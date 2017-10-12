@@ -1,0 +1,814 @@
+---
+swagger: "2.0"
+info:
+  description: "This API will allow you to manage your wallet."
+  version: "1.0"
+  title: "Merchant API - User - Wallet"
+  contact:
+    email: "support@imn.io"
+  license:
+    name: "IMN"
+    url: "https://go.imn.io"
+  x-logo:
+    url: "https://avatars0.githubusercontent.com/u/25665430"
+    backgroundColor: "#FFFFFF"
+host: "merchantapi.imn.io"
+basePath: "/v1/user/wallet"
+tags:
+- name: "Global"
+- name: "Wallet"
+schemes:
+- "https"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+security:
+- api_key: []
+paths:
+  /:
+    get:
+      tags:
+      - "Global"
+      summary: "Get the wallet index"
+      operationId: "GetWalletIndex"
+      parameters: []
+      responses:
+        200:
+          description: "The wallet index"
+          schema:
+            $ref: "#/definitions/walletIndex"
+        default:
+          description: "Occurs when something goes wrong"
+          schema:
+            $ref: "#/definitions/IMN.Common.ErrorResponseMessage"
+  /properties:
+    get:
+      tags:
+      - "Wallet"
+      summary: "Get the wallet property list"
+      description: "Depending to the template code the property list will be different.\
+        \ \nThis will be useful to display the property list expected by a marketplace.\n"
+      operationId: "GetWalletPropertyList"
+      parameters:
+      - name: "templateCode"
+        in: "query"
+        description: "The template code is optional, by default you will get all your\
+          \ wallet properties."
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "The wallet property list"
+          schema:
+            $ref: "#/definitions/walletPropertGroupList"
+        default:
+          description: "Occurs when something goes wrong"
+          schema:
+            $ref: "#/definitions/IMN.Common.ErrorResponseMessage"
+    post:
+      tags:
+      - "Wallet"
+      summary: "Save wallet property infos"
+      operationId: "SaveWalletPropertyInfos"
+      parameters:
+      - in: "body"
+        name: "request"
+        description: "The wallet property infos you want to pass"
+        required: true
+        schema:
+          $ref: "#/definitions/saveWalletPropertyInfoSettingsRequest"
+      responses:
+        204:
+          description: "Wallet property infos saved"
+        400:
+          description: "One or more property keys or values are invalid. See response\
+            \ for details."
+          schema:
+            $ref: "#/definitions/IMN.Common.ErrorResponseMessage"
+        default:
+          description: "Occurs when something goes wrong"
+          schema:
+            $ref: "#/definitions/IMN.Common.ErrorResponseMessage"
+  /properties/{walletPropertyCode}/document/{documentPartNumber}:
+    put:
+      tags:
+      - "Wallet"
+      summary: "Save wallet document"
+      operationId: "SaveWalletDocument"
+      consumes:
+      - "multipart/form-data"
+      parameters:
+      - name: "walletPropertyCode"
+        in: "path"
+        description: "The wallet document code"
+        required: true
+        type: "string"
+      - name: "documentPartNumber"
+        in: "path"
+        description: "The part number of your document"
+        required: true
+        type: "integer"
+        default: 0
+      - name: "request"
+        in: "formData"
+        description: "The document file you want to upload"
+        required: true
+        type: "file"
+      responses:
+        204:
+          description: "Wallet document saved"
+        default:
+          description: "Occurs when something goes wrong"
+          schema:
+            $ref: "#/definitions/IMN.Common.ErrorResponseMessage"
+    delete:
+      tags:
+      - "Wallet"
+      summary: "Delete wallet document"
+      operationId: "DeleteWalletDocument"
+      parameters:
+      - name: "walletPropertyCode"
+        in: "path"
+        description: "The wallet document code"
+        required: true
+        type: "string"
+      - name: "documentPartNumber"
+        in: "path"
+        description: "The part number of your document"
+        required: true
+        type: "integer"
+        default: 0
+      responses:
+        204:
+          description: "Wallet document delete"
+        default:
+          description: "Occurs when something goes wrong"
+          schema:
+            $ref: "#/definitions/IMN.Common.ErrorResponseMessage"
+securityDefinitions:
+  api_key:
+    description: "The api subscription key"
+    type: "apiKey"
+    name: "Ocp-Apim-Subscription-Key"
+    in: "header"
+definitions:
+  links.SaveWalletDocumentLink:
+    allOf:
+    - $ref: "#/definitions/IMN.Common.Link3"
+    - type: "object"
+      example:
+        href: "/v1/user/wallet/properties/IBAN/document"
+        method: "PUT"
+  links.DeleteWalletDocumentLink:
+    allOf:
+    - $ref: "#/definitions/IMN.Common.Link3"
+    - type: "object"
+      example:
+        href: "/v1/user/wallet/properties/IBAN/document"
+        method: "DELETE"
+  links.SaveWalletPropertyInfosLink:
+    allOf:
+    - $ref: "#/definitions/IMN.Common.Link3"
+    - type: "object"
+      example:
+        href: "/v1/user/wallet/properties"
+        method: "POST"
+  links.GetWalletPropertyListLink:
+    allOf:
+    - $ref: "#/definitions/IMN.Common.Link3"
+    - type: "object"
+      example:
+        href: "/v1/user/wallet/properties"
+        method: "GET"
+  walletIndexLinks:
+    type: "object"
+    required:
+    - "properties"
+    - "walletPropertyCodeLov"
+    - "walletPropertyGroupCodeLov"
+    properties:
+      properties:
+        $ref: "#/definitions/links.GetWalletPropertyListLink"
+      walletPropertyCodeLov:
+        $ref: "#/definitions/IMN.Common.LOVLink3"
+      walletPropertyGroupCodeLov:
+        $ref: "#/definitions/IMN.Common.LOVLink3"
+    description: "Tells you want you can do on this API"
+  walletIndex:
+    type: "object"
+    required:
+    - "links"
+    properties:
+      links:
+        $ref: "#/definitions/walletIndexLinks"
+  walletPropertGroupListLinks:
+    type: "object"
+    required:
+    - "savePropertyInfos"
+    properties:
+      savePropertyInfos:
+        $ref: "#/definitions/links.SaveWalletPropertyInfosLink"
+  walletPropertGroupList:
+    type: "object"
+    required:
+    - "groups"
+    - "links"
+    properties:
+      groups:
+        type: "array"
+        items:
+          $ref: "#/definitions/walletPropertyGroup"
+      links:
+        $ref: "#/definitions/walletPropertGroupListLinks"
+  walletPropertyGroup:
+    type: "object"
+    required:
+    - "properties"
+    - "propertyGroupCode"
+    properties:
+      propertyGroupCode:
+        type: "string"
+        example: "General"
+        description: "The wallet property group code"
+        x-lov: "WalletPropertyGroupCode"
+      propertyGroupPosition:
+        type: "integer"
+        example: 1
+        description: "Indicate the position of the property in the display group"
+        minimum: 1
+      properties:
+        $ref: "#/definitions/walletPropertyList"
+  walletPropertyList:
+    type: "array"
+    items:
+      $ref: "#/definitions/walletPropertyBase"
+  saveWalletPropertyInfoSettingsRequest:
+    type: "object"
+    properties:
+      propertySettings:
+        type: "array"
+        description: "The property infos you want to set up (insert/update) you can\
+          \ delete a property info by setting the values to null."
+        items:
+          $ref: "#/definitions/walletPropertySetting"
+        maxItems: 100
+  walletPropertySetting:
+    type: "object"
+    required:
+    - "code"
+    properties:
+      code:
+        $ref: "#/definitions/walletPropertyCode"
+      values:
+        $ref: "#/definitions/walletPropertyValues"
+    description: "It's possible to set null to the values to clear the property."
+  walletPropertyType:
+    type: "string"
+    example: "walletPropertyInfo"
+    enum:
+    - "walletPropertyInfo"
+    - "walletDocumentInfo"
+  walletPropertyBase:
+    type: "object"
+    required:
+    - "code"
+    - "propertyType"
+    discriminator: "propertyType"
+    properties:
+      propertyType:
+        $ref: "#/definitions/walletPropertyType"
+      code:
+        $ref: "#/definitions/walletPropertyCode"
+      description:
+        type: "string"
+        example: "If true allows to retireve one marketplace country only"
+        description: "Indicate the description of the property"
+      position:
+        type: "integer"
+        example: 1
+        description: "Indicate the position of the property in the display group"
+        minimum: 1
+      required:
+        type: "boolean"
+        example: true
+        description: "Indicate if the property is required or not"
+        default: false
+  walletPropertyValues:
+    type: "array"
+    description: "A property could have more than one value that's the reason why\
+      \ we anticipate the situation with an array. \nWe choose object to allow any\
+      \ type.\n"
+    items:
+      type: "object"
+      properties: {}
+  walletPropertyInfo:
+    allOf:
+    - $ref: "#/definitions/walletPropertyBase"
+    - type: "object"
+      required:
+      - "valueType"
+      properties:
+        values:
+          $ref: "#/definitions/walletPropertyValues"
+        valueType:
+          $ref: "#/definitions/walletPropertyValueType"
+        default:
+          type: "array"
+          example:
+          - true
+          description: "Indicate the default values of the property"
+          items:
+            type: "object"
+            properties: {}
+        readOnly:
+          type: "boolean"
+          example: false
+          description: "Indicate if the value cannot be changed."
+          default: false
+        minLength:
+          type: "integer"
+          format: "int32"
+          example: 1
+          description: "Indicates the minimum size of the property value"
+          minimum: 0
+          default: 0
+        maxLength:
+          type: "integer"
+          format: "int32"
+          example: 500
+          description: "Indicates the maximum size of the property value"
+          minimum: 1
+        minItems:
+          type: "integer"
+          format: "int32"
+          example: 1
+          description: "Indicates the minimum item count of the property value."
+          minimum: 0
+          default: 1
+        maxItems:
+          type: "integer"
+          format: "int32"
+          example: 2
+          description: "Indicates the maximum item count of the property value"
+          minimum: 1
+          default: 1
+        lovLink:
+          $ref: "#/definitions/IMN.Common.LOVLink3"
+        lovRequired:
+          type: "boolean"
+          example: true
+          description: "Indicates if the property value must be in the list of value."
+          default: false
+        visible:
+          type: "boolean"
+          example: true
+          description: "Indicates if this property should be displayed in the configuration\
+            \ page."
+          default: true
+        pattern:
+          $ref: "#/definitions/IMN.Common.ValidationPattern"
+  walletDocumentInfo:
+    allOf:
+    - $ref: "#/definitions/walletPropertyBase"
+    - type: "object"
+      required:
+      - "authorizedContentTypes"
+      - "links"
+      properties:
+        authorizedContentTypes:
+          $ref: "#/definitions/walletDocumentAuthorizedContentTypeList"
+        maxSizeInKiloBytes:
+          type: "integer"
+          example: 1024
+          description: "Indicate the maximum size of a document in Kilo Bytes."
+        maxDocumentPartCount:
+          type: "integer"
+          description: "The maximum part of document that could be uploaded"
+        parts:
+          type: "array"
+          items:
+            $ref: "#/definitions/walletDocumentPartInfo"
+        links:
+          $ref: "#/definitions/walletDocumentInfoLinks"
+  walletDocumentPartInfo:
+    type: "object"
+    required:
+    - "number"
+    properties:
+      number:
+        type: "integer"
+        description: "The part number of the document"
+      url:
+        $ref: "#/definitions/IMN.Common.HttpUrl"
+  walletDocumentAuthorizedContentTypeList:
+    type: "array"
+    description: "Indicates the list of content type authorized for a document"
+    items:
+      type: "string"
+    example:
+    - "image/png"
+    - "image/jpg"
+    - "image/gif"
+    - "image/svg"
+    - "application/pdf"
+  walletPropertyValueType:
+    type: "string"
+    description: "The value type of the wallet property.\n"
+    example: "string"
+    enum:
+    - "string"
+    - "integer"
+    - "number"
+    - "boolean"
+    - "object"
+    - "array"
+    - "date"
+    - "date-time"
+    default: "string"
+  walletDocumentInfoLinks:
+    type: "object"
+    required:
+    - "save"
+    properties:
+      save:
+        $ref: "#/definitions/links.SaveWalletDocumentLink"
+      delete:
+        $ref: "#/definitions/links.DeleteWalletDocumentLink"
+    description: "Indicates the operations you can do on a document"
+  walletPropertyCode:
+    type: "string"
+    description: "Wallet information code"
+    example: "IBAN"
+    x-lov: "WalletPropertyCode"
+  IMN.Common.ErrorResponseMessage:
+    type: "object"
+    required:
+    - "errors"
+    properties:
+      errors:
+        type: "array"
+        items:
+          $ref: "#/definitions/IMN.Common.UserErrorMessage"
+  IMN.Common.UserErrorMessage:
+    type: "object"
+    required:
+    - "code"
+    - "message"
+    properties:
+      docUrl:
+        $ref: "#/definitions/IMN.Common.DocUrl"
+      code:
+        type: "string"
+        example: "CatalogImportationAlreadyInProgress(ExecutionId currentCatalogImportationId)"
+        description: "the error code. The error code can be a pattern containing the\
+          \ argument's name"
+      message:
+        type: "string"
+        example: "There is already an importation in progress: b24d0dd8-a561-478a-9b26-34f573f03527\n"
+        description: "The error message"
+      cultureName:
+        type: "string"
+        example: "en"
+        description: "If the error is translated, the culture name will be indicated"
+        x-lov: "Go2CultureName"
+      arguments:
+        type: "array"
+        description: "a dictionary string/object"
+        items:
+          $ref: "#/definitions/IMN.Common.UserErrorMessage_arguments"
+  IMN.Common.DocUrl:
+    type: "string"
+    format: "uri"
+    description: "The documentation related to this operation."
+    example: "\"https://api-docs.imn.io/#operation/EnableChannelCatalog\""
+  IMN.Common.Link3:
+    type: "object"
+    required:
+    - "href"
+    properties:
+      label:
+        type: "string"
+        example: "The translated label"
+        description: "The label corresponding to the link. This label is automatically\
+          \ translated based on the Accept-Language http header."
+      docUrl:
+        $ref: "#/definitions/IMN.Common.DocUrl"
+      description:
+        type: "string"
+        example: "This is a description link"
+        description: "The description of the link"
+      href:
+        $ref: "#/definitions/IMN.Common.Href"
+      operationId:
+        $ref: "#/definitions/IMN.Common.OperationId"
+      method:
+        $ref: "#/definitions/IMN.Common.HttpMethod"
+      parameters:
+        type: "object"
+        additionalProperties:
+          $ref: "#/definitions/IMN.Common.LinkParameter3"
+      urlTemplated:
+        type: "boolean"
+        description: "indicates whether the href is templated or not"
+      allRequiredParamsProvided:
+        type: "boolean"
+        description: "indicates whether all required params have been provided"
+      allOptionalParamsProvided:
+        type: "boolean"
+        description: "indicates whether all optionals params have been provided"
+      info:
+        $ref: "#/definitions/IMN.Common.InfoSummaries"
+  IMN.Common.Href:
+    type: "string"
+    description: "Indicate the relative uri for this link"
+    example: "\"/v1/user/orders/{marketplaceCode}/{IMNOrderId}\""
+  IMN.Common.OperationId:
+    type: "string"
+    description: "The operationId to call."
+    example: "\"GetOrder\""
+  IMN.Common.HttpMethod:
+    type: "string"
+    description: "Indicate the http method to use on this link"
+    example: "\"GET\""
+    enum:
+    - "GET"
+    - "POST"
+    - "PATCH"
+    - "DELETE"
+    - "PUT"
+    - "HEAD"
+    default: "GET"
+  IMN.Common.LinkParameter3:
+    type: "object"
+    required:
+    - "in"
+    properties:
+      label:
+        type: "string"
+        example: "The translated label"
+        description: "The label corresponding to the link parameter. This label is\
+          \ automatically translated based on the Accept-Language http header."
+      value:
+        type: "object"
+        example: "1234"
+        description: "The value of the parameter. It can be an integer a string or\
+          \ an object."
+        properties: {}
+      required:
+        type: "boolean"
+        example: true
+        default: false
+      in:
+        $ref: "#/definitions/IMN.Common.ParameterIn"
+      type:
+        $ref: "#/definitions/IMN.Common.ParameterType"
+      lovLink:
+        $ref: "#/definitions/IMN.Common.LOVLink3"
+      lovRequired:
+        type: "boolean"
+        example: true
+        description: "If true, you MUST indicate a value from the list of values otherwise\
+          \ it's a freetext"
+      description:
+        type: "string"
+        example: "the store identifier"
+        description: "description of the parameter"
+      schema:
+        type: "string"
+        example: "orderListRequest"
+        description: "schema of the parameter"
+      pattern:
+        $ref: "#/definitions/IMN.Common.ValidationPattern"
+      properties:
+        type: "object"
+        example:
+          shipOrder:
+            type: "string"
+        description: "If the parameter is an object with flexible properties (additionProperties/dictionary),\
+          \ we will describe the properties of the object."
+        additionalProperties:
+          $ref: "#/definitions/IMN.Common.LinkParameterProperty3"
+  IMN.Common.ParameterIn:
+    type: "string"
+    description: "* path: if the parameter must be pass in the path uri\n* header:\
+      \ if the parameter must be passed in http header\n* query: if the parameter\
+      \ must be passed in querystring\n* body: if the parameter must be passed in\
+      \ the body\n* file: if the parameter must be passed in a multipart/form-data\
+      \ (https://swagger.io/docs/specification/2-0/file-upload/)\n"
+    example: "\"path\""
+    enum:
+    - "path"
+    - "header"
+    - "query"
+    - "body"
+    - "file"
+  IMN.Common.ParameterType:
+    type: "string"
+    description: "The value type of the parameter"
+    example: "\"string\""
+    enum:
+    - "string"
+    - "integer"
+    - "number"
+    - "boolean"
+    - "object"
+    - "array"
+    - "date"
+    - "date-time"
+    - "file"
+    default: "string"
+  IMN.Common.LOVLink3:
+    type: "object"
+    required:
+    - "href"
+    properties:
+      href:
+        type: "string"
+        format: "uri"
+        example: "/v2/public/Go2CultureName"
+        description: "Indicate the uri to the list of value"
+      method:
+        $ref: "#/definitions/IMN.Common.HttpMethod"
+    description: "Describe the way you have to follow to get access to the LOV"
+  IMN.Common.ValidationPattern:
+    type: "string"
+    description: "The regular expression to validate the value"
+    example: "\"*.-api$\""
+  IMN.Common.LinkParameterProperty3:
+    type: "object"
+    required:
+    - "type"
+    properties:
+      label:
+        type: "string"
+        example: "The translated label"
+        description: "The label corresponding to the link parameter property. This\
+          \ label is automatically translated based on the Accept-Language http header."
+      value:
+        type: "object"
+        example: "1234"
+        description: "The value of the parameter. It can be an integer a string or\
+          \ an object."
+        properties: {}
+      required:
+        type: "boolean"
+        example: true
+      type:
+        $ref: "#/definitions/IMN.Common.ParameterType"
+      lovLink:
+        $ref: "#/definitions/IMN.Common.LOVLink3"
+      lovRequired:
+        type: "boolean"
+        example: true
+        description: "If true, you MUST use indicate a value from the list of values\
+          \ otherwise it's a freetext"
+      description:
+        type: "string"
+        example: "the store identifier"
+        description: "description of the parameter"
+      schema:
+        type: "string"
+        example: "orderListRequest"
+        description: "schema of the parameter"
+      pattern:
+        $ref: "#/definitions/IMN.Common.ValidationPattern"
+  IMN.Common.InfoSummaries:
+    type: "object"
+    properties:
+      successes:
+        type: "array"
+        items:
+          $ref: "#/definitions/IMN.Common.SuccessSummary"
+      errors:
+        type: "array"
+        items:
+          $ref: "#/definitions/IMN.Common.ErrorSummary"
+      warnings:
+        type: "array"
+        items:
+          $ref: "#/definitions/IMN.Common.WarningSummary"
+      informations:
+        type: "array"
+        items:
+          $ref: "#/definitions/IMN.Common.InfoSummary"
+  IMN.Common.SuccessSummary:
+    type: "object"
+    properties:
+      successCode:
+        type: "string"
+      successMessage:
+        type: "string"
+      successArguments:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      propertyName:
+        type: "string"
+      propertyValue:
+        type: "string"
+      objectName:
+        type: "string"
+  IMN.Common.ErrorSummary:
+    type: "object"
+    properties:
+      utcDate:
+        type: "string"
+        format: "date-time"
+      errorGuid:
+        type: "string"
+        format: "uuid"
+      errorCode:
+        type: "string"
+      errorMessage:
+        type: "string"
+      technicalErrorMessage:
+        type: "string"
+      exceptionDetail:
+        $ref: "#/definitions/IMN.Common.ExceptionDetail"
+      errorArguments:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      propertyName:
+        type: "string"
+      propertyValue:
+        type: "string"
+      objectName:
+        type: "string"
+      source:
+        type: "string"
+  IMN.Common.ExceptionDetail:
+    type: "object"
+    properties:
+      helpLink:
+        type: "string"
+      message:
+        type: "string"
+      stackTrace:
+        type: "string"
+      type:
+        type: "string"
+  IMN.Common.WarningSummary:
+    type: "object"
+    properties:
+      technicalErrorMessage:
+        type: "string"
+      warningMessage:
+        type: "string"
+      warningCode:
+        type: "string"
+      warningArguments:
+        type: "object"
+        additionalProperties:
+          type: "string"
+  IMN.Common.InfoSummary:
+    type: "object"
+    properties:
+      informationCode:
+        type: "string"
+      informationMessage:
+        type: "string"
+      informationArguments:
+        type: "object"
+        additionalProperties:
+          type: "string"
+      propertyName:
+        type: "string"
+      propertyValue:
+        type: "string"
+      objectName:
+        type: "string"
+  IMN.Common.HttpUrl:
+    type: "string"
+    description: "The URL <a href=\"https://en.wikipedia.org/wiki/URL\">https://en.wikipedia.org/wiki/URL</a>"
+    example: "\"http://www.mydomain.com\""
+  IMN.Common.UserErrorMessage_arguments:
+    required:
+    - "name"
+    - "value"
+    properties:
+      name:
+        type: "string"
+        example: "currentCatalogImportationId"
+        description: "The key of the parameter"
+      value:
+        type: "object"
+        example: "b24d0dd8-a561-478a-9b26-34f573f03527"
+        description: "The value of the parameter. Depending to the type."
+        properties: {}
+parameters:
+  walletPropertyCodeParameter:
+    name: "walletPropertyCode"
+    in: "path"
+    description: "The wallet document code"
+    required: true
+    type: "string"
+x-IMN-api-ops:
+  repo: "Customer"
+  apiName: "V1UserWallet"
+  appRoot: "IMN.Customer.WebService"
+  namespace: "IMN.Customer.WebService"
+  comment: "No change. Just server side generation.\n"
+x-basePath: "/v1/user/wallet"
+x-azure-api-id: "V1UserWallet"
