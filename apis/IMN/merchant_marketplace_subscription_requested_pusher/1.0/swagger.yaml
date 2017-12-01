@@ -4,6 +4,7 @@ info:
   title: 'Merchant Marketplace Subscription Requested Pusher'
   description: 'Merchant Marketplace Subscription Requested Pusher'
 
+host: IMN.MER.SubsRQ.Pusher
 basePath: /MerchantMarketplaceSubscriptionRequestedPusher
 paths:
 
@@ -19,3 +20,5 @@ paths:
       responses:
         204:
           description: Subscriptions's request have been pushed to the MerchantActor
+          
+definitions: {}
