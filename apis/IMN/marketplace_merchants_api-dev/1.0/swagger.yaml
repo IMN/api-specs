@@ -19,6 +19,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/marketplaceMerchantApiIndex'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
             
   '/{marketplaceCode}/list':
     post:
@@ -45,6 +47,8 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/merchantList'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
             
             
   '/{marketplaceCode}/{merchantCode}':
@@ -58,27 +62,75 @@ paths:
         200:
           description: The merchant index
           schema:
-            $ref: merchantIndex
+            $ref: '#/definitions/merchantIndex'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
   '/{marketplaceCode}/{merchantCode}/apiCredential':
     get:
-      summary: Get the list of merchants related to a marketplace
-      operationId: GetMechantApiCredential
+      summary: Get the merchant API credential
+      operationId: GetMerchantApiCredential
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      responses:
+        '200':
+          description: The merchant API credential
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceApiCredential'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
     put:
-      summary: Get the list of merchants related to a marketplace
-      operationId: ConfigureMechantApiCredential
+      summary: Save the marketplace API credential
+      operationId: SaveMerchantApiCredential
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceApiCredential'
+        required: true
+      responses:
+        '204':
+          description: Merchant API credentials saved
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
 
 
   '/{marketplaceCode}/{merchantCode}/subscription/accept':
     post:
       summary: Get the list of merchants related to a marketplace
       operationId: AcceptMerchantSubscription
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      responses:
+        '204':
+          description: Merchant subscription accepted
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
   '/{marketplaceCode}/{merchantCode}/subscription/refuse':
     post:
       summary: Get the list of merchants related to a marketplace
       operationId: RefuseMerchantSubscription
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/merchantMarketplaceSubscriptionRefusalReason'
+        required: true
+      responses:
+        '204':
+          description: Merchant subscription refused
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
 
           
 definitions:
@@ -110,9 +162,9 @@ definitions:
   merchantListLinks:
     type: object
     required: 
-    - list
+    - self
     properties:
-      list:
+      self:
         $ref: '#/definitions/links.GetMerchantListLink'
 
   merchantList:
