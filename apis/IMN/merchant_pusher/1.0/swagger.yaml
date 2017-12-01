@@ -4,7 +4,7 @@ info:
   title: 'IMN - Merchant Projector Database'
 
 host: IMN.MER.Pusher
-basePath: /MerchantPuser
+basePath: /MerchantPusher
 
 paths:
 
