@@ -52,7 +52,7 @@ tags:
 
 paths: 
 
-  '/{marketplaceCode}/{merchantCode}/checkCredential':
+  '/{marketplaceCode}/{merchantCode}/checkApiCredential':
     post:
       tags:
       - Global
