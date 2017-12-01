@@ -1,0 +1,21 @@
+swagger: '2.0'
+info:
+  version: "1.0"
+  title: 'Merchant Marketplace Subscription Requested Pusher'
+  description: 'Merchant Marketplace Subscription Requested Pusher'
+
+basePath: /MerchantMarketplaceSubscriptionRequestedPusher
+paths:
+
+  '/subscriptionsRequested':
+    post:
+      summary: Call the MerchantActor to handle the marketplace subscriptions requested
+      parameters: 
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/externalMerchantMarketplaceSubscriptionsRequested'
+      responses:
+        204:
+          description: Subscriptions's request have been pushed to the MerchantActor
