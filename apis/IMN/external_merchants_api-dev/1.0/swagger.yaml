@@ -18,6 +18,7 @@ paths:
         schema:
           type: array
           minItems: 1
+          maxItems: 100
           items:
             $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/externalMerchantMarketplaceSubscriptionsRequested'
       responses:
