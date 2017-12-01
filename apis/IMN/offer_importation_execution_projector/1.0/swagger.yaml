@@ -1,0 +1,108 @@
+swagger: '2.0'
+info:
+  version: "1.0"
+  title: 'IMN ADAPTER - Offer Importation Execution Projector'
+  
+basePath: /OfferImportationExecutionProjector
+  
+x-beezup-ops:
+  repo: TBD
+  appRoot: TBD
+  namespace: IMN.ADPT.OfferIMPExecution.PROJ
+  comment: |
+    Actor 
+  
+paths:
+
+
+  '/started':
+    post:
+      summary: When the offer importation is started
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_importation-events/1.0#/definitions/offerImportationStarted'
+      responses:
+        204:
+          description: OK
+
+
+  '/preparationPartitionCompleted':
+    post:
+      summary: When the offer preparation for a partition is completed
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_importation-events/1.0#/definitions/offerImportationPreparationPartitionCompleted'
+      responses:
+        204:
+          description: OK
+
+
+  '/preparationCompleted':
+    post:
+      summary: When the offer preparation process is completed
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_importation-events/1.0#/definitions/offerImportationPreparationAllPartitionsCompleted'
+      responses:
+        204:
+          description: OK
+
+
+  '/sendPartitionCompleted':
+    post:
+      summary: When the offer send for a partition is completed
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_importation-events/1.0#/definitions/offerImportationSendPartitionCompleted'
+      responses:
+        204:
+          description: OK
+
+  '/expired':
+    post:
+      summary: When the offer importation expired
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_importation-events/1.0#/definitions/offerImportationExpired'
+      responses:
+        204:
+          description: OK
+
+
+  '/failed':
+    post:
+      summary: When the offer importation failed
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_importation-events/1.0#/definitions/offerImportationFailed'
+      responses:
+        204:
+          description: OK
+
+
+
+  '/completed':
+    post:
+      summary: When the offer importation completed
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_importation-events/1.0#/definitions/offerImportationCompleted'
+      responses:
+        204:
+          description: OK
+
+definitions: {}
