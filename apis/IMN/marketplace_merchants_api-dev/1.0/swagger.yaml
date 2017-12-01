@@ -23,7 +23,7 @@ paths:
   '/{marketplaceCode}/list':
     post:
       summary: Get the list of merchants related to a marketplace
-      operationId: GetMechantList
+      operationId: GetMerchantList
       parameters: 
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageSizeQueryStringParameter'
@@ -50,9 +50,16 @@ paths:
   '/{marketplaceCode}/{merchantCode}':
     get:
       summary: Get the list of merchants related to a marketplace
-      operationId: GetMechantInfo
-    
-    
+      operationId: GetMerchantIndex
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      responses:
+        200:
+          description: The merchant index
+          schema:
+            $ref: merchantIndex
+
   '/{marketplaceCode}/{merchantCode}/apiCredential':
     get:
       summary: Get the list of merchants related to a marketplace
@@ -62,11 +69,6 @@ paths:
       summary: Get the list of merchants related to a marketplace
       operationId: ConfigureMechantApiCredential
 
-
-  '/{marketplaceCode}/{merchantCode}/subscription':
-    get:
-      summary: Get the list of merchants related to a marketplace
-      operationId: GetMechantApiCredential
 
   '/{marketplaceCode}/{merchantCode}/subscription/accept':
     post:
@@ -123,15 +125,88 @@ definitions:
       merchants:
         type: array
         items:
-          $ref: 
-          
-          
+          $ref: '#/definitions/merchantIndex' 
+        
+        
+  links.GetMerchantApiCredentialLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+
+  links.GetMerchantIndexLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+
+  links.AcceptMerchantSubscriptionLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+  links.RefuseMerchantSubscriptionLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+    
+  merchantInfoLinks:
+    type: object
+    required:
+    - apiCredential
+    properties:
+      self:
+        $ref: '#/definitions/links.GetMerchantIndexLink'
+      apiCredential:
+        $ref: '#/definitions/links.GetMerchantApiCredentialLink'
+      acceptSubscription:
+        $ref: '#/definitions/links.AcceptMerchantSubscriptionLink'
+      refuseSubscription:
+        $ref: '#/definitions/links.RefuseMerchantSubscriptionLink'
+        
+  
+  
+  merchantIndex:
+    type: object
+    required:
+    - info
+    - links
+    properties:
+      info:
+        $ref: '#/definitions/merchantInfo'
+      links:
+        $ref: '#/definitions/merchantInfoLinks'
+  
   merchantInfo:
     type: object
+    required:
+    - code
+    - email
+    - companyName
+    - firstName
+    - lastName
+    - phoneNumber
+    - source
+    - offerPublicationEnabled
+    - orderImportationEnabled
     properties:
       code:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/merchantCode'
+      email:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/email'
       companyName:
         $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/merchantCompanyName'
       firstName:
         type: string
+      lastName:
+        type: string
+      phoneNumber:
+        type: string
+      subscriptionStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceSubcriptionStatus'
+      credentialStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/markeplaceCredentialStatus'
+      transportSettingsStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceTransportSettingsStatus'
+      source:
+        type: boolean
+        description: If true, this marketplace is the source of offers
+        default: false
+        example: false
+      offerPublicationEnabled:
+        type: boolean
+      orderImportationEnabled:
+        type: boolean
