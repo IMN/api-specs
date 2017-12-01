@@ -3,4 +3,135 @@ info:
   version: '1.0'
   title: 'Marketplace - Merchant API'
   description: 'Marketplace - Merchant API'
-paths: {}
+  
+basePath: /marketplace/merchants/v1
+
+paths: 
+
+  '/{marketplaceCode}':
+    get:
+      summary: Get marketplace index in the merchants API
+      operationId: GetMarketplaceMerchantApiIndex
+      parameters: 
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/marketplaceMerchantApiIndex'
+            
+  '/{marketplaceCode}/list':
+    post:
+      summary: Get the list of merchants related to a marketplace
+      operationId: GetMechantList
+      parameters: 
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageSizeQueryStringParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageNumberQueryStringParameter'
+      - name: orderBy
+        in: query
+        type: string
+        enum:
+        - code
+        - creationUtcDate
+        - modificationUtcDate
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/merchantListRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/merchantList'
+            
+            
+  '/{marketplaceCode}/{merchantCode}':
+    get:
+      summary: Get the list of merchants related to a marketplace
+      operationId: GetMechantInfo
+    
+    
+  '/{marketplaceCode}/{merchantCode}/apiCredential':
+    get:
+      summary: Get the list of merchants related to a marketplace
+      operationId: GetMechantApiCredential
+
+    put:
+      summary: Get the list of merchants related to a marketplace
+      operationId: ConfigureMechantApiCredential
+
+
+  '/{marketplaceCode}/{merchantCode}/subscription':
+    get:
+      summary: Get the list of merchants related to a marketplace
+      operationId: GetMechantApiCredential
+
+  '/{marketplaceCode}/{merchantCode}/subscription/accept':
+    post:
+      summary: Get the list of merchants related to a marketplace
+      operationId: AcceptMerchantSubscription
+
+  '/{marketplaceCode}/{merchantCode}/subscription/refuse':
+    post:
+      summary: Get the list of merchants related to a marketplace
+      operationId: RefuseMerchantSubscription
+
+          
+definitions:
+
+  links.GetMerchantListLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+  
+  marketplaceMerchantApiIndexLinks:
+    type: object
+    required: 
+    - list
+    properties:
+      list:
+        $ref: '#/definitions/links.GetMerchantListLink'
+        
+  marketplaceMerchantApiIndex:
+    type: object
+    required: 
+    - links
+    properties:
+      links:
+        $ref: '#/definitions/marketplaceMerchantApiIndexLinks'
+        
+  merchantListRequest:
+    type: object
+   
+   
+  merchantListLinks:
+    type: object
+    required: 
+    - list
+    properties:
+      list:
+        $ref: '#/definitions/links.GetMerchantListLink'
+
+  merchantList:
+    type: object
+    required: 
+    - links
+    properties:
+      links:
+        $ref: '#/definitions/merchantListLinks'
+      merchants:
+        type: array
+        items:
+          $ref: 
+          
+          
+  merchantInfo:
+    type: object
+    properties:
+      code:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/merchantCode'
+      companyName:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/merchantCompanyName'
+      firstName:
+        type: string
