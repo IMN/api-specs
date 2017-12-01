@@ -47,6 +47,8 @@ tags:
 - name: Global
 - name: Wallet
 
+
+
   
 securityDefinitions:
   api_key:
