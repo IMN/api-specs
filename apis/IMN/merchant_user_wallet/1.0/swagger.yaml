@@ -1,0 +1,536 @@
+swagger: '2.0'
+info:
+  title: 'Merchant API - User - Wallet'
+  description: 'This API will allow you to manage your wallet.'
+# Added by API Auto Mocking Plugin
+
+  version: "1.0"
+  
+  x-logo:
+    url: "https://avatars0.githubusercontent.com/u/25665430"
+    backgroundColor: "#FFFFFF"
+  
+  contact:
+    email: support@imn.io
+     
+ 
+  license:
+    name: IMN
+    url: https://go.imn.io
+    
+host: merchantapi.imn.io
+basePath: /v1/user/wallet
+
+
+
+
+x-IMN-api-ops:
+  repo: Customer
+  apiName: V1UserWallet
+  appRoot: IMN.Customer.WebService
+  namespace: IMN.Customer.WebService
+  comment: |
+    No change. Just server side generation.
+
+x-basePath: /v1/user/wallet
+
+
+schemes:
+  - https
+
+consumes:
+  - application/json
+produces:
+  - application/json
+  
+tags:
+- name: Global
+- name: Wallet
+
+  
+securityDefinitions:
+  api_key:
+    description: The api subscription key
+    type: apiKey
+    name: Ocp-Apim-Subscription-Key
+    in: header
+
+security:
+- api_key: []
+
+
+parameters:
+  walletPropertyCodeParameter:
+    name: walletPropertyCode
+    in: path
+    required: true
+    type: string
+    description: The wallet document code
+
+paths: 
+
+
+  '/':
+    get:
+      tags:
+      - Global
+      summary: Get the wallet index
+      operationId: GetWalletIndex
+      responses:
+        '200':
+          description: The wallet index
+          schema:
+            $ref: '#/definitions/walletIndex'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+    
+  '/properties':
+    get:
+      tags:
+      - Wallet
+      summary: Get the wallet property list
+      description: |
+        Depending to the template code the property list will be different. 
+        This will be useful to display the property list expected by a marketplace.
+      operationId: GetWalletPropertyList
+      parameters:
+        - name: templateCode
+          description: The template code is optional, by default you will get all your wallet properties.
+          in: query
+          required: false
+          type: string
+      responses:
+        '200':
+          description: The wallet property list
+          schema:
+            $ref: '#/definitions/walletPropertGroupList'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+
+    
+    post:
+      tags:
+      - Wallet
+      summary: Save wallet property infos
+      operationId: SaveWalletPropertyInfos
+      parameters:
+        - name: request
+          in: body
+          required: true
+          description: The wallet property infos you want to pass
+          schema:
+            $ref: '#/definitions/saveWalletPropertyInfoSettingsRequest'
+            
+      responses:
+        '204':
+          description: Wallet property infos saved
+        '400':
+          description: One or more property keys or values are invalid. See response for details.
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/IMN.Common.ErrorResponseMessage'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+    
+  '/properties/{walletPropertyCode}/document/{documentPartNumber}':
+    put:
+      tags:
+      - Wallet
+      summary: Save wallet document
+      operationId: SaveWalletDocument
+      consumes:
+        - multipart/form-data
+      parameters:
+        - $ref: '#/parameters/walletPropertyCodeParameter'
+        - name: documentPartNumber
+          in: path
+          required: true
+          type: integer
+          description: The part number of your document
+          default: 0
+        - name: request
+          in: formData
+          required: true
+          type: file
+          description: The document file you want to upload
+      responses:
+        '204':
+          description: Wallet document saved
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+    
+    delete:
+      tags:
+      - Wallet
+      summary: Delete wallet document
+      operationId: DeleteWalletDocument
+      parameters:
+        - $ref: '#/parameters/walletPropertyCodeParameter'
+        - name: documentPartNumber
+          in: path
+          required: true
+          type: integer
+          description: The part number of your document
+          default: 0
+      responses:
+        '204':
+          description: Wallet document delete
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+definitions:
+
+######################################################################################################
+##############                  LINKS                                 ################################
+######################################################################################################
+
+  links.SaveWalletDocumentLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/IMN.Common.Link3'
+    - type: object
+      example:
+        href: /v1/user/wallet/properties/IBAN/document
+        method: PUT
+  
+  links.DeleteWalletDocumentLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/IMN.Common.Link3'
+    - type: object
+      example:
+        href: /v1/user/wallet/properties/IBAN/document
+        method: DELETE
+
+
+  links.SaveWalletPropertyInfosLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/IMN.Common.Link3'
+    - type: object
+      example:
+        href: /v1/user/wallet/properties
+        method: POST
+  
+  links.GetWalletPropertyListLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/IMN.Common.Link3'
+    - type: object
+      example:
+        href: /v1/user/wallet/properties
+        method: GET
+  
+
+######################################################################################################
+##############                  DEFINITIONS                           ################################
+######################################################################################################
+  
+  
+  walletIndexLinks:
+    description: Tells you want you can do on this API
+    type: object
+    required:
+    - properties
+    - walletPropertyCodeLov
+    - walletPropertyGroupCodeLov
+    properties:
+      properties:
+        $ref: '#/definitions/links.GetWalletPropertyListLink'
+      walletPropertyCodeLov:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/IMN.Common.LOVLink3'
+      walletPropertyGroupCodeLov:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/IMN.Common.LOVLink3'
+  
+  walletIndex:
+    type: object
+    required:
+    - links
+    properties:
+      links:
+        $ref: '#/definitions/walletIndexLinks'
+
+
+
+  walletPropertGroupListLinks:
+    type: object
+    required:
+    - savePropertyInfos
+    properties:
+      savePropertyInfos:
+        $ref: '#/definitions/links.SaveWalletPropertyInfosLink'
+        
+  walletPropertGroupList:
+    type: object
+    required:
+    - groups
+    - links
+    properties:
+# [Style Validator (81bd2e75-63ed-4922-97c7-cf5a2e59d3c7) : All model properties must have examples]: Field 'example' required in 'properties'
+      groups:
+        type: array
+        items:
+          $ref: '#/definitions/walletPropertyGroup'
+      links:
+        $ref: '#/definitions/walletPropertGroupListLinks'
+
+  walletPropertyGroup:
+    type: object
+    required:
+    - propertyGroupCode
+    - properties
+    properties:
+      propertyGroupCode:
+        type: string
+        description: The wallet property group code
+        x-lov: WalletPropertyGroupCode
+        example: General
+      propertyGroupPosition:
+        type: integer
+        description: Indicate the position of the property in the display group
+        minimum: 1
+        example: 1
+      properties:
+        $ref: '#/definitions/walletPropertyList'
+        
+  walletPropertyList:
+    type: array
+    items:
+      $ref: '#/definitions/walletPropertyBase'
+      
+
+  saveWalletPropertyInfoSettingsRequest:
+    type: object
+    properties:
+# [Style Validator (81bd2e75-63ed-4922-97c7-cf5a2e59d3c7) : All model properties must have examples]: Field 'example' required in 'properties'
+      propertySettings:
+        type: array
+        description: The property infos you want to set up (insert/update) you can delete a property info by setting the values to null.
+        maxItems: 100
+        items:
+          $ref: '#/definitions/walletPropertySetting'
+
+  walletPropertySetting:
+    description: It's possible to set null to the values to clear the property.
+    type: object
+    required:
+    - code
+    properties:
+      code:
+        $ref: '#/definitions/walletPropertyCode'
+      values:
+        $ref: '#/definitions/walletPropertyValues'
+
+  walletPropertyType:
+    type: string
+    enum:
+    - walletPropertyInfo
+    - walletDocumentInfo
+    example: walletPropertyInfo
+
+  walletPropertyBase:
+    type: object
+    discriminator: propertyType
+    required:
+    - code
+    - propertyType
+    properties:
+      propertyType:
+        $ref: '#/definitions/walletPropertyType'
+      code:
+        $ref: '#/definitions/walletPropertyCode'
+      description:
+        type: string
+        description: Indicate the description of the property
+        example: If true allows to retireve one marketplace country only
+      position:
+        type: integer
+        description: Indicate the position of the property in the display group
+        minimum: 1
+        example: 1
+      required:
+        type: boolean
+        description: Indicate if the property is required or not
+        default: false
+        example: true
+
+
+
+  walletPropertyValues:
+    description: |
+      A property could have more than one value that's the reason why we anticipate the situation with an array. 
+      We choose object to allow any type.
+    type: array
+    items:
+      type: object
+    
+
+
+  walletPropertyInfo:
+    allOf:
+    - $ref: '#/definitions/walletPropertyBase'
+    - type: object
+      required:
+      - code
+      - valueType
+      properties:
+        values:
+          $ref: '#/definitions/walletPropertyValues'
+        valueType:
+          $ref: '#/definitions/walletPropertyValueType'
+        default:
+          description: Indicate the default values of the property
+          type: array
+          items:
+            type: object
+          example: 
+          - true
+        readOnly:
+          type: boolean
+          description: Indicate if the value cannot be changed.
+          default: false
+          example: false
+        minLength:
+          type: integer
+          format: int32
+          description: Indicates the minimum size of the property value
+          default: 0
+          minimum: 0
+          example: 1
+        maxLength:
+          type: integer
+          format: int32
+          description: Indicates the maximum size of the property value
+          minimum: 1
+          example: 500
+        minItems:
+          type: integer
+          format: int32
+          description: Indicates the minimum item count of the property value.
+          default: 1
+          minimum: 0
+          example: 1
+        maxItems:
+          type: integer
+          format: int32
+          description: Indicates the maximum item count of the property value
+          default: 1
+          minimum: 1
+          example: 2
+        lovLink:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/IMN.Common.LOVLink3'
+        lovRequired:
+          type: boolean
+          description: Indicates if the property value must be in the list of value.
+          default: false
+          example: true
+        visible:
+          type: boolean
+          description: Indicates if this property should be displayed in the configuration page.
+          default: true
+          example: true
+        pattern:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/IMN.Common.ValidationPattern'
+
+
+
+  
+  
+
+
+  walletDocumentInfo:
+    allOf: 
+    - $ref: '#/definitions/walletPropertyBase'
+    - type: object
+      required:
+      - code
+      - authorizedContentTypes
+      - links
+      properties:
+        authorizedContentTypes:
+          $ref: '#/definitions/walletDocumentAuthorizedContentTypeList'
+        maxSizeInKiloBytes:
+          description: Indicate the maximum size of a document in Kilo Bytes.
+          type: integer
+          default: 1024
+          example: 1024
+        maxDocumentPartCount:
+          type: integer
+          default: 1
+          description: The maximum part of document that could be uploaded
+          example: 1
+# [Style Validator (81bd2e75-63ed-4922-97c7-cf5a2e59d3c7) : All model properties must have examples]: Field 'example' required in 'properties'
+        parts:
+          type: array
+          items:
+            $ref: '#/definitions/walletDocumentPartInfo'
+        links:
+          $ref: '#/definitions/walletDocumentInfoLinks'
+      
+  
+  walletDocumentPartInfo:
+    type: object
+    required:
+    - number
+    properties:
+# [Style Validator (81bd2e75-63ed-4922-97c7-cf5a2e59d3c7) : All model properties must have examples]: Field 'example' required in 'properties'
+      number:
+        type: integer
+        description: The part number of the document
+      url:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/IMN.Common.HttpUrl'
+        
+        
+  walletDocumentAuthorizedContentTypeList:
+    description: Indicates the list of content type authorized for a document
+    type: array
+    items:
+      type: string
+    example:
+    - image/png
+    - image/jpg
+    - image/gif
+    - image/svg
+    - application/pdf
+  
+  walletPropertyValueType:
+    description: |
+      The value type of the wallet property.
+    type: string
+    enum:
+      - string
+      - integer
+      - number
+      - boolean
+      - object
+      - array
+      - date
+      - date-time
+    default: string
+    example: string
+      
+
+  
+  
+  walletDocumentInfoLinks:
+    description: Indicates the operations you can do on a document
+    type: object
+    required: 
+    - save
+    properties:
+      save:
+        $ref: '#/definitions/links.SaveWalletDocumentLink'
+      delete:
+        $ref: '#/definitions/links.DeleteWalletDocumentLink'
+        
+  
+  #walletPropertyCodeList:
+  #  type: array
+  #  items:
+  #    $ref: '#/definitions/walletPropertyCode'
+  
+  walletPropertyCode:
+    type: string
+    description: Wallet information code
+    example: IBAN
+    x-lov: WalletPropertyCode
+  
+  
+x-azure-api-id: 'V1UserWallet'
