@@ -1,0 +1,321 @@
+swagger: '2.0'
+info:
+  title: Merchant API - Public - Security
+  description: |
+    This API will allow you to get your tokens based on your marketplace api credentials.
+    
+  version: "1.0"
+  
+  x-logo:
+    url: "https://avatars0.githubusercontent.com/u/25665430"
+    backgroundColor: "#FFFFFF"
+  
+  contact:
+    email: support@imn.io
+     
+ 
+  license:
+    name: IMN
+    url: https://go.imn.io
+    
+    
+host: merchantapi.imn.io
+basePath: /v1/public/security
+    
+    
+    
+x-IMN-api-ops:
+  repo: Customer
+  apiName: V1PublicSecurity
+  appRoot: IMN.Customer.WebService
+  namespace: IMN.Customer.WebService
+  comment: |
+    No change. Just server side generation.
+
+x-basePath: /v1/public/security
+
+
+schemes:
+  - https
+
+consumes:
+  - application/json
+produces:
+  - application/json
+  
+tags:
+- name: Global
+- name: Security
+  
+paths:
+
+
+  '/':
+    get:
+      tags:
+      - Global
+      summary: Get the public security index
+      operationId: GetPublicSecurityIndex
+      responses:
+        '200':
+          description: The public security index
+          schema:
+            $ref: '#/definitions/publicSecurityIndex'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+            
+
+
+  '/login':
+    get:
+      tags:
+      - Security
+      summary: Get Login Info
+      operationId: GetLoginInfo
+      responses:
+        '200':
+          description: LoginInfo
+          schema:
+            $ref: '#/definitions/loginInfo'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+
+  '/login/{marketplaceCode}':
+    post:
+      tags:
+      - Security
+      summary: Login
+      description: User Login - The login will give your tokens
+      operationId: Login
+      parameters:
+        - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+        - name: request
+          in: body
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/IMN.Common.MarketplaceApiCredential'
+          required: true
+      responses:
+        '200':
+          description: Your tokens
+          schema:
+            $ref: '#/definitions/apiCredentials'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/IMN.Common.ErrorResponseMessage'
+
+        '403':
+          description: Invalid credentials
+        '500':
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+definitions:
+
+######################################################################################################
+##############                  LINKS                                 ################################
+######################################################################################################
+
+
+  links.LoginLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/IMN.Common.Link3'
+    - type: object
+      description: The link to the login
+      "example":
+        label: Login to Cdiscount
+        href: /v1/public/security/login/cdiscount
+        method: POST
+        urlTemplated: false
+        allRequiredParamsProvided: true
+        parameters:
+          request:
+            in: body
+            type: object
+            schema: marketplaceApiCredentials
+            required: true
+            properties:
+# [Style Validator (718f86d2-4411-449a-8f43-a62f66c8f4ee) : All model properties must have examples]: Field 'example' required in 'properties'
+              login:
+                type: string
+                required: true
+                pattern: '*.-api$'
+# [Style Validator (718f86d2-4411-449a-8f43-a62f66c8f4ee) : All model properties must have examples]: Field 'example' required in 'properties'
+              password:
+                in: body
+                type: string
+                required: true
+              
+        
+  links.GetLoginInfoLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/IMN.Common.Link3'
+    - type: object
+      description: The link to the login
+      example:
+        href: /v1/public/security/login
+        method: GET
+        
+
+######################################################################################################
+##############                  DEFINITIONS                           ################################
+######################################################################################################
+      
+  publicSecurityIndexLinks:
+    type: object
+    required:
+    - login
+    properties:
+      login:
+        $ref: '#/definitions/links.GetLoginInfoLink'
+
+  publicSecurityIndex:
+    type: object
+    required: 
+    - links
+    properties:
+      links:
+        $ref: '#/definitions/publicSecurityIndexLinks'
+
+
+
+      
+  loginInfo:
+    type: object
+    required: 
+    - links
+    properties:
+      links:
+        type: object
+        description: For each marketplace code identifier the expected parameters for the login
+        additionalProperties:
+          $ref: '#/definitions/links.LoginLink'
+        example:
+          cdiscount:
+            label: Login to Cdiscount [img](http://marketplace.cdiscount.com/wp-content/uploads/2016/03/LOGO-Cdiscount-MKP-300x212.png)
+            href: /v1/public/security/login/cdiscount
+            method: POST
+            urlTemplated: false
+            allRequiredParamsProvided: true
+            parameters:
+              request:
+                in: body
+                type: object
+                schema: marketplaceApiCredentials
+                required: true
+                properties:
+                  login:
+                    type: string
+                    required: true
+                    pattern: '*.-api$'
+                  password:
+                    type: string
+                    required: true
+
+          eprice:
+            label: Login to EPRICE [img](https://m.eprice.it/layout/images/mobile/logo.png)
+            href: /v1/public/security/login/eprice
+            method: POST
+            urlTemplated: false
+            allRequiredParamsProvided: true
+            parameters:
+              request:
+                in: body
+                type: object
+                schema: marketplaceApiCredentials
+                required: true
+                properties:
+                  apiKey:
+                    type: string
+                    required: true
+                  shopId:
+                    type: string
+                    required: true
+    
+
+          bol:
+            label: Login to BOL [img](https://s.s-bol.com/nl/static/images/main/bolcom_logo.png)
+            href: /v1/public/security/login/bol
+            method: POST
+            urlTemplated: false
+            allRequiredParamsProvided: true
+            parameters:
+              request:
+                in: body
+                type: object
+                schema: marketplaceApiCredentials
+                required: true
+                properties:
+                  publicAPIKey:
+                    type: string
+                    required: true
+                  privateAPIKey:
+                    type: string
+                    required: true
+
+
+          realde:
+            label: Login to REAL.DE [img](https://www.real.de/static/dist/images/frontend-core/real-logo.4caa4283.svg)
+            href: /v1/public/security/login/realde
+            method: POST
+            urlTemplated: false
+            allRequiredParamsProvided: true
+            parameters:
+              request:
+                in: body
+                type: object
+                schema: marketplaceApiCredentials
+                required: true
+                properties:
+                  clientAPIKey:
+                    type: string
+                    required: true
+                  secretAPIKey:
+                    type: string
+                    required: true
+                    
+                    
+
+
+  
+  apiCredentials:
+    type: object
+    required: 
+    - credentials
+    properties:
+      credentials:
+        description: Your API credential list
+        type: array
+        items:
+          $ref: '#/definitions/apiCredential'
+        example:
+        - productName: UserAPI
+          primaryToken: 3b22980d8d1143c6ba7adf4e55b9a153
+          secondaryToken: 162ae17fd52044c38cce3388ea5b0c91
+  
+  apiCredential:
+    description: Your api credential
+    type: object
+    required: 
+    - productName
+    - primaryToken
+    - secondaryToken
+    properties:
+      productName:
+        description: The product name related to this credential
+        type: string
+        example: UserAPI
+      primaryToken:
+        description: The primary token to be used in the next call in the user scope API
+        type: string
+        example: 3b22980d8d1143c6ba7adf4e55b9a153
+      secondaryToken:
+        description: >-
+          The secondary token. Could be usefull if you want to share your access
+          with someone else.
+        type: string
+        example: 162ae17fd52044c38cce3388ea5b0c91
+
+x-azure-api-id: 'V1PublicSecurity'
