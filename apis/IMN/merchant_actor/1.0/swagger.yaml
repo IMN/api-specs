@@ -56,7 +56,7 @@ paths:
           description: OK
 
 
-  '/marketplaceSubscriptionRequested':
+  '/externalMerchantMarketplaceSubscriptionsRequested':
     post:
       summary: When the registration process has been completed
       parameters: 
