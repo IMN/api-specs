@@ -1,10 +1,51 @@
 swagger: '2.0'
 info:
   version: '1.0'
-  title: 'Marketplace - Merchant API'
-  description: 'Marketplace - Merchant API'
+  title: 'Marketplace - Merchants API'
+  description: 'Marketplace - Merchants API'
+  x-logo:
+    url: https://imngo.blob.core.windows.net/imngo/images/imn-logo.png
+    backgroundColor: "#FFFFFF"
   
+  contact:
+    email: support@imn.io
+     
+ 
+  license:
+    name: IMN
+    url: https://go.imn.io
+    
+host: api.imn.io
 basePath: /marketplace/merchants/v1
+
+x-IMN-api-ops:
+  repo: IMN
+  appRoot: IMN.Core.MER.WebService
+  apiName: MerchantMarketplacesV1
+  namespace: IMN.Core.MER.WebService
+  useBeezUPFrameworkVersion2: true
+  comment: |
+    No change. Just server side generation.
+  
+
+x-basePath: /marketplace/merchants/v1
+
+
+schemes:
+  - https
+
+consumes:
+  - application/json
+produces:
+  - application/json
+  
+tags:
+- name: Global
+- name: Marketplace
+- name: Api Credentials
+- name: Transport Settings
+- name: Pricing Settings
+- name: Activation
 
 paths: 
 
@@ -107,11 +148,6 @@ paths:
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
-      - name: request
-        in: body
-        schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceApiCredential'
-        required: true
       responses:
         '204':
           description: Merchant subscription accepted
