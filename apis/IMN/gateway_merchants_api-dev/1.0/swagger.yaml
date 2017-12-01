@@ -1,0 +1,107 @@
+swagger: '2.0'
+info:
+  title: 'Gateway API - Merchants'
+  description: 'This API will allow you to manage your offers from the marketplace.'
+
+  version: "1.0"
+  
+  x-logo:
+    url: https://imngo.blob.core.windows.net/imngo/images/imn-logo.png
+    backgroundColor: "#FFFFFF"
+  
+  contact:
+    email: support@imn.io
+     
+ 
+  license:
+    name: IMN
+    url: https://go.imn.io
+
+
+host: api.imn.io
+basePath: /gateway/merchants/v1
+
+
+
+x-IMN-api-ops:
+  repo: IMN
+  apiName: GatewayOffersV1
+  appRoot: IMN.ADPT.Offer.WebService
+  namespace: IMN.ADPT.Offer.WebService
+  comment: |
+    No change. Just server side generation.
+  
+
+x-basePath: /gateway/merchants/v1
+
+
+schemes:
+  - https
+
+consumes:
+  - application/json
+produces:
+  - application/json
+  
+tags:
+- name: Global
+
+
+
+
+
+paths: 
+
+  '/{marketplaceCode}/{merchantCode}/checkCredential':
+    post:
+      tags:
+      - Global
+      summary: Check Merchant Marketplace API Credential
+      operationId: CheckMerchantMarketplaceApiCredential
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceApiCredential'
+      responses:
+        '204':
+          description: The api credential is valid
+        '401':
+          description: The api credential is invalid
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+  '/{marketplaceCode}/{merchantCode}/events':
+    post:
+      tags:
+      - Global
+      summary: Save a batch of merchant marketplace offers
+      operationId: SynchronizeMerchantEvents
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: request
+        in: body
+        schema:
+          $ref: '#/definitions/merchantEvent'
+      responses:
+        '204':
+          description: The api credential is valid
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+definitions:
+  
+  merchantEvent:
+    type: object
+    oneOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantCreated'
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantOffersSourceMarketplaceDeclared'
+    #- $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/
+    
+
+x-azure-api-id: 'GatewayMerchantsV1'
