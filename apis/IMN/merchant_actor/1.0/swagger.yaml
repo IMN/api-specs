@@ -55,7 +55,21 @@ paths:
         204:
           description: OK
 
-  '/enable':
+
+  '/marketplaceSubscriptionRequested':
+    post:
+      summary: When the registration process has been completed
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceSubscriptionRequested'
+      responses:
+        204:
+          description: OK
+    
+
+  '/enableMarketplace':
     post:
       summary: When the merchant wants to enable offer publication & order managementon a marketplace
       parameters: 
@@ -68,7 +82,7 @@ paths:
           description: OK
 
 
-  '/disable':
+  '/disableMarketplace':
     post:
       summary: When the merchant wants to disable offer publication & order management on a marketplace
       parameters: 
