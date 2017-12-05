@@ -11,11 +11,11 @@ schemes:
 
 paths:
 
-  '/{merchantCode}/subscriptionsRequested':
+  '/subscriptionsRequested':
     post:
       summary: Notify merchant subscription request
       parameters: 
-      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      #- $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - name: request
         in: body
         required: true
