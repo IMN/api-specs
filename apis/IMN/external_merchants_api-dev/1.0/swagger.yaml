@@ -4,7 +4,7 @@ info:
   title: 'External API - Merchant Marketplace Subscription Request'
   description: 'External API - Merchant Marketplace Subscription Request'
 
-host: api.beezup.com
+host: api.imn.io
 basePath: /external/merchants/v1
 schemes: 
 - https
