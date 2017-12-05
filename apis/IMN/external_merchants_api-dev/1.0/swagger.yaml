@@ -5,13 +5,13 @@ info:
   description: 'External API - Merchant Marketplace Subscription Request'
 
 host: api.imn.io
-basePath: /external/merchants/v1
+
 schemes: 
 - https
 
 paths:
 
-  '/subscriptionsRequested':
+  '/external/merchants/v1/subscriptionsRequested':
     post:
       summary: Notify merchant subscription request
       parameters: 
