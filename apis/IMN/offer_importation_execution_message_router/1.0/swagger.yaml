@@ -19,7 +19,7 @@ paths:
 
   '/completed':
     post:
-      summary: When the offer importation is complted
+      summary: When the offer importation is completed
       parameters: 
       - name: request
         in: body
