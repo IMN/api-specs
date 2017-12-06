@@ -87,7 +87,7 @@ paths:
       - name: request
         in: body
         schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/acceptMerchantSubscription'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-commands/1.0#/definitions/acceptMerchantSubscription'
       responses:
         204:
           description: OK
