@@ -8,7 +8,7 @@ basePath: /MerchantActor
 x-beezup-ops:
   repo: IMN
   appRoot: IMN.MER.Actors
-  apiName: TBD
+  apiName: MerchantActor
   namespace: IMN.MER.Actors
   comment: |
     Actor
