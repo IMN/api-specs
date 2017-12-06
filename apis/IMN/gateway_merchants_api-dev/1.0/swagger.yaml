@@ -25,9 +25,9 @@ basePath: /gateway/merchants/v1
 
 x-IMN-api-ops:
   repo: IMN
-  apiName: GatewayOffersV1
-  appRoot: IMN.ADPT.Offer.WebService
-  namespace: IMN.ADPT.Offer.WebService
+  apiName: GatewayMerchantsV1
+  appRoot: IMN.ADPT.MER.WebService
+  namespace: IMN.ADPT.MER.WebService
   comment: |
     No change. Just server side generation.
   
