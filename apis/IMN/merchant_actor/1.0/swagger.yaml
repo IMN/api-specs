@@ -67,6 +67,30 @@ paths:
       responses:
         204:
           description: OK
+          
+  '/refuseMerchantSubscription':
+    post:
+      summary: When the registration process has been completed
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/refuseMerchantSubscription'
+      responses:
+        204:
+          description: OK
+          
+  '/acceptMerchantSubscription':
+    post:
+      summary: When the registration process has been completed
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/acceptMerchantSubscription'
+      responses:
+        204:
+          description: OK
     
 
   '/enableMarketplace':
