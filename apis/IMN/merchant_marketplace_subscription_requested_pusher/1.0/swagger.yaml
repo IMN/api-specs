@@ -6,6 +6,15 @@ info:
 
 host: IMN.MER.SubsRQ.Pusher
 basePath: /MerchantMarketplaceSubscriptionRequestedPusher
+
+x-beezup-ops:
+  repo: IMN
+  appRoot: IMN.MER.SubsRQ.Pusher
+  apiName: MerchantMarketplaceSubscriptionRequestedPusher
+  namespace: IMN.MER.SubsRQ.Pusher
+  comment: |
+    Actor
+
 paths:
 
   '/subscriptionsRequested':
