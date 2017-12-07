@@ -79,7 +79,7 @@ definitions:
   actorId:
     x-format: ActorId
     type: object
-    x-pattern: {marketplaceCode}-{merchantCode}-{correlationId}
+    x-pattern: '{marketplaceCode}-{merchantCode}-{correlationId}'
     properties:
       marketplaceCode:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
@@ -88,13 +88,3 @@ definitions:
       correlationId:
         type: string
         format: CorrelationId
-  
-        
-  merchantCodeAlreadyUsedException:
-    x-format: Exception
-    type: object
-    description: |
-      The merchant code '{merchantCode}' already exists
-    properties:
-      merchantCode: 
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/merchantCode'
