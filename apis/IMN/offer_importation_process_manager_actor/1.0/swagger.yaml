@@ -7,11 +7,14 @@ info:
 basePath: /OfferImportationProcessManager
 x-beezup-ops:
   repo: IMN
-  appRoot: TBD
-  apiName: TBD
+  domain: IMN.ADPT.OfferIMP
+  appRoot: IMN.ADPT.OfferIMP.PM
+  apiName: OfferImportationProcessManager
   namespace: IMN.ADPT.OfferIMP.PM
   comment: |
     Actor
+
+
 
 
 paths:
@@ -72,3 +75,26 @@ definitions:
     properties:
       offerImportationStarted:
         $ref: 'https://api.swaggerhub.com/domains/IMN/offer_importation-events/1.0#/definitions/offerImportationStarted'
+        
+  actorId:
+    x-format: ActorId
+    type: object
+    x-pattern: {marketplaceCode}-{merchantCode}-{correlationId}
+    properties:
+      marketplaceCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
+      merchantCode: 
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/merchantCode'
+      correlationId:
+        type: string
+        format: CorrelationId
+  
+        
+  merchantCodeAlreadyUsedException:
+    x-format: Exception
+    type: object
+    description: |
+      The merchant code '{merchantCode}' already exists
+    properties:
+      merchantCode: 
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/merchantCode'
