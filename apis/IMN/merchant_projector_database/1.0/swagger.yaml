@@ -6,6 +6,14 @@ info:
 host: IMN.MER.PROJ.Db
 basePath: /MerchantProjectorDatabase
 
+x-beezup-ops:
+  repo: IMN
+  appRoot: IMN.MER.PROJ.Db
+  apiName: MerchantProjectorDatabase
+  namespace: IMN.MER.PROJ.Db
+  comment: |
+    Actor
+
 paths:
 
   '/merchantCreated':
