@@ -7,8 +7,9 @@ basePath: /OfferImportationExecutionMessageRouter
   
 x-beezup-ops:
   repo: IMN
-  appRoot: .
-  namespace: IMN.ADPT.OfferIMPExecution.Routers
+  appRoot: IMN.ADPT.OfferIMP.EXEC.Routers
+  apiName: OfferImportationExecutionMessageRouter
+  namespace: IMN.ADPT.OfferIMP.EXEC.Routers
   comment: |
     Actor 
   
