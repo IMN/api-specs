@@ -16,6 +16,7 @@ x-beezup-ops:
     Actor
   using:
   - IMN.ADPT.OfferIMP.Events
+  - IMN.MER.Events
 
 
 
