@@ -9,6 +9,7 @@ basePath: /external/merchants/v1
 
 
 x-IMN-api-ops:
+  codeGenType: azure-functions 
   repo: IMN
   apiName: ExternalMerchantsV1
   appRoot: IMN.EXT.MER.WebService
