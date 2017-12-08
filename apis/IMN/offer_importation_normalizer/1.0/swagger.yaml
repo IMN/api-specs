@@ -6,6 +6,7 @@ info:
 basePath: /OfferImportationNormalizer
   
 x-beezup-ops:
+  codeGenType: actor
   repo: IMN
   appRoot: .
   namespace: IMN.ADPT.OfferIMP.ENG.Normalizer
