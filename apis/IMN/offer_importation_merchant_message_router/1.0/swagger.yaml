@@ -6,7 +6,11 @@ info:
 host: IMN.ADPT.OfferIMP.Routers
 basePath: /OfferImportationMerchantMessageRouter
 
-
+x-beezup-ops:
+  repo: IMN
+  namespace: IMN.ADPT.OfferIMP.Routers
+  comment: |
+    Actor 
 
 paths:
 
