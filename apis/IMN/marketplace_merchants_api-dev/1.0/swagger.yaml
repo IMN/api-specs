@@ -19,6 +19,7 @@ host: api.imn.io
 basePath: /marketplace/merchants/v1
 
 x-IMN-api-ops:
+  codeGenType: webapi
   repo: IMN
   appRoot: IMN.MER.WebService
   apiName: MerchantMarketplacesV1
