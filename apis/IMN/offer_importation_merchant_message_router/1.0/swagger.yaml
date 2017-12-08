@@ -9,6 +9,7 @@ basePath: /OfferImportationMerchantMessageRouter
 x-beezup-ops:
   codeGenType: actor
   repo: IMN
+  apiName: OfferImportationMerchantMessageRouter
   namespace: IMN.ADPT.OfferIMP.MER.Routers
   comment: |
     Actor 
