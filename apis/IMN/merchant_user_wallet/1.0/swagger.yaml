@@ -25,6 +25,7 @@ basePath: /v1/user/wallet
 
 
 x-IMN-api-ops:
+  codeGenType: webapi
   repo: Customer
   apiName: V1UserWallet
   appRoot: IMN.Customer.WebService
