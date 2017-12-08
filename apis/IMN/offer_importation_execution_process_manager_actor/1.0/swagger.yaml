@@ -9,6 +9,7 @@ x-beezup-ops:
   codeGenType: actor
   repo: IMN
   appRoot: TBD
+  apiName: OfferImportationExecutionProcessManager
   namespace: IMN.ADPT.OfferIMP.EXEC.PM
   comment: |
     Actor 
