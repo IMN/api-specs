@@ -6,6 +6,7 @@ info:
 basePath: /OfferImportationExecutionMessageRouter
   
 x-beezup-ops:
+  codeGenType: actor
   repo: IMN
   appRoot: IMN.ADPT.OfferIMP.EXEC.Routers
   apiName: OfferImportationExecutionMessageRouter
