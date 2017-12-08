@@ -6,9 +6,9 @@ info:
 basePath: /OfferImportationExecutionProcessManager
   
 x-beezup-ops:
-  repo: TBD
+  repo: IMN
   appRoot: TBD
-  namespace: IMN.ADPT.OfferIMPExecution.PM
+  namespace: IMN.ADPT.OfferIMP.EXEC.PM
   comment: |
     Actor 
   
