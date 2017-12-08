@@ -6,6 +6,7 @@ info:
 
 basePath: /OfferImportationProcessManager
 x-beezup-ops:
+  codeGenType: actor
   repo: IMN
   domain: IMN.ADPT.OfferIMP
   appRoot: IMN.ADPT.OfferIMP.PM
