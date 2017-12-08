@@ -14,6 +14,8 @@ x-beezup-ops:
   namespace: IMN.MER.Pusher
   comment: |
     Actor
+  using:
+  - IMN.MER.Events
 
 paths:
 
