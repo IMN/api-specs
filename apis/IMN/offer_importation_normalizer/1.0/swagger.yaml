@@ -9,7 +9,7 @@ x-beezup-ops:
   codeGenType: actor
   repo: IMN
   appRoot: .
-  apiName: 
+  apiName: OfferImportationNormalizer
   namespace: IMN.ADPT.OfferIMP.ENG.Normalizer
   comment: |
     Actor 
