@@ -6,6 +6,7 @@ info:
 
 basePath: /MerchantActor
 x-beezup-ops:
+  codeGenType: actor
   repo: IMN
   appRoot: IMN.MER.Actors
   apiName: MerchantActor
