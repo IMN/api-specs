@@ -8,6 +8,7 @@ host: IMN.MER.SubsRQ.Pusher
 basePath: /MerchantMarketplaceSubscriptionRequestedPusher
 
 x-beezup-ops:
+  codeGenType: domain
   repo: IMN
   appRoot: IMN.MER.SubsRQ.Pusher
   apiName: MerchantMarketplaceSubscriptionRequestedPusher
