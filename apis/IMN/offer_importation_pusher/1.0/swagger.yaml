@@ -13,6 +13,9 @@ x-beezup-ops:
   namespace: IMN.ADPT.OfferIMP.ENG.Pusher
   comment: |
     Actor 
+  using:
+  - IMN.ADPT.OfferIMP.Events
+  - using IMN.Offer.Events
   
 paths:
 
