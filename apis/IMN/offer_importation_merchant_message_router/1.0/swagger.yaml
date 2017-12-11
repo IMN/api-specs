@@ -13,6 +13,7 @@ x-beezup-ops:
   namespace: IMN.ADPT.OfferIMP.MER.Routers
   comment: |
     Actor 
+  IMN.MER.Events
 
 paths:
 
