@@ -13,7 +13,8 @@ x-beezup-ops:
   namespace: IMN.ADPT.OfferIMP.EXEC.PROJ
   comment: |
     Actor 
-  using IMN.ADPT.OfferIMP.Events
+  using:
+  - IMN.ADPT.OfferIMP.Events
   
 paths:
 
