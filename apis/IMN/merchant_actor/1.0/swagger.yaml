@@ -74,7 +74,7 @@ paths:
         204:
           description: OK
           
-  '/refuseMerchantSubscription':
+  '/refuseMerchantMarketplaceSubscription':
     post:
       summary: When the marketplace refuses the merchant subscription
       parameters: 
@@ -86,14 +86,14 @@ paths:
         204:
           description: OK
           
-  '/acceptMerchantSubscription':
+  '/acceptMerchantMarketplaceSubscription':
     post:
       summary: When the marketplace accepts the merchant subscription
       parameters: 
       - name: request
         in: body
         schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-commands/1.0#/definitions/acceptMerchantSubscription'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-commands/1.0#/definitions/acceptMerchantMarketplaceSubscription'
       responses:
         204:
           description: OK
