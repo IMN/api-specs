@@ -23,6 +23,7 @@ basePath: /merchant/marketplaces/v1
 
 
 x-IMN-api-ops:
+  codeGenType: webapi
   repo: IMN
   appRoot: IMN.Core.MER.WebService
   apiName: MerchantMarketplacesV1
