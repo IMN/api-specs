@@ -25,6 +25,7 @@ basePath: /v1/public/security
     
     
 x-IMN-api-ops:
+  codeGenType: webapi
   repo: Customer
   apiName: V1PublicSecurity
   appRoot: IMN.Customer.WebService
