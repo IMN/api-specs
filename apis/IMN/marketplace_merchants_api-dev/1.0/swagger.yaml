@@ -137,7 +137,7 @@ paths:
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
-      - name: request
+      - name: credential
         in: body
         schema:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceApiCredential'
@@ -159,6 +159,11 @@ paths:
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: credential
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceApiCredential'
+        required: true
       responses:
         '204':
           description: Merchant subscription accepted
@@ -174,7 +179,7 @@ paths:
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
-      - name: request
+      - name: reason
         in: body
         schema:
           $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/merchantMarketplaceSubscriptionRefusalReason'
