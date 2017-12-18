@@ -23,7 +23,7 @@ x-IMN-api-ops:
   repo: IMN
   appRoot: IMN.MKP.MER.WebService
   apiName: MarketplaceMerchantsV1
-  namespace: IMN.MER.WebService
+  namespace: IMN.MKP.MER.WebService
   useBeezUPFrameworkVersion2: true
   comment: |
     No change. Just server side generation.
