@@ -331,7 +331,7 @@ definitions:
 
   merchantListOrderBy:
     type: string
-    description: Indicates on which properties you want to order by the list of merchant
+    description: Indicates on which property you want to order by the list of merchant
     default: modificationUtcDate
     enum:
     - code
