@@ -26,7 +26,7 @@ x-IMN-api-ops:
   repo: IMN
   apiName: MerchantOffersV1
   appRoot: IMN.Core.Offer.WebService
-  namespace: IMN.Core.Offer.WebService
+  namespace: IMN.Offer.WebService
   comment: |
     No change. Just server side generation.
   
