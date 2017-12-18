@@ -21,7 +21,7 @@ basePath: /marketplace/merchants/v1
 x-IMN-api-ops:
   codeGenType: webapi
   repo: IMN
-  appRoot: IMN.MER.WebService
+  appRoot: IMN.MKP.MER.WebService
   apiName: MarketplaceMerchantsV1
   namespace: IMN.MER.WebService
   useBeezUPFrameworkVersion2: true
@@ -211,11 +211,29 @@ definitions:
         $ref: '#/definitions/marketplaceMerchantApiIndexLinks'
       
 
+  sort: 
+    type: string
+    default: ascending
+    enum:
+    - ascending
+    - descending
+    
+  merchantListOrderBy:
+    type: object
+    required:
+    - on
+    properties:
+      on:
+        $ref: '#/definitions/merchantListOrderByOn'
+      sort:
+        $ref: '#/definitions/sort'
+      
   merchantListRequest:
     type: object
     properties:
       orderBy:
         $ref: '#/definitions/merchantListOrderBy'
+        
       searchCompanyName:
         type: string
         description: Search merchants by the company name
@@ -330,7 +348,7 @@ definitions:
         type: boolean
         
 
-  merchantListOrderBy:
+  merchantListOrderByOn:
     type: string
     description: Indicates on which property you want to order by the list of merchant
     default: modificationUtcDate
