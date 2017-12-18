@@ -22,7 +22,7 @@ x-IMN-api-ops:
   codeGenType: webapi
   repo: IMN
   appRoot: IMN.MER.WebService
-  apiName: MerchantMarketplacesV1
+  apiName: MarketplacesV1
   namespace: IMN.MER.WebService
   useBeezUPFrameworkVersion2: true
   comment: |
