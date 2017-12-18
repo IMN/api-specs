@@ -55,7 +55,17 @@ tags:
 - name: Pricing Settings
 - name: Activation
 
+responses:
 
+  merchantNotFound:
+    description: The merchant code is not found.
+    schema:
+      $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/userErrorMessage'
+
+  merchantOrMarketplaceNotFound:
+    description: The merchant code or marketplace code is not found.
+    schema:
+      $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/userErrorMessage'
 
 
 paths: 
@@ -74,6 +84,10 @@ paths:
           description: The marketplaces index
           schema:
             $ref: '#/definitions/marketplacesIndex'
+            
+        '404':
+          $ref: '#/responses/merchantNotFound'
+
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
@@ -91,6 +105,9 @@ paths:
           description: The marketplaces pricing rules
           schema:
             $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplacePricingRuleList'
+        '404':
+          $ref: '#/responses/merchantNotFound'
+
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       
@@ -111,6 +128,8 @@ paths:
           description: The marketplace index
           schema:
             $ref: '#/definitions/marketplaceIndex'
+        '404':
+          $ref: '#/responses/merchantOrMarketplaceNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
@@ -128,6 +147,8 @@ paths:
           description: The marketplace subscription reporting
           schema:
             $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceSubscriptionReporting'
+        '404':
+          $ref: '#/responses/merchantOrMarketplaceNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
@@ -145,6 +166,8 @@ paths:
           description: The marketplace API credential
           schema:
             $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceApiCredential'
+        '404':
+          $ref: '#/responses/merchantOrMarketplaceNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
@@ -164,6 +187,8 @@ paths:
       responses:
         '204':
           description: Marketplace API credentials saved
+        '404':
+          $ref: '#/responses/merchantOrMarketplaceNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
@@ -183,6 +208,8 @@ paths:
           description: The transport settings for this marketplace
           schema:
             $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceTransportSettingList'
+        '404':
+          $ref: '#/responses/merchantOrMarketplaceNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
@@ -202,6 +229,8 @@ paths:
       responses:
         '204':
           description: Transport settings configured for this marketplace
+        '404':
+          $ref: '#/responses/merchantOrMarketplaceNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
@@ -221,6 +250,8 @@ paths:
           description: The pricing settings for this marketplace
           schema:
             $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplacePricingSetting'
+        '404':
+          $ref: '#/responses/merchantOrMarketplaceNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
@@ -239,6 +270,8 @@ paths:
       responses:
         '204':
           description: Pricing setting configured for this marketplace
+        '404':
+          $ref: '#/responses/merchantOrMarketplaceNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
@@ -255,6 +288,8 @@ paths:
       responses:
         '204':
           description: The source marketplace has been declared
+        '404':
+          $ref: '#/responses/merchantOrMarketplaceNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
@@ -270,6 +305,8 @@ paths:
       responses:
         '204':
           description: The source marketplace has been declared
+        '404':
+          $ref: '#/responses/merchantOrMarketplaceNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
@@ -285,6 +322,8 @@ paths:
       responses:
         '204':
           description: The marketplace has been enabled
+        '404':
+          $ref: '#/responses/merchantOrMarketplaceNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
@@ -301,6 +340,8 @@ paths:
       responses:
         '204':
           description: The marketplace has been disabled
+        '404':
+          $ref: '#/responses/merchantOrMarketplaceNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
