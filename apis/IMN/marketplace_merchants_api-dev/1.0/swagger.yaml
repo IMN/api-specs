@@ -27,6 +27,9 @@ x-IMN-api-ops:
   useBeezUPFrameworkVersion2: true
   comment: |
     No change. Just server side generation.
+  using:
+  - IMN.Schemas
+  - IMN.MER.Schemas
   
 
 x-basePath: /marketplace/merchants/v1
