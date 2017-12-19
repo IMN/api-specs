@@ -25,7 +25,7 @@ basePath: /merchant/marketplaces/v1
 x-IMN-api-ops:
   codeGenType: webapi
   repo: IMN
-  appRoot: IMN.MER.WebService
+  appRoot: IMN.MER.MKP.WebService
   apiName: MerchantMarketplacesV1
   namespace: IMN.MER.MKP.WebService
   useBeezUPFrameworkVersion2: true
@@ -179,7 +179,7 @@ paths:
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
-      - name: request
+      - name: credential
         in: body
         schema:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceApiCredential'
@@ -221,7 +221,7 @@ paths:
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
-      - name: request
+      - name: transportSetting
         in: body
         schema:
           $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceTransportSettingList'
@@ -262,7 +262,7 @@ paths:
       operationId: SaveMarketplacePricingSetting
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
-      - name: request
+      - name: pricingSetting
         in: body
         schema:
           $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplacePricingSetting'
