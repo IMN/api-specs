@@ -110,8 +110,8 @@ paths:
         200:
           description: The merchant index
           schema:
-            $ref: '#/definitions/merchantIndex
-        '404':
+            $ref: '#/definitions/merchantIndex'
+        404:
           $ref: '#/responses/merchantOrMarketplaceNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
