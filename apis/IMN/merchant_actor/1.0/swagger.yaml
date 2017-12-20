@@ -24,7 +24,7 @@ paths:
 
   '/createMerchant':
     post:
-      summary: When the merchant declares his information
+      summary: When the merchant creates his account on IMN
       parameters: 
       - name: request
         in: body
