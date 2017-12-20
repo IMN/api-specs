@@ -1,0 +1,179 @@
+swagger: '2.0'
+info:
+  version: "1.0"
+  title: 'IMN CORE - Merchant Actor'
+
+
+basePath: /MerchantActor
+x-beezup-ops:
+  codeGenType: actor
+  repo: IMN
+  appRoot: IMN.MER.Actors
+  apiName: MerchantActor
+  namespace: IMN.MER.Actors
+  comment: |
+    Actor
+  using:
+  - IMN.MER.Commands
+  - IMN.MER.Events
+  - IMN.MER.Schemas
+  
+
+
+paths:
+
+  '/createMerchant':
+    post:
+      summary: When the merchant declares his information
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-commands/1.0#/definitions/createMerchant'
+      responses:
+        204:
+          description: OK
+          
+  '/updateMerchantAcountInfo':
+    post:
+      summary: When the merchant updates his account information
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-commands/1.0#/definitions/updateMerchantAcountInfo'
+      responses:
+        204:
+          description: OK
+
+  '/declareSourceMarketplace':
+    post:
+      summary: When the merchant wants to declare source marketplace by using his credential
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-commands/1.0#/definitions/declareMerchantOffersSourceMarketplace'
+      responses:
+        204:
+          description: OK
+
+
+  '/undeclareSourceMarketplace':
+    post:
+      summary: When the merchant wants to declare source marketplace by using his credential
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-commands/1.0#/definitions/undeclareMerchantOffersSourceMarketplace'
+      responses:
+        204:
+          description: OK
+
+
+  '/configureMarketplaceApiCredential':
+    post:
+      summary: When the merchant configure a api credential for a marketplace
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-commands/1.0#/definitions/configureMerchantMarketplaceCredential'
+      responses:
+        204:
+          description: OK
+
+
+  '/externalMerchantMarketplaceSubscriptionsRequested':
+    post:
+      summary: When the registration process has been completed
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/externalMerchantMarketplaceSubscriptionsRequested'
+      responses:
+        204:
+          description: OK
+          
+  '/refuseMerchantMarketplaceSubscription':
+    post:
+      summary: When the marketplace refuses the merchant subscription
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-commands/1.0#/definitions/refuseMerchantMarketplaceSubscription'
+      responses:
+        204:
+          description: OK
+          
+  '/acceptMerchantMarketplaceSubscription':
+    post:
+      summary: When the marketplace accepts the merchant subscription
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-commands/1.0#/definitions/acceptMerchantMarketplaceSubscription'
+      responses:
+        204:
+          description: OK
+    
+
+  '/enableMarketplace':
+    post:
+      summary: When the merchant wants to enable offer publication & order managementon a marketplace
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-commands/1.0#/definitions/enableMerchantMarketplace'
+      responses:
+        204:
+          description: OK
+
+
+  '/disableMarketplace':
+    post:
+      summary: When the merchant wants to disable offer publication & order management on a marketplace
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-commands/1.0#/definitions/disableMerchantMarketplace'
+      responses:
+        204:
+          description: OK
+
+
+
+  '/reenableOrderImportation':
+    post:
+      summary: When the merchant wants to reenable order importation on a marketplace
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-commands/1.0#/definitions/reenableMerchantMarketplaceOrderImportation'
+      responses:
+        204:
+          description: OK
+
+
+  '/disableOrderImportation':
+    post:
+      summary: When the merchant wants to disable order importation on a marketplace
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-commands/1.0#/definitions/disableMerchantMarketplaceOrderImportation'
+      responses:
+        204:
+          description: OK
+
+
+
+definitions: {}
