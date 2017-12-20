@@ -277,7 +277,7 @@ paths:
         '204':
           description: The source marketplace has been declared
         '404':
-          $ref: '#/responses/merchantOrMarketplaceNotFound'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
