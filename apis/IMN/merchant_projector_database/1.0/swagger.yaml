@@ -30,6 +30,18 @@ paths:
       responses:
         204:
           description: OK
+  
+  '/merchantAcountInfoUpdated':
+    post:
+      summary: When the merchant updates his information
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantAcountInfoUpdated'
+      responses:
+        204:
+          description: OK
 
   '/merchantMarketplaceCredentialConfigured':
     post:
