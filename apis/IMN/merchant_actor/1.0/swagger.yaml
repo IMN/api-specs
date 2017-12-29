@@ -5,14 +5,14 @@ info:
 
 
 basePath: /MerchantActor
-x-beezup-api-ops:
+x-IMN-api-ops:
   codeGenType: actor
   repo: IMN
   appRoot: IMN.MER.Actors
   apiName: MerchantActor
   namespace: IMN.MER.Actors
   comment: |
-    Actor - Test server side generation script 6
+    Actor - Test server side generation script 7
   using:
   - IMN.MER.Commands
   - IMN.MER.Events
