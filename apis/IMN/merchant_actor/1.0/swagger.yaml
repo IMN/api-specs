@@ -12,7 +12,7 @@ x-beezup-api-ops:
   apiName: MerchantActor
   namespace: IMN.MER.Actors
   comment: |
-    Actor - Test server side generation fiddler
+    Actor - Test server side generation script 6
   using:
   - IMN.MER.Commands
   - IMN.MER.Events
