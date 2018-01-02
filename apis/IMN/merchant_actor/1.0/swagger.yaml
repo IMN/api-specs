@@ -12,7 +12,7 @@ x-IMN-api-ops:
   apiName: MerchantActor
   namespace: IMN.MER.Actors
   comment: |
-    Actor - Test server side generation script t12
+    Actor - Test server side generation script t13
   using:
   - IMN.MER.Commands
   - IMN.MER.Events
