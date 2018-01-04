@@ -296,6 +296,9 @@ definitions:
   links.RefuseMerchantSubscriptionLink:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+  links.BlockMerchantSubscriptionLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
     
   merchantInfoLinks:
     type: object
@@ -310,6 +313,8 @@ definitions:
         $ref: '#/definitions/links.AcceptMerchantSubscriptionLink'
       refuseSubscription:
         $ref: '#/definitions/links.RefuseMerchantSubscriptionLink'
+      blockSubscription:
+        $ref: '#/definitions/links.BlockMerchantSubscriptionLink'
         
   
   
