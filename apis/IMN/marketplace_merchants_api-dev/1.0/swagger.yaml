@@ -156,7 +156,7 @@ paths:
     post:
       tags: 
       - Subscription
-      summary: Get the list of merchants related to a marketplace
+      summary: Accept a merchant subscription to a marketplace
       operationId: AcceptMerchantSubscription
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
@@ -176,7 +176,7 @@ paths:
     post:
       tags: 
       - Subscription
-      summary: Get the list of merchants related to a marketplace
+      summary: Block a merchant subscription to a marketplace
       operationId: RefuseMerchantSubscription
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
@@ -189,6 +189,26 @@ paths:
       responses:
         '204':
           description: Merchant subscription refused
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+          
+  '/{marketplaceCode}/{merchantCode}/subscription/block':
+    post:
+      tags: 
+      - Subscription
+      summary: Block a merchant subscription to the marketplace
+      operationId: BlockMerchantSubscription
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: reason
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/merchantMarketplaceSubscriptionRefusalReason'
+        required: true
+      responses:
+        '204':
+          description: Merchant subscription blocked
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
