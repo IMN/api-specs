@@ -108,6 +108,18 @@ paths:
       responses:
         204:
           description: OK
+    
+  '/blockMerchantMarketplaceSubscription':
+    post:
+      summary: When the marketplace blocks the merchant subscription
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-commands/1.0#/definitions/refuseMerchantMarketplaceSubscription'
+      responses:
+        204:
+          description: OK
           
   '/acceptMerchantMarketplaceSubscription':
     post:
