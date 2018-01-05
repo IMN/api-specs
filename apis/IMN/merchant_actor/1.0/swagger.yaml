@@ -198,16 +198,5 @@ paths:
         204: 
           description: OK
           
-  '/retrieveMerchantMarketplacePricingSetting':
-    post:
-      summary: When the merchant wants to retrieve the price rule for a marketplace
-      parameters: 
-      - name: request
-        in: body
-        schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-commands/1.0#/definitions/retrieveMarketplacePricingSetting'
-      responses:
-        204: 
-          description: OK
 
 definitions: {}
