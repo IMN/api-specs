@@ -168,4 +168,16 @@ paths:
         204:
           description: OK
 
+  '/merchantMarketplacePricingSettingConfigured':
+    post:
+      summary: When the merchant configured the pricing of a marketplace
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplacePricingSettingConfigured'
+      responses:
+        204:
+          description: OK
+      
 definitions: {}
