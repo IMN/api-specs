@@ -51,7 +51,7 @@ tags:
 - name: Global
 - name: Marketplace
 - name: Api Credentials
-- name: Transport Settings
+- name: Shipping Settings
 - name: Pricing Settings
 - name: Activation
 
@@ -175,20 +175,20 @@ paths:
 
 
 
-  '/{merchantCode}/{marketplaceCode}/transportSettings':
+  '/{merchantCode}/{marketplaceCode}/shippingSettings':
     get:
       tags:
-      - Transport Settings
-      summary: Get the transport settings for this marketplace
-      operationId: GetMarketplaceTransportSettings
+      - Shipping Settings
+      summary: Get the shipping settings for this marketplace
+      operationId: GetMarketplaceShippingSettings
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       responses:
         '200':
-          description: The transport settings for this marketplace
+          description: The shipping settings for this marketplace
           schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceTransportSettingList'
+            $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceShippingSettingList'
         '404':
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         default:
@@ -196,20 +196,20 @@ paths:
 
     put:
       tags:
-      - Transport Settings
-      summary: Save the transport settings for this marketplace
-      operationId: SaveMarketplaceTransportSettings
+      - Shipping Settings
+      summary: Save the shipping settings for this marketplace
+      operationId: SaveMarketplaceShippingSettings
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
-      - name: transportSetting
+      - name: shippingSetting
         in: body
         schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceTransportSettingList'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceShippingSettingList'
         required: true
       responses:
         '204':
-          description: Transport settings configured for this marketplace
+          description: Shipping settings configured for this marketplace
         '404':
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         default:
@@ -358,12 +358,12 @@ definitions:
         method: GET
 
 
-  links.GetMarketplaceTransportSettingsLink:
+  links.GetMarketplaceShippingSettingsLink:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
     - type: object
       example:
-        href: /merchant/marketplace/v1/eprice/transportSettings
+        href: /merchant/marketplace/v1/eprice/shippingSettings
         method: GET
 
   links.GetMarketplacePricingSettingLink:
@@ -409,12 +409,12 @@ definitions:
         href: /v1/user/lov/MarketplacePricingRuleType
         method: GET
 
-  externalLinks.TransportTypeStandardLOVLink:
+  externalLinks.ShippingTypeStandardLOVLink:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/LOVLink3'
     - type: object
       example:
-        href: /v1/user/lov/TransportTypeStandard
+        href: /v1/user/lov/ShippingTypeStandard
         method: GET
 
 
@@ -428,8 +428,8 @@ definitions:
     properties:
       pricingRuleTypeLOV:
         $ref: '#/definitions/externalLinks.MarketplacePricingRuleTypeLOVLink'
-      transportTypeStandardLOV:
-        $ref: '#/definitions/externalLinks.TransportTypeStandardLOVLink'
+      shippingTypeStandardLOV:
+        $ref: '#/definitions/externalLinks.ShippingTypeStandardLOVLink'
         
       pricingRules:
         $ref: '#/definitions/links.GetPricingRulesLink'
@@ -452,12 +452,12 @@ definitions:
   marketplaceIndexLinks:
     type: object
     properties:
-      transportTypeLOV:
+      shippingTypeLOV:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/LOVLink3'
       apiCredential:
         $ref: '#/definitions/links.GetMarketplaceApiCredentialLink'
-      transportSettings:
-        $ref: '#/definitions/links.GetMarketplaceTransportSettingsLink'
+      shippingSettings:
+        $ref: '#/definitions/links.GetMarketplaceShippingSettingsLink'
       pricingSetting:
         $ref: '#/definitions/links.GetMarketplacePricingSettingLink'
       enable:
