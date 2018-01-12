@@ -199,4 +199,15 @@ paths:
           description: OK
           
 
+  '/configureMerchantMarketplaceShippingSettings':
+    post:
+      summary: When the merchant wants to configure the shipping settings a marketplace
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-commands/1.0#/definitions/configureMarketplaceShippingSettings'
+      responses:
+        204: 
+          description: OK
 definitions: {}
