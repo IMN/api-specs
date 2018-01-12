@@ -188,7 +188,7 @@ paths:
         '200':
           description: The shipping settings for this marketplace
           schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceShippingSettingList'
+            $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceShippingSettings'
         '404':
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         default:
@@ -205,7 +205,7 @@ paths:
       - name: shippingSetting
         in: body
         schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceShippingSettingList'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceShippingSettings'
         required: true
       responses:
         '204':
