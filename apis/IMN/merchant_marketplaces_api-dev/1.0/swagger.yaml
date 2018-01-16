@@ -518,6 +518,8 @@ definitions:
         $ref: '#/definitions/links.DisableOrderImportationLink'
       reenableOrderImportation:
         $ref: '#/definitions/links.ReenableOrderImportationLink'
+      reporting:
+        $ref: '#/definitions/links.GetMarketplaceSubscriptionReportingLink'
         
   marketplaceIndex:
     type: object
