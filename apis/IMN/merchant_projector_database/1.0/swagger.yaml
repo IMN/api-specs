@@ -191,19 +191,7 @@ paths:
       responses:
         204:
           description: OK
-          
-  '/merchantMarketplaceShippingSettingConfigured':
-    post:
-      summary: When the merchant configured the shipping of a marketplace
-      parameters:
-      - name: request
-        in: body
-        schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceShippingSettingConfigured'
-      responses:
-        204:
-          description: OK
-          
+  
   '/merchantOffersSourceMarketplaceDeclared':
     post:
       summary: When the merchant declared this offer source marketplace
