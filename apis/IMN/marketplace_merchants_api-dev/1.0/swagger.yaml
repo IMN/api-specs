@@ -30,6 +30,7 @@ x-IMN-api-ops:
   using:
   - IMN.Schemas
   - IMN.MER.Schemas
+  - IMN.MER.Exceptions
   
 
 x-basePath: /marketplace/merchants/v1
