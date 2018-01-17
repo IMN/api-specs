@@ -62,7 +62,10 @@ paths:
       responses:
         204:
           description: OK
-
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
 
   '/undeclareSourceMarketplace':
     post:
@@ -75,8 +78,13 @@ paths:
       responses:
         204:
           description: OK
-
-
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
+        412:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/notOfferSourceMarketplace'
+          
   '/configureMarketplaceApiCredential':
     post:
       summary: When the merchant configure a api credential for a marketplace
@@ -88,7 +96,12 @@ paths:
       responses:
         204:
           description: OK
-
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
+        403:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMarketplaceCredential'
 
   '/externalMerchantMarketplaceSubscriptionsRequested':
     post:
@@ -101,7 +114,11 @@ paths:
       responses:
         204:
           description: OK
-          
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantNotFound'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
+
   '/refuseMerchantMarketplaceSubscription':
     post:
       summary: When the marketplace refuses the merchant subscription
@@ -113,7 +130,11 @@ paths:
       responses:
         204:
           description: OK
-    
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
+          
   '/blockMerchantMarketplaceSubscription':
     post:
       summary: When the marketplace blocks the merchant subscription
@@ -125,6 +146,10 @@ paths:
       responses:
         204:
           description: OK
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
           
   '/acceptMerchantMarketplaceSubscription':
     post:
@@ -137,7 +162,10 @@ paths:
       responses:
         204:
           description: OK
-    
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
 
   '/enableMarketplace':
     post:
@@ -150,8 +178,13 @@ paths:
       responses:
         204:
           description: OK
-
-
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
+        403:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/subscriptionNotAcceptedByMarketplace'
+          
   '/disableMarketplace':
     post:
       summary: When the merchant wants to disable offer publication & order management on a marketplace
@@ -163,7 +196,10 @@ paths:
       responses:
         204:
           description: OK
-
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
 
 
   '/reenableOrderImportation':
@@ -177,7 +213,12 @@ paths:
       responses:
         204:
           description: OK
-
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
+        403:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/subscriptionNotAcceptedByMarketplace'
 
   '/disableOrderImportation':
     post:
@@ -190,7 +231,11 @@ paths:
       responses:
         204:
           description: OK
-
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
+          
   '/configureMerchantMarketplacePricingSetting':
     post:
       summary: When the merchant wants to configure the price rule for a marketplace
