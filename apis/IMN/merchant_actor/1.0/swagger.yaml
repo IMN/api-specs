@@ -33,7 +33,8 @@ paths:
       responses:
         204:
           description: OK
-          
+        409:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantCodeAlreadyUsed'
   '/updateMerchantAcountInfo':
     post:
       summary: When the merchant updates his account information
@@ -45,7 +46,10 @@ paths:
       responses:
         204:
           description: OK
-
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantNotFound'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/definitions/invalidMerchantCode'
   '/declareSourceMarketplace':
     post:
       summary: When the merchant wants to declare source marketplace by using his credential
