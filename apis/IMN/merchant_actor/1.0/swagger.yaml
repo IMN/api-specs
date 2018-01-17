@@ -49,7 +49,7 @@ paths:
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantNotFound'
         400:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
           
   '/declareSourceMarketplace':
     post:
@@ -65,7 +65,7 @@ paths:
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
 
   '/undeclareSourceMarketplace':
     post:
@@ -81,9 +81,9 @@ paths:
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
         412:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/notOfferSourceMarketplace'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/notOfferSourceMarketplace'
           
   '/configureMarketplaceApiCredential':
     post:
@@ -99,9 +99,9 @@ paths:
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
         403:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMarketplaceCredential'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMarketplaceCredential'
 
   '/externalMerchantMarketplaceSubscriptionsRequested':
     post:
@@ -117,7 +117,7 @@ paths:
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantNotFound'
         400:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
 
   '/refuseMerchantMarketplaceSubscription':
     post:
@@ -133,7 +133,7 @@ paths:
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
           
   '/blockMerchantMarketplaceSubscription':
     post:
@@ -149,7 +149,7 @@ paths:
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
           
   '/acceptMerchantMarketplaceSubscription':
     post:
@@ -165,7 +165,7 @@ paths:
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
 
   '/enableMarketplace':
     post:
@@ -181,9 +181,9 @@ paths:
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
         403:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/subscriptionNotAcceptedByMarketplace'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/subscriptionNotAcceptedByMarketplace'
           
   '/disableMarketplace':
     post:
@@ -199,7 +199,7 @@ paths:
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
 
 
   '/reenableOrderImportation':
@@ -216,9 +216,9 @@ paths:
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
         403:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/subscriptionNotAcceptedByMarketplace'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/subscriptionNotAcceptedByMarketplace'
 
   '/disableOrderImportation':
     post:
@@ -234,7 +234,7 @@ paths:
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
           
   '/configureMerchantMarketplacePricingSetting':
     post:
@@ -250,7 +250,7 @@ paths:
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantNotFound'
         400:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/1.0#/responses/invalidMerchantCode'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
           
 
   '/configureMerchantMarketplaceShippingSettings':
