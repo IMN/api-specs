@@ -203,6 +203,18 @@ paths:
       responses:
         204:
           description: OK
+          
+  '/merchantOffersSourceMarketplaceUndeclared':
+    post:
+      summary: When the merchant undeclared this offer source marketplace
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantOffersSourceMarketplaceUndeclared'
+      responses:
+        204:
+          description: OK
   
       
 definitions: {}
