@@ -10,7 +10,7 @@ x-beezup-ops:
   codeGenType: eventHandlerActor
   repo: IMN
   appRoot: IMN.MER.PROJ.Db
-  apiName: MerchantProjectorDatabase
+  apiName: MerchantProjectionApplier
   namespace: IMN.MER.PROJ.Db
   comment: |
     Actor
