@@ -7,7 +7,7 @@ host: IMN.MER.PROJ.Db
 basePath: /MerchantProjectorDatabase
 
 x-beezup-ops:
-  codeGenType: actor
+  codeGenType: eventHandlerActor
   repo: IMN
   appRoot: IMN.MER.PROJ.Db
   apiName: MerchantProjectorDatabase
