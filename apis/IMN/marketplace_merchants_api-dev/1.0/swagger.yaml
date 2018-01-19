@@ -91,7 +91,7 @@ paths:
           schema:
             $ref: '#/definitions/merchantList'
         404:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/marketplaceNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
             
