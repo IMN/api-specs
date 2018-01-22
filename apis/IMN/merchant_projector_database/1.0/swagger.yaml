@@ -4,7 +4,7 @@ info:
   title: 'IMN - Merchant Projector Database'
 
 host: IMN.MER.PROJ.Db
-basePath: /MerchantProjectorDatabase
+basePath: /MerchantProjectionApplier
 
 x-beezup-ops:
   codeGenType: eventHandlerActor
