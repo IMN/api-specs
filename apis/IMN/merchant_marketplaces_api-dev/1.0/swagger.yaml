@@ -479,10 +479,6 @@ definitions:
         $ref: '#/definitions/externalLinks.MarketplacePricingRuleTypeLOVLink'
       shippingTypeStandardLOV:
         $ref: '#/definitions/externalLinks.ShippingTypeStandardLOVLink'
-        
-      pricingRules:
-        $ref: '#/definitions/links.GetPricingRulesLink'
-
       
 
   marketplacesIndex:
