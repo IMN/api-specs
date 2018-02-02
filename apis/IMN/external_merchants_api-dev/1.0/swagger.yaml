@@ -52,7 +52,7 @@ paths:
         in: body
         required: true
         schema:
-          $ref: '#/definitions/externalMerchantMarketplaceSubscriptionRequest'
+          $ref: '#/definitions/externalMerchantMarketplaceSubscriptionsRequest'
       responses:
         204:
           description: Subscriptions's request have been integrated
@@ -61,7 +61,7 @@ paths:
           
 definitions: 
 
-  externalMerchantMarketplaceSubscriptionRequest:
+  externalMerchantMarketplaceSubscriptionsRequest:
     type: object
     description: When the merchant marketplace subscription has been requested
     required:
