@@ -1,0 +1,63 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: 'External API - Merchant Marketplace Subscription Request'
+  description: 'External API - Merchant Marketplace Subscription Request'
+
+host: api.imn.io
+basePath: /external/merchants/v1
+
+
+x-IMN-api-ops:
+  codeGenType: azure-functions 
+  repo: IMN
+  apiName: ExternalMerchantsV1
+  appRoot: IMN.EXT.MER.WebService
+  namespace: IMN.EXT.MER.WebService
+  useBeezUPFrameworkVersion2: true
+  comment: |
+    Added useBeezUPFrameworkVersion2 and comment properties. And usings
+  using:
+  - IMN.Schemas
+  - IMN.MER.Schemas
+  - IMN.MER.Exceptions
+  - IMN.MER.Events
+
+x-basePath: /external/merchants/v1
+
+
+schemes:
+  - https
+
+consumes:
+  - application/json
+produces:
+  - application/json
+  
+tags:
+- name: Global
+
+
+
+paths:
+
+  '/subscriptionsRequested':
+    post:
+      tags: 
+      - Global
+      summary: Notify merchant subscriptions request
+      operationId: PushMerchantSubscriptionsRequested
+      parameters: 
+      #- $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/externalMerchantMarketplaceSubscriptionsRequested'
+      responses:
+        204:
+          description: Subscriptions's request have been integrated
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+          
+definitions: {}
