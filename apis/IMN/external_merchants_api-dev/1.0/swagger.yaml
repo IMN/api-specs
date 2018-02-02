@@ -15,6 +15,8 @@ x-IMN-api-ops:
   appRoot: IMN.EXT.MER.WebService
   namespace: IMN.EXT.MER.WebService
   useBeezUPFrameworkVersion2: true
+  comment: |
+    Added useBeezUPFrameworkVersion2 and comment properties.
 
 x-basePath: /external/merchants/v1
 
