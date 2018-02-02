@@ -14,6 +14,7 @@ x-IMN-api-ops:
   apiName: ExternalMerchantsV1
   appRoot: IMN.EXT.MER.WebService
   namespace: IMN.EXT.MER.WebService
+  useBeezUPFrameworkVersion2: true
 
 x-basePath: /external/merchants/v1
 
