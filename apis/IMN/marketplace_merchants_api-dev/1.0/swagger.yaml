@@ -71,12 +71,12 @@ paths:
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
             
-  '/{marketplaceCode}/list':
+  '/{marketplaceCode}/incoming':
     post:
       tags: 
       - Merchants
-      summary: Get the list of merchants related to a marketplace
-      operationId: GetMerchantList
+      summary: Get the list of incoming merchants related to a marketplace
+      operationId: GetIncomingMerchantList
       parameters: 
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageSizeQueryStringParameter'
@@ -85,12 +85,37 @@ paths:
         in: body
         required: true
         schema:
-          $ref: '#/definitions/merchantListRequest'
+          $ref: '#/definitions/incomingMerchantListRequest'
       responses:
         200:
           description: OK
           schema:
-            $ref: '#/definitions/merchantList'
+            $ref: '#/definitions/incomingMerchantList'
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/marketplaceNotFound'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+  '/{marketplaceCode}/outgoing':
+    post:
+      tags: 
+      - Merchants
+      summary: Get the list of outgoing merchants related to a marketplace
+      operationId: GetOutgoingMerchantList
+      parameters: 
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageSizeQueryStringParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageNumberQueryStringParameter'
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/outgoingMerchantListRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/incomingMerchantList'
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/marketplaceNotFound'
         default:
@@ -288,7 +313,7 @@ definitions:
       sort:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/sort'
       
-  merchantListRequest:
+  incomingMerchantListRequest:
     type: object
     properties:
       orderBy:
@@ -311,7 +336,7 @@ definitions:
       self:
         $ref: '#/definitions/links.GetMerchantListLink'
 
-  merchantList:
+  incomingMerchantList:
     type: object
     required: 
     - links
