@@ -230,8 +230,8 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
 
-  '/{marketplaceCode}/{merchantCode}/marketplaceMerchantCode':
-    put:
+  '/{marketplaceCode}/{merchantCode}/configureMarketplaceMerchantCode':
+    post:
       tags: 
       - Marketplace Merchant Code
       summary: Configure marketplace merchant code
