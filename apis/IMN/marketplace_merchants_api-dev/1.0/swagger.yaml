@@ -49,6 +49,7 @@ tags:
 - name: Merchants
 - name: Api Credentials
 - name: Subscription
+- name: Marketplace Merchant Code
 
 paths: 
 
@@ -185,12 +186,12 @@ paths:
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
-  '/{marketplaceCode}/{merchantCode}/subscription/refuse':
+  '/{marketplaceCode}/{merchantCode}/subscription/decline':
     post:
       tags: 
       - Subscription
-      summary: Block a merchant subscription to a marketplace
-      operationId: RefuseMerchantSubscription
+      summary: Decline a merchant subscription to a marketplace
+      operationId: DeclineMerchantSubscription
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
@@ -201,7 +202,7 @@ paths:
         required: true
       responses:
         204:
-          description: Merchant subscription refused
+          description: Merchant subscription declined
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
@@ -232,6 +233,33 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+  '/{marketplaceCode}/{merchantCode}/marketplaceMerchantCode':
+    put:
+      tags: 
+      - Marketplace Merchant Code
+      summary: Configure marketplace merchant code
+      operationId: ConfigureMarketplaceMerchantCode
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: marketplaceMerchantCode
+        in: body
+        schema:
+          type: string
+        required: true
+      responses:
+        204:
+          description: Merchant subscription blocked
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
 
 definitions:
 
@@ -398,3 +426,4 @@ definitions:
     - merchantCode
     - creationUtcDate
     - modificationUtcDate
+x-azure-api-id: 'MarketplaceMerchantsV1'
