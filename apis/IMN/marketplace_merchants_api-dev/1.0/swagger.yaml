@@ -318,7 +318,6 @@ definitions:
     properties:
       orderBy:
         $ref: '#/definitions/merchantListOrderBy'
-        
       searchCompanyName:
         type: string
         description: Search merchants by the company name
