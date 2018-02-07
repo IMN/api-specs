@@ -421,7 +421,7 @@ definitions:
     - firstName
     - lastName
     - phoneNumber
-    - source
+    - sourceMarketplaceCode
     - creationUtcDate
     properties:
       code:
@@ -445,6 +445,11 @@ definitions:
         type: number
         format: int32
         description: Imported offer count from the source marketpalce
+
+
+  marketplaceMerchantCode:
+    type: string
+    description: The merchant code for a marketplace
 
   merchantTargetMarketplaceInfo:
     type: object
@@ -498,6 +503,8 @@ definitions:
       - shippingSettingsStatus
       - offerPublicationEnabled
       properties:
+        targetMarketplaceMerchantCode:
+          $ref: '#/definitions/marketplaceMerchantCode'
         orderCount:
           type: number
           format: int32
@@ -522,12 +529,14 @@ definitions:
       - source
       - creationUtcDate
       properties:
+        sourceMarketplaceMerchantCode:
+          $ref: '#/definitions/marketplaceMerchantCode'
         targetMarketplaces:
           type: object
           description: The key is the marketplace code
           additionalProperties:
             $ref: '#/definitions/merchantTargetMarketplaceInfo'
-          
+            
     
 
         
