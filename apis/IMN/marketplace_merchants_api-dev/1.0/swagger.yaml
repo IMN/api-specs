@@ -326,7 +326,24 @@ definitions:
         type: string
         description: Search merchants by the code
         example: MLT
-        
+
+
+  outgoingMerchantListRequest:
+    type: object
+    properties:
+      orderBy:
+        $ref: '#/definitions/merchantListOrderBy'
+      searchCompanyName:
+        type: string
+        description: Search merchants by the company name
+        example: Literie
+      searchMerchantCode:
+        type: string
+        description: Search merchants by the code
+        example: MLT
+  
+
+
   merchantListLinks:
     type: object
     required: 
