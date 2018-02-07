@@ -65,14 +65,14 @@ securityDefinitions:
     authorizationUrl: 'https://login.microsoftonline.com/imnb2ctenant.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_sign_up_or_sign_in_light&response_mode=fragment'
     flow: implicit
     scopes:
-      user_impersonation: Access this app on behalf of the signed-in user
+      https://imnb2ctenant.onmicrosoft.com/swaggerhub/read_write: Access this app on behalf of the signed-in user
 
 # Here we apply the security flow called 'implicit' globally to all the opeartions in the spec. 
 # This security scheme is defined above in the 'securityDefinitions' section.
 # Global security can be overriden an operation level as seen in the example below
 security:
   - implicit:
-    - user_impersonation
+    - https://imnb2ctenant.onmicrosoft.com/swaggerhub/read_write
     
 paths:
   
