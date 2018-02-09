@@ -312,7 +312,7 @@ definitions:
     - outgoing
     properties:
       self:
-        $ref: '#/definitions/links.marketplaceMerchantApiIndexLink'
+        $ref: '#/definitions/links.GetMarketplaceMerchantApiIndexLink'
       incoming:
         $ref: '#/definitions/links.GetIncomingMerchantIndexLink'
       outgoing:
@@ -412,13 +412,14 @@ definitions:
   links.BlockMerchantSubscriptionLink:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
-  links.marketplaceMerchantApiIndexLink:
+  links.GetMarketplaceMerchantApiIndexLink:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
     
   incomingMerchantInfoLinks:
     type: object
     required:
+    - self
     - apiCredential
     properties:
       self:
@@ -436,6 +437,7 @@ definitions:
   outgoingMerchantInfoLinks:
     type: object
     required:
+    - self
     - apiCredential
     properties:
       self:
