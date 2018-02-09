@@ -422,8 +422,8 @@ definitions:
     required:
     - apiCredential
     properties:
-      self:
-        $ref: '#/definitions/links.GetMerchantIndexLink'
+      merchantList:
+        $ref: '#/definitions/links.GetMerchantListLink'
       apiCredential:
         $ref: '#/definitions/links.GetMerchantApiCredentialLink'
       acceptSubscription:
