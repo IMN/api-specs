@@ -403,10 +403,12 @@ definitions:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
 
-  links.GetMerchantIndexLink:
+  links.GetIncomingMerchantIndexLink:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
-
+  links.GetOutgoingMerchantIndexLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
   links.AcceptMerchantSubscriptionLink:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
@@ -423,7 +425,7 @@ definitions:
     - apiCredential
     properties:
       self:
-        $ref: '#/definitions/links.GetMerchantIndexLink'
+        $ref: '#/definitions/links.GetIncomingMerchantIndexLink'
       apiCredential:
         $ref: '#/definitions/links.GetMerchantApiCredentialLink'
       acceptSubscription:
@@ -440,7 +442,7 @@ definitions:
     - apiCredential
     properties:
       self:
-        $ref: '#/definitions/links.GetMerchantIndexLink'
+        $ref: '#/definitions/links.GetOutgoingMerchantIndexLink'
 
   
   incomingMerchantIndex:
