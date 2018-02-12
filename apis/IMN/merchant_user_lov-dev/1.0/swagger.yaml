@@ -212,4 +212,4 @@ definitions:
         $ref: '#/definitions/links.GetUserListOfValuesLink'
     
 
-x-azure-api-id: 'merchantlovv1'
+x-azure-api-id: 'MerchantLovV1'
