@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  title: Merchant API - User - List of Values
+  title: Merchant API - List of Values
   description: This API gives you access to list of values.
   version: "1.0"
   contact:
@@ -16,8 +16,8 @@ info:
 
 
  
-host: merchantapi.imn.io
-basePath: /v1/user/lov
+host: api.imn.io
+basePath: /merchant/lov/v1
 schemes:
   - https
 
