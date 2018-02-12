@@ -30,7 +30,9 @@ x-IMN-api-ops:
   namespace: IMN.MER.MKP.WebService
   useBeezUPFrameworkVersion2: true
   comment: |
-    No change. Just server side generation. Integration to VSO for docgen
+    No change. Just server side generation. 
+    Integration to VSO for docgen
+    Republish as an edit occurred in the Overview header
   using:
   - IMN.Schemas
   - IMN.MER.Schemas
