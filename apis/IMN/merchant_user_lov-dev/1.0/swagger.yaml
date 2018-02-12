@@ -28,15 +28,6 @@ consumes:
 produces:
   - application/json
 
-securityDefinitions:
-  api_key:
-    description: The api subscription key
-    type: apiKey
-    name: Ocp-Apim-Subscription-Key
-    in: header
-
-security:
-- api_key: []
 
 tags:
 - name: LOV
@@ -221,4 +212,4 @@ definitions:
         $ref: '#/definitions/links.GetUserListOfValuesLink'
     
 
-x-azure-api-id: 'v2userlov'
+x-azure-api-id: 'merchantlovv1'
