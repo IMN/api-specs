@@ -1,0 +1,62 @@
+swagger: '2.0'
+info:
+  version: "1.0"
+  title: 'IMN ADAPTER - Offer Importation Pusher'
+  
+basePath: /OfferImportationPusher
+  
+x-beezup-ops:
+  codeGenType: actor
+  repo: IMN
+  apiName: OfferImportationPusher
+  appRoot: IMN.ADPT.OfferIMP.ENG.Pusher
+  namespace: IMN.ADPT.OfferIMP.ENG.Pusher
+  comment: |
+    Actor 
+  using:
+  - IMN.ADPT.OfferIMP.Events
+  - IMN.Offer.Events
+  - IMN.Offer.Schemas
+  
+paths:
+
+
+
+
+  '/merchantOffer':
+    post:
+      summary: When the offer is received
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-schemas/1.0#/definitions/merchantOffer'
+      responses:
+        204:
+          description: OK
+
+  '/merchantOfferDeleted':
+    post:
+      summary: When the offer updated is received
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-events/1.0#/definitions/merchantOfferDeleted'
+      responses:
+        204:
+          description: OK
+
+  '/preparationPartitionCompleted':
+    post:
+      summary: When the partition has been send completely
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_importation-events/1.0#/definitions/offerImportationPreparationPartitionCompleted'
+      responses:
+        204:
+          description: OK
+
+definitions: {}
