@@ -1,0 +1,623 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: 'Marketplace - Merchants API'
+  description: 'Marketplace - Merchants API'
+  x-logo:
+    url: https://imngo.blob.core.windows.net/imngo/images/imn-logo.png
+    backgroundColor: "#FFFFFF"
+  
+  contact:
+    email: support@imn.io
+     
+ 
+  license:
+    name: IMN
+    url: https://go.imn.io
+    
+host: api.imn.io
+basePath: /marketplace/merchants/v1
+
+x-IMN-api-ops:
+  codeGenType: webapi
+  repo: IMN
+  appRoot: IMN.MKP.MER.WebService
+  apiName: MarketplaceMerchantsV1
+  namespace: IMN.MKP.MER.WebService
+  useBeezUPFrameworkVersion2: true
+  comment: |
+    No change. Just server side generation.
+  using:
+  - IMN.Schemas
+  - IMN.MER.Schemas
+  - IMN.MER.Exceptions
+  
+
+x-basePath: /marketplace/merchants/v1
+
+
+schemes:
+  - https
+
+consumes:
+  - application/json
+produces:
+  - application/json
+  
+tags:
+- name: Global
+- name: Merchants
+- name: Api Credentials
+- name: Subscription
+- name: Marketplace Merchant Code
+
+paths: 
+
+  '/{marketplaceCode}':
+    get:
+      tags: 
+      - Global
+      summary: Get marketplace index in the merchants API
+      operationId: GetMarketplaceMerchantApiIndex
+      parameters: 
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      responses:
+        200:
+          description: The Marketplace Merchant Api Index
+          schema:
+            $ref: '#/definitions/marketplaceMerchantApiIndex'
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/marketplaceNotFound'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+            
+  '/{marketplaceCode}/incoming':
+    post:
+      tags: 
+      - Merchants
+      summary: Get the list of incoming merchants related to a marketplace
+      operationId: GetIncomingMerchantList
+      parameters: 
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageSizeQueryStringParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageNumberQueryStringParameter'
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/incomingMerchantListRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/incomingMerchantList'
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/marketplaceNotFound'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+  '/{marketplaceCode}/incoming/{merchantCode}':
+    get:
+      tags: 
+      - Merchants
+      summary: Get the incoming merchant
+      operationId: GetIncomingMerchantIndex
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      responses:
+        200:
+          description: The incoming merchant index
+          schema:
+            $ref: '#/definitions/incomingMerchantIndex'
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+
+  '/{marketplaceCode}/outgoing':
+    post:
+      tags: 
+      - Merchants
+      summary: Get the list of outgoing merchants related to a marketplace
+      operationId: GetOutgoingMerchantList
+      parameters: 
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageSizeQueryStringParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageNumberQueryStringParameter'
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/outgoingMerchantListRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/outgoingMerchantList'
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/marketplaceNotFound'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+            
+            
+
+
+  '/{marketplaceCode}/outgoing/{merchantCode}':
+    get:
+      tags: 
+      - Merchants
+      summary: Get the outgoing merchant
+      operationId: GetOutgoingMerchantIndex
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      responses:
+        200:
+          description: The outgoing merchant index
+          schema:
+            $ref: '#/definitions/outgoingMerchantIndex'
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+  '/{marketplaceCode}/{merchantCode}/apiCredential':
+    get:
+      tags: 
+      - Api Credentials
+      summary: Get the merchant API credential
+      operationId: GetMerchantApiCredential
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      responses:
+        200:
+          description: The merchant API credential
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceApiCredential'
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+    put:
+      tags: 
+      - Api Credentials
+      summary: Save the marketplace API credential
+      operationId: SaveMerchantApiCredential
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: credential
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceApiCredential'
+        required: true
+      responses:
+        204:
+          description: Merchant API credentials saved
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
+        403:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMarketplaceCredential'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+
+  '/{marketplaceCode}/{merchantCode}/subscription/accept':
+    post:
+      tags: 
+      - Subscription
+      summary: Accept a merchant subscription to a marketplace
+      operationId: AcceptMerchantSubscription
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      responses:
+        204:
+          description: Merchant subscription accepted
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'          
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+  '/{marketplaceCode}/{merchantCode}/subscription/decline':
+    post:
+      tags: 
+      - Subscription
+      summary: Decline a merchant subscription to a marketplace
+      operationId: DeclineMerchantSubscription
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: reason
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/merchantMarketplaceSubscriptionRefusalReason'
+        required: true
+      responses:
+        204:
+          description: Merchant subscription declined
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+          
+  '/{marketplaceCode}/{merchantCode}/subscription/block':
+    post:
+      tags: 
+      - Subscription
+      summary: Block a merchant subscription to the marketplace
+      operationId: BlockMerchantSubscription
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: reason
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/merchantMarketplaceSubscriptionRefusalReason'
+        required: true
+      responses:
+        204:
+          description: Merchant subscription blocked
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+  '/{marketplaceCode}/{merchantCode}/configureMarketplaceMerchantCode':
+    post:
+      tags: 
+      - Marketplace Merchant Code
+      summary: Configure marketplace merchant code
+      operationId: ConfigureMarketplaceMerchantCode
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: marketplaceMerchantCode
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceMerchantCode'
+        required: true
+      responses:
+        204:
+          description: Marketplace merchant code configured
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+
+definitions:
+
+  marketplaceMerchantApiIndexLinks:
+    type: object
+    required: 
+    - incoming
+    - outgoing
+    properties:
+      self:
+        $ref: '#/definitions/links.GetMarketplaceMerchantApiIndexLink'
+      incoming:
+        $ref: '#/definitions/links.GetIncomingMerchantListLink'
+      outgoing:
+        $ref: '#/definitions/links.GetOutgoingMerchantListLink'
+
+
+  marketplaceMerchantApiIndex:
+    type: object
+    required: 
+    - links
+    properties:
+      links:
+        $ref: '#/definitions/marketplaceMerchantApiIndexLinks'
+    
+    
+  merchantListOrderBy:
+    type: object
+    required:
+    - propertyName
+    properties:
+      propertyName:
+        $ref: '#/definitions/merchantListOrderByOn'
+      sort:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/sort'
+      
+  incomingMerchantListRequest:
+    type: object
+    properties:
+      orderBy:
+        $ref: '#/definitions/merchantListOrderBy'
+      searchCompanyName:
+        type: string
+        description: Search merchants by the company name
+        example: Literie
+      searchMerchantCode:
+        type: string
+        description: Search merchants by the code
+        example: MLT
+
+
+  outgoingMerchantListRequest:
+    type: object
+    properties:
+      orderBy:
+        $ref: '#/definitions/merchantListOrderBy'
+      searchCompanyName:
+        type: string
+        description: Search merchants by the company name
+        example: Literie
+      searchMerchantCode:
+        type: string
+        description: Search merchants by the code
+        example: MLT
+  
+  incomingMerchantList:
+    type: object
+    required: 
+    - links
+    properties:
+      links:
+        $ref: '#/definitions/incomingMerchantListLinks'
+      merchants:
+        type: array
+        items:
+          $ref: '#/definitions/incomingMerchantIndex' 
+
+  outgoingMerchantList:
+    type: object
+    required: 
+    - links
+    properties:
+      links:
+        $ref: '#/definitions/outgoingMerchantListLinks'
+      merchants:
+        type: array
+        items:
+          $ref: '#/definitions/outgoingMerchantIndex' 
+  
+  links.GetMerchantApiCredentialLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+  links.GetMerchantIndexLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+  links.GetIncomingMerchantIndexLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+  links.GetOutgoingMerchantIndexLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+  links.AcceptMerchantSubscriptionLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+  links.DeclineMerchantSubscriptionLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+  links.BlockMerchantSubscriptionLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+  links.GetMarketplaceMerchantApiIndexLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+  links.GetIncomingMerchantListLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+  links.GetOutgoingMerchantListLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+    
+  incomingMerchantInfoLinks:
+    type: object
+    required:
+    - self
+    - apiCredential
+    properties:
+      self:
+        $ref: '#/definitions/links.GetIncomingMerchantIndexLink'
+      apiCredential:
+        $ref: '#/definitions/links.GetMerchantApiCredentialLink'
+      acceptSubscription:
+        $ref: '#/definitions/links.AcceptMerchantSubscriptionLink'
+      declineSubscription:
+        $ref: '#/definitions/links.DeclineMerchantSubscriptionLink'
+      blockSubscription:
+        $ref: '#/definitions/links.BlockMerchantSubscriptionLink'
+        
+  incomingMerchantListLinks:
+    type: object
+    required:
+    - self
+    properties:
+      self:
+        $ref: '#/definitions/links.GetIncomingMerchantListLink'
+        
+  outgoingMerchantListLinks:
+    type: object
+    required: 
+    - self
+    properties:
+      self:
+        $ref: '#/definitions/links.GetOutgoingMerchantListLink'
+  
+  outgoingMerchantInfoLinks:
+    type: object
+    required:
+    - self
+    - apiCredential
+    properties:
+      self:
+        $ref: '#/definitions/links.GetOutgoingMerchantIndexLink'
+      apiCredential:
+        $ref: '#/definitions/links.GetMerchantApiCredentialLink'
+
+  
+  incomingMerchantIndex:
+    type: object
+    required:
+    - info
+    - links
+    properties:
+      info:
+        $ref: '#/definitions/incomingMerchantInfo'
+      links:
+        $ref: '#/definitions/incomingMerchantInfoLinks'
+
+
+  outgoingMerchantIndex:
+    type: object
+    required:
+    - info
+    - links
+    properties:
+      info:
+        $ref: '#/definitions/outgoingMerchantInfo'
+      links:
+        $ref: '#/definitions/outgoingMerchantInfoLinks'
+
+
+  
+  merchantInfo:
+    type: object
+    required:
+    - code
+    - email
+    - companyName
+    - firstName
+    - lastName
+    - phoneNumber
+    - creationUtcDate
+    properties:
+      code:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/merchantCode'
+      email:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/email'
+      companyName:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/merchantCompanyName'
+      firstName:
+        type: string
+      lastName:
+        type: string
+      phoneNumber:
+        type: string
+      creationUtcDate:
+        type: string
+        format: date-time
+      importedOfferCount:
+        type: integer
+        format: int32
+        description: Imported offer count from the source marketpalce
+
+  merchantTargetMarketplaceInfo:
+    type: object
+    required:
+    - subscriptionRequestUtcDate
+    - subscriptionStatus
+    - credentialStatus
+    - shippingSettingsStatus
+    - offerPublicationEnabled
+    - targetMarketplaceCode
+    properties:
+      subscriptionRequestUtcDate:
+        type: string
+        format: date-time
+        description: date the merchant pushed his registration to the marketplace (through SF)
+      subscriptionStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceSubscriptionStatus'
+      credentialStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceCredentialStatus'
+      shippingSettingsStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceShippingSettingsStatus'
+      offerPublicationEnabled:
+        type: boolean
+      publishedOfferCount:
+        type: integer
+        format: int32
+        description: Effective offer count published to the target marketplace
+      publishableOfferCount:
+        type: integer
+        format: int32
+        description: Publishable offer count to the target marketplace
+      targetMarketplaceCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
+
+        
+  incomingMerchantInfo:
+    allOf:
+    - $ref: '#/definitions/merchantInfo'
+    - $ref: '#/definitions/merchantTargetMarketplaceInfo'
+    - type: object
+      required:
+      - code
+      - email
+      - companyName
+      - firstName
+      - lastName
+      - phoneNumber
+      - sourceMarketplaceCode
+      - creationUtcDate
+      - subscriptionRequestUtcDate
+      - subscriptionStatus
+      - credentialStatus
+      - shippingSettingsStatus
+      - offerPublicationEnabled
+      properties:
+        sourceMarketplaceCode:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceMerchantCode'
+        orderCount:
+          type: integer
+          format: int32
+          example: 102
+        turnOver:
+          type: number
+          format: decimal
+          example: 10602.23
+
+
+  outgoingMerchantInfo:
+    allOf:
+    - $ref: '#/definitions/merchantInfo'
+    - type: object
+      required:
+      - code
+      - email
+      - companyName
+      - firstName
+      - lastName
+      - phoneNumber
+      - sourceMarketplaceCode
+      - creationUtcDate
+      properties:
+        sourceMarketplaceCode:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
+        targetMarketplaces:
+          type: object
+          description: The key is the marketplace code
+          additionalProperties:
+            $ref: '#/definitions/merchantTargetMarketplaceInfo'
+
+        
+  merchantListOrderByOn:
+    type: string
+    description: Indicates on which property you want to order by the list of merchant
+    default: modificationUtcDate
+    enum:
+    - merchantCode
+    - creationUtcDate
+    - modificationUtcDate
+x-azure-api-id: 'MarketplaceMerchantsV1'
