@@ -33,6 +33,7 @@ x-IMN-api-ops:
     No change. Just server side generation. 
     Integration to VSO for docgen
     Republish as an edit occurred in the Overview header
+    Client generation test
   using:
   - IMN.Schemas
   - IMN.MER.Schemas
