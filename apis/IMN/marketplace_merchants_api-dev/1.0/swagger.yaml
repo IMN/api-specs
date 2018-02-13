@@ -385,7 +385,7 @@ definitions:
     - links
     properties:
       links:
-        $ref: '#/definitions/outgoingMerchantInfoLinks'
+        $ref: '#/definitions/outgoingMerchantListLinks'
       merchants:
         type: array
         items:
