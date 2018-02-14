@@ -34,6 +34,7 @@ x-IMN-api-ops:
     Integration to VSO for docgen
     Republish as an edit occurred in the Overview header
     Client generation test 5
+    Regen for lov integration
   using:
   - IMN.Schemas
   - IMN.MER.Schemas
