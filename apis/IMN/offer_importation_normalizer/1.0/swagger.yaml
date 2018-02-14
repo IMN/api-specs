@@ -6,7 +6,7 @@ info:
 basePath: /OfferImportationNormalizer
   
 x-beezup-ops:
-  codeGenType: eventHandler
+  codeGenType: eventHandlerActor
   repo: IMN
   appRoot: .
   apiName: OfferImportationNormalizer
