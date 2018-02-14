@@ -1,0 +1,33 @@
+swagger: '2.0'
+info:
+  version: "1.0"
+  title: 'IMN ADAPTER - Offer Importation Normalizer'
+  
+basePath: /OfferImportationNormalizer
+  
+x-beezup-ops:
+  codeGenType: eventHandler
+  repo: IMN
+  appRoot: .
+  apiName: OfferImportationNormalizer
+  namespace: IMN.ADPT.OfferIMP.ENG.Normalizer
+  comment: |
+    Actor 
+  using:
+  - IMN.ADPT.OfferIMP.Commands
+  
+paths:
+
+  '/prepare':
+    post:
+      summary: When the offer importation normalizer is requested
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_importation-commands/1.0#/definitions/prepareOfferImportation'
+      responses:
+        204:
+          description: OK
+
+definitions: {}
