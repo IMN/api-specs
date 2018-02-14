@@ -268,4 +268,20 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
+          
+  '/configureMarketplaceMerchantCode':
+    post:
+      summary: When a marketplace wants to configure a merchant MarketplaceMerchantCode  
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-commands/1.0#/definitions/configureMarketplaceMerchantCode'
+      responses:
+        204: 
+          description: OK
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'          
 definitions: {}
