@@ -6,7 +6,7 @@ info:
 basePath: /OfferImportationNormalizer
   
 x-beezup-ops:
-  codeGenType: eventHandlerActor
+  codeGenType: actor
   repo: IMN
   appRoot: .
   apiName: OfferImportationNormalizer
@@ -17,6 +17,9 @@ x-beezup-ops:
   - IMN.ADPT.OfferIMP.Commands
   
 paths:
+
+
+
 
   '/prepare':
     post:
@@ -29,5 +32,7 @@ paths:
       responses:
         204:
           description: OK
+
+
 
 definitions: {}
