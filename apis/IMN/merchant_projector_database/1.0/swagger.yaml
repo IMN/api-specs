@@ -215,6 +215,17 @@ paths:
       responses:
         204:
           description: OK
-  
+          
+  '/marketplaceMerchantCodeConfigured':
+    post:
+      summary: When the marketplaceMerchantCode is configured
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/marketplaceMerchantCodeConfigured'
+      responses:
+        204:
+          description: OK
       
 definitions: {}
