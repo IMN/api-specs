@@ -1,0 +1,320 @@
+swagger: '2.0'
+info:
+  title: 'Merchant - Account API'
+  description: 'This API will allow you to manage your account.'
+# Added by API Auto Mocking Plugin
+
+  version: "1.0"
+  
+  x-logo:
+    url: "https://avatars0.githubusercontent.com/u/25665430"
+    backgroundColor: "#FFFFFF"
+  
+  contact:
+    email: support@imn.io
+     
+ 
+  license:
+    name: IMN
+    url: https://go.imn.io
+    
+host: api.imn.io
+basePath: /merchant/account/v1
+
+x-IMN-api-ops:
+  codeGenType: webapi
+  repo: IMN
+  apiName: MerchantAccountV1
+  appRoot: IMN.MER.ACC.WebService
+  namespace: IMN.MER.ACC.WebService
+  useBeezUPFrameworkVersion2: true
+  comment: |
+    No change. Just server side generation.
+  using:
+  - IMN.Schemas
+  - IMN.MER.Schemas
+  - IMN.MER.Exceptions
+
+x-basePath: /merchant/account/v1
+
+
+schemes:
+  - https
+
+consumes:
+  - application/json
+produces:
+  - application/json
+  
+tags:
+- name: Global
+- name: Account
+
+
+paths: 
+
+
+  '/':
+    get:
+      tags:
+      - Global
+      summary: Get the merchant account index
+      operationId: GetMerchantAccountIndex
+      responses:
+        '200':
+          description: The merchant account index
+          schema:
+            $ref: '#/definitions/merchantAccountIndex'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+  
+
+
+  '/checkMerchantCodeAvailability':
+   post:
+     tags:
+     - Global
+     summary: Check if merchant code is available
+     operationId: CheckMerchantCodeAvailability
+     parameters:
+     - name: merchantCode
+       in: body
+       required: true
+       schema:
+         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/merchantCode'
+     responses:
+       '204':
+         description: The merchant code is available
+       '409':
+         description: The merchant code is not available
+         schema:
+           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/userErrorMessage'
+       default:
+         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+  
+  
+  '/create':
+   post:
+     tags:
+     - Global
+     summary: Create the merchant account using the merchant code
+     operationId: CreateMerchantAccount
+     parameters:
+     - name: request
+       in: body
+       required: true
+       schema:
+        $ref: '#/definitions/createMerchantAccountRequest'
+     responses:
+       '204':
+         description: The merchant code has been created
+       '400':
+         description: The merchant code or some values are invalid. Please check the error message.
+         schema:
+           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/userErrorMessage'
+       '409':
+         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantCodeAlreadyUsed'
+       default:
+         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+  
+  
+
+   
+  '/{merchantCode}':
+   get:
+     tags:
+     - Account
+     summary: Get merchant account info
+     operationId: GetMerchantAccountInfo
+     parameters:
+       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+     responses:
+       '200':
+         description: The merchant account info
+         schema:
+           $ref: '#/definitions/merchantAccountInfo'
+       '404':
+         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantNotFound'
+       default:
+         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+   
+   patch:
+     tags:
+     - Account
+     summary: Save merchant account info
+     operationId: UpdateMerchantAcountInfo
+     parameters:
+       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+       - name: request
+         in: body
+         required: true
+         description: The merchant account info update request
+         schema:
+           $ref: '#/definitions/updateMerchantAccountRequest'
+           
+     responses:
+       204:
+         description: Merchant account info updated
+       400:
+         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
+       404:
+         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantNotFound'
+       default:
+         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+    
+    
+    
+    
+definitions:
+
+  httpUrl:
+    x-exclude: true
+    description: 'The URL <a href="https://en.wikipedia.org/wiki/URL">https://en.wikipedia.org/wiki/URL</a>'
+    type: string
+    #format: email
+    pattern: ^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$
+    example: http://www.mydomain.com
+
+  merchantAccountIndexLinks:
+    type: object
+    properties:
+      create:
+        $ref: '#/definitions/links.CreateMerchantAccountLink'
+      checkMerchantCode:
+        $ref: '#/definitions/links.CheckMerchantCodeAvailabilityLink'
+      accountInfo:
+        $ref: '#/definitions/links.GetMerchantAccountInfoLink'
+      update:
+        $ref: '#/definitions/links.UpdateMerchantAcountInfoLink'
+
+  merchantAccountIndex:
+    type: object
+    properties:
+      links:
+        $ref: '#/definitions/merchantAccountIndexLinks'
+    
+
+  createMerchantAccountRequest:
+    type: object
+    required:
+    - code
+    - email
+    - firstName
+    - lastName
+    - country
+    - companyName
+    - phoneNumber
+    properties:
+      code:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/merchantCode'
+      email:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/email'
+# [Style Validator (8b9abe62-bfb2-4cb6-ace8-00884b9738ec) : All model properties must have examples]: Field 'example' required in 'properties'
+      firstName:
+       type: string
+# [Style Validator (8b9abe62-bfb2-4cb6-ace8-00884b9738ec) : All model properties must have examples]: Field 'example' required in 'properties'
+      lastName:
+       type: string
+      country:
+       $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/countryIsoCodeAlpha3'
+      companyName:
+       $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/merchantCompanyName'
+      imageUrl:
+       $ref: '#/definitions/httpUrl'
+# [Style Validator (8b9abe62-bfb2-4cb6-ace8-00884b9738ec) : All model properties must have examples]: Field 'example' required in 'properties'
+      phoneNumber:
+       type: string
+ 
+  updateMerchantAccountRequest:
+    type: object
+    required:
+     - firstName
+     - lastName
+     - country
+     - companyName
+     - email
+     - phoneNumber
+    properties:
+# [Style Validator (8b9abe62-bfb2-4cb6-ace8-00884b9738ec) : All model properties must have examples]: Field 'example' required in 'properties'
+      firstName:
+        type: string
+# [Style Validator (8b9abe62-bfb2-4cb6-ace8-00884b9738ec) : All model properties must have examples]: Field 'example' required in 'properties'
+      lastName:
+        type: string
+      country:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/countryIsoCodeAlpha3'
+      companyName:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/merchantCompanyName'
+      email:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/email'
+# [Style Validator (8b9abe62-bfb2-4cb6-ace8-00884b9738ec) : All model properties must have examples]: Field 'example' required in 'properties'
+      phoneNumber:
+        type: string    
+      imageUrl:
+        $ref: '#/definitions/httpUrl'
+
+
+
+  merchantAccountInfo:
+    type: object
+    required:
+    - email
+    - firstName
+    - lastName
+    - country
+    - companyName
+    - phoneNumber
+    properties:
+      email:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/email'
+# [Style Validator (8b9abe62-bfb2-4cb6-ace8-00884b9738ec) : All model properties must have examples]: Field 'example' required in 'properties'
+      firstName:
+        type: string
+# [Style Validator (8b9abe62-bfb2-4cb6-ace8-00884b9738ec) : All model properties must have examples]: Field 'example' required in 'properties'
+      lastName:
+        type: string
+      country:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/countryIsoCodeAlpha3'
+      companyName:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/merchantCompanyName'
+# [Style Validator (8b9abe62-bfb2-4cb6-ace8-00884b9738ec) : All model properties must have examples]: Field 'example' required in 'properties'
+      phoneNumber:
+        type: string
+      
+######################################################################################################
+##############                  LINKS                                 ################################
+######################################################################################################
+  
+  links.CreateMerchantAccountLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+    - type: object
+      example:
+        href: /merchant/account/v1/create
+        method: POST
+        
+  links.CheckMerchantCodeAvailabilityLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+    - type: object
+      example:
+        href: /merchant/account/v1/checkMerchantCode
+        method: GET
+
+  links.GetMerchantAccountInfoLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+    - type: object
+      example:
+        href: /merchant/account/v1/accountInfo
+        method: GET
+  
+  links.UpdateMerchantAcountInfoLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+    - type: object
+      example:
+        href: /merchant/account/v1/update
+        method: POST
+        
+x-azure-api-id: 'MerchantAccountV1'
