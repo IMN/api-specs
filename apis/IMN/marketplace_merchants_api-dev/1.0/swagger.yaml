@@ -373,13 +373,10 @@ definitions:
         description: filter merchants to subscription request date 
       filterCountry:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/countryIsoCodeAlpha3'
-        description: filter merchants by countryCode
       filterSourceMarketplaceCode:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
-        description: filter merchants by source marketplaceCode
       filterSubscriptionStatusId:
         $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceSubscriptionStatus'
-        description: filter merchants by subscription status
       filterofferPublicationEnabled:
         type: boolean
         description: filter merchants by offer publication status 
@@ -419,13 +416,10 @@ definitions:
         description: filter merchants by to ending creation date
       filterCountry:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/countryIsoCodeAlpha3'
-        description: filter merchants by country code
       filterSourceMarketplaceCode:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
-        description: filter merchants by source marketplaceCode
       filterSubscriptionStatusId:
         $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceSubscriptionStatus'
-        description: filter merchants by subscription status
       filterofferPublicationEnabled:
         type: boolean
         description: filter merchants by offer publication status 
@@ -560,8 +554,8 @@ definitions:
     required:
     - code
     - email
-    - country
     - companyName
+    - country
     - firstName
     - lastName
     - phoneNumber
@@ -573,6 +567,8 @@ definitions:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/email'
       companyName:
         $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/merchantCompanyName'
+      country:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/countryIsoCodeAlpha3'
       firstName:
         type: string
       lastName:
