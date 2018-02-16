@@ -359,6 +359,10 @@ definitions:
         type: string
         description: Search merchants by contact Email
         example: contact@ma-boutique-en-ligne.com
+      searchContactName:
+        type: string
+        description: Search merchants by the contact name
+        example: Johnson
       searchContactPhone:
         type: string
         description: Search merchants by the ContactPhone
@@ -407,6 +411,10 @@ definitions:
         type: string
         description: Search merchants by the contactEmail
         example: contact@ma-boutique-en-ligne.com
+      searchContactName:
+        type: string
+        description: Search merchants by the contact name
+        example: Johnson
       searchContactPhone:
         type: string
         description: Search merchants by the ContactPhone
