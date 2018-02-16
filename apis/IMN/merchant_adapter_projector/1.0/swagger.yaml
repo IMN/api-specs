@@ -4,7 +4,7 @@ info:
   title: 'IMN ADAPTER - Merchant Adapter Projector'
 
 host: IMN.ADPT.MER.PROJ
-basePath: /MerchantAdapterProjector
+basePath: /MerchantAdapterProjectorApplier
 
 x-beezup-ops:
   codeGenType: eventHandlerActor
