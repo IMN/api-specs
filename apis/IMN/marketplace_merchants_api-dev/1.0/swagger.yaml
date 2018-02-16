@@ -351,7 +351,38 @@ definitions:
         type: string
         description: Search merchants by the code
         example: MLT
-
+      searchMarketplaceMerchantCode:
+        type: string
+        description: Search merchants by the marketplaceMerchantCode
+        example: 050041
+      searchContactEmail:
+        type: string
+        description: Search merchants by the contactEmail
+        example: contact@ma-boutique-en-ligne.com
+      searchContactPhone:
+        type: string
+        description: Search merchants by the ContactPhone
+        example: +33711223344
+      filterSubscriptionRequestUtcDateFrom:
+        type: string
+        format: date-time
+        description: filter merchants by From beginning questDate 
+      filterSubscriptionRequestUtcDateTo:
+        type: string
+        format: date-time
+        description: filter merchants by to ending requestDate
+      filterCountry:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/countryIsoCodeAlpha3'
+        description: filter merchants by countryCode
+      filterSourceMarketplaceCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
+        description: filter merchants by source marketplaceCode
+      filterSubscriptionStatusId:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceSubscriptionStatus'
+        description: filter merchants by subscription status
+      filterofferPublicationEnabled:
+        type: boolean
+        description: filter merchants by offer publication status 
 
   outgoingMerchantListRequest:
     type: object
@@ -497,6 +528,7 @@ definitions:
     required:
     - code
     - email
+    - country
     - companyName
     - firstName
     - lastName
