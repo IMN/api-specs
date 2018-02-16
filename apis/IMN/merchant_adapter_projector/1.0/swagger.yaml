@@ -10,7 +10,7 @@ x-beezup-ops:
   codeGenType: eventHandlerActor
   repo: IMN
   appRoot: IMN.ADPT.MER.PROJ
-  apiName: MerchantAdapterProjector
+  apiName: MerchantAdapterProjectorApplier
   namespace: IMN.ADPT.MER.PROJ
   comment: |
     Actor
