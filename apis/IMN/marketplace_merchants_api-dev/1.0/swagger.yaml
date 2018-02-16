@@ -345,7 +345,7 @@ definitions:
         $ref: '#/definitions/merchantListOrderBy'
       searchCompanyName:
         type: string
-        description: Search merchants by the company name
+        description: Search merchants by company name
         example: Literie
       searchMerchantCode:
         type: string
@@ -353,11 +353,11 @@ definitions:
         example: MLT
       searchMarketplaceMerchantCode:
         type: string
-        description: Search merchants by the marketplaceMerchantCode
+        description: Search merchants bymarketplace MerchantCode
         example: 050041
       searchContactEmail:
         type: string
-        description: Search merchants by the contactEmail
+        description: Search merchants by contact Email
         example: contact@ma-boutique-en-ligne.com
       searchContactPhone:
         type: string
@@ -370,13 +370,18 @@ definitions:
       filterSubscriptionRequestUtcDateTo:
         type: string
         format: date-time
-        description: filter merchants to subscription request date 
+        description: filter merchants by subscription request date 
       filterCountry:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/countryIsoCodeAlpha3'
+        type: string
+        description: filter merchants by country code 
+        example: FRA
       filterSourceMarketplaceCode:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
+        type: string
+        description: filter merchants by Source MarketplaceCode 
+        example: C1
       filterSubscriptionStatusId:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceSubscriptionStatus'
+        type: integer
+        description: filter merchants by SubscriptionStatus
       filterofferPublicationEnabled:
         type: boolean
         description: filter merchants by offer publication status 
@@ -415,11 +420,12 @@ definitions:
         format: date-time
         description: filter merchants by to ending creation date
       filterCountry:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/countryIsoCodeAlpha3'
-      filterSourceMarketplaceCode:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
+        type: string
+        description: filter merchants by country code 
+        example: FRA
       filterSubscriptionStatusId:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceSubscriptionStatus'
+        type: integer
+        description: filter merchants by SubscriptionStatus
       filterofferPublicationEnabled:
         type: boolean
         description: filter merchants by offer publication status 
