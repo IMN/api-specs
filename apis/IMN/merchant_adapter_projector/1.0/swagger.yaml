@@ -7,7 +7,7 @@ host: IMN.ADPT.MER.PROJ
 basePath: /MerchantAdapterProjector
 
 x-beezup-ops:
-  codeGenType: actor
+  codeGenType: eventHandlerActor
   repo: IMN
   appRoot: IMN.ADPT.MER.PROJ
   apiName: MerchantAdapterProjector
