@@ -366,11 +366,11 @@ definitions:
       filterSubscriptionRequestUtcDateFrom:
         type: string
         format: date-time
-        description: filter merchants by From beginning questDate 
+        description: filter merchants From beginning subscription request date 
       filterSubscriptionRequestUtcDateTo:
         type: string
         format: date-time
-        description: filter merchants by to ending requestDate
+        description: filter merchants to subscription request date 
       filterCountry:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/countryIsoCodeAlpha3'
         description: filter merchants by countryCode
@@ -397,7 +397,39 @@ definitions:
         type: string
         description: Search merchants by the code
         example: MLT
-  
+      searchMarketplaceMerchantCode:
+        type: string
+        description: Search merchants by the marketplaceMerchantCode
+        example: 050041
+      searchContactEmail:
+        type: string
+        description: Search merchants by the contactEmail
+        example: contact@ma-boutique-en-ligne.com
+      searchContactPhone:
+        type: string
+        description: Search merchants by the ContactPhone
+        example: +33711223344
+      filterCreationUtcDateFrom:
+        type: string
+        format: date-time
+        description: filter merchants by From beginning creation date 
+      filterCreationUtcDateTo:
+        type: string
+        format: date-time
+        description: filter merchants by to ending creation date
+      filterCountry:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/countryIsoCodeAlpha3'
+        description: filter merchants by country code
+      filterSourceMarketplaceCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
+        description: filter merchants by source marketplaceCode
+      filterSubscriptionStatusId:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceSubscriptionStatus'
+        description: filter merchants by subscription status
+      filterofferPublicationEnabled:
+        type: boolean
+        description: filter merchants by offer publication status 
+        
   incomingMerchantList:
     type: object
     required: 
