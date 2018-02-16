@@ -87,7 +87,9 @@ paths:
       - name: request
         in: body
         schema:
-          $ref: '#/definitions/merchantEvent'
+          type: array
+          items:
+            $ref: '#/definitions/merchantEvent'
       responses:
         '204':
           description: The api credential is valid
@@ -98,9 +100,9 @@ definitions:
   
   merchantEvent:
     type: object
-    oneOf:
-    - $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantCreated'
-    - $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantOffersSourceMarketplaceDeclared'
+#    oneOf:
+#    - $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantCreated'
+#    - $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantOffersSourceMarketplaceDeclared'
     #- $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/
     
 
