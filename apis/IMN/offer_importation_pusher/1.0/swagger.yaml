@@ -6,7 +6,7 @@ info:
 basePath: /OfferImportationPusher
   
 x-beezup-ops:
-  codeGenType: actor
+  codeGenType: eventHandlerActor
   repo: IMN
   apiName: OfferImportationPusher
   appRoot: IMN.ADPT.OfferIMP.ENG.Pusher
