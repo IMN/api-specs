@@ -3,13 +3,13 @@ info:
   version: "1.0"
   title: 'IMN ADAPTER - Offer Importation Execution Projector'
   
-basePath: /OfferImportationExecutionProjector
+basePath: /OfferImportationExecutionProjectorApplier
   
 x-beezup-ops:
-  codeGenType: actor
+  codeGenType: eventHandlerActor
   repo: IMN
   appRoot: IMN.ADPT.OfferIMP.EXEC.PROJ
-  apiName: OfferImportationExecutionProjector
+  apiName: OfferImportationExecutionProjectorApplier
   namespace: IMN.ADPT.OfferIMP.EXEC.PROJ
   comment: |
     Actor 
