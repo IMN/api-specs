@@ -33,7 +33,6 @@ x-IMN-api-ops:
     No change. Just server side generation.
   using:
   - IMN.Schemas
-  - IMN.MER.Exceptions
   
 
 x-basePath: /gateway/merchants/v1
