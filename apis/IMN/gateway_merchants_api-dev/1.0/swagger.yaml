@@ -31,6 +31,9 @@ x-IMN-api-ops:
   useBeezUPFrameworkVersion2: true
   comment: |
     No change. Just server side generation.
+  using:
+  - IMN.Schemas
+  - IMN.MER.Exceptions
   
 
 x-basePath: /gateway/merchants/v1
