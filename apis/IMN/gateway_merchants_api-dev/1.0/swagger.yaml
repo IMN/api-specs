@@ -110,8 +110,9 @@ paths:
         in: body
         required: true
         schema:
+          type: array
           items:
-            type: object
+            $ref: '#/definitions/merchantEvent'
       responses:
         '204':
           description: The api credential is valid
@@ -121,6 +122,7 @@ paths:
 definitions:
   
   merchantEvent:
+    x-exclude: true
     type: object
     #allOf:
     #- $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantCreated'
