@@ -105,10 +105,10 @@ definitions:
   
   merchantEvent:
     type: object
-    anyOf:
+    #anyOf:
     #- $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantCreated'
-    - $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantOffersSourceMarketplaceDeclared'
-    - $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOfferImportationEnabled'
+    #- $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantOffersSourceMarketplaceDeclared'
+    #- $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOfferImportationEnabled'
     #- $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOfferImportationDisabled'
     
 
