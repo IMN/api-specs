@@ -122,19 +122,6 @@ definitions:
   
   merchantEvents:
     type: object
-    properties:
-      offerSourceDeclared:
-        type: array
-        items:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantOffersSourceMarketplaceDeclared'
-      offerImportationEnabled:
-        type: array
-        items:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOfferImportationEnabled'
-      offerImportationDisabled:
-        type: array
-        items:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOfferImportationDisabled'
     #allOf:
     #- $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantCreated'
     #- $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantOffersSourceMarketplaceDeclared'
