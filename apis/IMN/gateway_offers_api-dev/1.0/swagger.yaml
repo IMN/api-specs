@@ -52,14 +52,16 @@ tags:
 
 paths: 
 
-  '/{marketplaceCode}':
+
+  '/{marketplaceCode}/{merchantCode}/events':
     post:
       tags:
-      - Global
-      summary: Save a batch of merchant marketplace offers
-      operationId: SaveMerchantOfferBatch
+        - Global
+      summary: Push a batch of merchant marketplace offers events
+      operationId: PushMerchantOfferEvents
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - name: request
         in: body
         schema:
