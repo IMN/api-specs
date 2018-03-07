@@ -121,8 +121,8 @@ paths:
 
 definitions:
   
-  merchantEvent:
-    type: object
+  #merchantEvent:
+    #type: object
     #allOf:
     #- $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantCreated'
     #- $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantOffersSourceMarketplaceDeclared'
