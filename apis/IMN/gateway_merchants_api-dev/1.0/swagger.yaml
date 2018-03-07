@@ -56,6 +56,22 @@ tags:
 
 paths: 
 
+
+  '/{marketplaceCode}/ping':
+    post:
+      tags:
+        - Global
+      summary: Ping the status of your merchant system
+      operationId: PingGatewayMerchantApi
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      responses:
+        '204':
+          description: The status of the API is up!
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
   '/{marketplaceCode}/{merchantCode}/checkApiCredential':
     post:
       tags:
