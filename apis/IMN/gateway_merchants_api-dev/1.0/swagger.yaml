@@ -104,10 +104,11 @@ definitions:
   
   merchantEvent:
     type: object
-#    oneOf:
-#    - $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantCreated'
-#    - $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantOffersSourceMarketplaceDeclared'
-    #- $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/
+    allOf:
+    #- $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantCreated'
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantOffersSourceMarketplaceDeclared'
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOfferImportationEnabled'
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOfferImportationDisabled'
     
 
 x-azure-api-id: 'GatewayMerchantsV1'
