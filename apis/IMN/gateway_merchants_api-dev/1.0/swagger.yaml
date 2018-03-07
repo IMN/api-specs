@@ -119,7 +119,7 @@ paths:
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
-definitions:
+#definitions:
   
   #merchantEvent:
     #type: object
