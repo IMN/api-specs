@@ -110,7 +110,7 @@ paths:
         in: body
         required: true
         schema:
-          type: object
+          type: array
           items:
             $ref: '#/definitions/merchantEvent'
       responses:
