@@ -179,7 +179,6 @@ definitions:
       orderChangeApiIntegration:
         $ref:  '#/definitions/marketplacePushApiIntegration'
         
-
       marketplaceAgentCount:
         type: integer
       
