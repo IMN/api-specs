@@ -524,69 +524,71 @@ definitions:
       links:
         $ref: '#/definitions/marketplaceIndexLinks'
 
+  offersPublicationStatus:
+    type: object
+    description: The status of the offer publication to the target marketplace
+    required:
+    - status
+    properties:
+      status:
+        type: string
+        description: The marketplace API status for the offer publication
+        enum: 
+        - up
+        - down
+        - paused
+        example: up
+      publishableOfferCount:
+        type: integer
+        format: int32
+        description: The publishable offer count for this target marketplace (considering the product matching)
+        example: 25
+      publishedOfferCount:
+        type: integer
+        format: int32
+        description: The published offer count to this target marketplace
+        example: 20
+      lastPublicationUtcDate:
+        type: string
+        format: date-time
+        description: The last synchronization of the offers from the source marketplace
+        example: '2018-12-25T23:39:00Z'
+
+
   marketplaceApiInfo:
     allOf: 
     - $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceInfo'
     - type: object
       properties:
-# [Style Validator (3435b500-6281-4333-8352-65cf18d10cb8) : All model properties must have examples]: Field 'example' required in 'properties'
         offersPublicationStatus:
-          type: object
-          description: The status of the offer publication to the target marketplace
-          required:
-          - status
-          properties:
-            status:
-              type: string
-              description: The marketplace API status for the offer publication
-              enum: 
-              - up
-              - down
-              - paused
-              example: up
-            publishableOfferCount:
-              type: integer
-              format: int32
-              description: The publishable offer count for this target marketplace (considering the product matching)
-              example: 25
-            publishedOfferCount:
-              type: integer
-              format: int32
-              description: The published offer count to this target marketplace
-              example: 20
-            lastPublicationUtcDate:
-              type: string
-              format: date-time
-              description: The last synchronization of the offers from the source marketplace
-              example: '2018-12-25T23:39:00Z'
-            
-            
-                
-# [Style Validator (3435b500-6281-4333-8352-65cf18d10cb8) : All model properties must have examples]: Field 'example' required in 'properties'
+          $ref: '#/definitions/offersPublicationStatus'
         offersSourceStatus:
-          type: object
-          description: The status of the offer importation from the source marketplace
-          required:
-          - status
-          properties:
-            status:
-              type: string
-              description: The marketplace API status for the offer importation
-              enum: 
-              - up
-              - down
-              - paused
-              example: up
-            lastSynchronizationUtcDate:
-              type: string
-              format: date-time
-              description: The last synchronization of the offers from the source marketplace
-              example: '2018-12-24T23:39:00Z'
-            importedOfferCount:
-              type: integer
-              format: int32
-              description: The imported offer count from the source marketplace
-              example: 52
+          $ref: '#/definitions/offersSourceStatus'
+  
 
+  offersSourceStatus:
+    type: object
+    description: The status of the offer importation from the source marketplace
+    required:
+    - status
+    properties:
+      status:
+        type: string
+        description: The marketplace API status for the offer importation
+        enum: 
+        - up
+        - down
+        - paused
+        example: up
+      lastSynchronizationUtcDate:
+        type: string
+        format: date-time
+        description: The last synchronization of the offers from the source marketplace
+        example: '2018-12-24T23:39:00Z'
+      importedOfferCount:
+        type: integer
+        format: int32
+        description: The imported offer count from the source marketplace
+        example: 52
 
 x-azure-api-id: 'MerchantMarketplacesV1'
