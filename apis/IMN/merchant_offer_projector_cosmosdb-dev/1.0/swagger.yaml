@@ -1,0 +1,61 @@
+swagger: '2.0'
+info:
+  version: "1.0"
+  title: 'IMN - Merchant Offer Projector CosmosDb'
+
+host: IMN.Offer.PROJ.CosmosDb
+basePath: /OfferProjectionCosmosDb
+
+x-beezup-ops:
+  codeGenType: eventHandlerActor
+  repo: IMN
+  appRoot: IMN.Offer.PROJ.CosmosDb
+  apiName: OfferProjectionCosmosDb
+  namespace: IMN.Offer.PROJ.CosmosDb
+  comment: |
+    Actor
+  using:
+  - IMN.MER.Events
+  - IMN.Offer.Events
+
+paths:
+
+  '/merchantOfferCreated':
+    post:
+      summary: When the merchant offer is created
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-events/1.0#/definitions/merchantOfferCreated'
+      responses:
+        204:
+          description: OK
+  
+  '/merchantOfferUpdated':
+    post:
+      summary: When the merchant offer is updated
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-events/1.0#/definitions/merchantOfferUpdated'
+      responses:
+        204:
+          description: OK
+
+  '/merchantOfferDeleted':
+    post:
+      summary: When the merchant offer is deleted
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-events/1.0#/definitions/merchantOfferDeleted'
+      responses:
+        204:
+          description: OK
+
+
+      
+definitions: {}
