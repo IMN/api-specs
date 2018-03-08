@@ -520,12 +520,63 @@ definitions:
     type: object
     properties:
       info:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceInfo'
+        $ref: '#/definitions/marketplaceApiInfo'
       links:
         $ref: '#/definitions/marketplaceIndexLinks'
 
-  
+  marketplaceApiInfo:
+    allOf: 
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceInfo'
+    - type: object
+      properties:
+# [Style Validator (3435b500-6281-4333-8352-65cf18d10cb8) : All model properties must have examples]: Field 'example' required in 'properties'
+        offersPublicationStatus:
+          type: object
+          description: The status of the offer publication to the target marketplace
+          required:
+          - status
+          properties:
+            status:
+              type: string
+              description: The marketplace API status for the offer publication
+              enum: 
+              - up
+              - down
+              - paused
 
+            publishableOfferCount:
+              type: integer
+              format: int32
+              description: The publishable offer count for this target marketplace (considering the product matching)
+            publishedOfferCount:
+              type: integer
+              format: int32
+              description: The published offer count to this target marketplace
+            
+                
+# [Style Validator (3435b500-6281-4333-8352-65cf18d10cb8) : All model properties must have examples]: Field 'example' required in 'properties'
+        offersSourceStatus:
+          type: object
+          description: The status of the offer importation from the source marketplace
+          required:
+          - status
+          properties:
+            status:
+              type: string
+              description: The marketplace API status for the offer importation
+              enum: 
+              - up
+              - down
+              - paused
+            lastSynchronizationUtcDate:
+              type: string
+              format: date-time
+              description: The last synchronization of the offers from the source marketplace 
+            importedOfferCount:
+              type: integer
+              format: int32
+              description: The imported offer count from the source marketplace
+              
 
 
 x-azure-api-id: 'MerchantMarketplacesV1'
