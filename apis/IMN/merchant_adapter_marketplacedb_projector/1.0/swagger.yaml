@@ -1,0 +1,50 @@
+swagger: '2.0'
+info:
+  version: "1.0"
+  title: 'IMN ADAPTER - Merchant Adapter MarketplaceDb Projector'
+
+host: IMN.ADPT.MER.MarketplaceDb.PROJ
+basePath: /MerchantAdapterMarketplaceDbProjectorApplier
+
+x-imn-ops:
+  codeGenType: eventHandlerActor
+  repo: IMN
+  appRoot: IMN.ADPT.MER.MarketplaceDb.PROJ
+  apiName: MerchantAdapterMarketplaceDbProjectorApplier
+  namespace: IMN.ADPT.MER.MarketplaceDb.PROJ
+  comment: |
+    Actor
+  using:
+  - IMN.MER.Events
+
+
+paths:
+
+
+  '/orderImportationEnabled':
+    post:
+      summary: When the order importation is enabled
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOrderImportationEnabled'
+      responses:
+        204:
+          description: OK
+
+
+  '/orderImportationDisabled':
+    post:
+      summary: When the offer importation is disabled
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOrderImportationDisabled'
+      responses:
+        204:
+          description: OK
+
+
+definitions: {}
