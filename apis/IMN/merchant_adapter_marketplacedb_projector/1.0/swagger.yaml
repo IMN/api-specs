@@ -3,7 +3,7 @@ info:
   version: "1.0"
   title: 'IMN ADAPTER - Merchant Adapter MarketplaceDb Projector'
 
-host: IMN.ADPT.MER.MarketplaceDb.PROJ
+host: IMN.ADPT.MER.PROJ.MarketplaceDb
 basePath: /MerchantAdapterMarketplaceDbProjectorApplier
 
 x-imn-ops:
