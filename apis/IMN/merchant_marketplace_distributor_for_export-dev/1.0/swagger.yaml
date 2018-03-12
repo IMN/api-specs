@@ -3,15 +3,15 @@ info:
   version: "1.0"
   title: 'IMN - Merchant Marketplace Distributor for Exportation'
 
-host: IMN.MER.MKP.DIST.EXP
+host: IMN.MER.DIST.EXP
 basePath: /MerchantMarketplaceDistributorForExport
 
 x-beezup-ops:
   codeGenType: eventHandlerActor
   repo: IMN
-  appRoot: IMN.MER.MKP.DIST.EXP
+  appRoot: IMN.MER.DIST.EXP
   apiName: MerchantMarketplaceDistributorForExport
-  namespace: IMN.MER.MKP.DIST.EXP
+  namespace: IMN.MER.DIST.EXP
   comment: |
     Actor
   using:
