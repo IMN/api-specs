@@ -9,9 +9,9 @@ basePath: /MerchantAdapterMarketplaceDbProjectorApplier
 x-imn-ops:
   codeGenType: eventHandlerActor
   repo: IMN
-  appRoot: IMN.ADPT.MER.MarketplaceDb.PROJ
+  appRoot: IMN.ADPT.MER.PROJ.MarketplaceDb
   apiName: MerchantAdapterMarketplaceDbProjectorApplier
-  namespace: IMN.ADPT.MER.MarketplaceDb.PROJ
+  namespace: IMN.ADPT.MER.PROJ.MarketplaceDb
   comment: |
     Actor
   using:
