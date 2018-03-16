@@ -13,7 +13,7 @@ x-beezup-ops:
   apiName: MerchantMarketplaceDistributorForExport
   namespace: IMN.MER.DIST.EXP
   comment: |
-    Actor
+    Actor. Added merchant marketplace shipping input messages
   using:
   - IMN.MER.Events
 
@@ -47,9 +47,6 @@ paths:
           description: OK
 
 
-  
-  
-
   '/merchantMarketplacePricingSettingConfigured':
     post:
       summary: When the merchant configured the pricing of a marketplace
@@ -62,7 +59,29 @@ paths:
         204:
           description: OK
 
-      
 
+  '/merchantMarketplaceShippingPreprationSettingConfigured':
+    post:
+      summary: When the merchant configured the preparation shipping of a marketplace
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceShippingPreprationSettingConfigured'
+      responses:
+        204:
+          description: OK
+
+  '/merchantMarketplaceShippingDeliverySettingConfigured':
+    post:
+      summary: When the merchant configured the preparation delivery of a marketplace
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceShippingDeliverySettingConfigured'
+      responses:
+        204:
+          description: OK
       
 definitions: {}
