@@ -22,7 +22,7 @@ paths:
   '/merchantMarketplaceCredentialConfigured':
     post:
       summary: When the merchant declared his marketplace credential
-      parameters: 
+      parameters:
       - name: request
         in: body
         schema:
@@ -31,13 +31,10 @@ paths:
         204:
           description: OK
 
-
-
-
   '/offerPublicationEnabled':
     post:
       summary: When the offer publication is enabled
-      parameters: 
+      parameters:
       - name: request
         in: body
         schema:
@@ -46,11 +43,10 @@ paths:
         204:
           description: OK
 
-
   '/offerPublicationDisabled':
     post:
       summary: When the offer publication is disabled
-      parameters: 
+      parameters:
       - name: request
         in: body
         schema:
@@ -59,11 +55,10 @@ paths:
         204:
           description: OK
 
-
   '/orderImportationEnabled':
     post:
       summary: When the order importation is enabled
-      parameters: 
+      parameters:
       - name: request
         in: body
         schema:
@@ -72,11 +67,10 @@ paths:
         204:
           description: OK
 
-
   '/orderImportationDisabled':
     post:
       summary: When the offer importation is disabled
-      parameters: 
+      parameters:
       - name: request
         in: body
         schema:
