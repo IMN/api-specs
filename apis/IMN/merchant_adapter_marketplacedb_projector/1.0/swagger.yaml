@@ -6,7 +6,7 @@ info:
 host: IMN.ADPT.MER.PROJ.MarketplaceDb
 basePath: /MerchantAdapterMarketplaceDbProjectorApplier
 
-x-beezup-ops:
+x-IMN-api-ops:
   codeGenType: eventHandlerActor
   repo: IMN
   appRoot: IMN.ADPT.MER.PROJ.MarketplaceDb
