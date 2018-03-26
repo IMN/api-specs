@@ -61,6 +61,7 @@ paths:
 ##############################################################
 # For now we will not expose an API to manage the agents, these use cases will be directly handled using the Azure AD API
 ###############################################################
+
 #  '/agents/{marketplaceCode}':
 #    get:
 #      tags: 
