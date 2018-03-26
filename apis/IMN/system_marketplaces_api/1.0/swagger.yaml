@@ -1,0 +1,240 @@
+swagger: '2.0'
+info:
+  version: "1.0"
+  title: 'System - Marketplaces'
+  description: 'Marketplace management'
+  x-logo:
+    url: https://imngo.blob.core.windows.net/imngo/images/imn-logo.png
+    backgroundfColor: "#FFFFFF"
+
+  contact:
+    email: support@imn.io
+
+host: api.imn.io
+basePath: /system/marketplaces/v1
+
+x-IMN-api-ops:
+  codeGenType: webapi
+  repo: IMN
+  appRoot: IMN.SYS.MKP.WebService
+  apiName: SystemMarkteplacesV1
+  namespace: IMN.SYS.MKP.WebService
+  useBeezUPFrameworkVersion2: true
+  comment: |
+    No change. Just server side generation.
+  using:
+  - IMN.Schemas
+  - IMN.MER.Schemas
+  - IMN.MKP.Schemas
+  - IMN.MER.Exceptions
+
+x-basePath: /system/marketplaces/v1
+schemes:
+  - https
+
+consumes:
+  - application/json
+produces:
+  - application/json
+  
+tags:
+- name: Global
+- name: Marketplaces
+
+paths: 
+
+        
+  '/':
+    get:
+      tags: 
+      - Marketplaces
+      summary: Get the list of marketplace
+      operationId: GetMarketplaceList
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/marketplaceList'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'       
+
+  '/agents/{marketplaceCode}':
+    get:
+      tags: 
+      - Marketplaces Agent
+      summary: Get the list of marketplace's agents
+      operationId: GetAgentList
+      parameters: 
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/agentList'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError' 
+
+definitions:
+
+  agentList:
+    type: array
+    items:
+      $ref: '#/definitions/agent'
+
+  agent:
+    type: object
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/email'
+        
+  marketplaceList:
+    type: object
+    required: 
+    - links
+    properties:
+      links:
+        $ref: '#/definitions/marketplaceListLinks'
+      marketplaces:
+        type: array
+        items:
+          $ref: '#/definitions/marketplaceSysInfo' 
+
+  marketplaceListLinks:
+    type: object
+    required:
+    - self
+    properties:
+      self:
+        $ref: '#/definitions/links.GetMarketplaceListLink'
+  
+  links.GetMarketplaceListLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+
+  marketplaceApiIntegration:
+    type: object
+    description: The marketplace integration status to push their data to IMN
+    properties:
+      status:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/marketplace-schemas/1.0#/definitions/marketplaceApiIntegrationStatus'
+      errorMessage:
+        type: string
+      sinceUtcDate:
+        description: This status has changed since
+        type: string
+        format: date-time
+      lastCheckUtcDate:
+        description: The last time we checked the api integration status with the marketplace
+        type: string
+        format: date-time
+
+  marketplacePushApiIntegration:
+    type: object
+    description: The marketplace integration status to received pushed data from IMN
+    properties:
+      backendUrl:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/httpUrl'
+      status:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/marketplace-schemas/1.0#/definitions/marketplaceApiIntegrationStatus'
+      errorMessage:
+        type: string
+      sinceUtcDate:
+        description: This status has changed since
+        type: string
+        format: date-time
+      lastCheckUtcDate:
+        description: The last time we checked the api integration status with the marketplace
+        type: string
+        format: date-time
+
+
+  marketplaceSysInfo:
+    type: object
+    required:
+    - code
+    - name
+    - status
+    properties:
+      code:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
+      name:
+        type: string
+        example: Cdiscount
+      status:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/marketplace-schemas/1.0#/definitions/marketplaceStatus'
+      country:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/countryIsoCodeAlpha3'
+      merchantApiIntegration:
+        $ref:  '#/definitions/marketplacePushApiIntegration'
+      offerImportationApiIntegration:
+        $ref:  '#/definitions/marketplaceApiIntegration'
+      offerPublicationApiIntegration:
+        $ref: '#/definitions/marketplacePushApiIntegration'
+      orderImportationApiIntegration:
+        $ref:  '#/definitions/marketplaceApiIntegration'
+      orderChangeApiIntegration:
+        $ref:  '#/definitions/marketplacePushApiIntegration'
+        
+      marketplaceAgentCount:
+        type: integer
+      
+      importedOfferCount:
+        type: integer
+        format: int32
+        description: Imported offer count from the source marketplace
+        
+      publishedOfferCount:
+        type: integer
+        format: int32
+        description: Effective offer count published to the target marketplace
+
+      importedOrderCount: 
+        type: integer
+        format: int32
+        description: Imported order count from the marketplace
+
+      sourceMerchantOrderCount:
+        type: integer
+        format: int32
+        
+      targetMerchantOrderCount:
+        type: integer
+        format: int32
+        
+      targetMerchantTurnOver:
+        type: number
+        format: decimal
+
+      sourceMerchantTurnOver:
+        type: number
+        format: decimal
+        
+      targetMerchantCredentialCounter:
+        type: object
+        description: The key will be the credential status
+        additionalProperties:
+          type: integer
+          
+      sourceMerchantCredentialCounter:
+        type: object
+        description: The key will be the credential status
+        additionalProperties:
+          type: integer
+          
+      merchantSubscriptionCounter:
+        type: object
+        description: The key will be the subscription Status
+        additionalProperties:
+          type: integer
+
+      merchantOfferPublicationCounter:
+        type: object
+        description: The key will be the offer publication Status
+        additionalProperties:
+          type: integer
+
+x-azure-api-id: 'SystemMarketplacesV1'
