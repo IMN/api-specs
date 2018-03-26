@@ -1,0 +1,124 @@
+swagger: '2.0'
+info:
+  version: "1.0"
+  title: 'IMN - Merchant Pusher'
+
+host: IMN.MER.Pusher
+basePath: /MerchantPusher
+
+x-beezup-ops:
+  codeGenType: eventHandlerActor
+  repo: IMN
+  appRoot: IMN.MER.Pusher
+  apiName: MerchantPusher
+  namespace: IMN.MER.Pusher
+  comment: |
+    Actor
+  using:
+  - IMN.MER.Events
+
+paths:
+
+  # '/merchantCreated':
+  #   post:
+  #     summary: When the merchant is created
+  #     parameters: 
+  #     - name: request
+  #       in: body
+  #       schema:
+  #         $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantCreated'
+  #     responses:
+  #       204:
+  #         description: OK
+
+  '/merchantMarketplaceCredentialConfigured':
+    post:
+      summary: When the merchant declared his marketplace credential
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceCredentialConfigured'
+      responses:
+        204:
+          description: OK
+
+  '/offerImportationEnabled':
+    post:
+      summary: When the offer importation is enabled
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOfferImportationEnabled'
+      responses:
+        204:
+          description: OK
+
+
+  '/offerImportationDisabled':
+    post:
+      summary: When the offer importation is disabled
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOfferImportationDisabled'
+      responses:
+        204:
+          description: OK
+
+
+  '/offerPublicationEnabled':
+    post:
+      summary: When the offer publication is enabled
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOfferPublicationEnabled'
+      responses:
+        204:
+          description: OK
+
+
+  '/offerPublicationDisabled':
+    post:
+      summary: When the offer publication is disabled
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOfferPublicationDisabled'
+      responses:
+        204:
+          description: OK
+
+
+  '/orderImportationEnabled':
+    post:
+      summary: When the order importation is enabled
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOrderImportationEnabled'
+      responses:
+        204:
+          description: OK
+
+
+  '/orderImportationDisabled':
+    post:
+      summary: When the offer importation is disabled
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOrderImportationDisabled'
+      responses:
+        204:
+          description: OK
+
+
+definitions: {}
