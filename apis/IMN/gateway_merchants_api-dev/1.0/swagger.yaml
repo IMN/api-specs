@@ -125,8 +125,16 @@ definitions:
   merchantEvents:
     type: array
     items:
-      type: object
-  
+      $ref: '#/definitions/merchantEvent'
+      
+  merchantEvent:
+    type: object
+    properties:
+      eventType:
+        type: string
+      event: 
+        type: object
+    
   #merchantEvent:
     #type: object
     #allOf:
