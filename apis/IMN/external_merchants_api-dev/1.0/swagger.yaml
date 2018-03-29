@@ -69,6 +69,7 @@ definitions:
     required:
     - merchantCode
     - userId
+    - sourceMarketplaceCode
     - marketplacesRequested
     - subscriptionRequestUtcDate
     properties:
