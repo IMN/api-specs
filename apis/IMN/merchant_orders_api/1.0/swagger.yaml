@@ -28,6 +28,7 @@ x-imn-api-ops:
   apiName: MerchantOrdersV1
   comment: |
     First document
+    regen
 
 x-host: api.imn.io
 x-basePath: /merchant/orders/v1
