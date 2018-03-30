@@ -18,6 +18,9 @@ info:
  
 host: api.imn.io
 basePath: /merchant/lov/v1
+
+x-basePath: /merchant/lov/v1
+
 schemes:
   - https
 
