@@ -40,6 +40,7 @@ produces:
 tags:
 - name: Global
 - name: Marketplaces
+- name: Marketplaces Agent
 
 paths: 
 
