@@ -7,7 +7,7 @@ host: IMN.ADPT.OfferIMP.Routers
 basePath: /OfferImportationMerchantMessageRouter
 
 x-beezup-ops:
-  codeGenType: actor
+  codeGenType: eventHandlerActor
   repo: IMN
   apiName: OfferImportationMerchantMessageRouter
   namespace: IMN.ADPT.OfferIMP.MER.Routers
