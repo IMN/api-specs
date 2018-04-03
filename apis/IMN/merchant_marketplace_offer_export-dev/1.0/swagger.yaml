@@ -1,0 +1,109 @@
+swagger: '2.0'
+info:
+  version: "1.0"
+  title: 'IMN - Merchant Marketplace Offer Exporter'
+
+host: IMN.Offer.EXP.Exporter
+basePath: /MerchantMarketplaceOfferExporter
+
+x-beezup-ops:
+  codeGenType: eventHandlerActor
+  repo: IMN
+  appRoot: IMN.Offer.EXP.Exporter
+  apiName: MerchantMarketplaceOfferExporter
+  namespace: IMN.Offer.EXP.Exporter
+  comment: |
+    Actor
+  using:
+  - IMN.MER.Events
+  - IMN.Offer.Events
+
+
+tags: 
+- name: Offer Exportation Events
+- name: Merchant Offer Events 
+
+paths:
+
+
+
+
+  '/offerExportInitializationStarted':
+    post:
+      tags: 
+      - Offer Exportation Events
+      summary: When the offer publication is enabled
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_export-events/1.0#/definitions/offerExportInitializationStarted'
+      responses:
+        204:
+          description: OK
+
+
+
+
+  '/offerExportInitializationCompleted':
+    post:
+      tags: 
+      - Offer Exportation Events
+      summary: When the offer publication is enabled
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_export-events/1.0#/definitions/offerExportInitializationCompleted'
+      responses:
+        204:
+          description: OK
+
+
+
+          
+  '/merchantOfferCreated':
+    post:
+      tags: 
+      - Merchant Offer Events
+      summary: When the merchant offer is created
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-events/1.0#/definitions/merchantOfferCreated'
+      responses:
+        204:
+          description: OK
+  
+  '/merchantOfferUpdated':
+    post:
+      tags: 
+      - Merchant Offer Events
+      summary: When the merchant offer is updated
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-events/1.0#/definitions/merchantOfferUpdated'
+      responses:
+        204:
+          description: OK
+
+  '/merchantOfferDeleted':
+    post:
+      tags: 
+      - Merchant Offer Events
+      summary: When the merchant offer is deleted
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-events/1.0#/definitions/merchantOfferDeleted'
+      responses:
+        204:
+          description: OK
+
+
+      
+definitions: {}
