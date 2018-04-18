@@ -1,0 +1,37 @@
+swagger: '2.0'
+info:
+  version: "1.0"
+  title: 'IMN - Merchant Marketplace Exported Offer Projector CosmosDb'
+
+host: IMN.Offer.EXP.PROJ.CosmosDb
+basePath: /ExportedOfferProjectionCosmosDb
+
+x-beezup-ops:
+  codeGenType: eventHandlerActor
+  repo: IMN
+  appRoot: IMN.Offer.EXP.PROJ.CosmosDb
+  apiName: ExportedOfferProjectionCosmosDb
+  namespace: IMN.Offer.EXP.PROJ.CosmosDb
+  comment: |
+    Actor
+  using:
+  - IMN.Offer.Schemas
+
+paths:
+
+  '/merchantMarketplaceOffers':
+    post:
+      summary: merchant offers exported for a marketplace 
+      parameters:
+      - name: request
+        in: body
+        schema:
+          type: array
+          items:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/offer-schemas/1.0#/definitions/merchantMarketplaceOffer'
+      responses:
+        204:
+          description: OK
+
+
+definitions: {}
