@@ -19,16 +19,14 @@ x-beezup-ops:
 
 paths:
 
-  '/merchantMarketplaceOffers':
+  '/merchantMarketplaceOffer':
     post:
       summary: merchant offers exported for a marketplace 
       parameters:
       - name: request
         in: body
         schema:
-          type: array
-          items:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/offer-schemas/1.0#/definitions/merchantMarketplaceOffer'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-schemas/1.0#/definitions/merchantMarketplaceOffer'
       responses:
         204:
           description: OK
