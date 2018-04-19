@@ -23,6 +23,18 @@ x-beezup-ops:
 
 paths:
 
+  '/configured':
+    post:
+      summary: When the merchant declared his marketplace credential
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceCredentialConfigured'
+      responses:
+        204:
+          description: OK
+  
   '/enabled':
     post:
       summary: When the offer importation is enabled
