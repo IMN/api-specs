@@ -431,12 +431,12 @@ definitions:
         type: string
         description: filter merchants by country code 
         example: FRA
-      filterSubscriptionStatusId:
-        type: integer
-        description: filter merchants by SubscriptionStatus
-      filterofferPublicationStatusId:
-        type: integer
-        description: filter merchants by offer publication status 
+      
+      filterSubscriptionStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceSubscriptionStatus'
+
+      filterofferPublicationStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceOfferPublicationStatus'
         
   incomingMerchantList:
     type: object
@@ -610,7 +610,7 @@ definitions:
     - subscriptionStatus
     - credentialStatus
     - shippingSettingsStatus
-    - offerPublicationStatusId
+    - offerPublicationStatusd
     - targetMarketplaceCode
     properties:
       subscriptionRequestUtcDate:
@@ -623,9 +623,8 @@ definitions:
         $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceCredentialStatus'
       shippingSettingsStatus:
         $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceShippingSettingsStatus'
-      offerPublicationStatusId:
-        type: integer
-        format: int32
+      offerPublicationStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceOfferPublicationStatus'
       publishedOfferCount:
         type: integer
         format: int32
@@ -656,7 +655,7 @@ definitions:
       - subscriptionStatus
       - credentialStatus
       - shippingSettingsStatus
-      - offerPublicationStatusId
+      - offerPublicationStatus
       properties:
         sourceMarketplaceCode:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceMerchantCode'
