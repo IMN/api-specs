@@ -70,6 +70,27 @@ paths:
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'       
 
+
+  '/{merchantCode}/targetMarketplaces':
+    post:
+      tags: 
+      - Merchants
+      summary: Get the list of marketplace for a merchant
+      operationId: GetMerchantTargetMarketplaceList
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            description: The key is the marketplace code
+            additionalProperties:
+              $ref: '#/definitions/merchantTargetMarketplaceInfo'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'       
+
+
 definitions:
 
   merchantListRequest:
@@ -215,11 +236,11 @@ definitions:
         description: Sales Force status id 
       credentialStatus:
         $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceCredentialStatus'
-      targetMarketplaces:
-        type: object
-        description: The key is the marketplace code
-        additionalProperties:
-          $ref: '#/definitions/merchantTargetMarketplaceInfo'
+      targetMarketplaceCount:
+        type: integer
+        format: int32
+        description: The target marketplace count of this merchant
+        
  
   
   merchantTargetMarketplaceInfo:
@@ -267,5 +288,31 @@ definitions:
         example: 10602.23
       currencyCode:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/currencyCode'
+      subscriptionHistory:
+        type: array
+        items:
+          $ref: '#/definitions/marketplaceSubcriptionReporting'
+
+
+  marketplaceSubcriptionReporting:
+    type: object
+    required:
+#    - senderType
+    - senderEmail
+    - utcDate
+    - status
+    properties:
+#      senderType:
+#        $ref: '#/definitions/marketplaceSubcriptionMessageSenderType'
+      senderEmail:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/email'
+      utcDate:
+        type: string
+        format: date-time
+      status:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceSubscriptionStatus'
+      message:
+        type: string
+
 
 x-azure-api-id: 'SystemBoV1'
