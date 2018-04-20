@@ -261,10 +261,11 @@ definitions:
       targetMarketplaceMerchantCode:
         type: string
         description: the tarket marketplace merchant code ?? 
-      turnOvers:
+      turnOver:
         type: number
         format: decimal
         example: 10602.23
-
+      currencyCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/currencyCode'
 
 x-azure-api-id: 'SystemBoV1'
