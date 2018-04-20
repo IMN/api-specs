@@ -162,6 +162,7 @@ definitions:
     required:
     - code
     - name
+    - imageUrl
     - status
     properties:
       code:
@@ -169,6 +170,8 @@ definitions:
       name:
         type: string
         example: Cdiscount
+      imageUrl:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/httpUrl'
       status:
         $ref: 'https://api.swaggerhub.com/domains/IMN/marketplace-schemas/1.0#/definitions/marketplaceStatus'
       country:
@@ -202,21 +205,25 @@ definitions:
         format: int32
         description: Imported order count from the marketplace
 
-      sourceMerchantOrderCount:
+      sourceOrderCount:
         type: integer
         format: int32
         
-      targetMerchantOrderCount:
+      targetOrderCount:
         type: integer
         format: int32
         
-      targetMerchantTurnOver:
+      targetTurnOver:
         type: number
         format: decimal
+      
 
-      sourceMerchantTurnOver:
+      sourceTurnOver:
         type: number
         format: decimal
+        
+      currencyCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/currencyCode'
         
       targetMerchantCredentialCounter:
         type: object
