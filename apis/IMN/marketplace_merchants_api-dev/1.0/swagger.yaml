@@ -669,7 +669,32 @@ definitions:
           example: 10602.23
         currencyCode:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/currencyCode'
+        subscriptionHistory:
+          type: array
+          items:
+            $ref: '#/definitions/marketplaceSubcriptionReporting'
 
+
+
+  marketplaceSubcriptionReporting:
+    type: object
+    required:
+#    - senderType
+    - senderEmail
+    - utcDate
+    - status
+    properties:
+#      senderType:
+#        $ref: '#/definitions/marketplaceSubcriptionMessageSenderType'
+      senderEmail:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/email'
+      utcDate:
+        type: string
+        format: date-time
+      status:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceSubscriptionStatus'
+      message:
+        type: string
 
   outgoingMerchantInfo:
     allOf:
