@@ -213,7 +213,7 @@ definitions:
       salesForceStatus:
         type: boolean
         description: Sales Force status id 
-      credentialStatusId:
+      credentialStatus:
         $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceCredentialStatus'
       targetMarketplaces:
         type: object
