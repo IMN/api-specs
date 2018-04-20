@@ -118,12 +118,14 @@ definitions:
         format: date-time
         description: filter merchants by to ending creation date
       filterCountry:
-        type: string
-        description: filter merchants by country code 
-        example: FRA
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/countryIsoCodeAlpha3'
       filterSalesforceStatus:
         type: boolean
         description: filter merchants by SalesforceStatus
+      filterSourceMarketplaceCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
+      filterSourceMarketplaceCredentialStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceCredentialStatus'
 
   merchantListOrderBy:
     type: object
