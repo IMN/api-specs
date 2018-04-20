@@ -383,12 +383,12 @@ definitions:
         type: string
         description: filter merchants by Source MarketplaceCode 
         example: C1
-      filterSubscriptionStatusId:
-        type: integer
-        description: filter merchants by SubscriptionStatus
-      filterofferPublicationStatusId:
-        type: integer
-        description: filter merchants by offer publication status 
+      filterCredentialStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceCredentialStatus'
+      filterSubscriptionStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceSubscriptionStatus'
+      filterofferPublicationStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceOfferPublicationStatus'
 
   outgoingMerchantListRequest:
     type: object
