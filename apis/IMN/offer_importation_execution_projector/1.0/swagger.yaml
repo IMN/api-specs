@@ -10,7 +10,7 @@ x-beezup-ops:
   repo: IMN
   appRoot: IMN.ADPT.OfferIMP.EXEC.PROJ.Db
   apiName: OfferImportationExecutionProjectorApplier
-  namespace: IMN.ADPT.OfferIMP.EXEC.PROJ.db
+  namespace: IMN.ADPT.OfferIMP.EXEC.PROJ.Db
   comment: |
     Actor 
   using:
