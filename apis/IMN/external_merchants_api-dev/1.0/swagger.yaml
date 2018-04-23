@@ -73,6 +73,7 @@ definitions:
     - sourceMarketplaceCode
     - targetMarketplacesSubscriptionRequested
     - subscriptionRequestUtcDate
+    - salesforceSubscriptionId
     properties:
       merchantCode:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/merchantCode'
@@ -90,3 +91,6 @@ definitions:
         type: string
         format: date-time
         description: The exact date time of the subscription request
+      salesforceSubscriptionId:
+        type: string
+        description: The Salesforce identifier of the subscription
