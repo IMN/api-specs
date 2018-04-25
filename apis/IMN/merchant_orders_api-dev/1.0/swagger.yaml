@@ -808,8 +808,13 @@ definitions:
     minimum: 1
     default: 1
 
-  order_Billing_Name:
-    description: Buyer full name
+  order_Billing_FirstName:
+    description: Buyer first name
+    type: string
+    example: Marilyn
+
+  order_Billing_LastName:
+    description: Buyer last name
     type: string
     example: Monroe
 
@@ -853,9 +858,9 @@ definitions:
         example: '2017-04-01T13:10:01Z'
 
       order_Billing_FirstName:
-        $ref: '#/definitions/order_Billing_Name'
+        $ref: '#/definitions/order_Billing_FirstName'
       order_Billing_LastName:
-        $ref: '#/definitions/order_Billing_Name'
+        $ref: '#/definitions/order_Billing_LastName'
       marketplaceOrderIds:
         type: array
         items:
@@ -1095,9 +1100,9 @@ definitions:
         example: '2017-04-16T10:25:23Z'
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Billing_Name' does not comply with the rule
       order_Billing_FirstName:
-        $ref: '#/definitions/order_Billing_Name'
+        $ref: '#/definitions/order_Billing_FirstName'
       order_Billing_LastName:
-        $ref: '#/definitions/order_Billing_Name'
+        $ref: '#/definitions/order_Billing_LastName'
 
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_TotalPrice' does not comply with the rule
       order_TotalPrice:
