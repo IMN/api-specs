@@ -52,6 +52,29 @@ tags:
 - name: Api Token
 
 
+# Under securityDefinitions we declare which security schemes can be used.
+# These definitions do not affect to the operations, but can be applied
+# using the 'security' key at the global level or the operation level.
+# In this sample, we'll see how to apply the security definition globally,
+# and override it at the operation level.
+#
+# Note that for Implicit Flow, you must provide the Token URL.
+securityDefinitions:
+  implicit:
+    type: oauth2
+    # This should be updated to the Authorization URL of your OAuth provider.
+    authorizationUrl: 'https://login.microsoftonline.com/imnb2ctenant.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_sign_up_or_sign_in_light&response_mode=fragment'
+    flow: implicit
+    scopes:
+      read_write: Access this app on behalf of the signed-in user
+
+# Here we apply the security flow called 'implicit' globally to all the opeartions in the spec. 
+# This security scheme is defined above in the 'securityDefinitions' section.
+# Global security can be overriden an operation level as seen in the example below
+security:
+  - implicit:
+    - read_write
+
 paths: 
 
 
