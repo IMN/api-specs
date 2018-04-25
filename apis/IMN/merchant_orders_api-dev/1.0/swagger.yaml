@@ -900,8 +900,9 @@ definitions:
   imnOrderId:
     description: The IMN Order identifier
     type: string
-    format: uuid
-    example: '00000000000000000000000000000000000000000000000'
+    example: 'A0CD3FG'
+    pattern: ^([A-Z|0-9]){7}$
+    x-pattern: ^([A-Z|0-9]){7}$
 
 
 
@@ -1170,7 +1171,7 @@ definitions:
     allOf:
     - $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3
     - example:
-        href: /merchant/orders/v1/Amazon/1001/00000000000000000000000000000000000000000000000
+        href: /merchant/orders/v1/MLT01/C1/A0CD3FG
         method: GET
 
   orderHeaderLinks:
@@ -1376,14 +1377,14 @@ definitions:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
     - example:
-        href: /merchant/orders/v1/Amazon/1001/00000000000000000000000000000000000000000000000/history
+        href: /merchant/orders/v1/MLT01/C1/A0CD3FG/history
         method: GET
 
   links.SetMerchantOrderInfoLink:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
     - example:
-        href: /merchant/orders/v1/Amazon/1001/00000000000000000000000000000000000000000000000/setMerchantOrderInfo
+        href: /merchant/orders/v1/MLT01/C1/A0CD3FG/setMerchantOrderInfo
         method: POST
         parameters:
           request:
@@ -1395,14 +1396,14 @@ definitions:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
     - example:
-        href: /merchant/orders/v1/Amazon/1001/00000000000000000000000000000000000000000000000/clearMerchantOrderInfo
+        href: /merchant/orders/v1/MLT01/C1/A0CD3FG/clearMerchantOrderInfo
         method: POST
 
   links.HarvestOrderLink:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
     - example:
-        href: /merchant/orders/v1/Amazon/1001/00000000000000000000000000000000000000000000000/harvest
+        href: /merchant/orders/v1/MLT01/C1/A0CD3FG/harvest
         method: POST
 
   order:
