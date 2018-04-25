@@ -808,7 +808,7 @@ definitions:
     minimum: 1
     default: 1
 
-  order_Buyer_Name:
+  order_Billing_Name:
     description: Buyer full name
     type: string
     example: Monroe
@@ -851,9 +851,11 @@ definitions:
         format: date-time
         type: string
         example: '2017-04-01T13:10:01Z'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_Name' does not comply with the rule
-      order_Buyer_Name:
-        $ref: '#/definitions/order_Buyer_Name'
+
+      order_Billing_FirstName:
+        $ref: '#/definitions/order_Billing_Name'
+      order_Billing_LastName:
+        $ref: '#/definitions/order_Billing_Name'
       marketplaceOrderIds:
         type: array
         items:
@@ -1091,9 +1093,12 @@ definitions:
         format: date-time
         type: string
         example: '2017-04-16T10:25:23Z'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_Name' does not comply with the rule
-      order_Buyer_Name:
-        $ref: '#/definitions/order_Buyer_Name'
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Billing_Name' does not comply with the rule
+      order_Billing_FirstName:
+        $ref: '#/definitions/order_Billing_Name'
+      order_Billing_LastName:
+        $ref: '#/definitions/order_Billing_Name'
+
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_TotalPrice' does not comply with the rule
       order_TotalPrice:
         description: The total price of this order (corresponding to the amount paid by the customer)
@@ -1336,11 +1341,22 @@ definitions:
           description: The company name of the shipping address for this order
           type: string
           example: My Company
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_AddressName' does not comply with the rule
-        order_Shipping_AddressName:
-          description: The name of the person in the shipping address for this order
+        order_Shipping_RelayId:
+          description: The company name of the shipping address for this order
           type: string
-          example: Jacques BAUREGARD
+          example: My Company
+          
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_AddressName' does not comply with the rule
+        order_Shipping_AddressFirstName:
+          description: The first name of the person in the shipping address for this order
+          type: string
+          example: Jacques
+
+        order_Shipping_AddressLastName:
+          description: The last name of the person in the shipping address for this order
+          type: string
+          example: BAUREGARD
+          
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_Email' does not comply with the rule
         order_Shipping_Email:
           description: The email of the person in the shipping address for this order
@@ -1361,6 +1377,12 @@ definitions:
           description: The shipping address line 3 of this order
           type: string
           example: 'RDC'
+
+        order_Shipping_Comment:
+          description: The shipping comment of this order
+          type: string
+          example: 'The instructions from the buyer'
+          
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_AddressPostalCode' does not comply with the rule
         order_Shipping_AddressPostalCode:
           description: The shipping address postal code of this order
@@ -1407,6 +1429,13 @@ definitions:
           description: The shipping method of this order
           type: string
           example: DPD Domicile
+
+
+        order_Shippping_FulfilledBy:
+          description: The shipment is fulfilled by
+          type: string
+          example: Cdiscount Fulfillment
+
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_ShippingTax' does not comply with the rule
         order_Shipping_ShippingTax:
           description: The shipping tax for this order
@@ -1425,73 +1454,73 @@ definitions:
           type: string
           format: date-time
           example: '2017-04-30T21:30:00Z'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_Identifier' does not comply with the rule
-        order_Buyer_Identifier:
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Billing_Identifier' does not comply with the rule
+        order_Billing_Identifier:
           description: The buyer identifier for this order
           type: string
           example: '1234567890'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_Civility' does not comply with the rule
-        order_Buyer_Civility:
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Billing_Civility' does not comply with the rule
+        order_Billing_Civility:
           description: The buyer civility for this order
           type: string
           example: 'Marseille'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_CompanyName' does not comply with the rule
-        order_Buyer_CompanyName:
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Billing_CompanyName' does not comply with the rule
+        order_Billing_CompanyName:
           description: The buyer company name for this order
           type: string
           example: 'Marsillia'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_Email' does not comply with the rule
-        order_Buyer_Email:
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Billing_Email' does not comply with the rule
+        order_Billing_Email:
           description: The email of the buyer for this order
           type: string
           example: client_000000@manomano.fr
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_AddressLine1' does not comply with the rule
-        order_Buyer_AddressLine1:
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Billing_AddressLine1' does not comply with the rule
+        order_Billing_AddressLine1:
           description: The Buyer address line 1 of this order
           type: string
           example: '5 rue amélie'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_AddressLine2' does not comply with the rule
-        order_Buyer_AddressLine2:
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Billing_AddressLine2' does not comply with the rule
+        order_Billing_AddressLine2:
           description: The Buyer address line 2 of this order
           type: string
           example: 'BDR'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_AddressLine3' does not comply with the rule
-        order_Buyer_AddressLine3:
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Billing_AddressLine3' does not comply with the rule
+        order_Billing_AddressLine3:
           description: The Buyer address line 3 of this order
           type: string
           example:  'RDC'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_AddressPostalCode' does not comply with the rule
-        order_Buyer_AddressPostalCode:
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Billing_AddressPostalCode' does not comply with the rule
+        order_Billing_AddressPostalCode:
           description: The Buyer address postal code of this order
           type: string
           example: '13014'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_AddressCity' does not comply with the rule
-        order_Buyer_AddressCity:
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Billing_AddressCity' does not comply with the rule
+        order_Billing_AddressCity:
           description: The Buyer address city of this order
           type: string
           example: Marseille
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_AddressStateOrRegion' does not comply with the rule
-        order_Buyer_AddressStateOrRegion:
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Billing_AddressStateOrRegion' does not comply with the rule
+        order_Billing_AddressStateOrRegion:
           description: The Buyer address state or region of this order
           type: string
           example: BDR
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_AddressCountryName' does not comply with the rule
-        order_Buyer_AddressCountryName:
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Billing_AddressCountryName' does not comply with the rule
+        order_Billing_AddressCountryName:
           description: The Buyer address country name
           type: string
           example: France
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_AddressCountryIsoCodeAlpha2' does not comply with the rule
-        order_Buyer_AddressCountryIsoCodeAlpha2:
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Billing_AddressCountryIsoCodeAlpha2' does not comply with the rule
+        order_Billing_AddressCountryIsoCodeAlpha2:
           description: The Buyer address country iso code alpha 2 (see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#/decoding_table for more details)
           type: string
           example: FR
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_Phone' does not comply with the rule
-        order_Buyer_Phone:
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Billing_Phone' does not comply with the rule
+        order_Billing_Phone:
           description: The phone number of the buyer for this order
           type: string
           example: '+33000000101'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_MobilePhone' does not comply with the rule
-        order_Buyer_MobilePhone:
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Billing_MobilePhone' does not comply with the rule
+        order_Billing_MobilePhone:
           description: The mobile phone number of the buyer for this order
           type: string
           example: '+33000000042'
