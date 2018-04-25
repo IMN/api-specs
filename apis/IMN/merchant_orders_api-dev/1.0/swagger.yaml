@@ -1988,11 +1988,13 @@ definitions:
     description: The reason why you cancel the order
     enum:
     - WrongPrice
-    - LateShipping
-    - WrongProductData
-    - NoBuyerFeedback
+    - DelayedInventory
+    - WrongProductInfo
+    - BuyerFeedbackTimeout
     - BuyerAgreement
-    - BuyerCancellationBeforeShipment
+    - BuyerCancelled
+    - NoInventory
+    - ShippingAddressUndeliverable
     - Other
 
   shipOrderRequest:
