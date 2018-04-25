@@ -70,6 +70,18 @@ paths:
 #         204:
 #           description: OK
 
+  '/pageFetched':
+    post:
+      summary: When the page is fetched by normalizer
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_importation-events/1.0#/definitions/offerImportationPageFetched'
+      responses:
+        204:
+          description: OK
+
 
   '/preparationCompleted':
     post:
