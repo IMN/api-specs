@@ -48,14 +48,14 @@ paths:
           description: OK
 
 
-  '/preparationCompleted':
+  '/pageFetched':
     post:
-      summary: When the offer preparation process is completed
+      summary: When the offer preparation fetched a page
       parameters: 
       - name: request
         in: body
         schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_importation-events/1.0#/definitions/offerImportationPreparationAllPartitionsCompleted'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_importation-events/1.0#/definitions/offerImportationPageFetched'
       responses:
         204:
           description: OK
