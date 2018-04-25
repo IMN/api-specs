@@ -108,8 +108,8 @@ paths:
     get:
       tags:
       - Global
-      x-tagGroups: Martketplaces Orders
-      operationId: GetOrderIndex
+      x-tagGroups: Marketplaces Orders
+      operationId: GetOrderApiIndex
       summary: Get all actions you can do on the order API
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
@@ -118,7 +118,7 @@ paths:
         200:
           description: Order index
           schema:
-            $ref: '#/definitions/orderIndex'
+            $ref: '#/definitions/orderApiIndex'
         304:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/304_NotModified'
         default:
@@ -1070,10 +1070,10 @@ definitions:
         uniqueItems: true
         minItems: 1
         example:
-        - marketplaceCode: Amazon
+        - marketplaceCode: Cdiscount
           merchantCode: 1234
           imnOrderId: '00000000000000000000000000000000000000000000000'
-        - marketplaceCode: Amazon
+        - marketplaceCode: Cdiscount
           merchantCode: 5678
           imnOrderId: '00000000000000000000000000000000000000000000000'
         - marketplaceCode: Ebay
@@ -1101,11 +1101,11 @@ definitions:
         uniqueItems: true
         minItems: 1
         example:
-        - marketplaceCode: Amazon
+        - marketplaceCode: Cdiscount
           merchantCode: 1234
           imnOrderId: '8D47FF1427A26B064ca98e95f644361ada5a5be0bbb3b53'
           order_MerchantOrderId: BX1234
-        - marketplaceCode: Amazon
+        - marketplaceCode: Cdiscount
           merchantCode: 5678
           imnOrderId: '8D47FF149F213D055f26e3c413e4c9ba5c5cfda460547a4'
           order_MerchantOrderId: BX5678
@@ -1431,9 +1431,9 @@ definitions:
           $ref: '#/definitions/orderLinks'
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MarketPlaceChannel' does not comply with the rule
         order_MarketPlaceChannel:
-          description: Useful to identify the origin of the order. For example in Amazon.
+          description: Useful to identify the origin of the order. For example in Cdiscount.
           type: string
-          example: Amazon France
+          example: Cdiscount France
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_TotalTax' does not comply with the rule
         order_TotalTax:
           description: The total tax of this order
@@ -1703,25 +1703,25 @@ definitions:
         
 
 
-  orderIndex:
+  orderApiIndex:
     type: object
     required:
     - links
     - lovLinks
     properties:
       links:
-        $ref: '#/definitions/orderIndexLinks'
+        $ref: '#/definitions/orderApiIndexLinks'
       lovLinks:
-        $ref: '#/definitions/orderIndexLovLinks'
+        $ref: '#/definitions/orderApiIndexLovLinks'
 
-  links.GetOrderIndexLink:
+  links.GetOrderApiIndexLink:
     allOf:
     - $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3
     - example:
-        href: /merchant/orders/v1
+        href: /merchant/orders/v1/MLT01
         method: GET
 
-  orderIndexLinks:
+  orderApiIndexLinks:
     description: Gives you all entry point operations you can do on this API
     type: object
     required:
@@ -1735,7 +1735,7 @@ definitions:
     - lightOrders
     properties:
       self:
-        $ref: '#/definitions/links.GetOrderIndexLink'
+        $ref: '#/definitions/links.GetOrderApiIndexLink'
       setMerchantInfos:
         $ref: '#/definitions/links.SetMerchantOrderInfoListLink'
       clearMerchantInfos:
@@ -1745,7 +1745,7 @@ definitions:
       lightOrders:
         $ref: '#/definitions/links.GetOrderListLightLink'
 
-  orderIndexLovLinks:
+  orderApiIndexLovLinks:
     description: Gives you all the LOV to get the translations realated to operation name, codes, property names and statuses.
     type: object
     required:
@@ -1903,21 +1903,6 @@ definitions:
       links:
         $ref: '#/definitions/orderListFullLinks'
 
-  imnOrderStatus:
-    type: string
-    description: IMN order status. Unified for all marketplaces.
-    example: Shipped
-    x-lov: IMNOrderState
-
-  marketplaceOrderStatus:
-    description: The marketplace order state
-    type: string
-    example: In_progress_3
-
-  marketplaceOrderId:
-    description: The order marketplace identifier
-    type: string
-    example: AMAZON12345
 
   orderHistory:
     description: Describe the history related to an order
@@ -1942,11 +1927,6 @@ definitions:
     - Go
     example: Api
 
-  correlationId:
-    description: The correlation identifier. It's a guid.
-    format: CorrelationId
-    type: string
-    example: 'b0d3faea-f881-439f-ba92-02b1168511ea'
 
   changeOrderReporting:
     description: The reporting related to a change order operation
