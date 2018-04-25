@@ -9,7 +9,7 @@ x-beezup-ops:
   codeGenType: eventHandlerActor
   repo: IMN
   appRoot: IMN.ADPT.OfferIMP.EXEC.PROJ.Db
-  apiName: OfferImportationExecutionProjectorApplier
+  apiName: OfferImportationExecutionDbProjectorApplier
   namespace: IMN.ADPT.OfferIMP.EXEC.PROJ.Db
   comment: |
     Actor 
