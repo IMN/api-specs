@@ -58,8 +58,8 @@ tags:
 - name: Batches
   description: All batch operations on Orders to reduce call rate
 
-- name: Subscriptions
-  description: All orders subscription operations
+- name: Subscriptions - DRAFT
+  description: All orders subscription operations - DRAFT
 
 consumes:
   - application/json
@@ -720,7 +720,7 @@ paths:
   '/{merchantCode}/subscriptions':
     post:
       tags:
-      - Subscriptions
+      - Subscriptions - DRAFT
       operationId: CreateSubscription
       summary: Creates a subscription to the orders
       parameters:
@@ -750,7 +750,7 @@ paths:
 
     get:
       tags:
-      - Subscriptions
+      - Subscriptions - DRAFT
       operationId: GetSubscriptionList
       summary: Get the subscription list
       parameters: 
@@ -781,7 +781,7 @@ paths:
   '/{merchantCode}/subscriptions/{id}':
     get:
       tags:
-      - Subscriptions
+      - Subscriptions - DRAFT
       operationId: GetSubscription
       summary: Get a subscription to the orders
       parameters:
@@ -808,7 +808,7 @@ paths:
 
     delete:
       tags:
-      - Subscriptions
+      - Subscriptions - DRAFT
       operationId: DeleteSubscription
       summary: Delete a subscription to the orders
       parameters:
@@ -838,7 +838,7 @@ paths:
   '/{merchantCode}/subscriptions/{id}/activate':
     post:
       tags:
-      - Subscriptions
+      - Subscriptions - DRAFT
       operationId: ActivateSubscription
       summary: Activate a subscription to the orders
       parameters:
@@ -866,7 +866,7 @@ paths:
   '/{merchantCode}/subscriptions/{id}/deactivate':
     post:
       tags:
-      - Subscriptions
+      - Subscriptions - DRAFT
       operationId: DeactivateSubscription
       summary: Deactivate a subscription to the orders
       parameters:
@@ -2076,12 +2076,9 @@ definitions:
     description: Contains the order identifier and the change order request
     required:
     - order
-    - acceptOrderRequest
     properties:
       order:
         $ref: '#/definitions/orderIdentifierWithETag'
-      acceptOrderRequest:
-        $ref: '#/definitions/acceptOrderRequest'
 
 
   cancelOrderListRequest:
