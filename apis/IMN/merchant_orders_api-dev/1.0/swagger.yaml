@@ -1300,6 +1300,15 @@ definitions:
           type: number
           format: decimal
           example: 0.0
+
+
+        order_AdditionalFee:
+          description: Additional fee related to this order
+          type: number
+          format: decimal
+          example: 10.0
+
+
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_PaymentMethod' does not comply with the rule
         order_PaymentMethod:
           description: The payment method of this order
@@ -1879,18 +1888,18 @@ definitions:
     - Go
     example: Api
 
-  executionUUID:
-    description: The execution identifier
-    format: uuid
+  correlationId:
+    description: The correlation identifier. It's a guid.
+    format: CorrelationId
     type: string
-    example: '8D4176FA78D5A7Fffa91e9edc694ec5858be9a1b109507c'
+    example: 'b0d3faea-f881-439f-ba92-02b1168511ea'
 
   changeOrderReporting:
     description: The reporting related to a change order operation
     type: object
     properties:
-      executionUUID:
-        $ref: '#/definitions/executionUUID'
+      correlationId:
+        $ref: '#/definitions/correlationId'
       changeOrderType:
         $ref: '#/definitions/businessOperationType'
       sourceType:
@@ -1973,6 +1982,34 @@ definitions:
       properties:
         etag:
          $ref: '#/definitions/etag'
+
+
+  refundOrderRequest:
+    type: object
+    description: The refund order parameters
+    required:
+    - refundReason
+    properties:
+      refundReason:
+        $ref: '#/definitions/refundReason'
+
+  refundReason:
+    type: string
+    description: The reason why you refund the order
+    enum:
+    - BuyerWarrantyOrRetractation
+    - WrongPrice
+    - LateDelivery
+    - IncorrectDelivery
+    - IncompleteDelivery
+    - DamagedDelivery
+    - BuyerFeedbackTimeout
+    - BuyerAgreement
+    - BuyerCancelled
+    - NoInventory
+    - ShippingAddressUndeliverable
+    - Other
+
 
   cancelOrderRequest:
     type: object
