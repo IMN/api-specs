@@ -75,8 +75,8 @@ parameters:
     in: path
     required: true
     type: string
-    format: uuid
-    x-example: '00000000000000000000000000000000000000000000000'
+    format: imnOrderId
+    x-example: 'A0CD3FG'
 
   changeOrderTypeParameter:
     description: The Order change type
