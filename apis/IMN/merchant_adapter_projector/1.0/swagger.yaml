@@ -1,17 +1,17 @@
 swagger: '2.0'
 info:
   version: "1.0"
-  title: 'IMN ADAPTER - Merchant Adapter Projector'
+  title: 'IMN ADAPTER - Merchant Adapter Projector Database'
 
-host: IMN.ADPT.MER.PROJ
-basePath: /MerchantAdapterProjectorApplier
+host: IMN.ADPT.MER.PROJ.Db
+basePath: /MerchantAdapterProjectorDbApplier
 
 x-beezup-ops:
   codeGenType: eventHandlerActor
   repo: IMN
-  appRoot: IMN.ADPT.MER.PROJ
-  apiName: MerchantAdapterProjectorApplier
-  namespace: IMN.ADPT.MER.PROJ
+  appRoot: IMN.ADPT.MER.PROJ.Db
+  apiName: MerchantAdapterProjectorDbApplier
+  namespace: IMN.ADPT.MER.PROJ.Db
   comment: |
     Actor
   using:
