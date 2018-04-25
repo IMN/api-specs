@@ -49,7 +49,31 @@ produces:
 tags:
 - name: Global
 - name: Account
+- name: Api Token
 
+
+# Under securityDefinitions we declare which security schemes can be used.
+# These definitions do not affect to the operations, but can be applied
+# using the 'security' key at the global level or the operation level.
+# In this sample, we'll see how to apply the security definition globally,
+# and override it at the operation level.
+#
+# Note that for Implicit Flow, you must provide the Token URL.
+securityDefinitions:
+  implicit:
+    type: oauth2
+    # This should be updated to the Authorization URL of your OAuth provider.
+    authorizationUrl: 'https://login.microsoftonline.com/imnb2ctenant.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_sign_up_or_sign_in_light&response_mode=fragment'
+    flow: implicit
+    scopes:
+      https://imnb2ctenant.onmicrosoft.com/swaggerhub/read_write: Access this app on behalf of the signed-in user
+
+# Here we apply the security flow called 'implicit' globally to all the opeartions in the spec. 
+# This security scheme is defined above in the 'securityDefinitions' section.
+# Global security can be overriden an operation level as seen in the example below
+security:
+  - implicit:
+    - https://imnb2ctenant.onmicrosoft.com/swaggerhub/read_write
 
 paths: 
 
@@ -65,6 +89,10 @@ paths:
           description: The merchant account index
           schema:
             $ref: '#/definitions/merchantAccountIndex'
+        '401':
+          description: The merchant informations are not available
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/userErrorMessage'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
   
@@ -127,7 +155,7 @@ paths:
      summary: Get merchant account info
      operationId: GetMerchantAccountInfo
      parameters:
-       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
      responses:
        '200':
          description: The merchant account info
@@ -162,7 +190,22 @@ paths:
        default:
          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
     
-    
+  '/{merchantCode}/resetApiToken':
+   post:
+     tags:
+     - Api Token
+     summary: Reset merchant api token
+     operationId: ResetMerchantApiToken
+     parameters:
+       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+     responses:
+       '204':
+         description: Merchant api token reset
+       '404':
+         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantNotFound'
+       default:
+         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
     
     
 definitions:
@@ -177,6 +220,10 @@ definitions:
 
   merchantAccountIndexLinks:
     type: object
+    description: |
+      The action you can do on the account API
+      The create and checkMerchantCode link will be available when the merchant code is not created
+      The account link will be available when the merchant has be created  
     properties:
       create:
         $ref: '#/definitions/links.CreateMerchantAccountLink'
@@ -184,21 +231,26 @@ definitions:
         $ref: '#/definitions/links.CheckMerchantCodeAvailabilityLink'
       accountInfo:
         $ref: '#/definitions/links.GetMerchantAccountInfoLink'
-      update:
-        $ref: '#/definitions/links.UpdateMerchantAcountInfoLink'
+
 
   merchantAccountIndex:
     type: object
+    required:
+    - links
     properties:
       links:
         $ref: '#/definitions/merchantAccountIndexLinks'
-    
+      merchantCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/merchantCode'
+
+
+  
+
 
   createMerchantAccountRequest:
     type: object
     required:
     - code
-    - email
     - firstName
     - lastName
     - country
@@ -207,23 +259,21 @@ definitions:
     properties:
       code:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/merchantCode'
-      email:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/email'
-# [Style Validator (8b9abe62-bfb2-4cb6-ace8-00884b9738ec) : All model properties must have examples]: Field 'example' required in 'properties'
       firstName:
-       type: string
-# [Style Validator (8b9abe62-bfb2-4cb6-ace8-00884b9738ec) : All model properties must have examples]: Field 'example' required in 'properties'
+        type: string
+        example: Marilyn
       lastName:
-       type: string
+        type: string
+        example: MONROE
       country:
-       $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/countryIsoCodeAlpha3'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/countryIsoCodeAlpha3'
       companyName:
        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/merchantCompanyName'
       imageUrl:
-       $ref: '#/definitions/httpUrl'
-# [Style Validator (8b9abe62-bfb2-4cb6-ace8-00884b9738ec) : All model properties must have examples]: Field 'example' required in 'properties'
+        $ref: '#/definitions/httpUrl'
       phoneNumber:
-       type: string
+        type: string
+        example: 0663963036
  
   updateMerchantAccountRequest:
     type: object
@@ -232,24 +282,21 @@ definitions:
      - lastName
      - country
      - companyName
-     - email
      - phoneNumber
     properties:
-# [Style Validator (8b9abe62-bfb2-4cb6-ace8-00884b9738ec) : All model properties must have examples]: Field 'example' required in 'properties'
       firstName:
         type: string
-# [Style Validator (8b9abe62-bfb2-4cb6-ace8-00884b9738ec) : All model properties must have examples]: Field 'example' required in 'properties'
+        example: Marilyn
       lastName:
         type: string
+        example: MONROE
       country:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/countryIsoCodeAlpha3'
       companyName:
         $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/merchantCompanyName'
-      email:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/email'
-# [Style Validator (8b9abe62-bfb2-4cb6-ace8-00884b9738ec) : All model properties must have examples]: Field 'example' required in 'properties'
       phoneNumber:
-        type: string    
+        type: string
+        example: 0663963036
       imageUrl:
         $ref: '#/definitions/httpUrl'
 
@@ -258,28 +305,61 @@ definitions:
   merchantAccountInfo:
     type: object
     required:
+    - merchantCode
     - email
     - firstName
     - lastName
     - country
     - companyName
     - phoneNumber
+    - apiToken
+    - links
     properties:
+      merchantCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/merchantCode'
       email:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/email'
-# [Style Validator (8b9abe62-bfb2-4cb6-ace8-00884b9738ec) : All model properties must have examples]: Field 'example' required in 'properties'
       firstName:
         type: string
-# [Style Validator (8b9abe62-bfb2-4cb6-ace8-00884b9738ec) : All model properties must have examples]: Field 'example' required in 'properties'
+        example: Marilyn
       lastName:
         type: string
+        example: MONROE
       country:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/countryIsoCodeAlpha3'
       companyName:
         $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/merchantCompanyName'
-# [Style Validator (8b9abe62-bfb2-4cb6-ace8-00884b9738ec) : All model properties must have examples]: Field 'example' required in 'properties'
       phoneNumber:
         type: string
+        example: 0663963036
+      imageUrl:
+        $ref: '#/definitions/httpUrl'
+      apiToken:
+        type: string
+        description: The api token that you will have to use to connect to our API
+        example: '2b1ff3a068054433ac09224bbb1ff3a068054433ac09224bb0c9d7ea=='
+      links:
+        $ref: '#/definitions/merchantAccountInfoLinks'
+        
+      
+  merchantAccountInfoLinks:
+    type: object
+    description: |
+      The action you can do on a merchant.
+      The external link will be avaible if there is no subscription requested 
+    required:
+    - self
+    - update
+    - resetApiToken
+    properties:
+      self:
+        $ref: '#/definitions/links.GetMerchantAccountInfoLink'
+      update:
+        $ref: '#/definitions/links.UpdateMerchantAcountInfoLink'
+      resetApiToken:
+        $ref: '#/definitions/links.ResetMerchantApiTokenLink'
+      externalMarketplaceSubscription:
+        $ref: '#/definitions/links.ExternalMarketplaceSubscriptionFormLink'
       
 ######################################################################################################
 ##############                  LINKS                                 ################################
@@ -306,15 +386,38 @@ definitions:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
     - type: object
       example:
-        href: /merchant/account/v1/accountInfo
+        href: /merchant/account/v1/MLT01
         method: GET
+
+  links.ResetMerchantApiTokenLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+    - type: object
+      example:
+        href: /merchant/account/v1/MLT01/resetApiToken
+        method: POST
   
   links.UpdateMerchantAcountInfoLink:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
     - type: object
       example:
-        href: /merchant/account/v1/update
-        method: POST
+        href: /merchant/account/v1/MLT01
+        method: PATCH
         
+  links.ExternalMarketplaceSubscriptionFormLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+    - type: object
+      description:  |
+        The link to sales force form to easily subscribe to the marketplaces
+        The query string will be indicated by the server: 
+        - email: the email of the merchant
+        - merchantCode: The merchant code 
+        - hmac: Computed by the server with a shared secret key
+        
+      example:
+        href: https://imn-developer-edition.eu9.force.com/?email=myemail@mydomain.com&merchantCode=MLT01&hmac=M2JiMmFkY2QwMTY1MjhkM2Y3ZGFmMGZlNjE5ODk1ZDE5NDVjMWQzZGRmNjMyNzkyYzVlMTZmZDQ1YmM1M2ZlOA==#general
+        method: GET
+
 x-azure-api-id: 'MerchantAccountV1'
