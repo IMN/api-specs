@@ -251,23 +251,22 @@ paths:
       deprecated: false
 
 
-  '/{merchantCode}/batches/changeOrders/{changeOrderType}':
+  '/{merchantCode}/batches/ship':
     post:
       tags:
       - Batches
-      operationId: ChangeOrderList
-      summary: Send a batch of operations to change your marketplace Order information (accept, ship, etc.)
+      operationId: ShipOrderList
+      summary: Send a batch of ship operations on your marketplace orders
       description: The purpose of this operation is to reduce the amount of request to the API.
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
-      - $ref: '#/parameters/changeOrderTypeParameter'
       - $ref: '#/parameters/userNameInQueryParameter'
       - $ref: '#/parameters/testModeInQueryParameter'
       - name: request
         in: body
         required: true
         schema:
-          $ref: '#/definitions/changeOrderListRequest'
+          $ref: '#/definitions/shipOrderListRequest'
       responses:
         202:
           description: Succesfully received and processed batched operations. Please check response to see the status per operation.
@@ -1850,22 +1849,22 @@ definitions:
 
 
 
-  changeOrderListRequest:
+  shipOrderListRequest:
     type: object
     description: Contains all change order operations you want to make
     required:
-    - changeOrders
+    - shipOrders
     properties:
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
-      changeOrders:
+      shipOrders:
         type: array
         description: The change order operations
         minLength: 1
         maxLength: 100
         items:
-         $ref: '#/definitions/changeOrderListRequestItem'
+         $ref: '#/definitions/shipOrderListRequestItem'
 
-  changeOrderListRequestItem:
+  shipOrderListRequestItem:
     type: object
     description: Contains the order identifier and the change order request
     required:
