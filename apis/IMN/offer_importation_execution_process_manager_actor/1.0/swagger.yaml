@@ -58,17 +58,17 @@ paths:
         204:
           description: OK
 
-  '/preparationPartitionCompleted':
-    post:
-      summary: When the offer preparation for a partition is completed
-      parameters: 
-      - name: request
-        in: body
-        schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_importation-events/1.0#/definitions/offerImportationPreparationPartitionCompleted'
-      responses:
-        204:
-          description: OK
+# '/preparationPartitionCompleted':
+#     post:
+#       summary: When the offer preparation for a partition is completed
+#       parameters: 
+#       - name: request
+#         in: body
+#         schema:
+#           $ref: 'https://api.swaggerhub.com/domains/IMN/offer_importation-events/1.0#/definitions/offerImportationPreparationPartitionCompleted'
+#       responses:
+#         204:
+#           description: OK
 
 
   '/preparationCompleted':
