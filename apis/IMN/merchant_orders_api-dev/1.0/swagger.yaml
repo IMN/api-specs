@@ -862,29 +862,6 @@ paths:
 
 definitions:
 
-  imnOrderId:
-    description: The IMN Order identifier
-    type: string
-    example: 'A0CD3FG'
-    pattern: ^([A-Z|0-9]){7}$
-    x-pattern: ^([A-Z|0-9]){7}$
-
-
-
-  order_MerchantOrderId:
-    description: The order merchant identifier
-    type: string
-    example: MyOrderMerchantId
-
-  order_MerchantECommerceSoftwareName:
-    description: The e-commerce software name of the merchant
-    type: string
-    example: Prestashop
-
-  order_MerchantECommerceSoftwareVersion:
-    description: The e-commece software version of the merchant
-    type: string
-    example: 123.0.1
 
 
 
@@ -970,12 +947,13 @@ definitions:
         $ref: '#/definitions/order_Billing_FirstName'
       order_Billing_LastName:
         $ref: '#/definitions/order_Billing_LastName'
+
       marketplaceOrderIds:
         type: array
         items:
           $ref: '#/definitions/marketplaceOrderId'
         example:
-        - AmazonOrderId1234
+        - CdiscountOrderId1234
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantOrderIds' does not comply with the rule
       order_MerchantOrderIds:
         description: Merchant order id list
@@ -1035,13 +1013,13 @@ definitions:
         uniqueItems: true
         minItems: 1
         example:
-        - marketplaceCode: Cdiscount
+        - marketplaceCode: C1
           merchantCode: 'MLT01'
           imnOrderId: 'X0CD8FG'
-        - marketplaceCode: Cdiscount
+        - marketplaceCode: C1
           merchantCode: 'MLT01'
           imnOrderId: 'Y0CD9FG'
-        - marketplaceCode: Ebay
+        - marketplaceCode: E1
           merchantCode: 'MLT01'
           imnOrderId: 'Z0CD4FG'
 
@@ -1066,15 +1044,15 @@ definitions:
         uniqueItems: true
         minItems: 1
         example:
-        - marketplaceCode: Cdiscount
+        - marketplaceCode: C1
           merchantCode: 'MLT01'
           imnOrderId: 'Z0CD4FG'
           order_MerchantOrderId: BX1234
-        - marketplaceCode: Cdiscount
+        - marketplaceCode: C1
           merchantCode: 5678
           imnOrderId: 'Y0CD9FG'
           order_MerchantOrderId: BX5678
-        - marketplaceCode: Ebay
+        - marketplaceCode: E1
           merchantCode: 9876
           imnOrderId: 'Z0CD4FG'
           order_MerchantOrderId: BX9876
