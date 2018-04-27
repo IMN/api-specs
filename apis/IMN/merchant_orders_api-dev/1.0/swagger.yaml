@@ -2040,19 +2040,6 @@ definitions:
       cancellationReason:
         $ref: '#/definitions/cancellationReason'
   
-  cancellationReason:
-    type: string
-    description: The reason why you cancel the order
-    enum:
-    - WrongPrice
-    - DelayedInventory
-    - WrongProductInfo
-    - BuyerFeedbackTimeout
-    - BuyerAgreement
-    - BuyerCancelled
-    - NoInventory
-    - ShippingAddressUndeliverable
-    - Other
 
   shipOrderRequest:
     type: object
