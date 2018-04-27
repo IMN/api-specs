@@ -1109,54 +1109,52 @@ definitions:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/httpUrl'
       marketplaceOrderId:
         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/marketplaceOrderId'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Status_IMNOrderStatus' does not comply with the rule
+
       imnOrderStatus:
         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderStatus'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Status_MarketplaceOrderStatus' does not comply with the rule
+
       marketplaceOrderStatus:
         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/marketplaceOrderStatus'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantOrderId' does not comply with the rule
+
       merchantOrderId:
         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantOrderId'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantECommerceSoftwareName' does not comply with the rule
+
       merchantECommerceSoftwareName:
         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantECommerceSoftwareName'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantECommerceSoftwareVersion' does not comply with the rule
+
       merchantECommerceSoftwareVersion:
         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantECommerceSoftwareVersion'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_PurchaseUtcDate' does not comply with the rule
+
       purchaseUtcDate:
         description: The purchase date of this order
         format: date-time
         type: string
         example: '2017-03-31T21:30:23Z'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_LastModificationUtcDate' does not comply with the rule
+
       imnLastModificationUtcDate:
         description: The last modification UTC date done by IMN of this order
         format: date-time
         type: string
         example: '2017-04-16T10:30:23Z'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MarketplaceLastModificationUtcDate' does not comply with the rule
+
       marketplaceLastModificationUtcDate:
         description: The last modification UTC date done by the marketplace on this order
         format: date-time
         type: string
         example: '2017-04-16T10:25:23Z'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'billingName' does not comply with the rule
+      
       billingFirstName:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/firstName'
         
       billingLastName:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/lastName'
 
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_TotalPrice' does not comply with the rule
-      order_TotalPrice:
+      totalPrice:
         description: The total price of this order (corresponding to the amount paid by the customer)
         format: decimal
         type: number
         example: 101.42
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_CurrencyCode' does not comply with the rule
-      order_CurrencyCode:
+      currencyCode:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/currencyCode'
       processing:
         $ref: '#/definitions/processing'
@@ -1178,7 +1176,6 @@ definitions:
     type: object
     required:
     - imnOrderItemId
-    - orderItem_OrderItemType
     properties:
       imnOrderItemId:
         description: The IMN identifier of the order Item
@@ -1186,74 +1183,67 @@ definitions:
         example: '1'
 
 
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_Title' does not comply with the rule
-      orderItem_Title:
+      title:
         description: The title of the order item
         example: 'bLA acide-plomb 6v-4.5ah 70x48x106mm'
         type: string
 
-      orderItem_Condition:
+      condition:
         description: The condition of the order item
         example: 'new'
         type: string
         
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_ImageUrl' does not comply with the rule
-      orderItem_ImageUrl:
+      imageUrl:
         description: The URL of the image of the order item
         example: 'http://blabla.com//das6-45.jpg'
         type: string
  
-      orderItem_MerchantOfferSku:
+      merchantOfferSku:
         $ref: 'https://api.swaggerhub.com/domains/IMN/offer-schemas/1.0#/definitions/sku'
 
-      orderItem_GTIN:
+      gtin:
         $ref: 'https://api.swaggerhub.com/domains/IMN/offer-schemas/1.0#/definitions/gtin'
 
 
 
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_MarketPlaceProductId' does not comply with the rule
-      orderItem_MarketPlaceProductId:
+      marketPlaceProductId:
         description: The marketplace product identifier of the order item
         example: 'MarketplaceProductId'
         type: string
 
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_ItemPrice' does not comply with the rule
-      orderItem_ItemPrice:
+      itemPrice:
         description: The price of the order item
         example: 6.86
         type: number
         format: decimal
 
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_ItemTax' does not comply with the rule
-      orderItem_ItemTax:
+      itemTax:
         description: The tax of the order item
         type: number
         format: decimal
         example: 0.0
 
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_Quantity' does not comply with the rule
-      orderItem_Quantity:
+      quantity:
         description: The quantity of the order item
         example: 1
         type: number
         format: decimal
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_Shipping_Price' does not comply with the rule
-      orderItem_Shipping_Price:
+      shippingPrice:
         description: The shipping price of the order item
         type: number
         example: 0.00
         format: decimal
 
 
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_TotalPrice' does not comply with the rule
-      orderItem_TotalPrice:
+
+      totalPrice:
         description: The total price of the order item
         example: 6.86
         type: number
         format: decimal
         
 
-      orderItem_MarketplaceProductUrl:
+      marketplaceProductUrl:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/httpUrl'
 
 
