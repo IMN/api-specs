@@ -1363,11 +1363,9 @@ definitions:
           type: string
           example: 'This is a comment'
 
-        customer:
-          $ref: '#/definitions/customer'
 
-        billingAdress:
-          $ref: '#/definitions/postalAddress'
+        billing:
+          $ref: '#/definitions/orderBillingInfo'
           
         shipping:
           $ref: '#/definitions/orderShippingInfo'
@@ -1382,10 +1380,18 @@ definitions:
           $ref: '#/definitions/orderTransitionLinks'
 
 
+  orderBillingInfo:
+    type: object
+    description: The billing information related to the order
+    properties:
+      customer:
+        $ref: '#/definitions/orderCustomer'
+      adress:
+        $ref: '#/definitions/postalAddress'
 
   orderShippingInfo:
     type: object
-    description: The shipping information related to a order
+    description: The shipping information related to the order
     properties:
       shippingContact:
         $ref: '#/definitions/person'
