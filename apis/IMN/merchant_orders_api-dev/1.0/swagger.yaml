@@ -868,41 +868,9 @@ definitions:
  
  
  
-  dateSearchType:
-    description: Indicates on which date you want to make the filter
-    type: string
-    enum:
-    - Modification
-    - Purchase
-    - MarketPlaceModification
-    default: Modification
 
-  pageSize:
-    description: Indicate the order count per page
-    type: integer
-    format: int32
-    default: 100
-    minimum: 25
-    maximum: 100
-    example: 100
 
-  pageNumber:
-    description: Indicates the page number
-    format: int32
-    type: integer
-    example: 1
-    minimum: 1
-    default: 1
 
-  order_Billing_FirstName:
-    description: Buyer first name
-    type: string
-    example: Marilyn
-
-  order_Billing_LastName:
-    description: Buyer last name
-    type: string
-    example: Monroe
 
   orderListRequestWithoutPagination:
     type: object
@@ -943,9 +911,9 @@ definitions:
         type: string
         example: '2017-04-01T13:10:01Z'
 
-      order_Billing_FirstName:
+      buyerFirstName:
         $ref: '#/definitions/order_Billing_FirstName'
-      order_Billing_LastName:
+      buyerLastName:
         $ref: '#/definitions/order_Billing_LastName'
 
       marketplaceOrderIds:
