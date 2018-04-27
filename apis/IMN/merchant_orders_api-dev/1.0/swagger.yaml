@@ -954,19 +954,7 @@ definitions:
     example: ShipOrder
 
 
-  orderIdentifier:
-    type: object
-    required:
-    - marketplaceCode
-    - merchantCode
-    - imnOrderId
-    properties:
-      marketplaceCode:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
-      merchantCode:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/merchantCode'
-      imnOrderId:
-        $ref: '#/definitions/imnOrderId'
+ 
 
   clearMerchantOrderInfoListRequest:
     type: object
@@ -2070,179 +2058,40 @@ definitions:
     type: object
     description: The ship order parameters
     required:
-    - order_Shipping_ShipperTrackingNumber
-    - order_Shipping_CarrierCode
+    - trackingNumber
+    - carrierCode
     properties:
-      order_Shipping_ShipperTrackingNumber:
-        $ref: '#/definitions/order_Shipping_ShipperTrackingNumber'
-      order_Shipping_CarrierCode: 
-        $ref: '#/definitions/order_Shipping_CarrierCode'
+      trackingNumber:
+        $ref: '#/definitions/trackingNumber'
+      carrierCode: 
+        $ref: '#/definitions/carrierCode'
     example:
-      order_Shipping_ShipperTrackingNumber: '1H01845163783'
-      order_Shipping_CarrierCode: MondialRelay
+      trackingNumber: '1H01845163783'
+      carrierCode: MondialRelay
 
 
   shipOrderWithOtherCarrierRequest:
     type: object
-    description: The ship order parameters for an unidentified carrier in the order_Shipping_CarrierCode enum
+    description: The ship order parameters for an unidentified carrier in the carrierCode enum
     required:
-    - order_Shipping_CarrierName
-    - order_Shipping_ShipperTrackingNumber
-    - order_Shipping_ShippingUrl
+    - carrierName
+    - trackingNumber
+    - shippingUrl
     properties:
-      order_Shipping_CarrierName:
-        $ref: '#/definitions/order_Shipping_CarrierName'
-      order_Shipping_ShipperTrackingNumber:
-        $ref: '#/definitions/order_Shipping_ShipperTrackingNumber'
-      order_Shipping_ShippingUrl: 
-        $ref: '#/definitions/order_Shipping_ShippingUrl'
+      carrierName:
+        $ref: '#/definitions/carrierName'
+      trackingNumber:
+        $ref: '#/definitions/trackingNumber'
+      shippingUrl: 
+        $ref: '#/definitions/shippingUrl'
     example:
-      order_Shipping_CarrierName: 'My special carrier name'
-      order_Shipping_ShipperTrackingNumber: '1H01845163783'
-      order_Shipping_ShippingUrl: 'https://trackingpackage.com?number=1H01845163783'
+      carrierName: 'My special carrier name'
+      trackingNumber: '1H01845163783'
+      shippingUrl: 'https://trackingpackage.com?number=1H01845163783'
 
 
 
 
-
-  order_Shipping_CarrierName:
-    type: string
-    description: The carrier name related to the shipping
-    example: 'My special carrier name'
-
-  order_Shipping_ShippingUrl:
-    type: string
-    description: The shipper url related to the shipping
-    example: 'https://trackingpackage.com?number=1H01845163783'
-
-
-  order_Shipping_ShipperTrackingNumber:
-    type: string
-    description: The shipper tracking number related to the shipping
-    example: '1H01845163783'
-    
-  order_Shipping_CarrierCode:
-    type: string
-    example: MondialRelay
-    description: |
-      The carrier code related to the shipping
-      - DeutschePost: DeutschePost
-      - DHL: DHL
-      - GLS: GLS
-      - TNT: TNT
-      - UPS: UPS
-      - DPD: DPD
-      - FEDEX: FEDEX
-      - 4PX: 4PX
-      - Bpost: Bpost
-      - ChinaEMSePacket: China EMS (ePacket)
-      - ChinaPost: China Post
-      - Chronopost: Chronopost
-      - CNEExpress: CNE Express
-      - ColisPrive: Colis Privé
-      - Colissimo: Colissimo
-      - GEODIS: GEODIS
-      - LaPosteCourrier: La Poste - Courrier
-      - MalaysiaPost: Malaysia Post
-      - MondialRelay: Mondial Relay
-      - PostNL: PostNL
-      - RelaisColis: Relais Colis
-      - RoyalMail: Royal Mail
-      - SFExpress: SF Express
-      - SFCService: SFC Service
-      - SingaporePost: Singapore Post
-      - USPS: USPS
-      - Yanwen: Yanwen
-      - AMATI: AMATI
-      - BRTID: BRTID
-      - BRTRIFMIT: BRTRIFMIT
-      - BRTSPED: BRTSPED
-      - CORREOS: CORREOS
-      - ENERGO: ENERGO
-      - FERCAM: FERCAM
-      - NEXIVE: NEXIVE
-      - ItalianPost: Italian Post
-      - SDA: SDA
-      - SGTFlyer: SGT Flyer
-      - TECNOTRANS: TECNOTRANS
-      - Bursped: Bursped
-      - Cargoline: Cargoline
-      - Computeruniverse: Computeruniverse
-      - Dachser: Dachser
-      - DHLFreight: DHL Freight
-      - dtl: dtl
-      - Emons: Emons
-      - GEL: GEL
-      - Hellmann: Hellmann
-      - Hermes: Hermes
-      - Hermes2MH: Hermes 2 MH
-      - IDSLogistik: IDS Logistik
-      - Iloxx: Iloxx
-      - KuehneNagel: Kuehne & Nagel
-      - Marktanlieferung: Marktanlieferung
-      - Rhenus: Rhenus
-      - Schenker: Schenker
-      - SpeditionGuettler: Spedition Guettler
-    
-
-    enum:
-    - DeutschePost
-    - DHL
-    - GLS
-    - TNT
-    - UPS
-    - DPD
-    - FEDEX
-    - 4PX
-    - Bpost
-    - ChinaEMSePacket
-    - ChinaPost
-    - Chronopost
-    - CNEExpress
-    - ColisPrivé
-    - Colissimo
-    - GEODIS
-    - LaPosteCourrier
-    - MalaysiaPost
-    - MondialRelay
-    - PostNL
-    - RelaisColis
-    - RoyalMail
-    - SFExpress
-    - SFCService
-    - SingaporePost
-    - USPS
-    - Yanwen
-    - AMATI
-    - BRTID
-    - BRTRIFMIT
-    - BRTSPED
-    - CORREOS
-    - ENERGO
-    - FERCAM
-    - NEXIVE
-    - ItalianPost
-    - SDA
-    - SGTFlyer
-    - TECNOTRANS
-    - Bursped
-    - Cargoline
-    - Computeruniverse
-    - Dachser
-    - DHLFreight
-    - dtl
-    - Emons
-    - GEL
-    - Hellmann
-    - Hermes
-    - Hermes2MH
-    - IDSLogistik
-    - Iloxx
-    - KuehneNagel
-    - Marktanlieferung
-    - Rhenus
-    - Schenker
-    - SpeditionGuettler
 
   
 
