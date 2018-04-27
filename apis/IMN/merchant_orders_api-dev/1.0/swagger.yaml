@@ -1363,67 +1363,17 @@ definitions:
           type: string
           example: 'This is a comment'
 
-        shippingContact:
-          $ref: '#/definitions/person'
 
 
-        shippingPrice:
-          description: The shipping price of this order
-          type: number
-          format: decimal
-          example: 6.9
-
-        shippingMethod:
-          description: The shipping method of this order
-          type: string
-          example: DPD Domicile
-
-
-        shippingFulfilledBy:
-          description: The shipment is fulfilled by
-          type: string
-          example: Cdiscount Fulfillment
-
-
-        shippingTax:
-          description: The shipping tax for this order
-          type: number
-          format: decimal
-          example: 0.0
-
-        shippingEarliestShipUtcDate:
-          description: The UTC date of the earliest ship for this order
-          type: string
-          example: '2017-04-02T21:30:00Z'
-          format: date-time
-
-        shippingLatestShipUtcDate:
-          description: The UTC date of the latest ship for this order
-          type: string
-          format: date-time
-          example: '2017-04-30T21:30:00Z'
-
-        customerIdentifier:
-          description: The buyer identifier for this order
-          type: string
-          example: '1234567890'
 
         customer:
-          $ref: '#/definitions/person'
-
-        customerPhoneNumber:
-          description: The phone number of the buyer for this order
-          type: string
-          example: '+33000000101'
-
-        customerMobilePhoneNumber:
-          description: The mobile phone number of the buyer for this order
-          type: string
-          example: '+33000000042'
+          $ref: '#/definitions/customer'
 
         billingAdress:
-          $ref: '#/definitions/postAddress'
+          $ref: '#/definitions/postalAddress'
           
+        shipping:
+          $ref: '#/definitions/orderShippingInfo'
 
 
 
@@ -1434,6 +1384,72 @@ definitions:
         transitionLinks:
           $ref: '#/definitions/orderTransitionLinks'
 
+
+
+  orderShippingInfo:
+    type: object
+    description: The shipping information related to a order
+    properties:
+      shippingContact:
+        $ref: '#/definitions/person'
+
+      shippingRelayId:
+        description: The company name of The address for this order
+        type: string
+        example: My Company
+        
+        
+      shippingAddress:
+        $ref: '#/definitions/postalAddress'
+
+
+      shippingPrice:
+        description: The shipping price of this order
+        type: number
+        format: decimal
+        example: 6.9
+
+      shippingMethod:
+        description: The shipping method of this order
+        type: string
+        example: DPD Domicile
+
+
+      shippingFulfilledBy:
+        description: The shipment is fulfilled by
+        type: string
+        example: Cdiscount Fulfillment
+
+
+      shippingTax:
+        description: The shipping tax for this order
+        type: number
+        format: decimal
+        example: 0.0
+
+      shippingEarliestShipUtcDate:
+        description: The UTC date of the earliest ship for this order
+        type: string
+        example: '2017-04-02T21:30:00Z'
+        format: date-time
+
+      shippingLatestShipUtcDate:
+        description: The UTC date of the latest ship for this order
+        type: string
+        format: date-time
+        example: '2017-04-30T21:30:00Z'
+
+
+  orderCustomer:
+    allOf:
+    - $ref: '#/definitions/person'
+    - type: object
+      description: The customer
+      properties:
+        customerIdentifier:
+          description: The buyer identifier for this order
+          type: string
+          example: '1234567890'
 
 
   person:
@@ -1456,21 +1472,22 @@ definitions:
       companyName:
         type: string
         description: The company name of the person
-        example: Apple
+        example: App
+        
       email:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/email'
+      
       phoneNumber:
-        description: The phone number of the person
-        type: string
-        example: '+33000000041'
-  
+        $ref: '#/definitions/telephoneNumber'
+        
       mobilePhoneNumber:
-        description: The mobile phone number of the person 
-        type: string
-        example: '+33000000042'
+        $ref: '#/definitions/telephoneNumber'
 
 
-  
+  telephoneNumber:
+    type: string
+    description: The telephone number
+    example: '+33000000042'
 
 
   postalAddress:
