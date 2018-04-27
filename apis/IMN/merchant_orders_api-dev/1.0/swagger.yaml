@@ -1367,12 +1367,6 @@ definitions:
           $ref: '#/definitions/person'
 
 
-          
-          
-        shippingAddress:
-          $ref: '#/definitions/postalAddress'
-
-
         shippingPrice:
           description: The shipping price of this order
           type: number
@@ -1474,8 +1468,7 @@ definitions:
         description: The mobile phone number of the person 
         type: string
         example: '+33000000042'
-      address:
-        $ref: '#/definitions/postalAddress'
+
 
   
 
