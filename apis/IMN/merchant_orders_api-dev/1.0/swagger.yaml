@@ -225,8 +225,8 @@ paths:
       description: The purpose of this operation is to reduce the amount of request to the API.
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
-      - $ref: '#/parameters/userNameInQueryParameter'
-      - $ref: '#/parameters/testModeInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/testModeInQueryParameter'
       - name: request
         in: body
         required: true
@@ -256,8 +256,8 @@ paths:
       description: The purpose of this operation is to reduce the amount of request to the API.
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
-      - $ref: '#/parameters/userNameInQueryParameter'
-      - $ref: '#/parameters/testModeInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/testModeInQueryParameter'
       - name: request
         in: body
         required: true
@@ -286,8 +286,8 @@ paths:
       description: The purpose of this operation is to reduce the amount of request to the API.
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
-      - $ref: '#/parameters/userNameInQueryParameter'
-      - $ref: '#/parameters/testModeInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/testModeInQueryParameter'
       - name: request
         in: body
         required: true
@@ -317,8 +317,8 @@ paths:
       description: The purpose of this operation is to reduce the amount of request to the API.
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
-      - $ref: '#/parameters/userNameInQueryParameter'
-      - $ref: '#/parameters/testModeInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/testModeInQueryParameter'
       - name: request
         in: body
         required: true
@@ -352,7 +352,7 @@ paths:
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
-      - $ref: '#/parameters/imnOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/imnOrderIdParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/ifNoneMatchParameter'
       responses:
         200:
@@ -387,7 +387,7 @@ paths:
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
-      - $ref: '#/parameters/imnOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/imnOrderIdParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/ifNoneMatchParameter'
       responses:
         200:
@@ -425,7 +425,7 @@ paths:
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
-      - $ref: '#/parameters/imnOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/imnOrderIdParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/ifNoneMatchParameter'
       responses:
         200:
@@ -451,7 +451,7 @@ paths:
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
-      - $ref: '#/parameters/imnOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/imnOrderIdParameter'
       - name: request
         in: body
         required: true
@@ -481,7 +481,7 @@ paths:
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
-      - $ref: '#/parameters/imnOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/imnOrderIdParameter'
       responses:
         204:
           description: Successfully cleared Order merchant order info set
@@ -508,8 +508,8 @@ paths:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       - $ref: imnOrderIdParameter
-      - $ref: '#/parameters/userNameInQueryParameter'
-      - $ref: '#/parameters/testModeInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/testModeInQueryParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/ifMatchParameter'
       responses:
         202:
@@ -548,9 +548,9 @@ paths:
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
-      - $ref: '#/parameters/imnOrderIdParameter'
-      - $ref: '#/parameters/userNameInQueryParameter'
-      - $ref: '#/parameters/testModeInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/imnOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/testModeInQueryParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/ifMatchParameter'
       - name: request
         in: body
@@ -594,9 +594,9 @@ paths:
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
-      - $ref: '#/parameters/imnOrderIdParameter'
-      - $ref: '#/parameters/userNameInQueryParameter'
-      - $ref: '#/parameters/testModeInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/imnOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/testModeInQueryParameter'
 
       - name: request
         in: body
@@ -642,9 +642,9 @@ paths:
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
-      - $ref: '#/parameters/imnOrderIdParameter'
-      - $ref: '#/parameters/userNameInQueryParameter'
-      - $ref: '#/parameters/testModeInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/imnOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/testModeInQueryParameter'
 
       - name: request
         in: body
