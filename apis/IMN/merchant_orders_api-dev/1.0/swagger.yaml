@@ -1345,8 +1345,6 @@ definitions:
           format: decimal
           example: 10.0
 
-
-
         paymentMethod:
           description: The payment method of this order
           type: string
