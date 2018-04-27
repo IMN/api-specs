@@ -1396,41 +1396,41 @@ definitions:
       shippingContact:
         $ref: '#/definitions/person'
 
-      shippingRelayId:
+      relayId:
         description: The company name of The address for this order
         type: string
         example: My Company
         
         
-      shippingAddress:
+      address:
         $ref: '#/definitions/postalAddress'
 
 
-      shippingPrice:
+      price:
         description: The shipping price of this order
         type: number
         format: decimal
         example: 6.9
 
-      shippingMethod:
+      method:
         description: The shipping method of this order
         type: string
         example: DPD Domicile
 
 
-      shippingFulfilledBy:
+      fulfilledBy:
         description: The shipment is fulfilled by
         type: string
         example: Cdiscount Fulfillment
 
 
-      shippingTax:
+      tax:
         description: The shipping tax for this order
         type: number
         format: decimal
         example: 0.0
 
-      shippingEarliestShipUtcDate:
+      earliestShipUtcDate:
         description: The UTC date of the earliest ship for this order
         type: string
         example: '2017-04-02T21:30:00Z'
