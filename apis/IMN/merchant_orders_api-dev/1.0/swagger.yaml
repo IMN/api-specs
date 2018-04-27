@@ -1007,26 +1007,26 @@ definitions:
           imnOrderId: 'Z0CD4FG'
           order_MerchantOrderId: BX1234
         - marketplaceCode: C1
-          merchantCode: 5678
+          merchantCode: 'MLT01'
           imnOrderId: 'Y0CD9FG'
           order_MerchantOrderId: BX5678
         - marketplaceCode: E1
-          merchantCode: 9876
+          merchantCode: 'MLT01'
           imnOrderId: 'Z0CD4FG'
           order_MerchantOrderId: BX9876
 
   setMerchantOrderInfoListRequestItem:
     allOf:
-    - $ref: '#/definitions/orderIdentifier'
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
     - type: object
       required:
       - marketplaceCode
       - merchantCode
       - imnOrderId
-      - order_MerchantOrderId
+      - merchantOrderId
       properties:
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantOrderId' does not comply with the rule
-        order_MerchantOrderId:
+        merchantOrderId:
           $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantOrderId'
 
   setMerchantOrderInfoRequest:
@@ -1966,7 +1966,7 @@ definitions:
 
   orderIdentifierWithETag:
     allOf:
-    - $ref: '#/definitions/orderIdentifier'
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
     - type: object
       required:
       - marketplaceCode
@@ -2061,7 +2061,7 @@ definitions:
     - status
     properties:
       order:
-        $ref: '#/definitions/orderIdentifier'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
       success:
         type: boolean
         description: Indicates if the operation succeed or not
