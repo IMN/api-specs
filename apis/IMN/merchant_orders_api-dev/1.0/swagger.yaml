@@ -1041,10 +1041,10 @@ definitions:
         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantOrderId'
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'merchantECommerceSoftwareName' does not comply with the rule
       merchantECommerceSoftwareName:
-        $ref: '#/definitions/merchantECommerceSoftwareName'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantECommerceSoftwareName'
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'merchantECommerceSoftwareVersion' does not comply with the rule
       merchantECommerceSoftwareVersion:
-        $ref: '#/definitions/merchantECommerceSoftwareVersion'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantECommerceSoftwareVersion'
 
   accountSynchronizationList:
     type: object
