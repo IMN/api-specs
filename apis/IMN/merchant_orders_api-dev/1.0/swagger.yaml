@@ -888,11 +888,11 @@ definitions:
       imnOrderStatuses:
         type: array
         items:
-          $ref: '#/definitions/imnOrderStatus'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderStatus'
         example:
         - InProgress
       dateSearchType:
-        $ref: '#/definitions/dateSearchType'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderDateSearchType'
       beginPeriodUtcDate:
         description: |
           The begin period you want to make the search. \
@@ -912,14 +912,14 @@ definitions:
         example: '2017-04-01T13:10:01Z'
 
       buyerFirstName:
-        $ref: '#/definitions/order_Billing_FirstName'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/firstName'
       buyerLastName:
-        $ref: '#/definitions/order_Billing_LastName'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/lastName'
 
       marketplaceOrderIds:
         type: array
         items:
-          $ref: '#/definitions/marketplaceOrderId'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/marketplaceOrderId'
         example:
         - CdiscountOrderId1234
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantOrderIds' does not comply with the rule
@@ -927,7 +927,7 @@ definitions:
         description: Merchant order id list
         type: array
         items:
-          $ref: '#/definitions/order_MerchantOrderId'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantOrderId'
         example:
         - MyOrderId1234
 
@@ -943,9 +943,10 @@ definitions:
       - pageNumber
       properties:
         pageSize:
-          $ref: '#/definitions/pageSize'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/pageSize'
+          
         pageNumber:
-          $ref: '#/definitions/pageNumber'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/pageNumber'
 
 
   businessOperationType:
@@ -1025,7 +1026,7 @@ definitions:
       properties:
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantOrderId' does not comply with the rule
         order_MerchantOrderId:
-          $ref: '#/definitions/order_MerchantOrderId'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantOrderId'
 
   setMerchantOrderInfoRequest:
     type: object
@@ -1036,7 +1037,7 @@ definitions:
     properties:
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantOrderId' does not comply with the rule
       order_MerchantOrderId:
-        $ref: '#/definitions/order_MerchantOrderId'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantOrderId'
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantECommerceSoftwareName' does not comply with the rule
       order_MerchantECommerceSoftwareName:
         $ref: '#/definitions/order_MerchantECommerceSoftwareName'
@@ -1089,11 +1090,11 @@ definitions:
     - merchantCode
     - imnOrderId
     - imnOrderUrl
-    - order_MarketplaceOrderId
-    - order_Status_IMNOrderStatus
-    - order_PurchaseUtcDate
-    - order_LastModificationUtcDate
-    - order_MarketplaceLastModificationUtcDate
+    - marketplaceOrderId
+    - imnOrderStatus
+    - purchaseUtcDate
+    - imnLastModificationUtcDate
+    - marketplaceLastModificationUtcDate
     - processing
     - etag
     - links
@@ -1103,49 +1104,50 @@ definitions:
       merchantCode:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/merchantCode'
       imnOrderId:
-        $ref: '#/definitions/imnOrderId'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderId'
       imnOrderUrl:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/httpUrl'
-      order_MarketplaceOrderId:
-        $ref: '#/definitions/marketplaceOrderId'
+      marketplaceOrderId:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/marketplaceOrderId'
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Status_IMNOrderStatus' does not comply with the rule
-      order_Status_IMNOrderStatus:
-        $ref: '#/definitions/imnOrderStatus'
+      imnOrderStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderStatus'
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Status_MarketplaceOrderStatus' does not comply with the rule
-      order_Status_MarketplaceOrderStatus:
-        $ref: '#/definitions/marketplaceOrderStatus'
+      marketplaceOrderStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/marketplaceOrderStatus'
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantOrderId' does not comply with the rule
-      order_MerchantOrderId:
-        $ref: '#/definitions/order_MerchantOrderId'
+      merchantOrderId:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantOrderId'
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantECommerceSoftwareName' does not comply with the rule
-      order_MerchantECommerceSoftwareName:
-        $ref: '#/definitions/order_MerchantECommerceSoftwareName'
+      merchantECommerceSoftwareName:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantECommerceSoftwareName'
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantECommerceSoftwareVersion' does not comply with the rule
-      order_MerchantECommerceSoftwareVersion:
-        $ref: '#/definitions/order_MerchantECommerceSoftwareVersion'
+      merchantECommerceSoftwareVersion:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantECommerceSoftwareVersion'
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_PurchaseUtcDate' does not comply with the rule
-      order_PurchaseUtcDate:
+      purchaseUtcDate:
         description: The purchase date of this order
         format: date-time
         type: string
         example: '2017-03-31T21:30:23Z'
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_LastModificationUtcDate' does not comply with the rule
-      order_LastModificationUtcDate:
+      imnLastModificationUtcDate:
         description: The last modification UTC date done by IMN of this order
         format: date-time
         type: string
         example: '2017-04-16T10:30:23Z'
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MarketplaceLastModificationUtcDate' does not comply with the rule
-      order_MarketplaceLastModificationUtcDate:
+      marketplaceLastModificationUtcDate:
         description: The last modification UTC date done by the marketplace on this order
         format: date-time
         type: string
         example: '2017-04-16T10:25:23Z'
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Billing_Name' does not comply with the rule
-      order_Billing_FirstName:
-        $ref: '#/definitions/order_Billing_FirstName'
-      order_Billing_LastName:
-        $ref: '#/definitions/order_Billing_LastName'
+      billingFirstName:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/firstName'
+        
+      billingLastName:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/lastName'
 
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_TotalPrice' does not comply with the rule
       order_TotalPrice:
