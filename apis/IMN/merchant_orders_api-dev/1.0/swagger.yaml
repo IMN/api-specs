@@ -1363,9 +1363,6 @@ definitions:
           type: string
           example: 'This is a comment'
 
-
-
-
         customer:
           $ref: '#/definitions/customer'
 
