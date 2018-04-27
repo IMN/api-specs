@@ -1806,7 +1806,7 @@ definitions:
     type: object
     properties:
       correlationId:
-        $ref: '#/definitions/correlationId'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/correlationId'
       changeOrderType:
         $ref: '#/definitions/businessOperationType'
       sourceType:
@@ -1985,7 +1985,7 @@ definitions:
     - refundReason
     properties:
       refundReason:
-        $ref: '#/definitions/refundReason'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/refundReason'
 
  
 
@@ -1996,7 +1996,7 @@ definitions:
     - cancellationReason
     properties:
       cancellationReason:
-        $ref: '#/definitions/cancellationReason'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/cancellationReason'
   
 
   shipOrderRequest:
@@ -2007,9 +2007,9 @@ definitions:
     - carrierCode
     properties:
       trackingNumber:
-        $ref: '#/definitions/trackingNumber'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/trackingNumber'
       carrierCode: 
-        $ref: '#/definitions/carrierCode'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/carrierCode'
     example:
       trackingNumber: '1H01845163783'
       carrierCode: MondialRelay
