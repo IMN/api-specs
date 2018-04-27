@@ -1393,7 +1393,7 @@ definitions:
     type: object
     description: The shipping information related to the order
     properties:
-      shippingContact:
+      contact:
         $ref: '#/definitions/person'
 
       relayId:
@@ -1436,7 +1436,7 @@ definitions:
         example: '2017-04-02T21:30:00Z'
         format: date-time
 
-      shippingLatestShipUtcDate:
+      latestShipUtcDate:
         description: The UTC date of the latest ship for this order
         type: string
         format: date-time
