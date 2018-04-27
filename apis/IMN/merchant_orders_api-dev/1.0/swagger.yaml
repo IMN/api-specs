@@ -922,8 +922,8 @@ definitions:
           $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/marketplaceOrderId'
         example:
         - CdiscountOrderId1234
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantOrderIds' does not comply with the rule
-      order_MerchantOrderIds:
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'merchantOrderIds' does not comply with the rule
+      merchantOrderIds:
         description: Merchant order id list
         type: array
         items:
@@ -988,10 +988,10 @@ definitions:
     - merchantECommerceSoftwareVersion
     - orders
     properties:
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantECommerceSoftwareName' does not comply with the rule
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'merchantECommerceSoftwareName' does not comply with the rule
       merchantECommerceSoftwareName:
         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantECommerceSoftwareName'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantECommerceSoftwareVersion' does not comply with the rule
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'merchantECommerceSoftwareVersion' does not comply with the rule
       merchantECommerceSoftwareVersion:
         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantECommerceSoftwareVersion'
       orders:
@@ -1005,15 +1005,15 @@ definitions:
         - marketplaceCode: C1
           merchantCode: 'MLT01'
           imnOrderId: 'Z0CD4FG'
-          order_MerchantOrderId: BX1234
+          merchantOrderId: BX1234
         - marketplaceCode: C1
           merchantCode: 'MLT01'
           imnOrderId: 'Y0CD9FG'
-          order_MerchantOrderId: BX5678
+          merchantOrderId: BX5678
         - marketplaceCode: E1
           merchantCode: 'MLT01'
           imnOrderId: 'Z0CD4FG'
-          order_MerchantOrderId: BX9876
+          merchantOrderId: BX9876
 
   setMerchantOrderInfoListRequestItem:
     allOf:
@@ -1025,26 +1025,26 @@ definitions:
       - imnOrderId
       - merchantOrderId
       properties:
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantOrderId' does not comply with the rule
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'merchantOrderId' does not comply with the rule
         merchantOrderId:
           $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantOrderId'
 
   setMerchantOrderInfoRequest:
     type: object
     required:
-    - order_MerchantOrderId
-    - order_MerchantECommerceSoftwareName
-    - order_MerchantECommerceSoftwareVersion
+    - merchantOrderId
+    - merchantECommerceSoftwareName
+    - merchantECommerceSoftwareVersion
     properties:
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantOrderId' does not comply with the rule
-      order_MerchantOrderId:
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'merchantOrderId' does not comply with the rule
+      merchantOrderId:
         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantOrderId'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantECommerceSoftwareName' does not comply with the rule
-      order_MerchantECommerceSoftwareName:
-        $ref: '#/definitions/order_MerchantECommerceSoftwareName'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantECommerceSoftwareVersion' does not comply with the rule
-      order_MerchantECommerceSoftwareVersion:
-        $ref: '#/definitions/order_MerchantECommerceSoftwareVersion'
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'merchantECommerceSoftwareName' does not comply with the rule
+      merchantECommerceSoftwareName:
+        $ref: '#/definitions/merchantECommerceSoftwareName'
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'merchantECommerceSoftwareVersion' does not comply with the rule
+      merchantECommerceSoftwareVersion:
+        $ref: '#/definitions/merchantECommerceSoftwareVersion'
 
   accountSynchronizationList:
     type: object
