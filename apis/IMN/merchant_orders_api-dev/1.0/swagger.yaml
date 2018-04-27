@@ -965,7 +965,8 @@ definitions:
       orders:
         type: array
         items:
-          $ref: '#/definitions/orderIdentifier'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
+          
         maxItems: 100
         uniqueItems: true
         minItems: 1
@@ -983,16 +984,16 @@ definitions:
   setMerchantOrderInfoListRequest:
     type: object
     required:
-    - order_MerchantECommerceSoftwareName
-    - order_MerchantECommerceSoftwareVersion
+    - merchantECommerceSoftwareName
+    - merchantECommerceSoftwareVersion
     - orders
     properties:
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantECommerceSoftwareName' does not comply with the rule
-      order_MerchantECommerceSoftwareName:
-        $ref: '#/definitions/order_MerchantECommerceSoftwareName'
+      merchantECommerceSoftwareName:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantECommerceSoftwareName'
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantECommerceSoftwareVersion' does not comply with the rule
-      order_MerchantECommerceSoftwareVersion:
-        $ref: '#/definitions/order_MerchantECommerceSoftwareVersion'
+      merchantECommerceSoftwareVersion:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantECommerceSoftwareVersion'
       orders:
         type: array
         items:
