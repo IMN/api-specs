@@ -507,7 +507,7 @@ paths:
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
-      - $ref: '#/parameters/imnOrderIdParameter'
+      - $ref: imnOrderIdParameter
       - $ref: '#/parameters/userNameInQueryParameter'
       - $ref: '#/parameters/testModeInQueryParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/ifMatchParameter'
@@ -2013,23 +2013,7 @@ definitions:
       refundReason:
         $ref: '#/definitions/refundReason'
 
-  refundReason:
-    type: string
-    description: The reason why you refund the order
-    enum:
-    - BuyerWarrantyOrRetractation
-    - WrongPrice
-    - LateDelivery
-    - IncorrectDelivery
-    - IncompleteDelivery
-    - DamagedDelivery
-    - BuyerFeedbackTimeout
-    - BuyerAgreement
-    - BuyerCancelled
-    - NoInventory
-    - ShippingAddressUndeliverable
-    - Other
-
+ 
 
   cancelOrderRequest:
     type: object
