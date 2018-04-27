@@ -1164,13 +1164,6 @@ definitions:
       links:
        $ref: '#/definitions/orderHeaderLinks'
 
-  etag:
-    description: |
-      ETag value to identify the order.\
-      This information is required for the operation GetOrder and ChangeOrder.\
-      For more details go to this link: http://tools.ietf.org/html/rfc7232#section-2.3
-    type: string
-    example: '"ca071a4580129f932a03971968ffef69"'
 
   orderItem:
     description: Describe an order item. All properties with the prefix orderItem_ are translated in the list of values /user/lov/OrderMetaInfoOrderItems
