@@ -2010,14 +2010,14 @@ definitions:
     required:
     - carrierName
     - trackingNumber
-    - shippingUrl
+    - trackingUrl
     properties:
       carrierName:
-        $ref: '#/definitions/carrierName'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/carrierName'
       trackingNumber:
-        $ref: '#/definitions/trackingNumber'
-      shippingUrl: 
-        $ref: '#/definitions/shippingUrl'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/trackingNumber'
+      trackingUrl: 
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/trackingUrl'
     example:
       carrierName: 'My special carrier name'
       trackingNumber: '1H01845163783'
