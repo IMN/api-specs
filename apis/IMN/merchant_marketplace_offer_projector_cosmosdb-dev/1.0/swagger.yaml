@@ -15,7 +15,7 @@ x-beezup-ops:
   comment: |
     Actor
   using:
-  - IMN.Offer.Schemas
+  - IMN.Offer.Events
 
 paths:
 
