@@ -459,7 +459,7 @@ definitions:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/LOVLink3'
     - type: object
       example:
-        href: /v1/user/lov/MarketplacePricingRuleType
+        href: /merchant/lov/v1/MarketplacePricingRuleType
         method: GET
 
   externalLinks.ShippingTypeStandardLOVLink:
@@ -467,7 +467,7 @@ definitions:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/LOVLink3'
     - type: object
       example:
-        href: /v1/user/lov/ShippingTypeStandard
+        href: /merchant/lov/v1/ShippingTypeStandard
         method: GET
 
 
