@@ -1,0 +1,82 @@
+swagger: '2.0'
+info:
+  version: "1.0"
+  title: 'IMN ADAPTER - Order Adapter Order Change to BeezUP'
+
+host: IMN.ADPT.Order.OrderChange.BeezUP
+basePath: /OrderAdapterOrderChangeBeezUPApplier
+
+x-IMN-api-ops:
+  codeGenType: eventHandlerActor
+  repo: IMN
+  appRoot: IMN.ADPT.Order.OrderChange.BeezUP
+  apiName: OrderAdapterOrderChangeBeezUPApplier
+  namespace: IMN.ADPT.Order.OrderChange.BeezUP
+  comment: |
+    Actor
+  using:
+  - IMN.Order.Events
+
+paths:
+
+  '/orderAccepted':
+    post:
+      summary: Order accepted
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-events/1.0#/definitions/orderAccepted'
+      responses:
+        204:
+          description: OK
+
+  '/orderRefused':
+    post:
+      summary: Order refused
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-events/1.0#/definitions/orderRefused'
+      responses:
+        204:
+          description: OK
+
+  '/orderRefunded':
+    post:
+      summary: Order refunded
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-events/1.0#/definitions/orderRefunded'
+      responses:
+        204:
+          description: OK
+
+  '/orderShipped':
+    post:
+      summary: Order shipped
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-events/1.0#/definitions/orderShipped'
+      responses:
+        204:
+          description: OK
+
+  '/orderCancelled':
+    post:
+      summary: Order cancelled
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-events/1.0#/definitions/orderCancelled'
+      responses:
+        204:
+          description: OK
+
+definitions: {}
