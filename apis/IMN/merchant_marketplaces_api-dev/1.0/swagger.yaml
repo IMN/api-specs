@@ -4,23 +4,20 @@ info:
   description: 'This API will allow you to manage your marketplaces.'
 
   version: "1.0"
-  
+
   x-logo:
     url: https://imngo.blob.core.windows.net/imngo/images/imn-logo.png
     backgroundColor: "#FFFFFF"
-  
+
   contact:
     email: support@imn.io
-     
- 
+
   license:
     name: IMN
     url: https://go.imn.io
-    
+
 host: api.imn.io
 basePath: /merchant/marketplaces/v1
-
-
 
 x-IMN-api-ops:
   codeGenType: webapi
@@ -35,10 +32,8 @@ x-IMN-api-ops:
   - IMN.Schemas
   - IMN.MER.Schemas
   - IMN.MER.Exceptions
-  
 
 x-basePath: /merchant/marketplaces/v1
-
 
 schemes:
   - https
@@ -47,7 +42,7 @@ consumes:
   - application/json
 produces:
   - application/json
-  
+
 tags:
 - name: Global
 - name: Marketplace
@@ -56,9 +51,7 @@ tags:
 - name: Pricing Settings
 - name: Activation
 
-
-paths: 
-
+paths:
 
   '/{merchantCode}':
     get:
@@ -66,7 +59,7 @@ paths:
       - Global
       summary: Get the marketplaces index
       operationId: GetMarketplacesIndex
-      parameters: 
+      parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       responses:
         '200':
@@ -75,7 +68,6 @@ paths:
             $ref: '#/definitions/marketplacesIndex'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
-
 
   '/{merchantCode}/{marketplaceCode}':
     get:
@@ -159,8 +151,6 @@ paths:
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
-
-
   '/{merchantCode}/{marketplaceCode}/shippingSettings':
     get:
       tags:
@@ -200,8 +190,6 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
-
-
 
   '/{merchantCode}/{marketplaceCode}/pricingSetting':
     get:
@@ -244,7 +232,6 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
-
 
   '/{merchantCode}/{marketplaceCode}/declareOffersSource':
     post:
@@ -309,7 +296,6 @@ paths:
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
-
   '/{merchantCode}/{marketplaceCode}/disable':
     post:
       tags:
@@ -328,7 +314,7 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
-  
+
   '/{merchantCode}/{marketplaceCode}/disableOrderImportation':
     post:
       tags:
@@ -347,7 +333,7 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
-  
+
   '/{merchantCode}/{marketplaceCode}/reenableOrderImportation':
     post:
       tags:
@@ -367,24 +353,15 @@ paths:
         403:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/subscriptionNotAccepted'
         412:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/credentialNotConfigured'          
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/credentialNotConfigured'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
-
-
 definitions:
-
 
 ######################################################################################################
 ##############                  LINKS                                 ################################
 ######################################################################################################
-
-
-  
-  
-
-
 
   links.GetMarketplaceApiCredentialLink:
     allOf:
@@ -393,7 +370,6 @@ definitions:
       example:
         href: /merchant/marketplace/v1/eprice/credential
         method: GET
-
 
   links.GetMarketplaceShippingSettingsLink:
     allOf:
@@ -411,7 +387,6 @@ definitions:
         href: /merchant/marketplace/v1/eprice/pricingSetting
         method: GET
 
-
   links.EnableMarketplaceLink:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
@@ -427,7 +402,7 @@ definitions:
       example:
         href: /merchant/marketplace/v1/eprice/disable
         method: POST
-        
+
   links.DisableOrderImportationLink:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
@@ -435,7 +410,7 @@ definitions:
       example:
         href: /merchant/marketplace/v1/eprice/disableOrderImportation
         method: POST
-        
+
   links.ReenableOrderImportationLink:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
@@ -451,26 +426,22 @@ definitions:
       example:
         href: /merchant/marketplace/v1/eprice/disable
         method: POST
-  
 
+#  externalLinks.MarketplacePricingRuleTypeLOVLink:
+#    allOf:
+#    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/LOVLink3'
+#    - type: object
+#      example:
+#        href: /merchant/lov/v1/MarketplacePricingRuleType
+#        method: GET
 
-  externalLinks.MarketplacePricingRuleTypeLOVLink:
-    allOf:
-    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/LOVLink3'
-    - type: object
-      example:
-        href: /merchant/lov/v1/MarketplacePricingRuleType
-        method: GET
-
-  externalLinks.ShippingTypeStandardLOVLink:
-    allOf:
-    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/LOVLink3'
-    - type: object
-      example:
-        href: /merchant/lov/v1/ShippingTypeStandard
-        method: GET
-
-
+#  externalLinks.ShippingTypeStandardLOVLink:
+#    allOf:
+#    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/LOVLink3'
+#    - type: object
+#      example:
+#        href: /merchant/lov/v1/ShippingTypeStandard
+#        method: GET
 
 ######################################################################################################
 ##############                  DEFINITIONS                           ################################
@@ -480,10 +451,9 @@ definitions:
     type: object
     properties:
       pricingRuleTypeLOV:
-        $ref: '#/definitions/externalLinks.MarketplacePricingRuleTypeLOVLink'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/LOVLink3'
       shippingTypeStandardLOV:
-        $ref: '#/definitions/externalLinks.ShippingTypeStandardLOVLink'
-      
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/LOVLink3'
 
   marketplacesIndex:
     type: object
@@ -496,7 +466,6 @@ definitions:
         description: The key is the marketplace code
         additionalProperties:
           $ref: '#/definitions/marketplaceIndex'
-
 
   marketplaceIndexLinks:
     type: object
@@ -519,7 +488,7 @@ definitions:
         $ref: '#/definitions/links.ReenableOrderImportationLink'
       reporting:
         $ref: '#/definitions/links.GetMarketplaceSubscriptionReportingLink'
-        
+
   marketplaceIndex:
     type: object
     properties:
@@ -537,7 +506,7 @@ definitions:
       status:
         type: string
         description: The marketplace API status for the offer publication
-        enum: 
+        enum:
         - up
         - down
         - paused
@@ -558,9 +527,8 @@ definitions:
         description: The last synchronization of the offers from the source marketplace
         example: '2018-12-25T23:39:00Z'
 
-
   marketplaceApiInfo:
-    allOf: 
+    allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceInfo'
     - type: object
       properties:
@@ -568,7 +536,6 @@ definitions:
           $ref: '#/definitions/offersPublicationStatus'
         offersSourceStatus:
           $ref: '#/definitions/offersSourceStatus'
-  
 
   offersSourceStatus:
     type: object
@@ -579,7 +546,7 @@ definitions:
       status:
         type: string
         description: The marketplace API status for the offer importation
-        enum: 
+        enum:
         - up
         - down
         - paused
