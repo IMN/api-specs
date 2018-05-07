@@ -1278,10 +1278,10 @@ definitions:
 
 
         billing:
-          $ref: '#/definitions/orderBillingInfo'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderBillingInfo'
           
         shipping:
-          $ref: '#/definitions/orderShippingInfo'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderShippingInfo'
 
 
 
