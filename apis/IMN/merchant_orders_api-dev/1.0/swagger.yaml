@@ -1111,42 +1111,6 @@ definitions:
 
   
   
-  orderInfo:
-    allOf:
-    - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderMarketplaceInfo'
-    - type: object
-      description: Describe in details all informations related to an order.
-      required:
-      - marketplaceCode
-      - merchantCode
-      - imnOrderId
-      - marketplaceOrderId
-      - imnOrderStatus
-      - purchaseUtcDate
-      - marketplaceLastModificationUtcDate
-      - paymentInfo
-      - billingInfo
-      - shippingInfo
-      - etag
-      - orderItems
-      - imnOrderUrl
-      - imnLastModificationUtcDate
-      - processing
-    properties:
-      orderMerchantInfo:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderMerchantInfo'
-
-      imnOrderUrl:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/httpUrl'
-
-      imnLastModificationUtcDate:
-        description: The last modification UTC date done by IMN of this order
-        format: date-time
-        type: string
-        example: '2017-04-16T10:30:23Z'
-
-      processing:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderProcessing'
     
 
   orderIndex:
@@ -1158,7 +1122,7 @@ definitions:
     - transitionLinks
     properties:
       info:
-        $ref: '#/definitions/orderInfo'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderInfo'
 
       links:
         $ref: '#/definitions/orderLinks'
