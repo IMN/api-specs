@@ -1079,85 +1079,81 @@ definitions:
         $ref: '#/definitions/links.GetOrderLink'
 
   orderHeader:
-    description: Describe the basic information related to an order.
-    type: object
-    required:
-    - marketplaceCode
-    - merchantCode
-    - imnOrderId
-    - imnOrderUrl
-    - marketplaceOrderId
-    - imnOrderStatus
-    - purchaseUtcDate
-    - imnLastModificationUtcDate
-    - marketplaceLastModificationUtcDate
-    - processing
-    - etag
-    - links
-    properties:
-      marketplaceCode:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
-      merchantCode:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/merchantCode'
-      imnOrderId:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderId'
-      imnOrderUrl:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/httpUrl'
-      marketplaceOrderId:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/marketplaceOrderId'
-
-      imnOrderStatus:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderStatus'
-
-      marketplaceOrderStatus:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/marketplaceOrderStatus'
-
-      merchantOrderId:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantOrderId'
-
-      merchantECommerceSoftwareName:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantECommerceSoftwareName'
-
-      merchantECommerceSoftwareVersion:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantECommerceSoftwareVersion'
-
-      purchaseUtcDate:
-        description: The purchase date of this order
-        format: date-time
-        type: string
-        example: '2017-03-31T21:30:23Z'
-
-      imnLastModificationUtcDate:
-        description: The last modification UTC date done by IMN of this order
-        format: date-time
-        type: string
-        example: '2017-04-16T10:30:23Z'
-
-      marketplaceLastModificationUtcDate:
-        description: The last modification UTC date done by the marketplace on this order
-        format: date-time
-        type: string
-        example: '2017-04-16T10:25:23Z'
-      
-      customerFirstName:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/firstName'
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
+    - description: Describe the basic information related to an order.
+      type: object
+      required:
+      - marketplaceCode
+      - merchantCode
+      - imnOrderId
+      - imnOrderUrl
+      - marketplaceOrderId
+      - imnOrderStatus
+      - purchaseUtcDate
+      - imnLastModificationUtcDate
+      - marketplaceLastModificationUtcDate
+      - processing
+      - etag
+      - links
+      properties:
+        imnOrderUrl:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/httpUrl'
+        marketplaceOrderId:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/marketplaceOrderId'
+  
+        imnOrderStatus:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderStatus'
+  
+        marketplaceOrderStatus:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/marketplaceOrderStatus'
+  
+        merchantOrderId:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantOrderId'
+  
+        merchantECommerceSoftwareName:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantECommerceSoftwareName'
+  
+        merchantECommerceSoftwareVersion:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantECommerceSoftwareVersion'
+  
+        purchaseUtcDate:
+          description: The purchase date of this order
+          format: date-time
+          type: string
+          example: '2017-03-31T21:30:23Z'
+  
+        imnLastModificationUtcDate:
+          description: The last modification UTC date done by IMN of this order
+          format: date-time
+          type: string
+          example: '2017-04-16T10:30:23Z'
+  
+        marketplaceLastModificationUtcDate:
+          description: The last modification UTC date done by the marketplace on this order
+          format: date-time
+          type: string
+          example: '2017-04-16T10:25:23Z'
         
-      customerLastName:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/lastName'
-
-      totalPrice:
-        description: The total price of this order (corresponding to the amount paid by the customer)
-        format: decimal
-        type: number
-        example: 101.42
-      currencyCode:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/currencyCode'
-      processing:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderProcessing'
-      etag:
-       $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderEtag'
-      links:
-       $ref: '#/definitions/orderHeaderLinks'
+        customerFirstName:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/firstName'
+          
+        customerLastName:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/lastName'
+  
+        totalPrice:
+          description: The total price of this order (corresponding to the amount paid by the customer)
+          format: decimal
+          type: number
+          example: 101.42
+        currencyCode:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/currencyCode'
+        processing:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderProcessing'
+        etag:
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderEtag'
+        links:
+         $ref: '#/definitions/orderHeaderLinks'
 
 
 
