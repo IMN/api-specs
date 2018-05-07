@@ -91,7 +91,7 @@ paths:
       deprecated: false
 
 
-  '/{merchantCode}/list/full':
+  '/{merchantCode}/list':
     post:
       tags:
       - List
@@ -133,32 +133,7 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
 
-  '/{merchantCode}/list/light':
-    post:
-      tags:
-      - List
-      operationId: GetOrderListLight
-      summary:  Get a paginated list of all Orders without details
-      parameters:
-      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
-      - name: request
-        in: body
-        required: true
-        schema:
-          $ref: '#/definitions/orderListRequest'
-      responses:
-        200:
-          description: Successfully fetched the list of Orders
-          schema:
-            $ref: '#/definitions/orderListLight'
-        400:
-          description: Could not process request for given parameters values. Please check error message for more details.
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
-        default:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
-      deprecated: false
-
+ 
 
 
   '/{merchantCode}/batches/setMerchantOrderInfos':
@@ -1075,84 +1050,31 @@ definitions:
     required:
     - self
     properties:
-      self:
-        $ref: '#/definitions/links.GetOrderLink'
 
 
   
         
-
-  orderHeaderInfo:
-    allOf:
-    - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderBasicMarketplaceInfo'
-    - description: Describe the basic information related to an order.
-      type: object
-      required:
-      - marketplaceCode
-      - merchantCode
-      - imnOrderId
-      - imnOrderUrl
-      - marketplaceOrderId
-      - imnOrderStatus
-      - purchaseUtcDate
-      - imnLastModificationUtcDate
-      - marketplaceLastModificationUtcDate
-      - processing
-      - etag
-      - links
-      properties:
-        imnOrderUrl:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/httpUrl'
-  
-        merchantOrderId:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantOrderId'
-  
-        merchantECommerceSoftwareName:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantECommerceSoftwareName'
-  
-        merchantECommerceSoftwareVersion:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantECommerceSoftwareVersion'
-  
-  
-        imnLastModificationUtcDate:
-          description: The last modification UTC date done by IMN of this order
-          format: date-time
-          type: string
-          example: '2017-04-16T10:30:23Z'
-  
-        
-        customerFirstName:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/firstName'
-          
-        customerLastName:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/lastName'
-  
-        processing:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderProcessing'
-        etag:
-         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderEtag'
-        links:
-         $ref: '#/definitions/orderHeaderLinks'
 
 
 
 
   orderLinks:
-    allOf:
-    - $ref: '#/definitions/orderHeaderLinks'
-    - type: object
-      required:
-      - self
-      - history
-      - setMerchantInfo
-      - clearMerchantInfo
-      properties:
-        history:
-          $ref: '#/definitions/links.GetOrderHistoryLink'
-        setMerchantInfo:
-          $ref: '#/definitions/links.SetMerchantOrderInfoLink'
-        clearMerchantInfo:
-          $ref: '#/definitions/links.ClearMerchantOrderInfoLink'
+    type: object
+    required:
+    - self
+    - history
+    - setMerchantInfo
+    - clearMerchantInfo
+    properties:
+      self:
+        $ref: '#/definitions/links.GetOrderLink'
+
+      history:
+        $ref: '#/definitions/links.GetOrderHistoryLink'
+      setMerchantInfo:
+        $ref: '#/definitions/links.SetMerchantOrderInfoLink'
+      clearMerchantInfo:
+        $ref: '#/definitions/links.ClearMerchantOrderInfoLink'
 
   links.GetOrderHistoryLink:
     allOf:
@@ -1259,10 +1181,11 @@ definitions:
 
     
 
+  
 
   orderIndex:
     allOf:
-    - $ref: '#/definitions/orderHeaderInfo'
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderBasicMarketplaceInfo'
     - type: object
       description: Describe in details all informations related to an order.
       required:
@@ -1280,48 +1203,9 @@ definitions:
       - orderItems
       - transitionLinks
       properties:
-        links:
-          $ref: '#/definitions/orderLinks'
-
-        marketPlaceChannel:
-          description: Useful to identify the origin of the order. For example in Cdiscount.
-          type: string
-          example: Cdiscount France
-
-        totalTax:
-          description: The total tax of this order
-          type: number
-          format: decimal
-          example: 0.0
-
-        totalCommission:
-          description: The total commission of this order
-          type: number
-          format: decimal
-          example: 0.0
-
-
-        additionalFee:
-          description: Additional fee related to this order
-          type: number
-          format: decimal
-          example: 10.0
-
-        paymentMethod:
-          description: The payment method of this order
-          type: string
-          example: '1 / 1X'
-
-        payingUtcDate:
-          description: The UTC date of the payment of this order
-          type: string
-          format: date-time
-          example: '2017-04-01T13:22:01Z'
-
-        comment:
-          description: The comment associated to this order
-          type: string
-          example: 'This is a comment'
+        orderMerchantInfo:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderMerchantInfo'
+  
 
 
         billing:
@@ -1336,6 +1220,28 @@ definitions:
           type: array
           items:
             $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderItem'
+
+
+
+        imnOrderUrl:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/httpUrl'
+
+        imnLastModificationUtcDate:
+          description: The last modification UTC date done by IMN of this order
+          format: date-time
+          type: string
+          example: '2017-04-16T10:30:23Z'
+  
+
+        processing:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderProcessing'
+  
+        etag:
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderEtag'
+
+        links:
+          $ref: '#/definitions/orderLinks'
+
         transitionLinks:
           $ref: '#/definitions/orderTransitionLinks'
 
