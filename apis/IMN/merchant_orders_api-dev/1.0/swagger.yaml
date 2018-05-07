@@ -405,7 +405,7 @@ paths:
                 ETag value to identify the current version of requested Order\
                 For more details go to this link: http://tools.ietf.org/html/rfc7232#section-2.3
           schema:
-            $ref: '#/definitions/order'
+            $ref: '#/definitions/orderIndex'
         304:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/304_NotModified'
         404:
@@ -1078,9 +1078,13 @@ definitions:
       self:
         $ref: '#/definitions/links.GetOrderLink'
 
-  orderHeader:
+
+  
+        
+
+  orderHeaderInfo:
     allOf:
-    - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderBasicMarketplaceInfo'
     - description: Describe the basic information related to an order.
       type: object
       required:
@@ -1099,14 +1103,6 @@ definitions:
       properties:
         imnOrderUrl:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/httpUrl'
-        marketplaceOrderId:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/marketplaceOrderId'
-  
-        imnOrderStatus:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderStatus'
-  
-        marketplaceOrderStatus:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/marketplaceOrderStatus'
   
         merchantOrderId:
           $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantOrderId'
@@ -1117,11 +1113,6 @@ definitions:
         merchantECommerceSoftwareVersion:
           $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantECommerceSoftwareVersion'
   
-        purchaseUtcDate:
-          description: The purchase date of this order
-          format: date-time
-          type: string
-          example: '2017-03-31T21:30:23Z'
   
         imnLastModificationUtcDate:
           description: The last modification UTC date done by IMN of this order
@@ -1129,11 +1120,6 @@ definitions:
           type: string
           example: '2017-04-16T10:30:23Z'
   
-        marketplaceLastModificationUtcDate:
-          description: The last modification UTC date done by the marketplace on this order
-          format: date-time
-          type: string
-          example: '2017-04-16T10:25:23Z'
         
         customerFirstName:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/firstName'
@@ -1141,13 +1127,6 @@ definitions:
         customerLastName:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/lastName'
   
-        totalPrice:
-          description: The total price of this order (corresponding to the amount paid by the customer)
-          format: decimal
-          type: number
-          example: 101.42
-        currencyCode:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/currencyCode'
         processing:
           $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderProcessing'
         etag:
@@ -1208,9 +1187,9 @@ definitions:
         href: /merchant/orders/v1/MLT01/C1/A0CD3FG/harvest
         method: POST
 
-  order:
+  orderIndex:
     allOf:
-    - $ref: '#/definitions/orderHeader'
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderBasicMarketplaceInfo'
     - type: object
       description: Describe in details all informations related to an order.
       required:
@@ -1500,7 +1479,7 @@ definitions:
       orders:
         type: array
         items:
-          $ref: '#/definitions/orderHeader'
+          $ref: '#/definitions/orderHeaderInfo'
       links:
         $ref: '#/definitions/orderListLightLinks'
 
@@ -1519,7 +1498,7 @@ definitions:
       orders:
         type: array
         items:
-          $ref: '#/definitions/order'
+          $ref: '#/definitions/orderIndex'
       links:
         $ref: '#/definitions/orderListFullLinks'
 
