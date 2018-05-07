@@ -1110,8 +1110,8 @@ definitions:
     
 
   
-
-  orderIndex:
+  
+  orderInfo:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderMarketplaceInfo'
     - type: object
@@ -1129,31 +1129,42 @@ definitions:
       - shippingInfo
       - etag
       - orderItems
+      - imnOrderUrl
       - imnLastModificationUtcDate
       - processing
-      - links
-      - transitionLinks
-      properties:
-        orderMerchantInfo:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderMerchantInfo'
-  
-        imnOrderUrl:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/httpUrl'
+    properties:
+      orderMerchantInfo:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderMerchantInfo'
 
-        imnLastModificationUtcDate:
-          description: The last modification UTC date done by IMN of this order
-          format: date-time
-          type: string
-          example: '2017-04-16T10:30:23Z'
-  
-        processing:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderProcessing'
-  
-        links:
-          $ref: '#/definitions/orderLinks'
+      imnOrderUrl:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/httpUrl'
 
-        transitionLinks:
-          $ref: '#/definitions/orderTransitionLinks'
+      imnLastModificationUtcDate:
+        description: The last modification UTC date done by IMN of this order
+        format: date-time
+        type: string
+        example: '2017-04-16T10:30:23Z'
+
+      processing:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderProcessing'
+    
+
+  orderIndex:
+    type: object
+    description: Describe in details all informations related to an order.
+    required:
+    - info
+    - links
+    - transitionLinks
+    properties:
+      info:
+        $ref: '#/definitions/orderInfo'
+
+      links:
+        $ref: '#/definitions/orderLinks'
+
+      transitionLinks:
+        $ref: '#/definitions/orderTransitionLinks'
 
 
  
