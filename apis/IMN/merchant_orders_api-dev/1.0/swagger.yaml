@@ -1045,11 +1045,6 @@ definitions:
         href: /merchant/orders/v1/MLT01/C1/A0CD3FG
         method: GET
 
-  orderHeaderLinks:
-    type: object
-    required:
-    - self
-    properties:
 
 
   
@@ -1442,25 +1437,8 @@ definitions:
 
 
 
-  orderListLight:
-    description: |
-      The order list with minimum information we have from the orders.\
-      The paginationResult properties can be null if the list is empty.
-    type: object
-    required:
-    - orders
-    - links
-    properties:
-      paginationResult:
-        $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/paginationResult
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
-      orders:
-        type: array
-        items:
-          $ref: '#/definitions/orderHeaderInfo'
-      links:
-        $ref: '#/definitions/orderListLightLinks'
-
+ 
+ 
   orderListFull:
     description: |
       The order list with all information we have from the orders and its items.\
