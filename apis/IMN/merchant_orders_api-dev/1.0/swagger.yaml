@@ -1105,74 +1105,7 @@ definitions:
         method: POST
 
 
-  orderMarketplaceInfo:
-    allOf:
-    - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderBasicMarketplaceInfo'
-    - type: object
-      description: Describe in details all informations related to an order.
-      required:
-      - marketplaceCode
-      - merchantCode
-      - imnOrderId
-      - marketplaceOrderId
-      - imnOrderStatus
-      - purchaseUtcDate
-      - marketplaceLastModificationUtcDate
-      - orderItems
-      properties:
-        marketPlaceChannel:
-          description: Useful to identify the origin of the order. For example in Cdiscount.
-          type: string
-          example: Cdiscount France
 
-        totalTax:
-          description: The total tax of this order
-          type: number
-          format: decimal
-          example: 0.0
-
-        totalCommission:
-          description: The total commission of this order
-          type: number
-          format: decimal
-          example: 0.0
-
-
-        additionalFee:
-          description: Additional fee related to this order
-          type: number
-          format: decimal
-          example: 10.0
-
-        paymentMethod:
-          description: The payment method of this order
-          type: string
-          example: '1 / 1X'
-
-        payingUtcDate:
-          description: The UTC date of the payment of this order
-          type: string
-          format: date-time
-          example: '2017-04-01T13:22:01Z'
-
-        comment:
-          description: The comment associated to this order
-          type: string
-          example: 'This is a comment'
-
-
-        billing:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderBillingInfo'
-          
-        shipping:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderShippingInfo'
-
-
-
-        orderItems:
-          type: array
-          items:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderItem'
 
     
 
@@ -1180,7 +1113,7 @@ definitions:
 
   orderIndex:
     allOf:
-    - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderBasicMarketplaceInfo'
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderMarketplaceInfo'
     - type: object
       description: Describe in details all informations related to an order.
       required:
@@ -1190,34 +1123,20 @@ definitions:
       - marketplaceOrderId
       - imnOrderStatus
       - purchaseUtcDate
-      - imnLastModificationUtcDate
       - marketplaceLastModificationUtcDate
-      - processing
+      - paymentInfo
+      - billingInfo
+      - shippingInfo
       - etag
-      - links
       - orderItems
+      - imnLastModificationUtcDate
+      - processing
+      - links
       - transitionLinks
       properties:
         orderMerchantInfo:
           $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderMerchantInfo'
   
-
-
-        billing:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderBillingInfo'
-          
-        shipping:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderShippingInfo'
-
-
-
-        orderItems:
-          type: array
-          items:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderItem'
-
-
-
         imnOrderUrl:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/httpUrl'
 
@@ -1227,13 +1146,9 @@ definitions:
           type: string
           example: '2017-04-16T10:30:23Z'
   
-
         processing:
           $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderProcessing'
   
-        etag:
-         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderEtag'
-
         links:
           $ref: '#/definitions/orderLinks'
 
