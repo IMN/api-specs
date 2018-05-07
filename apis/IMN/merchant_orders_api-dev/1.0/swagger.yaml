@@ -1187,9 +1187,82 @@ definitions:
         href: /merchant/orders/v1/MLT01/C1/A0CD3FG/harvest
         method: POST
 
-  orderIndex:
+
+  orderMarketplaceInfo:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderBasicMarketplaceInfo'
+    - type: object
+      description: Describe in details all informations related to an order.
+      required:
+      - marketplaceCode
+      - merchantCode
+      - imnOrderId
+      - marketplaceOrderId
+      - imnOrderStatus
+      - purchaseUtcDate
+      - marketplaceLastModificationUtcDate
+      - orderItems
+      properties:
+        marketPlaceChannel:
+          description: Useful to identify the origin of the order. For example in Cdiscount.
+          type: string
+          example: Cdiscount France
+
+        totalTax:
+          description: The total tax of this order
+          type: number
+          format: decimal
+          example: 0.0
+
+        totalCommission:
+          description: The total commission of this order
+          type: number
+          format: decimal
+          example: 0.0
+
+
+        additionalFee:
+          description: Additional fee related to this order
+          type: number
+          format: decimal
+          example: 10.0
+
+        paymentMethod:
+          description: The payment method of this order
+          type: string
+          example: '1 / 1X'
+
+        payingUtcDate:
+          description: The UTC date of the payment of this order
+          type: string
+          format: date-time
+          example: '2017-04-01T13:22:01Z'
+
+        comment:
+          description: The comment associated to this order
+          type: string
+          example: 'This is a comment'
+
+
+        billing:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderBillingInfo'
+          
+        shipping:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderShippingInfo'
+
+
+
+        orderItems:
+          type: array
+          items:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderItem'
+
+    
+
+
+  orderIndex:
+    allOf:
+    - $ref: '#/definitions/orderHeaderInfo'
     - type: object
       description: Describe in details all informations related to an order.
       required:
