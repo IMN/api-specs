@@ -36,7 +36,7 @@ x-IMN-api-ops:
   - IMN.Offer.Messages
   
 
-x-basePath: /merchant/offers/v1
+x-basePath: /marketplace/offers/v1
 
 
 schemes:
