@@ -1,0 +1,97 @@
+swagger: '2.0'
+info:
+  title: 'Gateway API - Orders'
+  description: 'This API will allow you to manage your orders from the marketplace.'
+
+  version: "1.0"
+  
+  x-logo:
+    url: https://imngo.blob.core.windows.net/imngo/images/imn-logo.png
+    backgroundColor: "#FFFFFF"
+  
+  contact:
+    email: support@imn.io
+     
+ 
+  license:
+    name: IMN
+    url: https://go.imn.io
+
+
+host: api.imn.io
+basePath: /gateway/orders/v1
+
+
+
+x-IMN-api-ops:
+  repo: IMN
+  apiName: GatewayOrdersV1
+  appRoot: IMN.ADPT.Order.WebService
+  namespace: IMN.ADPT.Order.WebService
+  comment: |
+    No change. Just server side generation.
+  
+
+x-basePath: /gateway/orders/v1
+
+
+schemes:
+  - https
+
+consumes:
+  - application/json
+produces:
+  - application/json
+  
+tags:
+- name: Global
+
+
+
+
+
+paths: 
+
+
+  '/{marketplaceCode}/ping':
+    post:
+      tags:
+        - Global
+      summary: Ping the status of your offer system
+      operationId: PingGatewayOfferApi
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      responses:
+        '204':
+          description: The status of the API is up!
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+
+
+  '/{marketplaceCode}/{merchantCode}/events':
+    post:
+      tags:
+        - Global
+      summary: Push a batch of merchant marketplace orders events
+      operationId: PushMerchantOfferEvents
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: request
+        in: body
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/order-events/1.0#/definitions/orderChangeEventBase'
+      responses:
+        '204':
+          description: The merchant orders changes have been saved!
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+
+x-azure-api-id: 'GatewayOrdersV1'
