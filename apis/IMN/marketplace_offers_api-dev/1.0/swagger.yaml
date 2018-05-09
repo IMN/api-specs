@@ -56,7 +56,7 @@ x-azure-api-id: 'MarketplaceOffersV1'
 
 paths:
   
-  '/{marketplaceCode}/{merchantCode}':
+  '/{marketplaceCode}/{merchantCode}/events':
     post:
       tags:
       - Global
