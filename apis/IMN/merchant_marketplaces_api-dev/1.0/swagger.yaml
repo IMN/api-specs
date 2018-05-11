@@ -501,25 +501,19 @@ definitions:
     type: object
     description: The status of the offer publication to the target marketplace
     required:
-    - status
+    - apiIntegrationStatus
     properties:
-      status:
-        type: string
-        description: The marketplace API status for the offer publication
-        enum:
-        - up
-        - down
-        - paused
-        example: up
+      apiIntegrationStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/marketplace-schemas/1.0#/definitions/marketplaceApiIntegrationStatus'
       publishableOfferCount:
         type: integer
         format: int32
-        description: The publishable offer count for this target marketplace (considering the product matching)
+        description: NULL - NOT AVAILABLE FOR NOW - The publishable offer count for this target marketplace (considering the product matching)
         example: 25
       publishedOfferCount:
         type: integer
         format: int32
-        description: The published offer count to this target marketplace
+        description: NULL - NOT AVAILABLE FOR NOW - The published offer count to this target marketplace
         example: 20
       lastPublicationUtcDate:
         type: string
@@ -537,20 +531,18 @@ definitions:
         offersSourceStatus:
           $ref: '#/definitions/offersSourceStatus'
 
+
+
+  
+
   offersSourceStatus:
     type: object
     description: The status of the offer importation from the source marketplace
     required:
-    - status
+    - apiIntegrationStatus
     properties:
-      status:
-        type: string
-        description: The marketplace API status for the offer importation
-        enum:
-        - up
-        - down
-        - paused
-        example: up
+      apiIntegrationStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/marketplace-schemas/1.0#/definitions/marketplaceApiIntegrationStatus'
       lastSynchronizationUtcDate:
         type: string
         format: date-time
@@ -559,7 +551,7 @@ definitions:
       importedOfferCount:
         type: integer
         format: int32
-        description: The imported offer count from the source marketplace
+        description: NOT AVAILABLE FOR NOW - The imported offer count from the source marketplace
         example: 52
 
 x-azure-api-id: 'MerchantMarketplacesV1'
