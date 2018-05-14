@@ -697,6 +697,8 @@ definitions:
         $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceSubscriptionStatus'
       message:
         type: string
+      salesforceSubscriptionId:
+        type: string
 
   outgoingMerchantInfo:
     allOf:
