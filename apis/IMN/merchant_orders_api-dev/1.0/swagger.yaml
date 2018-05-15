@@ -514,6 +514,47 @@ paths:
       deprecated: false
 
 
+  '/{merchantCode}/{marketplaceCode}/{imnOrderId}/refuse':
+    post:
+      tags:
+      - Order
+      operationId: RefuseOrder
+      summary: Refuse your marketplace order
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/imnOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/testModeInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/ifMatchParameter'
+      responses:
+        202:
+          description: Order refuse request accepted
+        400:
+          description: Invalid order refuse request, could not be send to the marketplace. Please check your request.
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+        404:
+          description: Requested Order could not be found
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+        409:
+          description: |
+            Already processing a change request for this Order.\
+            Please refresh your clients Order information and retry later.
+          headers:
+            Retry-After:
+              type: integer
+              description: Indicates the duration in seconds to wait to be able to make this request again
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+        412:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/412_PreConditionFailed'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+      deprecated: false
+
+
   '/{merchantCode}/{marketplaceCode}/{imnOrderId}/cancel':
     post:
       tags:
