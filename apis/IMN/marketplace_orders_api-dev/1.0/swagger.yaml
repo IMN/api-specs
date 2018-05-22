@@ -23,7 +23,7 @@ x-IMN-api-ops:
     First document
   using:
   - IMN.Schemas
-  - IMN.Orders.Schemas
+  - IMN.Order.Schemas
 
 x-host: api.imn.io
 x-basePath: /marketplace/orders/v1
