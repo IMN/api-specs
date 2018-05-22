@@ -21,6 +21,10 @@ x-imn-api-ops:
   apiName: MarketplaceOrdersV1
   comment: |
     First document
+  using:
+  - IMN.Schemas
+  - IMN.Orders.Schemas
+  - IMN.Orders.Events
 
 x-host: api.imn.io
 x-basePath: /marketplace/orders/v1
