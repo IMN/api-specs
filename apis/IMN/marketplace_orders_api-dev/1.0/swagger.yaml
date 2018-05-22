@@ -24,7 +24,6 @@ x-IMN-api-ops:
   using:
   - IMN.Schemas
   - IMN.Orders.Schemas
-  - IMN.Orders.Events
 
 x-host: api.imn.io
 x-basePath: /marketplace/orders/v1
