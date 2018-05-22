@@ -1,0 +1,111 @@
+swagger: '2.0'
+info:
+  version: "1.0"
+  title: Marketplaces - Orders - DRAFT
+  description: Draft
+  x-logo:
+    url: "https://avatars0.githubusercontent.com/u/25665430"
+    backgroundColor: "#FFFFFF"
+
+  contact:
+    email: help@imn.io
+
+  license:
+    name: IMN
+    url: http://www.imn.io
+
+x-IMN-api-ops:
+  codeGenType: webapi
+  repo: IMN
+  appRoot: IMN.MKP.Orders.WebService
+  namespace: IMN.MKP.Orders.WebService
+  apiName: MarketplaceOrdersV1
+  useBeezUPFrameworkVersion2: true
+  comment: |
+    First document
+  using:
+  - IMN.Schemas
+  - IMN.Order.Schemas
+
+x-host: api.imn.io
+x-basePath: /marketplace/orders/v1
+
+externalDocs:
+  description: IMN API documentation
+  url: https://mkp-api-docs.imn.io
+
+x-servers:
+- url: https://api.imn.io/marketplace/orders/v1
+  description: Production Server
+  
+x-azure-api-id: 'marketplace_orders_v1'
+host: api.imn.io
+basePath: /marketplace/orders/v1
+
+schemes:
+  - https
+
+# tags are used for organizing operations
+tags:
+
+- name: Batches
+  description: All batch operations on Orders to reduce call rate
+
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+
+paths:
+
+
+
+
+  '/{marketplaceCode}/{merchantCode}/events':
+    post:
+      tags:
+      - Batches
+      operationId: PushMerchantOrdersEvents
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: request
+        in: body
+        schema:
+          $ref: '#/definitions/batchMerchantMarketplaceOrderChanges'
+      responses:
+        '204':
+          description: The merchant orders changes have been saved!
+        '400':
+          description: Invalid marketplace code or merchant code or there is duplicate order(s) in the request
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+        '403':
+          description: The merchant has disabled the marketplace
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+definitions:
+
+
+  batchMerchantMarketplaceOrderChanges:
+    x-format: Message
+    type: object
+    description: Contains all changes for one marketplace for one merchant
+    properties:
+      created:
+        type: array
+        items:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderMarketplaceInfo'
+      updated:
+        type: array
+        items:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderMarketplaceInfo'
+      deleted:
+        type: array
+        items:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
