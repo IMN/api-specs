@@ -14,7 +14,7 @@ info:
     name: IMN
     url: http://www.imn.io
 
-x-imn-api-ops:
+x-IMN-api-ops:
   repo: IMN
   appRoot: IMN.MKP.Orders.WebService
   namespace: IMN.MKP.Orders.WebService
