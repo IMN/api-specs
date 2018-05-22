@@ -15,10 +15,12 @@ info:
     url: http://www.imn.io
 
 x-IMN-api-ops:
+  codeGenType: webapi
   repo: IMN
   appRoot: IMN.MKP.Orders.WebService
   namespace: IMN.MKP.Orders.WebService
   apiName: MarketplaceOrdersV1
+  useBeezUPFrameworkVersion2: true
   comment: |
     First document
   using:
