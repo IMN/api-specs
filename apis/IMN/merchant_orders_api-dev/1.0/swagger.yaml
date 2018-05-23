@@ -30,7 +30,10 @@ x-IMN-api-ops:
     First document
     regen
   using:
+  - BeezUP2.Framework.Temp
+  - IMN.MER.Schemas
   - IMN.Order.Schemas
+  - IMN.Order.Events
   - IMN.Schemas
   dependencies:
   - EntityFramework
