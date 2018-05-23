@@ -35,7 +35,7 @@ x-IMN-api-ops:
   - IMN.Order.Schemas
   - IMN.Order.Events
   - IMN.Schemas
-  dependencies:
+  dependency:
   - EntityFramework
   - CosmosDB
   - EventHubs
