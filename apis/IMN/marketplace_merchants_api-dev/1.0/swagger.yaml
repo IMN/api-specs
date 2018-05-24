@@ -282,6 +282,7 @@ paths:
       tags: 
       - Marketplace Merchant Code
       summary: Configure marketplace merchant code
+      description: By configuring the merchant identifier of the marketplace the marketplace will be able  to found the merchant easily using this identifier 
       operationId: ConfigureMarketplaceMerchantCode
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
