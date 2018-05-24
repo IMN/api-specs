@@ -33,7 +33,11 @@ x-IMN-api-ops:
   comment: |
     No change. Just server side generation.
   using:
-  - IMN.Orders.Events
+  - IMN.Order.Events
+  - IMN.Order.Schemas
+  - IMN.Schemas
+  dependencies:
+  - EventHubs
   
 
 x-basePath: /gateway/orders/v1
