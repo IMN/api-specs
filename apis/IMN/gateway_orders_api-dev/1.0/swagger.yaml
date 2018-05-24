@@ -32,6 +32,8 @@ x-IMN-api-ops:
   namespace: IMN.ADPT.Order.WebService
   comment: |
     No change. Just server side generation.
+  using:
+  - IMN.Orders.Events
   
 
 x-basePath: /gateway/orders/v1
