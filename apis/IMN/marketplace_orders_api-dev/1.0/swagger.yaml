@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   version: "1.0"
-  title: Marketplaces - Orders - DRAFT
+  title: Marketplaces - Orders
   description: Draft
   x-logo:
     url: "https://avatars0.githubusercontent.com/u/25665430"
