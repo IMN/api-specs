@@ -41,6 +41,8 @@ x-IMN-api-ops:
   - EntityFramework
   - CosmosDB
   - EventHubs
+  - Redis
+
 
 x-host: api.imn.io
 x-basePath: /merchant/orders/v1
