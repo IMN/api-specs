@@ -25,6 +25,7 @@ x-IMN-api-ops:
   codeGenType: webapi
   repo: IMN
   appRoot: IMN.MER.Orders.WebService
+  applicationShortName: MER.Orders.WS
   namespace: IMN.MER.Orders.WebService
   apiName: MerchantOrdersV1
   comment: |
