@@ -26,6 +26,7 @@ basePath: /gateway/orders/v1
 x-IMN-api-ops:
   repo: IMN
   product: IMN-ADPT
+  group: Order
   applicationShortName: ADPT.Order.WS
   apiName: GatewayOrdersV1
   appRoot: IMN.ADPT.Order.WebService
