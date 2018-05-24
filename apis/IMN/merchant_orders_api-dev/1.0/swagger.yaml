@@ -22,6 +22,7 @@ info:
     url: http://www.imn.io
 
 x-IMN-api-ops:
+  codeGenType: webapi
   repo: IMN
   appRoot: IMN.MER.Orders.WebService
   namespace: IMN.MER.Orders.WebService
