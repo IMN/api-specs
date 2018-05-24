@@ -58,6 +58,15 @@ produces:
   - application/json
 
 
+parameters:
+  correlationIdParameter:
+    name: correlationId
+    in: path
+    type: string
+    required: true
+    description: The correlation id corresponding to the order change request
+  
+
 paths:
 
 
@@ -100,10 +109,7 @@ paths:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/imnOrderIdParameter'
-      - name: correlationId
-        in: path
-        type: string
-        required: true
+      - $ref: '#/parameters/correlationIdParameter'
       responses:
         '204':
           description: The merchant orders changes have been saved!
@@ -112,6 +118,30 @@ paths:
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
+  '/{marketplaceCode}/{merchantCode}/{imnOrderId}/{correlationId}/failed':
+    post:
+      tags:
+      - Order Change Reporting
+      operationId: OrderChangeStatusFailed
+      summary: Declare the failure of the order change request by the marketplace
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/imnOrderIdParameter'
+      - $ref: '#/parameters/correlationIdParameter'
+      - name: request
+        in: body
+        required: true
+        description: The error that explains to the merchant why the order change has failed 
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/userErrorMessage'
+      responses:
+        '204':
+          description: The merchant order change failure has been processed
+          ## TODO: 404
+          
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
 
 definitions:
