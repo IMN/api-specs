@@ -17,6 +17,9 @@ info:
 x-IMN-api-ops:
   codeGenType: webapi
   repo: IMN
+  product: IMN-CORE
+  group: Order
+  applicationShortName: MKP.Orders.WS
   appRoot: IMN.MKP.Orders.WebService
   namespace: IMN.MKP.Orders.WebService
   apiName: MarketplaceOrdersV1
@@ -26,6 +29,10 @@ x-IMN-api-ops:
   using:
   - IMN.Schemas
   - IMN.Order.Schemas
+  dependencies:
+  - EventHubs
+  - EntityFramework
+  - Redis
 
 x-host: api.imn.io
 x-basePath: /marketplace/orders/v1
