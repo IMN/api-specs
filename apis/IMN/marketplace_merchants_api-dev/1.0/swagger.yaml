@@ -611,7 +611,6 @@ definitions:
   merchantTargetMarketplaceInfo:
     type: object
     required:
-    - subscriptionRequestUtcDate
     - subscriptionStatus
     - credentialStatus
     - shippingSettingsStatus
@@ -621,7 +620,7 @@ definitions:
       subscriptionRequestUtcDate:
         type: string
         format: date-time
-        description: date the merchant pushed his registration to the marketplace (through SF), can be null when a merchant already has an account
+        description: date the merchant pushed his registration to the marketplace (through SF), can be null when a merchant already has an
       subscriptionStatus:
         $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceSubscriptionStatus'
       credentialStatus:
