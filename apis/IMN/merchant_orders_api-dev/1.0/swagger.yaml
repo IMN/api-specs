@@ -920,7 +920,6 @@ definitions:
         - C1
       imnOrderStatuses:
         type: array
-        required: required
         items:
           $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderStatus'
         example:
