@@ -920,6 +920,7 @@ definitions:
         - C1
       imnOrderStatuses:
         type: array
+        required: required
         items:
           $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderStatus'
         example:
@@ -1262,8 +1263,6 @@ definitions:
         $ref: '#/definitions/links.ClearMerchantOrderInfoListLink'
       orders:
         $ref: '#/definitions/links.GetOrderListFullLink'
-      lightOrders:
-        $ref: '#/definitions/links.GetOrderListLightLink'
 
   orderApiIndexLovLinks:
     description: Gives you all the LOV to get the translations realated to operation name, codes, property names and statuses.
