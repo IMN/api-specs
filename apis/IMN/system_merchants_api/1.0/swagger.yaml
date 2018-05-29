@@ -70,6 +70,7 @@ paths:
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'       
 
+
   '/{merchantCode}/targetMarketplaces':
     post:
       tags: 
@@ -88,6 +89,7 @@ paths:
               $ref: '#/definitions/merchantTargetMarketplaceInfo'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'       
+
 
 definitions:
 
@@ -137,12 +139,14 @@ definitions:
         format: date-time
         description: filter merchants by to ending creation date
       filterCountry:
-        type: string
-        description: filter merchants by country code 
-        example: FRA
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/countryIsoCodeAlpha3'
       filterSalesforceStatus:
         type: boolean
         description: filter merchants by SalesforceStatus
+      filterSourceMarketplaceCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
+      filterSourceMarketplaceCredentialStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceCredentialStatus'
 
   merchantListOrderBy:
     type: object
@@ -200,7 +204,6 @@ definitions:
     - lastName
     - phoneNumber
     - creationUtcDate
-    - sourceMarketplaceCode
     - orderCount
     - turnOver
     properties:
@@ -225,18 +228,18 @@ definitions:
         type: integer
         format: int32
         description: Imported offer count from the source marketpalce
-      sourceMarketplaceCode:
+      sourceMarketplaceMerchantCode:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceMerchantCode'
       salesForceStatus:
         type: boolean
         description: Sales Force status id 
-      credentialStatusId:
+      credentialStatus:
         $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceCredentialStatus'
-      targetMarketplaces:
-        type: object
-        description: The key is the marketplace code
-        additionalProperties:
-          $ref: '#/definitions/merchantTargetMarketplaceInfo'
+      targetMarketplaceCount:
+        type: integer
+        format: int32
+        description: The target marketplace count of this merchant
+        
  
   
   merchantTargetMarketplaceInfo:
@@ -278,10 +281,37 @@ definitions:
       targetMarketplaceMerchantCode:
         type: string
         description: the tarket marketplace merchant code ?? 
-      turnOvers:
+      turnOver:
         type: number
         format: decimal
         example: 10602.23
+      currencyCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/currencyCode'
+      subscriptionHistory:
+        type: array
+        items:
+          $ref: '#/definitions/marketplaceSubcriptionReporting'
+
+
+  marketplaceSubcriptionReporting:
+    type: object
+    required:
+#    - senderType
+    - senderEmail
+    - utcDate
+    - status
+    properties:
+#      senderType:
+#        $ref: '#/definitions/marketplaceSubcriptionMessageSenderType'
+      senderEmail:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/email'
+      utcDate:
+        type: string
+        format: date-time
+      status:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceSubscriptionStatus'
+      message:
+        type: string
 
 
 x-azure-api-id: 'SystemBoV1'
