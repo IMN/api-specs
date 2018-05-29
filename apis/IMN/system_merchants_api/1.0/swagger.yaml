@@ -1,0 +1,287 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: 'System - Merchants'
+  description: 'Merchant management'
+  x-logo:
+    url: https://imngo.blob.core.windows.net/imngo/images/imn-logo.png
+    backgroundfColor: "#FFFFFF"
+
+  contact:
+    email: support@imn.io
+
+host: api.imn.io
+basePath: /system/merchants/v1
+
+x-IMN-api-ops:
+  codeGenType: webapi
+  repo: IMN
+  appRoot: IMN.SYS.MER.WebService
+  apiName: SystemMerchantsV1
+  namespace: IMN.SYS.MER.WebService
+  useBeezUPFrameworkVersion2: true
+  comment: |
+    No change. Just server side generation.
+  using:
+  - IMN.Schemas
+  - IMN.MER.Schemas
+  - IMN.MER.Exceptions
+  
+
+x-basePath: /system/merchants/v1
+schemes:
+  - https
+
+consumes:
+  - application/json
+produces:
+  - application/json
+  
+tags:
+- name: Global
+- name: Merchants
+- name: Api Credentials
+- name: Subscription
+- name: Marketplace Merchant Code
+
+paths: 
+
+
+        
+  '/':
+    post:
+      tags: 
+      - Merchants
+      summary: Get the list of merchants related to a marketplace
+      operationId: GetMerchantList
+      parameters: 
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageSizeQueryStringParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageNumberQueryStringParameter'
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/merchantListRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/merchantList'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'       
+
+  '/{merchantCode}/targetMarketplaces':
+    post:
+      tags: 
+      - Merchants
+      summary: Get the list of marketplace for a merchant
+      operationId: GetMerchantTargetMarketplaceList
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            description: The key is the marketplace code
+            additionalProperties:
+              $ref: '#/definitions/merchantTargetMarketplaceInfo'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'       
+
+definitions:
+
+  merchantListRequest:
+    type: object
+    properties:
+      orderBy:
+        $ref: '#/definitions/merchantListOrderBy'
+      searchMarketplaceCode:
+        type: string
+        description: Search merchants by the marketplace code
+        example: C1
+      searchMarketplaceName:
+        type: string
+        description: Search merchants by the marketplace name
+        example: cdis
+      searchCompanyName:
+        type: string
+        description: Search merchants by the company name
+        example: Literie
+      searchMerchantCode:
+        type: string
+        description: Search merchants by the code
+        example: MLT
+      searchMarketplaceMerchantCode:
+        type: string
+        description: Search merchants by the marketplaceMerchantCode
+        example: 050041
+      searchContactEmail:
+        type: string
+        description: Search merchants by the contactEmail
+        example: contact@ma-boutique-en-ligne.com
+      searchContactName:
+        type: string
+        description: Search merchants by the contact name
+        example: Johnson
+      searchContactPhone:
+        type: string
+        description: Search merchants by the ContactPhone
+        example: +33711223344
+      filterCreationUtcDateFrom:
+        type: string
+        format: date-time
+        description: filter merchants by From beginning creation date 
+      filterCreationUtcDateTo:
+        type: string
+        format: date-time
+        description: filter merchants by to ending creation date
+      filterCountry:
+        type: string
+        description: filter merchants by country code 
+        example: FRA
+      filterSalesforceStatus:
+        type: boolean
+        description: filter merchants by SalesforceStatus
+
+  merchantListOrderBy:
+    type: object
+    required:
+    - propertyName
+    properties:
+      propertyName:
+        $ref: '#/definitions/merchantListOrderByOn'
+      sort:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/sort'  
+        
+  merchantListOrderByOn:
+    type: string
+    description: Indicates on which property you want to order by the list of merchant
+    default: modificationUtcDate
+    enum:
+    - merchantCode
+    - creationUtcDate
+    - modificationUtcDate
+    
+  merchantList:
+    type: object
+    required: 
+    - links
+    properties:
+      links:
+        $ref: '#/definitions/merchantListLinks'
+      merchants:
+        type: array
+        items:
+          $ref: '#/definitions/merchantInfo' 
+      paginationResult:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/paginationResult'
+
+  merchantListLinks:
+    type: object
+    required:  
+    - self
+    properties:
+      self:
+        $ref: '#/definitions/links.GetMerchantListLink'
+
+  links.GetMerchantListLink:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
+  
+  merchantInfo:
+    type: object
+    required:
+    - code
+    - email
+    - companyName
+    - country
+    - firstName
+    - lastName
+    - phoneNumber
+    - creationUtcDate
+    - sourceMarketplaceCode
+    - orderCount
+    - turnOver
+    properties:
+      code:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/merchantCode'
+      email:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/email'
+      companyName:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/merchantCompanyName'
+      country:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/countryIsoCodeAlpha3'
+      firstName:
+        type: string
+      lastName:
+        type: string
+      phoneNumber:
+        type: string
+      creationUtcDate:
+        type: string
+        format: date-time
+      importedOfferCount:
+        type: integer
+        format: int32
+        description: Imported offer count from the source marketpalce
+      sourceMarketplaceCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceMerchantCode'
+      salesForceStatus:
+        type: boolean
+        description: Sales Force status id 
+      credentialStatusId:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceCredentialStatus'
+      targetMarketplaces:
+        type: object
+        description: The key is the marketplace code
+        additionalProperties:
+          $ref: '#/definitions/merchantTargetMarketplaceInfo'
+ 
+  
+  merchantTargetMarketplaceInfo:
+    type: object
+    required:
+    - subscriptionRequestUtcDate
+    - subscriptionStatus
+    - credentialStatus
+    - shippingSettingsStatus
+    - offerPublicationEnabled
+    - targetMarketplaceCode
+    properties:
+      subscriptionRequestUtcDate:
+        type: string
+        format: date-time
+        description: date the merchant pushed his registration to the marketplace (through SF)
+      subscriptionStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceSubscriptionStatus'
+      credentialStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceCredentialStatus'
+      shippingSettingsStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceShippingSettingsStatus'
+      offerPublicationStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceOfferPublicationStatus'
+      publishedOfferCount:
+        type: integer
+        format: int32
+        description: Effective offer count published to the target marketplace
+      publishableOfferCount:
+        type: integer
+        format: int32
+        description: Publishable offer count to the target marketplace
+      orderCount:
+        type: integer
+        format: int32
+        description: onrder count on the target marketplace
+      targetMarketplaceCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
+      targetMarketplaceMerchantCode:
+        type: string
+        description: the tarket marketplace merchant code ?? 
+      turnOvers:
+        type: number
+        format: decimal
+        example: 10602.23
+
+
+x-azure-api-id: 'SystemBoV1'
