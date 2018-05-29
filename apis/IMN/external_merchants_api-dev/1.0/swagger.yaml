@@ -58,6 +58,10 @@ paths:
       responses:
         204:
           description: Subscriptions's request have been integrated
+        400:
+          description: The subscription request utc date is in future
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/userErrorMessage'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
           
