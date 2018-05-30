@@ -38,7 +38,6 @@ produces:
   - application/json
   
 tags:
-- name: Global
 - name: Marketplaces
 
 paths: 
@@ -61,22 +60,6 @@ paths:
 
 definitions:
 
-
-#  agentList:
-#    type: array
-#    items:
-#      $ref: '#/definitions/agent'
-#
-#  agent:
-#    type: object
-#    properties:
-#      firstName:
-#        type: string
-#      lastName:
-#        type: string
-#      email:
-#        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/email'
-        
   marketplaceList:
     type: object
     required: 
