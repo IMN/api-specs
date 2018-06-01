@@ -925,12 +925,6 @@ definitions:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/pageNumber'
 
 
-  businessOperationType:
-    type: string
-    x-lov: OrderChangeBusinessOperationType
-    example: ShipOrder
-
-
  
 
   clearMerchantOrderInfoListRequest:
@@ -1342,8 +1336,8 @@ definitions:
     properties:
       correlationId:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/correlationId'
-      changeOrderType:
-        $ref: '#/definitions/businessOperationType'
+      changeType:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderChangeType'
       sourceType:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/operationSourceType'
       sourceUserId:
