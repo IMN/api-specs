@@ -400,9 +400,7 @@ paths:
         304:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/304_NotModified'
         404:
-          description: Requested Order could not be found
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
@@ -426,9 +424,7 @@ paths:
         304:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/304_NotModified'
         404:
-          description: Requested Order could not be found
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
@@ -456,9 +452,7 @@ paths:
           schema:
             $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
         404:
-          description: Requested Order could not be found
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
@@ -481,9 +475,7 @@ paths:
           schema:
             $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
         404:
-          description: Requested Order could not be found
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
@@ -510,9 +502,7 @@ paths:
           schema:
             $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
         404:
-          description: Requested Order could not be found
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
         409:
           description: |
             Already processing a change request for this Order.\
@@ -551,9 +541,7 @@ paths:
           schema:
             $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
         404:
-          description: Requested Order could not be found
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
         409:
           description: |
             Already processing a change request for this Order.\
@@ -597,9 +585,7 @@ paths:
           schema:
             $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
         404:
-          description: Requested Order could not be found
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
         409:
           description: |
             Already processing a change request for this Order.\
@@ -644,9 +630,7 @@ paths:
           schema:
             $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
         404:
-          description: Requested Order could not be found
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
         409:
           description: |
             Already processing a change request for this Order.\
@@ -692,9 +676,7 @@ paths:
           schema:
             $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
         404:
-          description: Requested Order could not be found
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
         409:
           description: |
             Already processing a change request for this Order.\
