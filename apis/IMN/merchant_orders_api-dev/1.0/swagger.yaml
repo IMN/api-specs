@@ -1334,14 +1334,7 @@ definitions:
         format: date-time
         type: string
 
-  sourceType:
-    description: Indicates the origin of the operation
-    type: string
-    enum:
-    - Api
-    - Go
-    example: Api
-
+      
 
   changeOrderReporting:
     description: The reporting related to a change order operation
@@ -1352,7 +1345,7 @@ definitions:
       changeOrderType:
         $ref: '#/definitions/businessOperationType'
       sourceType:
-        $ref: '#/definitions/sourceType'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/operationSourceType'
       sourceUserId:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/userId'
       sourceUserName:
