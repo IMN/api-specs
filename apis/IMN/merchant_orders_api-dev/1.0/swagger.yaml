@@ -40,6 +40,7 @@ x-IMN-api-ops:
   - IMN.Order.Schemas
   - IMN.Order.Events
   - IMN.Schemas
+  - IMN.Order.Exceptions
   packages:
   - EntityFramework
   - CosmosDB
