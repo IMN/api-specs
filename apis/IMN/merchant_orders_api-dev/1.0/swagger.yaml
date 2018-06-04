@@ -42,6 +42,7 @@ x-IMN-api-ops:
   - IMN.Schemas
   - IMN.Order.Exceptions
   - BeezUP2.Framework.Messaging
+  - 
   packages:
   - EntityFramework
   - CosmosDB
