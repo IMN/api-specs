@@ -30,6 +30,7 @@ x-IMN-api-ops:
   - IMN.Schemas
   - IMN.Order.Schemas
   - IMN.Order.Exceptions
+  - BeezUP2.Framework.Messaging
   dependencies:
   - EventHubs
   - EntityFramework
