@@ -55,6 +55,8 @@ schemes:
 
 # tags are used for organizing operations
 tags:
+- name: Order Change Reporting
+  description: The order change reporting operations
 
 - name: Batches
   description: All batch operations on Orders to reduce call rate
