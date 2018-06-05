@@ -172,6 +172,7 @@ definitions:
     properties:
       orders:
         type: array
+        description: Orders that need to be created or replaced
         minItems: 1
         maxItems: 1000
         items:
