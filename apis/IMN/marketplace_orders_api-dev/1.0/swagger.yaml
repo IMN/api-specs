@@ -91,7 +91,7 @@ paths:
       - name: request
         in: body
         schema:
-          $ref: '#/definitions/batchMerchantMarketplaceOrderChanges'
+          $ref: '#/definitions/batchMerchantMarketplaceOrders'
       responses:
         '204':
           description: The merchant orders changes have been saved!
@@ -164,20 +164,12 @@ paths:
 definitions:
 
 
-  batchMerchantMarketplaceOrderChanges:
+  batchMerchantMarketplaceOrders:
     x-format: Message
-    type: object
     description: Contains all changes for one marketplace for one merchant
     properties:
-      created:
+      orders:
         type: array
+        description: Create or replace orders.
         items:
           $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderMarketplaceInfo'
-      updated:
-        type: array
-        items:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderMarketplaceInfo'
-      deleted:
-        type: array
-        items:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
