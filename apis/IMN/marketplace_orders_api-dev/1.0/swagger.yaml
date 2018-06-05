@@ -73,6 +73,7 @@ parameters:
     name: correlationId
     in: path
     type: string
+    format: CorrelationId
     required: true
     description: The correlation id corresponding to the order change request
   
