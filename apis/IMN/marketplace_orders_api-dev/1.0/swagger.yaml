@@ -166,10 +166,11 @@ definitions:
 
   batchMerchantMarketplaceOrders:
     x-format: Message
-    description: Contains all changes for one marketplace for one merchant
+    description: Create or replace orders for one marketplace for one merchant
+    required:
+    - orders
     properties:
       orders:
         type: array
-        description: Create or replace orders.
         items:
           $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderMarketplaceInfo'
