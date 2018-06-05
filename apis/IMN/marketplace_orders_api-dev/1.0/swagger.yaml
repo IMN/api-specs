@@ -120,10 +120,12 @@ paths:
       responses:
         '204':
           description: The merchant orders changes have been saved!
-        404:
-          description: Requested Order could not be found
+        400:
+          description: Something wrong in the request, please check the documentation.
           schema:
             $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+        404:
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
@@ -147,12 +149,12 @@ paths:
       responses:
         '204':
           description: The merchant order change failure has been processed
-        404:
-          description: Requested Order could not be found
+        400:
+          description: Something wrong in the request, please check the documentation.
           schema:
             $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
-
-          
+        404:
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
