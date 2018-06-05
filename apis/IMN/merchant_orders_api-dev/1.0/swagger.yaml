@@ -35,13 +35,19 @@ x-IMN-api-ops:
     First document
     regen
   using:
-  - BeezUP2.Framework.Temp
   - IMN.MER.Schemas
   - IMN.Order.Schemas
   - IMN.Order.Events
   - IMN.Schemas
   - IMN.Order.Exceptions
   - BeezUP2.Framework.Messaging
+  references:
+  - BeezUP2.Framework.Temp
+  - IMN.MER.Schemas
+  - IMN.Order.Schemas
+  - IMN.Order.Events
+  - IMN.Schemas
+  - IMN.Order.Exceptions
   packages:
   - EntityFramework
   - CosmosDB
