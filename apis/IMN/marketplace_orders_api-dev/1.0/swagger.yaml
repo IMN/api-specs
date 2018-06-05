@@ -166,6 +166,7 @@ definitions:
 
   batchMerchantMarketplaceOrders:
     x-format: Message
+    type: object
     description: Create or replace orders for one marketplace for one merchant
     required:
     - orders
