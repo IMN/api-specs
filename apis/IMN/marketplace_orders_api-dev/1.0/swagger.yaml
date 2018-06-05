@@ -29,6 +29,7 @@ x-IMN-api-ops:
   using:
   - IMN.Schemas
   - IMN.Order.Schemas
+  - IMN.Order.Exceptions
   dependencies:
   - EventHubs
   - EntityFramework
