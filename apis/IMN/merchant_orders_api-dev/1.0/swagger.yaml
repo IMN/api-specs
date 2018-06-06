@@ -1044,12 +1044,6 @@ definitions:
 
 
 
-  
-        
-
-
-
-
   orderLinks:
     type: object
     description: |
