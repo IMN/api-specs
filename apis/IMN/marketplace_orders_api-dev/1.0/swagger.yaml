@@ -76,7 +76,8 @@ parameters:
     type: string
     format: CorrelationId
     required: true
-    description: The correlation id corresponding to the order change request
+    description: |
+      It's the guid corresponding to the operation.
   
 
 paths:
