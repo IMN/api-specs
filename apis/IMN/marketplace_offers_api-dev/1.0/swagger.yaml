@@ -69,7 +69,7 @@ paths:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/correlationIdParameter'
       responses:
         '204':
-          description: The marketplace merchant offers changes have been saved!
+          description: The purge completion has been saved
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
           
@@ -92,7 +92,7 @@ paths:
         required: true
       responses:
         '204':
-          description: The marketplace merchant offers changes have been saved!
+          description: The purge failure has been saved
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
   
