@@ -120,7 +120,7 @@ paths:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/correlationIdParameter'
       responses:
         '204':
-          description: The merchant offers changes have been saved!
+          description: The purge request has been received.
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
