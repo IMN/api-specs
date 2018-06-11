@@ -1,0 +1,127 @@
+swagger: '2.0'
+info:
+  title: 'Gateway API - Offers'
+  description: 'This API will allow you to manage your offers from the marketplace.'
+
+  version: "1.0"
+  
+  x-logo:
+    url: https://imngo.blob.core.windows.net/imngo/images/imn-logo.png
+    backgroundColor: "#FFFFFF"
+  
+  contact:
+    email: support@imn.io
+     
+ 
+  license:
+    name: IMN
+    url: https://go.imn.io
+
+
+host: api.imn.io
+basePath: /gateway/offers/v1
+
+
+
+x-IMN-api-ops:
+  repo: IMN
+  apiName: GatewayOffersV1
+  appRoot: IMN.ADPT.Offer.WebService
+  namespace: IMN.ADPT.Offer.WebService
+  comment: |
+    No change. Just server side generation.
+  
+
+x-basePath: /gateway/offers/v1
+
+
+schemes:
+  - https
+
+consumes:
+  - application/json
+produces:
+  - application/json
+  
+tags:
+- name: Global
+
+
+
+
+
+paths: 
+
+
+  '/{marketplaceCode}/ping':
+    post:
+      tags:
+        - Global
+      summary: Ping the status of your offer system
+      operationId: PingGatewayOfferApi
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      responses:
+        200:
+          description: The status of the API is up!
+          schema:
+            type: array
+            items:
+              $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/healthCheck'
+        503:
+          description: The status of your API is down...
+          schema:
+            type: array
+            items:
+              $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/healthCheck'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+
+  '/{marketplaceCode}/{merchantCode}/events':
+    post:
+      tags:
+        - Global
+      summary: Push a batch of merchant marketplace offers events
+      operationId: PushMerchantOfferEvents
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-messages/1.0#/definitions/batchMerchantMarketplaceOfferChanges'
+      responses:
+        '204':
+          description: The merchant offers changes have been saved!
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+
+  '/{marketplaceCode}/{merchantCode}/purge/{correlationId}':
+    post:
+      tags:
+        - Global
+      summary: Purge existing offers
+      description: |
+        This operation could will be called for the following reason:
+        - the merchant want to disable the offer publication to your marketplace and purge his offers by the way
+        - the merchant want to purge his existing offers before publishing his offers coming from IMN
+        The expected behavior by marketplace is to purge existing offers of the merchant and then call the /marektplace/offers/v1/{marketplaceCode}/{merchantCode}/purge/{correlationId}/done|failed if the purge succeed or failed
+      operationId: PurgeExistingOffers
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/correlationIdParameter'
+      responses:
+        '204':
+          description: The merchant offers changes have been saved!
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+
+
+x-azure-api-id: 'GatewayOffersV1'
