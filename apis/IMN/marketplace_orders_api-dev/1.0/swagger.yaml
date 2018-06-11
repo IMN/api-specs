@@ -102,7 +102,7 @@ paths:
 
 
 
-  '/{marketplaceCode}/{merchantCode}/{imnOrderId}/{correlationId}/done':
+  '/{marketplaceCode}/{merchantCode}/{imnOrderId}/changes/{correlationId}/done':
     post:
       tags:
       - Order Change Reporting
@@ -125,7 +125,7 @@ paths:
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
-  '/{marketplaceCode}/{merchantCode}/{imnOrderId}/{correlationId}/failed':
+  '/{marketplaceCode}/{merchantCode}/{imnOrderId}/changes/{correlationId}/failed':
     post:
       tags:
       - Order Change Reporting
