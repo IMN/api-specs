@@ -107,9 +107,12 @@ paths:
       summary: Purge existing offers
       description: |
         This operation could will be called for the following reason:
-        - the merchant want to disable the offer publication to your marketplace and purge his offers by the way
-        - the merchant want to purge his existing offers before publishing his offers coming from IMN
-        The expected behavior by marketplace is to purge existing offers of the merchant and then call the /marektplace/offers/v1/{marketplaceCode}/{merchantCode}/purge/{correlationId}/done|failed if the purge succeed or failed
+        - the merchant wants to disable the offer publication to your marketplace and ask to purge his offers on your marketplace
+        - the merchant wants to purge his existing offers before publishing his offers coming from IMN
+        
+        The expected behavior by marketplace are:
+        - purge existing offers of the merchant 
+        - notify IMN about the completion of the purge operation by calling this /marektplace/offers/v1/{marketplaceCode}/{merchantCode}/purge/{correlationId}/done|failed if the purge succeed or failed
       operationId: PurgeExistingOffers
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
