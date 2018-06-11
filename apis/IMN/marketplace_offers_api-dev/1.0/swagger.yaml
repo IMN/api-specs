@@ -55,6 +55,51 @@ x-azure-api-id: 'MarketplaceOffersV1'
 
 
 paths:
+
+
+  '/{marketplaceCode}/{merchantCode}/purges/{correlationId}/done':
+    post:
+      tags:
+      - Global
+      summary: Inform IMN about the offer purge completed
+      operationId: PurgeCompleted
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-messages/1.0#/definitions/batchMerchantMarketplaceOfferChanges'
+        required: true
+      responses:
+        '204':
+          description: The marketplace merchant offers changes have been saved!
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+          
+
+
+  '/{marketplaceCode}/{merchantCode}/purges/{correlationId}/failed':
+    post:
+      tags:
+      - Global
+      summary: Inform IMN about the offer purge completed
+      operationId: PurgeFailed
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#correlationIdParameter'
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/userErrorMessage'
+        required: true
+      responses:
+        '204':
+          description: The marketplace merchant offers changes have been saved!
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+  
   
   '/{marketplaceCode}/{merchantCode}/events':
     post:
