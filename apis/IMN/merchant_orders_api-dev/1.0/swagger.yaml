@@ -200,7 +200,7 @@ paths:
         in: body
         required: true
         schema:
-          $ref: '#/definitions/imnOrderIds'
+          $ref: '#/definitions/clearMerchantOrderInfoListRequest'
       responses:
         202:
           description: Succesfully received and processed batched operations. Please check response to see the status per operation.
@@ -1637,6 +1637,52 @@ definitions:
         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
       request:
         $ref: '#/definitions/cancelOrderRequest'
+
+
+
+  acceptOrderListRequest:
+    type: object
+    required:
+    - orders
+    properties:
+      orders:
+        type: array
+        maxItems: 100
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: '#/definitions/acceptOrderListRequestItem'
+
+  acceptOrderListRequestItem:
+    type: object
+    required:
+    - order
+    properties:
+      order:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
+
+
+  refuseOrderListRequest:
+    type: object
+    required:
+    - orders
+    properties:
+      orders:
+        type: array
+        maxItems: 100
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: '#/definitions/refuseOrderListRequestItem'
+
+  refuseOrderListRequestItem:
+    type: object
+    required:
+    - order
+    properties:
+      order:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
+
 
 
   clearMerchantOrderInfoListRequest:
