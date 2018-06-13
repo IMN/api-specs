@@ -259,11 +259,7 @@ paths:
         in: body
         required: true
         schema:
-          type: object
-          format: Dictionary<string,ShipOrderWithTrackingUrlRequest>
-          description: The key is the imnOrderId
-          additionalProperties:
-            $ref: '#/definitions/shipOrderWithTrackingUrlRequest'
+          $ref: '#/definitions/shipOrderWithTrackingUrlListRequest'
       responses:
         202:
           description: Succesfully received and processed batched operations.
@@ -292,10 +288,7 @@ paths:
         in: body
         required: true
         schema:
-          type: object
-          description: The key is the imnOrderId
-          additionalProperties:
-            $ref: '#/definitions/refundOrderRequest'
+          $ref: '#/definitions/refundOrderListRequest'
       responses:
         202:
           description: Succesfully received and processed batched operations. Please check response to see the status per operation.
@@ -381,10 +374,7 @@ paths:
         in: body
         required: true
         schema:
-          type: object
-          description: The key is the imnOrderId
-          additionalProperties:
-            $ref: '#/definitions/cancelOrderRequest'
+          $ref: '#/definitions/cancelOrderListRequest'
       responses:
         202:
           description: Succesfully received and processed batched operations.
@@ -1648,6 +1638,27 @@ definitions:
     description: The key is the imnOrderId
     additionalProperties:
       $ref: '#/definitions/shipOrderRequest'
+
+  shipOrderWithTrackingUrlListRequest:
+    type: object
+    description: The key is the imnOrderId
+    additionalProperties:
+      $ref: '#/definitions/shipOrderWithTrackingUrlRequest'
+
+  refundOrderListRequest:
+    type: object
+    description: The key is the imnOrderId
+    additionalProperties:
+      $ref: '#/definitions/refundOrderRequest'
+
+  cancelOrderListRequest:
+    type: object
+    description: The key is the imnOrderId
+    additionalProperties:
+      $ref: '#/definitions/cancelOrderRequest'
+
+
+
 
 
 x-azure-api-id: 'merchant_orders_v1'
