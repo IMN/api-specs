@@ -1445,37 +1445,6 @@ definitions:
 
 
 
-  
-
-
-
-
-
-
-  
-  refundOrderListRequestItem:
-    allOf:
-    - $ref: '#/definitions/refundOrderRequest'
-    - type: object
-      description: Contains the order identifier and the change order request
-      required:
-      - imnOrderId
-      properties:
-        imnOrderId:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderId'
-
-
-
-  cancelOrderListRequestItem:
-    allOf:
-    - $ref: '#/definitions/cancelOrderRequest'
-    - type: object
-      description: Contains the order identifier and the change order request
-      required:
-      - imnOrderId
-      properties:
-        imnOrderId:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderId'
 
 
 
