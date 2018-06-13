@@ -1171,8 +1171,6 @@ definitions:
     properties:
       links:
         $ref: '#/definitions/orderApiIndexLinks'
-      lovLinks:
-        $ref: '#/definitions/orderApiIndexLovLinks'
 
   links.GetOrderApiIndexLink:
     allOf:
@@ -1193,29 +1191,13 @@ definitions:
       orders:
         $ref: '#/definitions/links.GetOrderListFullLink'
 
-  orderApiIndexLovLinks:
-    description: Gives you all the LOV to get the translations realated to operation name, codes, property names and statuses.
-    type: object
-    required:
-    - orderChangeBusinessOperationType
-    - orderState
-    - orderProperty
-    - orderPropertyPosted
-    properties:
-      orderChangeBusinessOperationType:
-        $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/LOVLink3
-      orderState:
-        $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/LOVLink3
-      orderProperty:
-        $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/LOVLink3
-      orderPropertyPosted:
-        $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/LOVLink3
+
 
   links.GetOrderListFullLink:
     allOf:
     - $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3
     - example:
-        href: /merchant/orders/v1/list/full
+        href: /merchant/orders/v1/MLT01/list
         method: POST
         properties:
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
