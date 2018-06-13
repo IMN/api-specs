@@ -1186,20 +1186,10 @@ definitions:
     type: object
     required:
     - self
-    - status
-    - setMerchantInfos
-    - clearMerchantInfos
-    - export
-    - autoTransitions
     - orders
-    - lightOrders
     properties:
       self:
         $ref: '#/definitions/links.GetOrderApiIndexLink'
-      setMerchantInfos:
-        $ref: '#/definitions/links.SetMerchantOrderInfoListLink'
-      clearMerchantInfos:
-        $ref: '#/definitions/links.ClearMerchantOrderInfoListLink'
       orders:
         $ref: '#/definitions/links.GetOrderListFullLink'
 
