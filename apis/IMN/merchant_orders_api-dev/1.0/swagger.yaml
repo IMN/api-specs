@@ -294,12 +294,10 @@ paths:
         in: body
         required: true
         schema:
-          type: array
-          uniqueItems: true
-          minItems: 1
-          maxItems: 100
-          items:
-            $ref: '#/definitions/refundOrderListRequestItem'
+          type: object
+          description: The key is the imnOrderId
+          additionalProperties:
+            $ref: '#/definitions/refundOrderRequest'
       responses:
         202:
           description: Succesfully received and processed batched operations. Please check response to see the status per operation.
@@ -385,12 +383,10 @@ paths:
         in: body
         required: true
         schema:
-          type: array
-          uniqueItems: true
-          minItems: 1
-          maxItems: 100
-          items:
-            $ref: '#/definitions/cancelOrderListRequestItem'
+          type: object
+          description: The key is the imnOrderId
+          additionalProperties:
+            $ref: '#/definitions/cancelOrderRequest'
       responses:
         202:
           description: Succesfully received and processed batched operations.
