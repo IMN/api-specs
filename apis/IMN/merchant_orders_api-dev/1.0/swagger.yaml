@@ -196,7 +196,7 @@ paths:
       description: The purpose of this operation is to reduce the amount of request to the API.
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
-      - name: imnOrderIds
+      - name: request
         in: body
         required: true
         schema:
@@ -311,7 +311,7 @@ paths:
         in: body
         required: true
         schema:
-          $ref: '#/definitions/imnOrderIds'
+          $ref: '#/definitions/acceptOrderListRequest'
       responses:
         202:
           description: Succesfully received and processed batched operations.
@@ -338,7 +338,7 @@ paths:
         in: body
         required: true
         schema:
-          $ref: '#/definitions/imnOrderIds'
+          $ref: '#/definitions/refuseOrderListRequest'
       responses:
         202:
           description: Succesfully received and processed batched operations.
