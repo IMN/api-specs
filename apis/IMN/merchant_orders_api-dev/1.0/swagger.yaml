@@ -260,6 +260,7 @@ paths:
         required: true
         schema:
           type: object
+          format: Dictionary<string,ShipOrderWithTrackingUrlRequest>
           description: The key is the imnOrderId
           additionalProperties:
             $ref: '#/definitions/shipOrderWithTrackingUrlRequest'
