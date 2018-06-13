@@ -204,6 +204,7 @@ paths:
         schema:
           type: array
           minItems: 1
+          uniqueItems: true
           maxItems: 100
           items:
             $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderId'
