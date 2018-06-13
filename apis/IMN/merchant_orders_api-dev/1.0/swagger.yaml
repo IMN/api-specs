@@ -231,10 +231,7 @@ paths:
         in: body
         required: true
         schema:
-          type: object
-          description: The key is the imnOrderId
-          additionalProperties:
-            $ref: '#/definitions/shipOrderRequest'
+         $ref: '#/definitions/shipOrderListRequest'
       responses:
         202:
           description: Succesfully received and processed batched operations.
@@ -1644,7 +1641,14 @@ definitions:
     items:
       $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderId'
 
-  
+
+  shipOrderListRequest:
+    type: object
+    description: The key is the imnOrderId
+    additionalProperties:
+      $ref: '#/definitions/shipOrderRequest'
+
+
 x-azure-api-id: 'merchant_orders_v1'
 host: api.imn.io
 basePath: /merchant/orders/v1
