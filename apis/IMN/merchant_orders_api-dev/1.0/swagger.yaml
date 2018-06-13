@@ -232,8 +232,9 @@ paths:
         required: true
         schema:
           type: object
+          description: The key is the imnOrderId
           additionalProperties:
-            $ref: '#/definitions/shipOrderListRequestItem'
+            $ref: '#/definitions/shipOrderRequest'
       responses:
         202:
           description: Succesfully received and processed batched operations.
@@ -261,12 +262,10 @@ paths:
         in: body
         required: true
         schema:
-          type: array
-          uniqueItems: true
-          minItems: 1
-          maxItems: 100
-          items:
-            $ref: '#/definitions/shipOrderWithTrackingUrlListRequestItem'
+          type: object
+          description: The key is the imnOrderId
+          additionalProperties:
+            $ref: '#/definitions/shipOrderWithTrackingUrlRequest'
       responses:
         202:
           description: Succesfully received and processed batched operations.
@@ -1451,30 +1450,10 @@ definitions:
 
 
   
-  shipOrderListRequestItem:
-    allOf:
-    - $ref: '#/definitions/shipOrderRequest'
-    - type: object
-      description: Contains the order identifier and the change order request
-      required:
-      - imnOrderId
-      properties:
-        imnOrderId:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderId'
 
 
 
-  shipOrderWithTrackingUrlListRequestItem:
-    allOf:
-    - $ref: '#/definitions/shipOrderWithTrackingUrlRequest'
-    - type: object
-      description: Contains the order identifier and the change order request
-      required:
-      - imnOrderId
-      properties:
-        imnOrderId:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderId'
-        
+
 
 
   
