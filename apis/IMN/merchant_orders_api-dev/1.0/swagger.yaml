@@ -202,12 +202,7 @@ paths:
         in: body
         required: true
         schema:
-          type: array
-          minItems: 1
-          uniqueItems: true
-          maxItems: 100
-          items:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderId'
+          $ref: '#/definitions/imnOrderIds'
       responses:
         202:
           description: Succesfully received and processed batched operations. Please check response to see the status per operation.
@@ -236,7 +231,9 @@ paths:
         in: body
         required: true
         schema:
-          $ref: '#/definitions/shipOrderListRequest'
+          type: object
+          additionalProperties:
+            $ref: '#/definitions/shipOrderListRequestItem'
       responses:
         202:
           description: Succesfully received and processed batched operations.
@@ -248,6 +245,38 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
 
+  '/{merchantCode}/{marketplaceCode}/batches/shipWithTrackingUrl':
+    post:
+      tags:
+      - Batches
+      operationId: ShipOrderListWithTrackUrl
+      summary: Ship multiple marketplace orders with tracking url in one operation
+      description: The purpose of this operation is to reduce the amount of request to the API.
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/testModeInQueryParameter'
+      - name: request
+        in: body
+        required: true
+        schema:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          maxItems: 100
+          items:
+            $ref: '#/definitions/shipOrderWithTrackingUrlListRequestItem'
+      responses:
+        202:
+          description: Succesfully received and processed batched operations.
+        400:
+          description: Requested too many batch operations
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+      deprecated: false
 
 
   '/{merchantCode}/{marketplaceCode}/batches/refund':
@@ -266,7 +295,12 @@ paths:
         in: body
         required: true
         schema:
-          $ref: '#/definitions/refundOrderListRequest'
+          type: array
+          uniqueItems: true
+          minItems: 1
+          maxItems: 100
+          items:
+            $ref: '#/definitions/refundOrderListRequestItem'
       responses:
         202:
           description: Succesfully received and processed batched operations. Please check response to see the status per operation.
@@ -295,7 +329,7 @@ paths:
         in: body
         required: true
         schema:
-          $ref: '#/definitions/acceptOrderListRequest'
+          $ref: '#/definitions/imnOrderIds'
       responses:
         202:
           description: Succesfully received and processed batched operations.
@@ -307,6 +341,33 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
 
+  '/{merchantCode}/{marketplaceCode}/batches/refuse':
+    post:
+      tags:
+      - Batches
+      operationId: RefuseOrderList
+      summary: Refuse multiple marketplace orders in one operation
+      description: The purpose of this operation is to reduce the amount of request to the API.
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/testModeInQueryParameter'
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/imnOrderIds'
+      responses:
+        202:
+          description: Succesfully received and processed batched operations.
+        400:
+          description: Requested too many batch operations
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+      deprecated: false
 
 
   '/{merchantCode}/{marketplaceCode}/batches/cancel':
@@ -325,7 +386,12 @@ paths:
         in: body
         required: true
         schema:
-          $ref: '#/definitions/cancelOrderListRequest'
+          type: array
+          uniqueItems: true
+          minItems: 1
+          maxItems: 100
+          items:
+            $ref: '#/definitions/cancelOrderListRequestItem'
       responses:
         202:
           description: Succesfully received and processed batched operations.
@@ -624,6 +690,41 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
 
+
+  '/{merchantCode}/{marketplaceCode}/{imnOrderId}/shipWithTrackingUrl':
+    post:
+      tags:
+      - Order
+      operationId: ShipOrderWithTrackingUrl
+      summary: Ship your marketplace order with tracking url
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/imnOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/testModeInQueryParameter'
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/shipOrderWithTrackingUrlRequest'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/ifMatchParameter'
+      responses:
+        202:
+          description: Order ship with tracking url request accepted
+        400:
+          description: Invalid order ship request, could not be send to the marketplace. Please check the body of this request.
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+        404:
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
+        409:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeNotFound'        
+        412:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/412_PreConditionFailed'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+      deprecated: false
 
 
   '/{merchantCode}/{marketplaceCode}/{imnOrderId}/refund':
@@ -1349,132 +1450,58 @@ definitions:
 
 
 
-  shipOrderListRequest:
-    type: object
-    description: Contains all change order operations you want to make
-    required:
-    - shipOrders
-    properties:
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
-      shipOrders:
-        type: array
-        description: The change order operations
-        minLength: 1
-        maxLength: 100
-        items:
-         $ref: '#/definitions/shipOrderListRequestItem'
-
+  
   shipOrderListRequestItem:
-    type: object
-    description: Contains the order identifier and the change order request
-    required:
-    - order
-    - shipOrderRequest
-    properties:
-      order:
-        $ref: '#/definitions/orderIdentifierWithETag'
-      shipOrderRequest:
-        $ref: '#/definitions/shipOrderRequest'
+    allOf:
+    - $ref: '#/definitions/shipOrderRequest'
+    - type: object
+      description: Contains the order identifier and the change order request
+      required:
+      - imnOrderId
+      properties:
+        imnOrderId:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderId'
 
 
 
+  shipOrderWithTrackingUrlListRequestItem:
+    allOf:
+    - $ref: '#/definitions/shipOrderWithTrackingUrlRequest'
+    - type: object
+      description: Contains the order identifier and the change order request
+      required:
+      - imnOrderId
+      properties:
+        imnOrderId:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderId'
+        
 
 
-  refundOrderListRequest:
-    type: object
-    description: Contains all change order operations you want to make
-    required:
-    - shipOrders
-    properties:
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
-      refundOrders:
-        type: array
-        description: The change order operations
-        minLength: 1
-        maxLength: 100
-        items:
-         $ref: '#/definitions/refundOrderListRequestItem'
-
+  
   refundOrderListRequestItem:
-    type: object
-    description: Contains the order identifier and the change order request
-    required:
-    - order
-    - refundOrderRequest
-    properties:
-      order:
-        $ref: '#/definitions/orderIdentifierWithETag'
-      refundOrderRequest:
-        $ref: '#/definitions/refundOrderRequest'
+    allOf:
+    - $ref: '#/definitions/refundOrderRequest'
+    - type: object
+      description: Contains the order identifier and the change order request
+      required:
+      - imnOrderId
+      properties:
+        imnOrderId:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderId'
 
 
-  acceptOrderListRequest:
-    type: object
-    description: Contains all change order operations you want to make
-    required:
-    - acceptOrders
-    properties:
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
-      acceptOrders:
-        type: array
-        description: The change order operations
-        minLength: 1
-        maxLength: 100
-        items:
-         $ref: '#/definitions/acceptOrderListRequestItem'
-
-  acceptOrderListRequestItem:
-    type: object
-    description: Contains the order identifier and the change order request
-    required:
-    - order
-    properties:
-      order:
-        $ref: '#/definitions/orderIdentifierWithETag'
-
-
-  cancelOrderListRequest:
-    type: object
-    description: Contains all change order operations you want to make
-    required:
-    - cancelOrders
-    properties:
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
-      cancelOrders:
-        type: array
-        description: The change order operations
-        minLength: 1
-        maxLength: 100
-        items:
-         $ref: '#/definitions/cancelOrderListRequestItem'
 
   cancelOrderListRequestItem:
-    type: object
-    description: Contains the order identifier and the change order request
-    required:
-    - order
-    - cancelOrderRequest
-    properties:
-      order:
-        $ref: '#/definitions/orderIdentifierWithETag'
-      cancelOrderRequest:
-        $ref: '#/definitions/cancelOrderRequest'
-
-
-
-
-  orderIdentifierWithETag:
     allOf:
-    - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
+    - $ref: '#/definitions/cancelOrderRequest'
     - type: object
+      description: Contains the order identifier and the change order request
       required:
-      - marketplaceCode
-      - merchantCode
       - imnOrderId
-      - etag
       properties:
-        etag:
-         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderEtag'
+        imnOrderId:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderId'
+
 
 
   refundOrderRequest:
@@ -1514,7 +1541,7 @@ definitions:
       carrierCode: MondialRelay
 
 
-  shipOrderWithOtherCarrierRequest:
+  shipOrderWithTrackingUrlRequest:
     type: object
     description: The ship order parameters for an unidentified carrier in the carrierCode enum
     required:
@@ -1663,6 +1690,16 @@ definitions:
     enum:
     - order.created
     - order.updated
+    
+
+  imnOrderIds:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    maxItems: 100
+    items:
+      $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderId'
+
   
 x-azure-api-id: 'merchant_orders_v1'
 host: api.imn.io
