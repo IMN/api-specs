@@ -1627,7 +1627,7 @@ definitions:
           $ref: '#/definitions/cancelOrderListRequestItem'
 
 
-  cancelOrderRequestItem:
+  cancelOrderListRequestItem:
     type: object
     required:
     - order
