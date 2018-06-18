@@ -303,7 +303,6 @@ paths:
       responses:
         202:
           $ref: '#/responses/orderChangeBatchOperationResponse'
-          
         400:
           $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderBatchBadRequest'
         default:
