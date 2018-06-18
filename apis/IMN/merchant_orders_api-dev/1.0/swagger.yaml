@@ -181,6 +181,7 @@ paths:
           description: Succesfully received and processed batched operations.
         400:
           description: Requested too many batch operations
+          
           schema:
             $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
         default:
@@ -722,10 +723,12 @@ paths:
           $ref: '#/definitions/refundOrderRequest'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/ifMatchParameter'
       responses:
-        202:
+        200:
           description: Order refund request accepted
         400:
           description: Invalid order refund request, could not be send to the marketplace. Please check the body of this request.
+          x-exceptions:
+          - ValidationException
           schema:
             $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
         404:
@@ -1131,11 +1134,19 @@ definitions:
     allOf:
     - $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3
 
+  links.ShipOrderWithTrackingUrlLink:
+    allOf:
+    - $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3
+
   links.RefundOrderLink:
     allOf:
     - $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3
 
   links.AcceptOrderLink:
+    allOf:
+    - $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3
+
+ links.RefuseOrderLink:
     allOf:
     - $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3
 
@@ -1149,10 +1160,14 @@ definitions:
     properties:
       accept:
         $ref: '#/definitions/links.AcceptOrderLink'
+      refuse:
+        $ref: '#/definitions/links.RefuseOrderLink'
       cancel:
         $ref: '#/definitions/links.CancelOrderLink'
       ship:
         $ref: '#/definitions/links.ShipOrderLink'
+      shipWithTrackingUrl:
+        $ref: '#/definitions/shipOrderWithTrackingUrlRequest'
       refund:
         $ref: '#/definitions/links.RefundOrderLink'
         
