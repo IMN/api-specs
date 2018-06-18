@@ -1558,11 +1558,16 @@ definitions:
     required:
     - order
     - request
+    - etag
     properties:
       order:
         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
       request:
         $ref: '#/definitions/shipOrderRequest'
+      etag:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderEtag'
+
+
 
   shipOrderWithTrackingUrlListRequest:
     type: object
@@ -1583,11 +1588,14 @@ definitions:
     required:
     - order
     - request
+    - etag
     properties:
       order:
         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
       request:
         $ref: '#/definitions/shipOrderWithTrackingUrlRequest'
+      etag:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderEtag'
 
   refundOrderListRequest:
     type: object
@@ -1607,11 +1615,14 @@ definitions:
     required:
     - order
     - request
+    - etag
     properties:
       order:
         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
       request:
         $ref: '#/definitions/refundOrderRequest'
+      etag:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderEtag'
 
   cancelOrderListRequest:
     type: object
@@ -1632,11 +1643,14 @@ definitions:
     required:
     - order
     - request
+    - etag
     properties:
       order:
         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
       request:
         $ref: '#/definitions/cancelOrderRequest'
+      etag:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderEtag'
 
 
 
@@ -1657,9 +1671,12 @@ definitions:
     type: object
     required:
     - order
+    - etag
     properties:
       order:
         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
+      etag:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderEtag'
 
 
   refuseOrderListRequest:
@@ -1679,9 +1696,12 @@ definitions:
     type: object
     required:
     - order
+    - etag
     properties:
       order:
         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
+      etag:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderEtag'
 
 
 
@@ -1705,7 +1725,7 @@ definitions:
     properties:
       order:
         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
-      
+
     
     
   setMerchantOrderInfoListRequest:
