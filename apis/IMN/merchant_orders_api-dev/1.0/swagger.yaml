@@ -201,9 +201,8 @@ paths:
         200:
           $ref: '#/responses/orderMerchantInfoBatchOperationResponse'
         400:
-          description: Requested too many batch operations
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderBatchBadRequest'
+
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
@@ -226,9 +225,8 @@ paths:
         200:
           $ref: '#/responses/orderMerchantInfoBatchOperationResponse'
         400:
-          description: Requested too many batch operations
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderBatchBadRequest'
+
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
@@ -254,9 +252,7 @@ paths:
         202:
           $ref: '#/responses/orderChangeBatchOperationResponse'
         400:
-          description: Requested too many batch operations
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderBatchBadRequest'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
@@ -281,9 +277,8 @@ paths:
         202:
           $ref: '#/responses/orderChangeBatchOperationResponse'
         400:
-          description: Requested too many batch operations
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderBatchBadRequest'
+
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
@@ -310,9 +305,7 @@ paths:
           $ref: '#/responses/orderChangeBatchOperationResponse'
           
         400:
-          description: Requested too many batch operations
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderBatchBadRequest'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
@@ -336,11 +329,9 @@ paths:
           $ref: '#/definitions/acceptOrderListRequest'
       responses:
         202:
-          description: Succesfully received and processed batched operations.
+          $ref: '#/responses/orderChangeBatchOperationResponse'
         400:
-          description: Requested too many batch operations
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderBatchBadRequest'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
@@ -363,11 +354,9 @@ paths:
           $ref: '#/definitions/refuseOrderListRequest'
       responses:
         202:
-          description: Succesfully received and processed batched operations.
+          $ref: '#/responses/orderChangeBatchOperationResponse'
         400:
-          description: Requested too many batch operations
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderBatchBadRequest'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
@@ -391,11 +380,10 @@ paths:
           $ref: '#/definitions/cancelOrderListRequest'
       responses:
         202:
-          description: Succesfully received and processed batched operations.
+          $ref: '#/responses/orderChangeBatchOperationResponse'
         400:
-          description: Requested too many batch operations
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderBatchBadRequest'
+
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
