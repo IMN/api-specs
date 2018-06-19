@@ -11,11 +11,17 @@ x-IMN-api-ops:
   repo: IMN
   appRoot: IMN.ADPT.Order.OrderChange.BeezUP
   apiName: OrderAdapterOrderChangeBeezUPApplier
+  applicationShortName: Order.OrderChange.BeezUP 
   namespace: IMN.ADPT.Order.OrderChange.BeezUP
   comment: |
     Actor
   using:
   - IMN.Order.Events
+  references:
+  - IMN.Order.Events
+  packages:
+  - EventHubs
+  - AzureStorage
 
 paths:
 
