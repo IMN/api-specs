@@ -25,6 +25,9 @@ basePath: /gateway/offers/v1
 
 x-IMN-api-ops:
   codeGenType: webapi
+  useBeezUPFrameworkVersion2: true
+  product: IMN-ADPT
+  group: Offer
   repo: IMN
   apiName: GatewayOffersV1
   appRoot: IMN.ADPT.Offer.WebService
