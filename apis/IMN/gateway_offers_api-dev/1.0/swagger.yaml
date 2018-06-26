@@ -36,6 +36,7 @@ x-IMN-api-ops:
   comment: |
     No change. Just server side generation.
   using:
+  - IMN.Schemas
   - IMN.Offer.Schemas
   references:
   - IMN.Offer.Schemas
