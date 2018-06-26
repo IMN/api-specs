@@ -38,6 +38,7 @@ x-IMN-api-ops:
   using:
   - IMN.Schemas
   - IMN.Offer.Schemas
+  - BeezUP2.Framework.Messaging
   references:
   - IMN.Offer.Schemas
   
