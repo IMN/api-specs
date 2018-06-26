@@ -33,9 +33,9 @@ x-IMN-api-ops:
   comment: |
     No change. Just server side generation.
   using:
-  - IMN.Offers.Schemas
+  - IMN.Offer.Schemas
   references:
-  - IMN.Offers.Schemas
+  - IMN.Offer.Schemas
   
 
 x-basePath: /gateway/offers/v1
