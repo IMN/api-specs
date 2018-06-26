@@ -32,7 +32,6 @@ x-IMN-api-ops:
     No change. Just server side generation.
   using:
   - IMN.Schemas
-  - IMN.MER.Schemas
   - IMN.Offer.Messages
   
 
