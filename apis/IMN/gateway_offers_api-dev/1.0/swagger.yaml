@@ -24,12 +24,18 @@ basePath: /gateway/offers/v1
 
 
 x-IMN-api-ops:
+  codeGenType: webapi
   repo: IMN
   apiName: GatewayOffersV1
   appRoot: IMN.ADPT.Offer.WebService
+  applicationShortName: Offer.WebService
   namespace: IMN.ADPT.Offer.WebService
   comment: |
     No change. Just server side generation.
+  using:
+  - IMN.Offers.Schemas
+  references:
+  - IMN.Offers.Schemas
   
 
 x-basePath: /gateway/offers/v1
