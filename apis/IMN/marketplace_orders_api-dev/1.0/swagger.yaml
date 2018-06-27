@@ -1,0 +1,163 @@
+swagger: '2.0'
+info:
+  version: "1.0"
+  title: Marketplaces - Orders
+  description: Draft
+  x-logo:
+    url: "https://avatars0.githubusercontent.com/u/25665430"
+    backgroundColor: "#FFFFFF"
+
+  contact:
+    email: help@imn.io
+
+  license:
+    name: IMN
+    url: http://www.imn.io
+
+x-IMN-api-ops:
+  codeGenType: webapi
+  repo: IMN
+  product: IMN-CORE
+  group: Order
+  applicationShortName: MKP.Orders.WS
+  appRoot: IMN.MKP.Orders.WebService
+  namespace: IMN.MKP.Orders.WebService
+  apiName: MarketplaceOrdersV1
+  useBeezUPFrameworkVersion2: true
+  comment: |
+    First document
+  using:
+  - IMN.Schemas
+  - IMN.Order.Schemas
+  - IMN.Order.Exceptions
+  - BeezUP2.Framework.Messaging
+  dependencies:
+  - EventHubs
+  - EntityFramework
+  - Redis
+
+x-host: api.imn.io
+x-basePath: /marketplace/orders/v1
+
+externalDocs:
+  description: IMN API documentation
+  url: https://mkp-api-docs.imn.io
+
+x-servers:
+- url: https://api.imn.io/marketplace/orders/v1
+  description: Production Server
+
+x-azure-api-id: 'marketplace_orders_v1'
+host: api.imn.io
+basePath: /marketplace/orders/v1
+
+schemes:
+  - https
+
+# tags are used for organizing operations
+tags:
+- name: Order Change Reporting
+  description: The order change reporting operations
+
+- name: Batches
+  description: All batch operations on Orders to reduce call rate
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+
+  '/{marketplaceCode}/{merchantCode}/events':
+    post:
+      tags:
+      - Batches
+      operationId: PushMerchantOrdersEvents
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: request
+        in: body
+        schema:
+          $ref: '#/definitions/batchMerchantMarketplaceOrders'
+      responses:
+        '204':
+          description: The merchant orders changes have been saved!
+        '400':
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-exceptions/1.0#/responses/offerBatchBadRequest'
+        '403':
+          description: The merchant has disabled the marketplace
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+  '/{marketplaceCode}/{merchantCode}/{imnOrderId}/changes/{correlationId}/done':
+    post:
+      tags:
+      - Order Change Reporting
+      operationId: OrderChangeStatusCompleted
+      summary: Declare the completion of the order change request by the marketplace
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/imnOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/correlationIdParameter'
+      responses:
+        '204':
+          description: The merchant orders changes have been saved!
+        400:
+          description: Something wrong in the request, please check the documentation.
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+        404:
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeNotFound'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+  '/{marketplaceCode}/{merchantCode}/{imnOrderId}/changes/{correlationId}/failed':
+    post:
+      tags:
+      - Order Change Reporting
+      operationId: OrderChangeStatusFailed
+      summary: Declare the failure of the order change request by the marketplace
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/imnOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/correlationIdParameter'
+      - name: request
+        in: body
+        required: true
+        description: The error that explains to the merchant why the order change has failed
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/userErrorMessage'
+      responses:
+        '204':
+          description: The merchant order change failure has been processed
+        400:
+          description: Something wrong in the request, please check the documentation.
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+        404:
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeNotFound'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+definitions:
+
+  batchMerchantMarketplaceOrders:
+    x-format: Message
+    type: object
+    description: Create or replace orders for one marketplace for one merchant
+    required:
+    - orders
+    properties:
+      orders:
+        type: array
+        description: Orders that need to be created or replaced
+        minItems: 1
+        maxItems: 1000
+        items:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderMarketplaceInfo'
