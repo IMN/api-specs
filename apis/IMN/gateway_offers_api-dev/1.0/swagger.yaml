@@ -111,9 +111,7 @@ paths:
         '204':
           description: The merchant offers changes have been saved!
         '400':
-          description: Invalid marketplace code or merchant code or there is duplicate offer(s) in the request
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-exceptions/1.0#/responses/offerBatchBadRequest'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
