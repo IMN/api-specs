@@ -27,7 +27,7 @@ x-IMN-api-ops:
   codeGenType: webapi
   useBeezUPFrameworkVersion2: true
   product: IMN-ADPT
-  group: OfferPub
+  group: adpt-offerpub
   repo: IMN
   apiName: GatewayOffersV1
   appRoot: IMN.ADPT.Offers.WebService
