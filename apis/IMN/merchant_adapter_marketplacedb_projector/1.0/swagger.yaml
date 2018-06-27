@@ -1,0 +1,87 @@
+swagger: '2.0'
+info:
+  version: "1.0"
+  title: 'IMN ADAPTER - Merchant Adapter MarketplaceDb Projector'
+
+host: IMN.ADPT.MER.PROJ.MarketplaceDb
+basePath: /MerchantAdapterMarketplaceDbProjectorApplier
+
+x-IMN-api-ops:
+  codeGenType: eventHandlerActor
+  repo: IMN
+  appRoot: IMN.ADPT.MER.PROJ.MarketplaceDb
+  apiName: MerchantAdapterMarketplaceDbApplierApp
+  applicationShortName: MER.PROJ.MarketplaceDb
+  namespace: IMN.ADPT.MER.PROJ.MarketplaceDb
+  comment: |
+    Actor
+  using:
+  - IMN.MER.Events
+  references:
+  - IMN.MER.Events
+  packages:
+  - EventHubs
+
+paths:
+
+  '/merchantMarketplaceCredentialConfigured':
+    post:
+      summary: When the merchant declared his marketplace credential
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceCredentialConfigured'
+      responses:
+        204:
+          description: OK
+
+  '/offerPublicationEnabled':
+    post:
+      summary: When the offer publication is enabled
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOfferPublicationEnabled'
+      responses:
+        204:
+          description: OK
+
+  '/offerPublicationDisabled':
+    post:
+      summary: When the offer publication is disabled
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOfferPublicationDisabled'
+      responses:
+        204:
+          description: OK
+
+  '/orderImportationEnabled':
+    post:
+      summary: When the order importation is enabled
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOrderImportationEnabled'
+      responses:
+        204:
+          description: OK
+
+  '/orderImportationDisabled':
+    post:
+      summary: When the offer importation is disabled
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOrderImportationDisabled'
+      responses:
+        204:
+          description: OK
+
+definitions: {}
