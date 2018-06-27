@@ -26,12 +26,15 @@ x-IMN-api-ops:
   repo: IMN
   apiName: MerchantOffersV1
   appRoot: IMN.MER.Offer.WebService
+  applicationShortName: MER.Offer.WebService
   namespace: IMN.MER.Offer.WebService
   useBeezUPFrameworkVersion2: true
   comment: |
     No change. Just server side generation.
   using:
   - IMN.Schemas
+  - IMN.Offer.Messages
+  references:
   - IMN.Offer.Messages
   
 
