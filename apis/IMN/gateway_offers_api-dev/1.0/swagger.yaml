@@ -42,7 +42,10 @@ x-IMN-api-ops:
   - BeezUP2.Framework.Messaging
   references:
   - IMN.Offer.Schemas
-  
+  - IMN.Offer.Exceptions
+  - IMN.Offer.Helpers
+  - IMN.Exceptions
+
 
 x-basePath: /gateway/offers/v1
 
