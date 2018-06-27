@@ -30,9 +30,9 @@ x-IMN-api-ops:
   group: OfferPub
   repo: IMN
   apiName: GatewayOffersV1
-  appRoot: IMN.ADPT.Offer.WebService
-  applicationShortName: Offer.WebService
-  namespace: IMN.ADPT.Offer.WebService
+  appRoot: IMN.ADPT.Offers.WebService
+  applicationShortName: Offers.WebService
+  namespace: IMN.ADPT.Offers.WebService
   comment: |
     No change. Just server side generation.
   using:
