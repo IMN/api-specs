@@ -10,8 +10,9 @@ x-IMN-api-ops:
   codeGenType: eventHandlerActor
   repo: IMN
   appRoot: IMN.ADPT.Order.OrderChange.BeezUP
-  apiName: OrderAdapterOrderChangeBeezUPProjectorApplier
-  applicationShortName: Order.OrderChange.BeezUP 
+  apiName: OrderAdapterOrderChangeBeezUPApplier
+  applicationShortName: Order.OrderChange.BeezUP
+  product: IMN-ADPT
   namespace: IMN.ADPT.Order.OrderChange.BeezUP
   comment: |
     Actor
