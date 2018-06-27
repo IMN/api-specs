@@ -37,14 +37,14 @@ x-IMN-api-ops:
     No change. Just server side generation.
   using:
   - IMN.Schemas
-  - IMN.Offer.Schemas
   - IMN.Offer.Messages
   - BeezUP2.Framework.Messaging
-  references:
-  - IMN.Offer.Schemas
+  - IMN.Exceptions
   - IMN.Offer.Exceptions
+  references:
   - IMN.Offer.Helpers
   - IMN.Exceptions
+  - IMN.Offer.Exceptions
 
 
 x-basePath: /gateway/offers/v1
