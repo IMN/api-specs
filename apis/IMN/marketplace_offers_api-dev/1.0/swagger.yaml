@@ -27,7 +27,7 @@ x-IMN-api-ops:
   apiName: MarketplaceOffersV1
   appRoot: IMN.MKP.Offers.WebService
   applicationShortName: MKP.Offers.WS
-  namespace: IMN.MKP.Offers.WebService
+    namespace: IMN.MKP.Offers.WebService
   useBeezUPFrameworkVersion2: true
   comment: |
     No change. Just server side generation.
@@ -118,6 +118,9 @@ paths:
       responses:
         '204':
           description: The marketplace merchant offers changes have been saved!
+
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-exceptions/1.0#/responses/offerBatchBadRequest'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
           
