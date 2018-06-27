@@ -13,6 +13,7 @@ x-IMN-api-ops:
   apiName: MerchantAdapterMarketplaceDbApplierApp
   applicationShortName: MER.PROJ.MarketplaceDb
   product: IMN-ADPT
+  group: Order
   namespace: IMN.ADPT.MER.PROJ.MarketplaceDb
   comment: |
     Actor
