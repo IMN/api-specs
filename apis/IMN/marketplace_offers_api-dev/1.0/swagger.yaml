@@ -27,18 +27,21 @@ x-IMN-api-ops:
   apiName: MarketplaceOffersV1
   appRoot: IMN.MKP.Offers.WebService
   applicationShortName: MKP.Offers.WS
-    namespace: IMN.MKP.Offers.WebService
+  namespace: IMN.MKP.Offers.WebService
   useBeezUPFrameworkVersion2: true
   comment: |
     No change. Just server side generation.
   using:
   - IMN.Schemas
   - IMN.Offer.Messages
-  - IMN.Offer.Messages
   - BeezUP2.Framework.Messaging
+  - IMN.Exceptions
+  - IMN.Offer.Exceptions
   references:
   - IMN.Offer.Helpers
-  
+  - IMN.Exceptions
+  - IMN.Offer.Exceptions
+
 
 x-basePath: /marketplace/offers/v1
 
