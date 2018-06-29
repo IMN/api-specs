@@ -16,6 +16,7 @@ x-beezup-ops:
     Actor
   using:
   - IMN.Offer.Events
+  - IMN.Offer.EXP.Events
 
 paths:
 
