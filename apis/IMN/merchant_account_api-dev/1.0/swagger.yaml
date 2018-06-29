@@ -256,6 +256,7 @@ definitions:
     - country
     - companyName
     - phoneNumber
+    - currencyCode
     properties:
       code:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/merchantCode'
@@ -274,6 +275,9 @@ definitions:
       phoneNumber:
         type: string
         example: 0663963036
+      currencyCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/currencyCode'
+
  
   updateMerchantAccountRequest:
     type: object
@@ -283,6 +287,7 @@ definitions:
      - country
      - companyName
      - phoneNumber
+     - currencyCode
     properties:
       firstName:
         type: string
@@ -299,6 +304,8 @@ definitions:
         example: 0663963036
       imageUrl:
         $ref: '#/definitions/httpUrl'
+      currencyCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/currencyCode'
 
 
 
@@ -313,6 +320,7 @@ definitions:
     - companyName
     - phoneNumber
     - apiToken
+    - currencyCode
     - links
     properties:
       merchantCode:
@@ -334,6 +342,8 @@ definitions:
         example: 0663963036
       imageUrl:
         $ref: '#/definitions/httpUrl'
+      currencyCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/currencyCode'
       apiToken:
         type: string
         description: The api token that you will have to use to connect to our API
