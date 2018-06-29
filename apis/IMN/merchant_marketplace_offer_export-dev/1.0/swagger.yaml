@@ -44,7 +44,7 @@ paths:
     post:
       tags: 
       - Offer Exportation Events
-      summary: When the initializer starts to retrieve merchant offers
+      summary: When the initializer starts to retrieve merchant offers. Used to purge the transformed offers referential
       parameters: 
       - name: request
         in: body
