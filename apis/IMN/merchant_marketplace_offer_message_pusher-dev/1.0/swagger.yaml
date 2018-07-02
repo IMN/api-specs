@@ -56,14 +56,14 @@ paths:
         204:
           description: OK
 
-  '/offerExportInitializationStarted':
+  '/offerExportInitializationStartedForExport':
     post:
       summary: When the initializer starts to retrieve merchant offers. Propagated from initializer to purge the transformed offers referential
       parameters: 
       - name: request
         in: body
         schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_export-events/1.0#/definitions/offerExportInitializationStarted'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_export-events/1.0#/definitions/offerExportInitializationStartedForPartition'
       responses:
         204:
           description: OK
