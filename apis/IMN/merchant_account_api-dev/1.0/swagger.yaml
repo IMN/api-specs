@@ -357,6 +357,11 @@ definitions:
         example: '2b1ff3a068054433ac09224bbb1ff3a068054433ac09224bb0c9d7ea=='
       ecommerceSoftwareName:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/ecommerceSoftwareName'
+# [Style Validator (6ca033b6-0d03-4b35-ab93-3c7900fc8363) : All model properties must have examples]: Field 'example' required in 'properties'
+      importedOfferCount:
+        type: integer
+        format: int32
+        description: Imported offer count from the source marketplace or from his shop system source
 
       links:
         $ref: '#/definitions/merchantAccountInfoLinks'
