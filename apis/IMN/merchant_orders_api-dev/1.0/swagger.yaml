@@ -932,6 +932,61 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
 
+
+  '/{merchantCode}/reports/byday':
+    post:
+      tags:
+        - Statistics
+      summary: Get the report by day
+      description: Get the report by day
+      operationId: GetMerchantReportByDay
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/reportByDayRequest'
+      responses:
+        200:
+          description: Your reporting by day
+          schema:
+            $ref: '#/definitions/reportByDayResponse'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+  '/{merchantCode}/reports/byMarketplace':
+    post:
+      tags:
+        - Statistics
+      summary: Get the report by marketplace
+      description: Get the report by marketplace
+      operationId: GetMerchantReportByMarketplace
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/reportByChannelRequest'
+      responses:
+        200:
+          description: Your reporting by channel
+          schema:
+            $ref: '#/definitions/reportByChannelResponse'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+
 definitions:
 
 
