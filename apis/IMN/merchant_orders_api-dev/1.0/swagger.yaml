@@ -89,6 +89,9 @@ tags:
 - name: Subscriptions - DRAFT
   description: All orders subscription operations - DRAFT
 
+- name: Statistics
+  description: The statistics of your orders
+
 consumes:
   - application/json
 produces:
@@ -955,37 +958,9 @@ paths:
         400:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
         404:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
-
-  '/{merchantCode}/reports/byMarketplace':
-    post:
-      tags:
-        - Statistics
-      summary: Get the report by marketplace
-      description: Get the report by marketplace
-      operationId: GetMerchantReportByMarketplace
-      parameters:
-      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
-      - name: request
-        in: body
-        required: true
-        schema:
-          $ref: '#/definitions/reportByChannelRequest'
-      responses:
-        200:
-          description: Your reporting by channel
-          schema:
-            $ref: '#/definitions/reportByChannelResponse'
-        400:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
-        404:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
-        default:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
-
-
 
 definitions:
 
@@ -994,7 +969,85 @@ definitions:
 
  
  
- 
+  reportByDayRequest:
+    required:
+    - beginPeriodUtcDate
+    - endPeriodUtcDate
+    type: object
+    properties:
+      marketplaceCodes:
+        description: Indicate the marketplace identifier list
+        type: array
+        items:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
+        example:
+        - C1
+        - E1
+        - R1
+      beginPeriodUtcDate:
+        type: string
+        format: date
+        description: The begin date of the period for the report
+        example: '2006-11-20T00:00:00Z'
+      endPeriodUtcDate:
+        type: string
+        format: date
+        description: The end date of the period for the report
+        example: '2006-12-20T00:00:00Z'
+
+
+
+
+
+  reportByDayResponse:
+    type: object
+    required:
+    - days
+    properties:
+      days:
+        type: array
+        items:
+          $ref: '#/definitions/reportByDay'
+
+
+
+  reportByDay:
+    type: object
+    required:
+    - day
+    - byMarketplaces
+    properties:
+      day:
+        type: string
+        format: date
+        example: '2017-04-23'
+# [Style Validator (8c3bfea8-ddcf-4f79-8c7c-52fb930044e7) : All model properties must have examples]: Field 'example' required in 'properties'
+# [Style Validator (d4181c6e-f5b7-47c8-b188-98eaaaf65988) : All model properties must have examples]: Field 'example' required in 'properties'
+      byMarketplaces:
+        type: array
+        items:
+          $ref: '#/definitions/reportByDayByMarketplace'
+
+  reportByDayByMarketplace:
+    type: object
+    required:
+    - orderCount
+    - turnOver
+    - currencyCode
+    - marketplaceCode
+    properties:
+      orderCount:
+        type: integer
+        description: The order count
+        example: 42
+      turnover:
+        type: number
+        description: The turnover
+        example: 234.42
+      currencyCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/currencyCode'
+      marketplaceCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
 
 
 
