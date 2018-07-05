@@ -936,6 +936,30 @@ paths:
       deprecated: false
 
 
+  '/{merchantCode}/reports/status':
+    post:
+      tags:
+        - Statistics
+      summary: Get the report status
+      description: Get the report status
+      operationId: GetMerchantReportStatus
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      responses:
+        200:
+          description: Your reporting status
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/reportStatusByMarketplace'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantNotFound'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
   '/{merchantCode}/reports/byday':
     post:
       tags:
@@ -965,6 +989,29 @@ paths:
 definitions:
 
 
+
+  reportStatusByMarketplace:
+    type: object
+    required:
+    - toAccept
+    - toShip
+    - lateToShip
+    - marketplaceCode
+    properties:
+      toAccept:
+        type: integer
+        description: The order count to accept
+        example: 10
+      toShip:
+        type: integer
+        description: The order count to ship
+        example: 34
+      lateToShip:
+        type: integer
+        description: The order count late to ship
+        example: 56
+      marketplaceCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
 
 
  
