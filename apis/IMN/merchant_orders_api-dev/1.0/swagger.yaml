@@ -40,6 +40,7 @@ x-IMN-api-ops:
   - IMN.Order.Schemas
   - IMN.Order.Events
   - IMN.Schemas
+  - IMN.Exceptions
   - IMN.Order.Exceptions
   - BeezUP2.Framework.Messaging
   - BeezUP2.Framework.Processing
