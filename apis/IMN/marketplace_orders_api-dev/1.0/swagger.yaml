@@ -86,7 +86,7 @@ paths:
         '204':
           description: The merchant orders changes have been saved!
         '400':
-          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-exceptions/1.0#/responses/offerBatchBadRequest'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderBatchBadRequest'
         '403':
           description: The merchant has disabled the marketplace
           schema:
