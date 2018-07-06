@@ -24,6 +24,7 @@ basePath: /gateway/orders/v1
 
 
 x-IMN-api-ops:
+  codeGenType: webapi
   repo: IMN
   product: IMN-ADPT
   group: Order
