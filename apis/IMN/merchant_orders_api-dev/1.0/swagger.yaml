@@ -1185,24 +1185,6 @@ definitions:
 
 
 
-  accountSynchronizationList:
-    type: object
-    additionalProperties:
-      $ref: '#/definitions/accountSynchronization'
-
-  accountSynchronization:
-    type: object
-    required:
-    - merchantCode
-    - marketplaceCode
-    - marketplaceBusinessCode
-    properties:
-      completedHarvestSynchroUtcDate:
-        format: date-time
-        type: string
-
-
-
   links.GetOrderLink:
     allOf:
     - $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3
@@ -1262,14 +1244,6 @@ definitions:
     - example:
         href: /merchant/orders/v1/MLT01/C1/A0CD3FG/clearMerchantOrderInfo
         method: POST
-
-  links.HarvestOrderLink:
-    allOf:
-    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
-    - example:
-        href: /merchant/orders/v1/MLT01/C1/A0CD3FG/harvest
-        method: POST
-
 
 
 
@@ -1644,8 +1618,6 @@ definitions:
     properties:
       targetUrl:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/httpUrl'
-      eventTypes:
-        $ref: '#/definitions/subscriptionOrderEventTypeList'
       name:
         $ref: '#/definitions/subscriptionName'
       applicationName:
