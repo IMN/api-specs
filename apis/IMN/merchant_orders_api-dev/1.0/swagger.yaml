@@ -1654,16 +1654,6 @@ definitions:
         $ref: '#/definitions/subscriptionApplicationVersion'
 
 
-  subscriptionOrderEventTypeList:
-    type: array
-    items:
-      $ref: '#/definitions/orderEventType'
-    default:
-    - order.created
-    - order.updated
-    example:
-    - order.created
-    - order.updated
   subscriptionName:
     type: string
     description: The subscription name you want to use
@@ -1684,7 +1674,6 @@ definitions:
     required:
     - id
     - targetUrl
-    - eventTypes
     - status
     - name
     - applicationName
@@ -1696,8 +1685,6 @@ definitions:
         $ref: '#/definitions/subscriptionStatus'
       targetUrl:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/httpUrl'
-      eventTypes:
-        $ref: '#/definitions/subscriptionOrderEventTypeList'
       name:
         $ref: '#/definitions/subscriptionName'
       applicationName:
@@ -1712,16 +1699,10 @@ definitions:
     type: string
     description: The status of your subscription
     enum:
-    - active
-    - inactive
+    - Active
+    - Inactive
   
-  orderEventType:
-    type: string
-    description: The event type you can subscribe to
-    enum:
-    - order.created
-    - order.updated
-    
+
 
 
 
