@@ -40,7 +40,7 @@ paths:
         204:
           description: OK
 
-  '/offerExportInitializationStartedForPartition':
+  '/offerExportPartitionInitializationStarted':
     post:
       tags: 
       - Offer Exportation Events
@@ -49,7 +49,7 @@ paths:
       - name: request
         in: body
         schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_export-events/1.0#/definitions/offerExportInitializationStartedForPartition'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_export-events/1.0#/definitions/offerExportPartitionInitializationStarted'
       responses:
         204:
           description: OK
