@@ -655,7 +655,6 @@ definitions:
       - phoneNumber
       - sourceMarketplaceCode
       - creationUtcDate
-      - subscriptionRequestUtcDate
       - subscriptionStatus
       - credentialStatus
       - shippingSettingsStatus
