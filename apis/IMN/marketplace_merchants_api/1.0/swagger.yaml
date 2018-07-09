@@ -613,7 +613,6 @@ definitions:
     - shippingSettingsStatus
     - offerPublicationStatusd
     - targetMarketplaceCode
-    - subscriptionRequestUtcDate
     properties:
       subscriptionRequestUtcDate:
         type: string
