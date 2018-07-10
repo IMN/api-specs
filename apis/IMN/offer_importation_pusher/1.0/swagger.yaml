@@ -19,26 +19,14 @@ x-beezup-ops:
   - IMN.Offer.Schemas
   
 paths:
-  '/merchantOfferCreated':
+  '/merchantOfferReceived':
     post:
-      summary: When the offer created is received
+      summary: When the offer is received
       parameters: 
       - name: request
         in: body
         schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-events/1.0#/definitions/merchantOfferCreated'
-      responses:
-        204:
-          description: OK
-          
-  '/merchantOfferUpdated':
-    post:
-      summary: When the offer updated is received
-      parameters: 
-      - name: request
-        in: body
-        schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-events/1.0#/definitions/merchantOfferUpdated'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-events/1.0#/definitions/merchantOfferReceived'
       responses:
         204:
           description: OK
