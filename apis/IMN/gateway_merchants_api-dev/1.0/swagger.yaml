@@ -25,6 +25,7 @@ basePath: /gateway/merchants/v1
 
 x-IMN-api-ops:
   repo: IMN
+  codeGenType: webapi
   apiName: GatewayMerchantsV1
   appRoot: IMN.ADPT.MER.WebService
   namespace: IMN.ADPT.MER.WebService
