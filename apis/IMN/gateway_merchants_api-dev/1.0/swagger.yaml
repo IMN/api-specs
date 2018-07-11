@@ -37,10 +37,11 @@ x-IMN-api-ops:
   - IMN.Schemas
   - IMN.MER.Schemas
   - IMN.MER.Exceptions
+  - IMN.MER.Events
   references:
   - IMN.MER.Schemas
   - IMN.MER.Exceptions
-  
+  - IMN.MER.Events
 
 x-basePath: /gateway/merchants/v1
 
