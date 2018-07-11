@@ -19,6 +19,7 @@ x-IMN-api-ops:
   appRoot: IMN.SYS.MER.WebService
   apiName: SystemMerchantsV1
   namespace: IMN.SYS.MER.WebService
+  applicationShortName: SYS.MER.WS
   useBeezUPFrameworkVersion2: true
   comment: |
     No change. Just server side generation.
