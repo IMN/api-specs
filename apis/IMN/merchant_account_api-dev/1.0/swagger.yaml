@@ -27,7 +27,7 @@ x-IMN-api-ops:
   apiName: MerchantAccountV1
   appRoot: IMN.MER.ACC.WebService
   namespace: IMN.MER.ACC.WebService
-  applicationShortName: 
+  applicationShortName: MER.ACC.WS
   useBeezUPFrameworkVersion2: true
   comment: |
     No change. Just server side generation.
