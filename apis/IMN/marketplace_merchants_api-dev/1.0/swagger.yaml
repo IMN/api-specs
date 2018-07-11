@@ -742,4 +742,5 @@ definitions:
     - merchantCode
     - creationUtcDate
     - modificationUtcDate
+    - subscriptionRequestUtcDate
 x-azure-api-id: 'MarketplaceMerchantsV1'
