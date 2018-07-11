@@ -35,6 +35,10 @@ x-IMN-api-ops:
   - IMN.Schemas
   - IMN.MER.Schemas
   - IMN.MER.Exceptions
+  references:
+  - IMN.MER.Schemas
+  - IMN.MER.Exceptions
+  - IMN.Exceptions
 
 x-basePath: /merchant/account/v1
 
