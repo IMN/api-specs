@@ -32,9 +32,14 @@ x-IMN-api-ops:
     No change. Just server side generation.
   using:
   - IMN.Schemas
+  - IMN.Exceptions
   - IMN.MER.Schemas
   - IMN.MER.Exceptions
-  
+  references:
+  - IMN.Schemas
+  - IMN.Exceptions
+  - IMN.MER.Schemas
+  - IMN.MER.Exceptions
 
 x-basePath: /marketplace/merchants/v1
 
