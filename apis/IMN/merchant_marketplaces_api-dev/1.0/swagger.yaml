@@ -31,9 +31,11 @@ x-IMN-api-ops:
     No change. Just server side generation.
   using:
   - IMN.Schemas
+  - IMN.Exceptions
   - IMN.MER.Schemas
   - IMN.MER.Exceptions
   references:
+  - IMN.Exceptions
   - IMN.MER.Schemas
   - IMN.MER.Exceptions
   
