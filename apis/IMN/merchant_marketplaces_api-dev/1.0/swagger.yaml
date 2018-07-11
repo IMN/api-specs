@@ -25,7 +25,7 @@ x-IMN-api-ops:
   appRoot: IMN.MER.MKP.WebService
   apiName: MerchantMarketplacesV1
   namespace: IMN.MER.MKP.WebService
-  applicationShortName: 
+  applicationShortName: MER.MKP.WS
   useBeezUPFrameworkVersion2: true
   comment: |
     No change. Just server side generation.
@@ -33,6 +33,10 @@ x-IMN-api-ops:
   - IMN.Schemas
   - IMN.MER.Schemas
   - IMN.MER.Exceptions
+  references:
+  - IMN.MER.Schemas
+  - IMN.MER.Exceptions
+  
 
 x-basePath: /merchant/marketplaces/v1
 
