@@ -338,9 +338,13 @@ definitions:
         type: string
         description: The api token that you will have to use to connect to our API
         example: '2b1ff3a068054433ac09224bbb1ff3a068054433ac09224bb0c9d7ea=='
+      importedOfferCount:
+        type: integer
+        format: int32
+        description: Imported offer count from the source marketplace or from his shop system source
       links:
         $ref: '#/definitions/merchantAccountInfoLinks'
-        
+
       
   merchantAccountInfoLinks:
     type: object
