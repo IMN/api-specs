@@ -35,6 +35,7 @@ x-IMN-api-ops:
   - IMN.MER.Schemas
   - IMN.MER.Exceptions
   - IMN.MKP.Schemas
+  - IMNDb.Models
   references:
   - IMN.Exceptions
   - IMN.MER.Schemas
