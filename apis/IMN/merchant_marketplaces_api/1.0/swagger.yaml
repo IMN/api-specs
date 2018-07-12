@@ -524,11 +524,66 @@ definitions:
     type: object
     properties:
       info:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceInfo'
+        $ref: '#/definitions/marketplaceApiInfo'
       links:
         $ref: '#/definitions/marketplaceIndexLinks'
 
+  offersPublicationStatus:
+    type: object
+    description: The status of the offer publication to the target marketplace
+    required:
+    - apiIntegrationStatus
+    properties:
+      apiIntegrationStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/marketplace-schemas/1.0#/definitions/marketplaceApiIntegrationStatus'
+      publishableOfferCount:
+        type: integer
+        format: int32
+        description: NULL - NOT AVAILABLE FOR NOW - The publishable offer count for this target marketplace (considering the product matching)
+        example: 25
+      publishedOfferCount:
+        type: integer
+        format: int32
+        description: The published offer count to this target marketplace
+        example: 20
+      lastPublicationUtcDate:
+        type: string
+        format: date-time
+        description: The last synchronization of the offers from the source marketplace
+        example: '2018-12-25T23:39:00Z'
+
+  marketplaceApiInfo:
+    allOf:
+    - $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceInfo'
+    - type: object
+      properties:
+        offersPublicationStatus:
+          $ref: '#/definitions/offersPublicationStatus'
+        offersSourceStatus:
+          $ref: '#/definitions/offersSourceStatus'
+
+
+
   
+
+  offersSourceStatus:
+    type: object
+    description: The status of the offer importation from the source marketplace
+    required:
+    - apiIntegrationStatus
+    properties:
+      apiIntegrationStatus:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/marketplace-schemas/1.0#/definitions/marketplaceApiIntegrationStatus'
+      lastSynchronizationUtcDate:
+        type: string
+        format: date-time
+        description: The last synchronization of the offers from the source marketplace
+        example: '2018-12-24T23:39:00Z'
+      importedOfferCount:
+        type: integer
+        format: int32
+        description: The imported offer count from the source marketplace
+        example: 52  
 
 
 
