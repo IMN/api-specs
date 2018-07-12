@@ -534,13 +534,6 @@ definitions:
     required:
     - apiIntegrationStatus
     properties:
-      apiIntegrationStatus:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/marketplace-schemas/1.0#/definitions/marketplaceApiIntegrationStatus'
-      publishableOfferCount:
-        type: integer
-        format: int32
-        description: NULL - NOT AVAILABLE FOR NOW - The publishable offer count for this target marketplace (considering the product matching)
-        example: 25
       publishedOfferCount:
         type: integer
         format: int32
@@ -572,8 +565,6 @@ definitions:
     required:
     - apiIntegrationStatus
     properties:
-      apiIntegrationStatus:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/marketplace-schemas/1.0#/definitions/marketplaceApiIntegrationStatus'
       lastSynchronizationUtcDate:
         type: string
         format: date-time
