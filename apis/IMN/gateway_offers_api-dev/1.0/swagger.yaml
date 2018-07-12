@@ -41,6 +41,7 @@ x-IMN-api-ops:
   - BeezUP2.Framework.Messaging
   - IMN.Exceptions
   - IMN.Offer.Exceptions
+  - BeezUP2.Framework.Business
   references:
   - IMN.Offer.Helpers
   - IMN.Exceptions
