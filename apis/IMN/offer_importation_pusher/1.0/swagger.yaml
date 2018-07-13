@@ -11,6 +11,7 @@ x-beezup-ops:
   apiName: OfferImportationPusher
   appRoot: IMN.ADPT.OfferIMP.ENG.Pusher
   namespace: IMN.ADPT.OfferIMP.ENG.Pusher
+  applicationShortName: OfferIMP.EXEC.PM
   comment: |
     Actor 
   using:
