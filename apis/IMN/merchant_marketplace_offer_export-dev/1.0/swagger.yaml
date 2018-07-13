@@ -55,33 +55,20 @@ paths:
           description: OK
 
           
-  '/merchantOfferCreated':
+  '/merchantOfferReceived':
     post:
       tags: 
       - Merchant Offer Events
-      summary: When the merchant offer is created
+      summary: When the merchant offer is Received
       parameters: 
       - name: request
         in: body
         schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-events/1.0#/definitions/merchantOfferCreated'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-events/1.0#/definitions/merchantOfferReceived'
       responses:
         204:
           description: OK
-  
-  '/merchantOfferUpdated':
-    post:
-      tags: 
-      - Merchant Offer Events
-      summary: When the merchant offer is updated
-      parameters: 
-      - name: request
-        in: body
-        schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-events/1.0#/definitions/merchantOfferUpdated'
-      responses:
-        204:
-          description: OK
+
 
   '/merchantOfferDeleted':
     post:
