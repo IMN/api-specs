@@ -35,11 +35,20 @@ x-IMN-api-ops:
   comment: |
     No change. Just server side generation.
   using:
+  - IMN.Exceptions
+  - IMN.Order.Exceptions
   - IMN.Order.Events
   - IMN.Order.Schemas
   - IMN.Schemas
+  references:
+  - IMN.Order.Schemas
+  - IMN.Order.Exceptions
+  - IMN.Schemas
+  - IMN.Exceptions
+  - IMN.Order.Events
   dependencies:
   - EventHubs
+  
   
 
 x-basePath: /gateway/orders/v1
