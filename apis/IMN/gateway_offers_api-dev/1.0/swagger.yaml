@@ -107,7 +107,7 @@ paths:
       - name: request
         in: body
         schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-messages/1.0#/definitions/batchMerchantMarketplaceOfferChanges'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-messages/1.0#/definitions/batchMerchantOfferChanges'
       responses:
         '204':
           description: The merchant offers changes have been saved!
