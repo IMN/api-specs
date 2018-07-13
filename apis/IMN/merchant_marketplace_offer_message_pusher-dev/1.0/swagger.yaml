@@ -1,0 +1,60 @@
+swagger: '2.0'
+info:
+  version: "1.0"
+  title: 'IMN - Merchant Marketplace Offer Message Pusher'
+
+host: IMN.Offer.EXP.Pusher
+basePath: /ExportedOfferMessagePusher
+
+x-beezup-ops:
+  codeGenType: eventHandlerActor
+  repo: IMN
+  appRoot: IMN.Offer.EXP.Pusher
+  apiName: ExportedOfferMessagePusher
+  namespace: IMN.Offer.EXP.Pusher
+  comment: |
+    Actor
+  using:
+  - IMN.Offer.Events
+  - IMN.Offer.EXP.Events
+
+paths:
+
+  '/merchantMarketplaceOfferReceived':
+    post:
+      summary: merchant offers exported for a marketplace 
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-events/1.0#/definitions/merchantMarketplaceOfferReceived'
+      responses:
+        204:
+          description: OK
+
+
+  '/merchantMarketplaceOfferDeleted':
+    post:
+      summary: merchant offers exported for a marketplace 
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-events/1.0#/definitions/merchantMarketplaceOfferDeleted'
+      responses:
+        204:
+          description: OK
+
+  '/offerExportPartitionInitializationStarted':
+    post:
+      summary: When the initializer starts to retrieve merchant offers. Propagated from initializer to purge the transformed offers referential
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_export-events/1.0#/definitions/offerExportPartitionInitializationStarted'
+      responses:
+        204:
+          description: OK
+
+definitions: {}
