@@ -20,29 +20,18 @@ x-beezup-ops:
 
 paths:
 
-  '/merchantMarketplaceOfferCreated':
+  '/merchantMarketplaceOfferReceived':
     post:
       summary: merchant offers exported for a marketplace 
       parameters:
       - name: request
         in: body
         schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-events/1.0#/definitions/merchantMarketplaceOfferCreated'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-events/1.0#/definitions/merchantMarketplaceOfferReceived'
       responses:
         204:
           description: OK
 
-  '/merchantMarketplaceOfferUpdated':
-    post:
-      summary: merchant offers exported for a marketplace 
-      parameters:
-      - name: request
-        in: body
-        schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-events/1.0#/definitions/merchantMarketplaceOfferUpdated'
-      responses:
-        204:
-          description: OK
 
   '/merchantMarketplaceOfferDeleted':
     post:
