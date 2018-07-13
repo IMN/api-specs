@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   version: "1.0"
-  title: 'IMN ADAPTER - Order Adapter Order Change to BeezUP'
+  title: 'IMN - ADAPTER - Order Adapter Order Change to BeezUP'
 
 host: IMN.ADPT.Order.OrderChange.BeezUP
 basePath: /OrderAdapterOrderChangeBeezUPApplier
