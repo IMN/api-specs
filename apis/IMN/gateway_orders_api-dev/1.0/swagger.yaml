@@ -32,16 +32,15 @@ x-IMN-api-ops:
   comment: |
     No change. Just server side generation.
   using:
+  - IMN.Schemas
   - IMN.Exceptions
-  - IMN.Order.Exceptions
+  - IMN.Order.Schemas
   - IMN.Order.Events
-  - IMN.Order.Schemas
-  - IMN.Schemas
   references:
-  - IMN.Order.Schemas
-  - IMN.Order.Exceptions
   - IMN.Schemas
   - IMN.Exceptions
+  - IMN.Order.Schemas
+  - IMN.Order.Exceptions
   - IMN.Order.Events
   dependencies:
   - EventHubs
