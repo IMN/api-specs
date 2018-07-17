@@ -569,7 +569,7 @@ paths:
         404:
          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
         409:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeNotFound'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeAlreadyInProgress'
         412:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/412_PreConditionFailed'
         default:
@@ -601,7 +601,7 @@ paths:
          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
         
         409:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeNotFound'        
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeAlreadyInProgress'        
         412:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/412_PreConditionFailed'
         default:
@@ -637,7 +637,7 @@ paths:
         404:
          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
         409:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeNotFound'        
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeAlreadyInProgress'        
         412:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/412_PreConditionFailed'
         default:
@@ -674,7 +674,7 @@ paths:
         404:
          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
         409:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeNotFound'        
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeAlreadyInProgress'        
         412:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/412_PreConditionFailed'
         default:
@@ -710,7 +710,7 @@ paths:
         404:
          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
         409:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeNotFound'        
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeAlreadyInProgress'        
         412:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/412_PreConditionFailed'
         default:
@@ -749,7 +749,7 @@ paths:
         404:
          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
         409:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeNotFound'        
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeAlreadyInProgress'        
         412:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/412_PreConditionFailed'
         default:
