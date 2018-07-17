@@ -660,7 +660,6 @@ definitions:
       - firstName
       - lastName
       - phoneNumber
-      - sourceMarketplaceCode
       - creationUtcDate
       - subscriptionStatus
       - credentialStatus
@@ -684,7 +683,7 @@ definitions:
           type: array
           items:
             $ref: '#/definitions/marketplaceSubcriptionReporting'
-        creationUtcDate:
+        incomingUtcDate:
           type: string
           format: date-time
 
