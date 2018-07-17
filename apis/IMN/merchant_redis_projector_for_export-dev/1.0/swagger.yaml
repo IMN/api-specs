@@ -12,7 +12,7 @@ x-beezup-ops:
   appRoot: IMN.MER.PROJ.Redis
   apiName: MerchantRedisProjectorForExport
   namespace: IMN.MER.PROJ.Redis
-  applicationShortName: Offer.DIST.EXP
+  applicationShortName: MER.PROJ.Redis
   comment: |
     Actor.
   using:
