@@ -12,6 +12,7 @@ x-beezup-ops:
   appRoot: IMN.Offer.DIST.EXP
   apiName: OfferDistributorForExport
   namespace: IMN.Offer.DIST.EXP
+  applicationShortName: Order.Actors
   comment: |
     Actor
   using:
