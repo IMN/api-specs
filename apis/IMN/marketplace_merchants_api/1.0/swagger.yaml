@@ -652,7 +652,6 @@ definitions:
       - firstName
       - lastName
       - phoneNumber
-      - sourceMarketplaceCode
       - creationUtcDate
       - subscriptionStatus
       - credentialStatus
