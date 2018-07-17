@@ -666,6 +666,7 @@ definitions:
       - credentialStatus
       - shippingSettingsStatus
       - offerPublicationStatus
+      - incomingUtcDate
       properties:
         sourceMarketplaceCode:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
@@ -683,6 +684,9 @@ definitions:
           type: array
           items:
             $ref: '#/definitions/marketplaceSubcriptionReporting'
+        creationUtcDate:
+          type: string
+          format: date-time
 
 
 
@@ -721,6 +725,7 @@ definitions:
       - phoneNumber
       - sourceMarketplaceCode
       - creationUtcDate
+      - credentialStatus
       properties:
         sourceMarketplaceCode:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
@@ -732,6 +737,8 @@ definitions:
           description: The key is the marketplace code
           additionalProperties:
             $ref: '#/definitions/merchantTargetMarketplaceInfo'
+        credentialStatus:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceCredentialStatus'
 
         
   merchantListOrderByOn:
