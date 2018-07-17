@@ -12,6 +12,7 @@ x-beezup-ops:
   appRoot: IMN.Offer.EXP.Pusher
   apiName: ExportedOfferMessagePusher
   namespace: IMN.Offer.EXP.Pusher
+  applicationShortName: Offer.EXP.Pusher
   comment: |
     Actor
   using:
