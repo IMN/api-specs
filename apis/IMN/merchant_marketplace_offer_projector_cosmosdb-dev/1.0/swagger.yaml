@@ -12,9 +12,13 @@ x-beezup-ops:
   appRoot: IMN.Offer.EXP.PROJ.CosmosDb
   apiName: ExportedOfferProjectionCosmosDb
   namespace: IMN.Offer.EXP.PROJ.CosmosDb
+  applicationShortName: Offer.EXP.PROJ.CosmosDb
   comment: |
     Actor
   using:
+  - IMN.Offer.Events
+  - IMN.Offer.EXP.Events
+  references:
   - IMN.Offer.Events
   - IMN.Offer.EXP.Events
 
