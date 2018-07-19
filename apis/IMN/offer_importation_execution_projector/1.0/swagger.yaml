@@ -11,6 +11,7 @@ x-beezup-ops:
   appRoot: IMN.ADPT.OfferIMP.EXEC.PROJ.Db
   apiName: OfferImportationExecutionProjectorDbApplier
   namespace: IMN.ADPT.OfferIMP.EXEC.PROJ.Db
+  applicationShortName: OfferIMP.EXEC.PROJ.Db
   comment: |
     Actor 
   using:
