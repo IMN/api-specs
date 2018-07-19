@@ -12,6 +12,7 @@ x-beezup-ops:
   appRoot: IMN.MER.Pusher
   apiName: MerchantPusher
   namespace: IMN.MER.Pusher
+  applicationShortName: MER.Pusher
   comment: |
     Actor
   using:
