@@ -12,6 +12,7 @@ x-beezup-ops:
   appRoot: IMN.Offer.EXP.Exporter
   apiName: MerchantMarketplaceOfferExporter
   namespace: IMN.Offer.EXP.Exporter
+  applicationShortName: Offer.EXP.Exporter
   comment: |
     Actor
   using:
