@@ -12,7 +12,7 @@ x-beezup-ops:
   appRoot: IMN.Offer.PROJ.CosmosDb
   apiName: OfferProjectionCosmosDb
   namespace: IMN.Offer.PROJ.CosmosDb
-  applicationShortName: 
+  applicationShortName: Offer.PROJ.CosmosDb
   comment: |
     Actor
   using:
