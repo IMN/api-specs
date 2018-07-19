@@ -19,6 +19,8 @@ x-beezup-ops:
   - IMN.Offer.Events
   - IMN.Offer.EXP.Events
   references:
+  - IMN.Offer.Events
+  - IMN.Offer.EXP.Events
   
 
 paths:
