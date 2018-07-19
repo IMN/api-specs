@@ -11,6 +11,7 @@ x-IMN-api-ops:
   appRoot: IMN.MER.Actors
   apiName: MerchantActor
   namespace: IMN.MER.Actors
+  applicationShortName: MER.Actors
   comment: |
     Actor - Test server side generation script t26
   using:
