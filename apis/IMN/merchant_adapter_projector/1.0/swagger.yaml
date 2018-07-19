@@ -12,6 +12,7 @@ x-beezup-ops:
   appRoot: IMN.ADPT.MER.PROJ.Db
   apiName: MerchantAdapterProjectorDbApplier
   namespace: IMN.ADPT.MER.PROJ.Db
+  applicationShortName: MER.PROJ.Db
   comment: |
     Actor
   using:
