@@ -11,6 +11,7 @@ x-beezup-ops:
   repo: IMN
   apiName: OfferImportationMerchantMessageRouter
   namespace: IMN.ADPT.OfferIMP.MER.Routers
+  applicationShortName: OfferIMP.MER.Routers
   comment: |
     Actor 
   using:
