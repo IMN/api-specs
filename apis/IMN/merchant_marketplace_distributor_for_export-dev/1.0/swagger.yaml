@@ -12,7 +12,7 @@ x-beezup-ops:
   appRoot: IMN.MER.DIST.EXP
   apiName: MerchantMarketplaceDistributorForExport
   namespace: IMN.MER.DIST.EXP
-  applicationShortName: MER.PROJ.Redis
+  applicationShortName: MER.PROJ.DIST.EXP
   comment: |
     Actor. Added merchant marketplace shipping input messages
   using:
