@@ -1,0 +1,39 @@
+swagger: '2.0'
+info:
+  version: "1.0"
+  title: 'IMN ADAPTER - Offer Importation Execution Message Router'
+  
+basePath: /OfferImportationExecutionMessageRouter
+  
+x-beezup-ops:
+  codeGenType: eventHandlerActor
+  repo: IMN
+  appRoot: IMN.ADPT.OfferIMP.EXEC.Routers
+  apiName: OfferImportationExecutionMessageRouter
+  namespace: IMN.ADPT.OfferIMP.EXEC.Routers
+  applicationShortName: OfferIMP.EXEC.Routers
+  comment: |
+    Actor 
+  using:
+  - IMN.ADPT.OfferIMP.Events
+  
+paths:
+
+
+
+
+  '/completed':
+    post:
+      summary: When the offer importation is completed
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_importation-events/1.0#/definitions/offerImportationCompleted'
+      responses:
+        204:
+          description: OK
+
+
+
+definitions: {}
