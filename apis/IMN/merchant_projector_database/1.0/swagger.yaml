@@ -200,7 +200,7 @@ paths:
       - name: request
         in: body
         schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceShippingPreprationSettingConfigured'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceShippingPreparationSettingConfigured'
       responses:
         204:
           description: OK
