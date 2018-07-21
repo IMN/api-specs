@@ -193,7 +193,7 @@ paths:
         204:
           description: OK
   
-  '/merchantMarketplaceShippingPreprationSettingConfigured':
+  '/merchantMarketplaceShippingPreparationSettingConfigured':
     post:
       summary: When the merchant configured the shipping preparation of a marketplace
       parameters:
