@@ -183,9 +183,8 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
-        403:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/subscriptionNotAcceptedByMarketplace'
-          
+
+
   '/disableMarketplace':
     post:
       summary: When the merchant wants to disable offer publication & order management on a marketplace
@@ -218,9 +217,8 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
-        403:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/subscriptionNotAcceptedByMarketplace'
-
+  
+  
   '/disableOrderImportation':
     post:
       summary: When the merchant wants to disable order importation on a marketplace
