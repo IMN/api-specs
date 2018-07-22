@@ -12,7 +12,7 @@ x-beezup-ops:
   appRoot: IMN.MER.DIST.EXP
   apiName: MerchantMarketplaceDistributorForExport
   namespace: IMN.MER.DIST.EXP
-  applicationShortName: MER.PROJ.DIST.EXP
+  applicationShortName: MER.DIST.EXP
   comment: |
     Actor. Added merchant marketplace shipping input messages
   using:
@@ -61,14 +61,14 @@ paths:
           description: OK
 
 
-  '/merchantMarketplaceShippingPreprationSettingConfigured':
+  '/merchantMarketplaceShippingPreparationSettingConfigured':
     post:
       summary: When the merchant configured the preparation shipping of a marketplace
       parameters:
       - name: request
         in: body
         schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceShippingPreprationSettingConfigured'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceShippingPreparationSettingConfigured'
       responses:
         204:
           description: OK
