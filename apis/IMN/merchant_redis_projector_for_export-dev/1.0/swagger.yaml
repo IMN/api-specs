@@ -60,4 +60,32 @@ paths:
         204:
           description: OK
 
+
+ '/merchantMarketplaceShippingDeliverySettingConfigured':
+    post:
+      summary: When the merchant configure the delivery setting of a marketplace
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceShippingDeliverySettingConfigured'
+      responses:
+        204:
+          description: OK
+  
+    
+  '/merchantMarketplaceShippingDeliverySettingDeleted':
+    post:
+      summary: When the merchant delete the delivery setting of a marketplace
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceShippingDeliverySettingDeleted'
+      responses:
+        204:
+          description: OK
+  
+  
+
 definitions: {}
