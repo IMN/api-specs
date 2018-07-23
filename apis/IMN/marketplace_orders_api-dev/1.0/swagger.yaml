@@ -81,7 +81,7 @@ paths:
       - name: request
         in: body
         schema:
-          $ref: '#/definitions/batchMerchantMarketplaceOrders'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-messages/1.0#/definitions/batchMerchantMarketplaceOrders'
       responses:
         '204':
           description: The merchant orders changes have been saved!
@@ -145,20 +145,3 @@ paths:
          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
-
-definitions:
-
-  batchMerchantMarketplaceOrders:
-    x-format: Message
-    type: object
-    description: Create or replace orders for one marketplace for one merchant
-    required:
-    - orders
-    properties:
-      orders:
-        type: array
-        description: Orders that need to be created or replaced
-        minItems: 1
-        maxItems: 1000
-        items:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderMarketplaceInfo'
