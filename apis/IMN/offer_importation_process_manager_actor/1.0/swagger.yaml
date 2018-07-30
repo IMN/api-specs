@@ -36,14 +36,14 @@ paths:
         204:
           description: OK
 
-  '/started':
+  '/startRequested':
     post:
-      summary: When the offer importation is started
+      summary: When the offer importation start is requested
       parameters: 
       - name: request
         in: body
         schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_importation-events/1.0#/definitions/offerImportationStarted'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_importation-events/1.0#/definitions/offerImportationStartRequested'
       responses:
         204:
           description: OK
