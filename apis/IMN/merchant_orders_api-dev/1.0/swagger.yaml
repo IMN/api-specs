@@ -1361,8 +1361,6 @@ definitions:
             required: false
             type: object
             schema: orderListRequest
-
-  orderListLinks:
   
 
 
