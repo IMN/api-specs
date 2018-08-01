@@ -1411,7 +1411,6 @@ definitions:
       The paginationResult properties can be null if the list is empty.
     type: object
     required:
-    - orders
     - links
     properties:
       paginationResult:
