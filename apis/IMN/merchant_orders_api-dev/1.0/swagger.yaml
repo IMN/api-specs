@@ -1419,6 +1419,8 @@ definitions:
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
       orders:
         type: array
+        description: The order index list, this list can be empty if there is no result
+        minimum: 0
         items:
           $ref: '#/definitions/orderIndex'
       links:
