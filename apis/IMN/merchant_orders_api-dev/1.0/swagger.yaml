@@ -984,8 +984,6 @@ paths:
 
 definitions:
 
-
-
   reportStatusByMarketplace:
     type: object
     required:
@@ -1365,9 +1363,16 @@ definitions:
             schema: orderListRequest
 
   orderListLinks:
-    description: The list of actions you can do from the order list response
+  
+
+
+  
+
+  orderListFullLinks:
     type: object
+    description: The list of actions you can do from the order list response
     required:
+    - self
     - setMerchantInfos
     - clearMerchantInfos
     properties:
@@ -1375,24 +1380,8 @@ definitions:
         $ref: '#/definitions/links.SetMerchantOrderInfoListLink'
       clearMerchantInfos:
         $ref: '#/definitions/links.ClearMerchantOrderInfoListLink'
-
-
-  
-
-  orderListFullLinks:
-    allOf:
-    - $ref: '#/definitions/orderListLinks'
-    - type: object
-      required:
-      - self
-      - harvest
-      - setMerchantInfos
-      - clearMerchantInfos
-      - export
-      - status
-      properties:
-        self:
-          $ref: '#/definitions/links.GetOrderListFullLink'
+      self:
+        $ref: '#/definitions/links.GetOrderListFullLink'
 
   links.SetMerchantOrderInfoListLink:
     allOf:
