@@ -162,13 +162,7 @@ paths:
         description: Allows the client to indicate wether it accepts a compressed encoding to reduce traffic size
         in: header
         required: true
-        type: array
-        collectionFormat: csv
-        items:
-          type: string
-        #x-example:
-        #- gzip
-        #- deflate
+        type: string
       - name: request
         in: body
         required: true
@@ -1361,7 +1355,7 @@ definitions:
           'Accept-Encoding':
             in: header
             required: true
-            "type": "​array"
+            "type": "​string"
             schema: string
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
           request:
