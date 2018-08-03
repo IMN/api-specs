@@ -29,7 +29,7 @@ x-IMN-api-ops:
   apiName: GatewayMerchantsV1
   appRoot: IMN.ADPT.MER.WebService
   namespace: IMN.ADPT.MER.WebService
-  applicationShortName: ADPT.MER.WS
+  applicationShortName: MER.WS
   useBeezUPFrameworkVersion2: true
   comment: |
     No change. Just server side generation.
