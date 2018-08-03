@@ -24,7 +24,7 @@ x-IMN-api-ops:
   repo: IMN
   product: IMN-ADPT
   group: Order
-  applicationShortName: ADPT.Order.WS
+  applicationShortName: Order.WS
   apiName: GatewayOrdersV1
   appRoot: IMN.ADPT.Order.WebService
   namespace: IMN.ADPT.Order.WebService
