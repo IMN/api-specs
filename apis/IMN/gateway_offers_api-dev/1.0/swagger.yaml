@@ -31,7 +31,7 @@ x-IMN-api-ops:
   repo: IMN
   apiName: GatewayOffersV1
   appRoot: IMN.ADPT.Offers.WebService
-  applicationShortName: Offers.WebService
+  applicationShortName: Offers.WS
   namespace: IMN.ADPT.Offers.WebService
   comment: |
     No change. Just server side generation.
