@@ -9,6 +9,7 @@ x-IMN-api-ops:
   codeGenType: actor
   repo: IMN
   product: IMN-CORE
+  group: merchant
   appRoot: IMN.MER.Actors
   apiName: MerchantActor
   namespace: IMN.MER.Actors
