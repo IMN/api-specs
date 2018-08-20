@@ -5,19 +5,18 @@ info:
 # Added by API Auto Mocking Plugin
 
   version: "1.0"
-  
+
   x-logo:
     url: "https://avatars0.githubusercontent.com/u/25665430"
     backgroundColor: "#FFFFFF"
-  
+
   contact:
     email: support@imn.io
-     
- 
+
   license:
     name: IMN
     url: https://go.imn.io
-    
+
 host: api.imn.io
 basePath: /merchant/account/v1
 
@@ -43,7 +42,6 @@ x-IMN-api-ops:
 
 x-basePath: /merchant/account/v1
 
-
 schemes:
   - https
 
@@ -51,12 +49,11 @@ consumes:
   - application/json
 produces:
   - application/json
-  
+
 tags:
 - name: Global
 - name: Account
 - name: Api Token
-
 
 # Under securityDefinitions we declare which security schemes can be used.
 # These definitions do not affect to the operations, but can be applied
@@ -74,15 +71,14 @@ securityDefinitions:
     scopes:
       https://imnb2ctenant.onmicrosoft.com/swaggerhub/read_write: Access this app on behalf of the signed-in user
 
-# Here we apply the security flow called 'implicit' globally to all the opeartions in the spec. 
+# Here we apply the security flow called 'implicit' globally to all the opeartions in the spec.
 # This security scheme is defined above in the 'securityDefinitions' section.
 # Global security can be overriden an operation level as seen in the example below
 security:
   - implicit:
     - https://imnb2ctenant.onmicrosoft.com/swaggerhub/read_write
 
-paths: 
-
+paths:
 
   '/':
     get:
@@ -101,8 +97,6 @@ paths:
             $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/userErrorMessage'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
-  
-
 
   '/checkMerchantCodeAvailability':
    post:
@@ -125,8 +119,7 @@ paths:
            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/userErrorMessage'
        default:
          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
-  
-  
+
   '/create':
    post:
      tags:
@@ -150,10 +143,7 @@ paths:
          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantCodeAlreadyUsed'
        default:
          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
-  
-  
 
-   
   '/{merchantCode}':
    get:
      tags:
@@ -171,7 +161,7 @@ paths:
          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantNotFound'
        default:
          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
-   
+
    patch:
      tags:
      - Account
@@ -185,7 +175,7 @@ paths:
          description: The merchant account info update request
          schema:
            $ref: '#/definitions/updateMerchantAccountRequest'
-           
+
      responses:
        204:
          description: Merchant account info updated
@@ -195,7 +185,7 @@ paths:
          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantNotFound'
        default:
          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
-    
+
   '/{merchantCode}/apiToken':
    get:
      tags:
@@ -230,8 +220,6 @@ paths:
        default:
          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
-    
-    
 definitions:
 
   httpUrl:
@@ -247,7 +235,7 @@ definitions:
     description: |
       The action you can do on the account API
       The create and checkMerchantCode link will be available when the merchant code is not created
-      The account link will be available when the merchant has be created  
+      The account link will be available when the merchant has be created
     properties:
       create:
         $ref: '#/definitions/links.CreateMerchantAccountLink'
@@ -255,7 +243,6 @@ definitions:
         $ref: '#/definitions/links.CheckMerchantCodeAvailabilityLink'
       accountInfo:
         $ref: '#/definitions/links.GetMerchantAccountInfoLink'
-
 
   merchantAccountIndex:
     type: object
@@ -266,10 +253,6 @@ definitions:
         $ref: '#/definitions/merchantAccountIndexLinks'
       merchantCode:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/merchantCode'
-
-
-  
-
 
   createMerchantAccountRequest:
     type: object
@@ -305,7 +288,6 @@ definitions:
       ecommerceSoftwareName:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/ecommerceSoftwareName'
 
- 
   updateMerchantAccountRequest:
     type: object
     required:
@@ -337,13 +319,10 @@ definitions:
       ecommerceSoftwareName:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/ecommerceSoftwareName'
 
-
   apiToken:
     type: string
     description: The api token that you will have to use to connect to our API
     example: '2b1ff3a068054433ac09224bbb1ff3a068054433ac09224bb0c9d7ea=='
-
-
 
   merchantAccountInfo:
     type: object
@@ -388,13 +367,12 @@ definitions:
         example: 4242
       links:
         $ref: '#/definitions/merchantAccountInfoLinks'
-        
-      
+
   merchantAccountInfoLinks:
     type: object
     description: |
       The action you can do on a merchant.
-      The external link will be avaible if there is no subscription requested 
+      The external link will be avaible if there is no subscription requested
     required:
     - self
     - update
@@ -410,11 +388,11 @@ definitions:
         $ref: '#/definitions/links.ResetMerchantApiTokenLink'
       externalMarketplaceSubscription:
         $ref: '#/definitions/links.ExternalMarketplaceSubscriptionFormLink'
-      
+
 ######################################################################################################
 ##############                  LINKS                                 ################################
 ######################################################################################################
-  
+
   links.CreateMerchantAccountLink:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
@@ -422,7 +400,7 @@ definitions:
       example:
         href: /merchant/account/v1/create
         method: POST
-        
+
   links.CheckMerchantCodeAvailabilityLink:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
@@ -454,7 +432,7 @@ definitions:
       example:
         href: /merchant/account/v1/MLT01/apiToken/reset
         method: POST
-  
+
   links.UpdateMerchantAcountInfoLink:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
@@ -462,18 +440,18 @@ definitions:
       example:
         href: /merchant/account/v1/MLT01
         method: PATCH
-        
+
   links.ExternalMarketplaceSubscriptionFormLink:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
     - type: object
       description:  |
         The link to sales force form to easily subscribe to the marketplaces
-        The query string will be indicated by the server: 
+        The query string will be indicated by the server:
         - email: the email of the merchant
-        - merchantCode: The merchant code 
+        - merchantCode: The merchant code
         - hmac: Computed by the server with a shared secret key
-        
+
       example:
         href: https://imn-developer-edition.eu9.force.com/?email=myemail@mydomain.com&merchantCode=MLT01&hmac=M2JiMmFkY2QwMTY1MjhkM2Y3ZGFmMGZlNjE5ODk1ZDE5NDVjMWQzZGRmNjMyNzkyYzVlMTZmZDQ1YmM1M2ZlOA==#general
         method: GET
