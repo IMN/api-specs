@@ -8,6 +8,8 @@ basePath: /OfferImportationPusher
 x-beezup-ops:
   codeGenType: eventHandlerActor
   repo: IMN
+  product: IMN-ADPT
+  group: adpt-offerimp
   apiName: OfferImportationPusher
   appRoot: IMN.ADPT.OfferIMP.ENG.Pusher
   namespace: IMN.ADPT.OfferIMP.ENG.Pusher
