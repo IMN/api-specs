@@ -9,8 +9,8 @@ x-beezup-ops:
   codeGenType: eventHandlerActor
   repo: IMN
   product: IMN-ADPT
-  group: 
-  appRoot: .
+  group: adpt-offerimp
+  appRoot: IMN.ADPT.OfferIMP.ENG.Normalizer
   apiName: OfferImportationNormalizer
   namespace: IMN.ADPT.OfferIMP.ENG.Normalizer
   disableProjectGeneration: true
