@@ -9,6 +9,8 @@ basePath: /MerchantAdapterProjectorDbApplier
 x-beezup-ops:
   codeGenType: eventHandlerActor
   repo: IMN
+  product: IMN-ADPT
+  group: merchant
   appRoot: IMN.ADPT.MER.PROJ.Db
   apiName: MerchantAdapterProjectorDbApplier
   namespace: IMN.ADPT.MER.PROJ.Db
