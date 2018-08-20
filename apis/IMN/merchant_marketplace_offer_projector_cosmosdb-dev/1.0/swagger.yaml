@@ -9,6 +9,8 @@ basePath: /ExportedOfferProjectionCosmosDb
 x-beezup-ops:
   codeGenType: eventHandlerActor
   repo: IMN
+  product: IMN-CORE
+  group: offer
   appRoot: IMN.Offer.EXP.PROJ.CosmosDb
   apiName: ExportedOfferProjectionCosmosDb
   namespace: IMN.Offer.EXP.PROJ.CosmosDb
