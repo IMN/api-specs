@@ -9,6 +9,8 @@ basePath: /ExportedOfferMessagePusher
 x-beezup-ops:
   codeGenType: eventHandlerActor
   repo: IMN
+  product: IMN-CORE
+  group: offer
   appRoot: IMN.Offer.EXP.Pusher
   apiName: ExportedOfferMessagePusher
   namespace: IMN.Offer.EXP.Pusher
