@@ -8,6 +8,8 @@ basePath: /OfferImportationExecutionProjectorDbApplier
 x-beezup-ops:
   codeGenType: eventHandlerActor
   repo: IMN
+  product: IMN-ADPT
+  group: adpt-offerimp
   appRoot: IMN.ADPT.OfferIMP.EXEC.PROJ.Db
   apiName: OfferImportationExecutionProjectorDbApplier
   namespace: IMN.ADPT.OfferIMP.EXEC.PROJ.Db
