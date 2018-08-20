@@ -9,6 +9,8 @@ basePath: /MerchantPusher
 x-beezup-ops:
   codeGenType: eventHandlerActor
   repo: IMN
+  product: IMN-CORE
+  group: merchant
   appRoot: IMN.MER.Pusher
   apiName: MerchantPusher
   namespace: IMN.MER.Pusher
