@@ -9,6 +9,8 @@ basePath: /MerchantMarketplaceOfferExporter
 x-beezup-ops:
   codeGenType: eventHandlerActor
   repo: IMN
+  product: IMN-CORE
+  group: 
   appRoot: IMN.Offer.EXP.Exporter
   apiName: MerchantMarketplaceOfferExporter
   namespace: IMN.Offer.EXP.Exporter
