@@ -13,7 +13,7 @@ x-IMN-api-ops:
   apiName: OrderAdapterOrderChangeBeezUPApplier
   applicationShortName: Order.OrderChange.BeezUP
   product: IMN-ADPT
-  group: Order
+  group: adpt-order
   namespace: IMN.ADPT.Order.OrderChange.BeezUP
   comment: |
     Actor
