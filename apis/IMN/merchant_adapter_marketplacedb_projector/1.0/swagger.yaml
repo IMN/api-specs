@@ -10,12 +10,10 @@ x-IMN-api-ops:
   codeGenType: eventHandlerActor
   repo: IMN
   product: IMN-ADPT
-  group: merchant
+  group: adpt-merchant
   appRoot: IMN.ADPT.MER.PROJ.MarketplaceDb
   apiName: MerchantAdapterMarketplaceDbApplier
   applicationShortName: MER.PROJ.MarketplaceDb
-  product: IMN-ADPT
-  group: adpt-merchant
   namespace: IMN.ADPT.MER.PROJ.MarketplaceDb
   comment: |
     Actor
