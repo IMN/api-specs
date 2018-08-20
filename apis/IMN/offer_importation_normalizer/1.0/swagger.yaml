@@ -8,6 +8,8 @@ basePath: /OfferImportationNormalizer
 x-beezup-ops:
   codeGenType: eventHandlerActor
   repo: IMN
+  product: IMN-ADPT
+  group: 
   appRoot: .
   apiName: OfferImportationNormalizer
   namespace: IMN.ADPT.OfferIMP.ENG.Normalizer
