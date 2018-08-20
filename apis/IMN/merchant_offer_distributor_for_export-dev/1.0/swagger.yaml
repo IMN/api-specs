@@ -9,6 +9,8 @@ basePath: /OfferDistributorForExport
 x-beezup-ops:
   codeGenType: eventHandlerActor
   repo: IMN
+  product: IMN-CORE
+  group: offer
   appRoot: IMN.Offer.DIST.EXP
   apiName: OfferDistributorForExport
   namespace: IMN.Offer.DIST.EXP
