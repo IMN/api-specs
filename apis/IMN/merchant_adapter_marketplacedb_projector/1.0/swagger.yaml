@@ -9,6 +9,8 @@ basePath: /MerchantAdapterMarketplaceDbApplier
 x-IMN-api-ops:
   codeGenType: eventHandlerActor
   repo: IMN
+  product: IMN-ADPT
+  group: merchant
   appRoot: IMN.ADPT.MER.PROJ.MarketplaceDb
   apiName: MerchantAdapterMarketplaceDbApplier
   applicationShortName: MER.PROJ.MarketplaceDb
