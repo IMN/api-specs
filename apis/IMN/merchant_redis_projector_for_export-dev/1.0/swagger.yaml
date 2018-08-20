@@ -1,0 +1,104 @@
+swagger: '2.0'
+info:
+  version: "1.0"
+  title: 'IMN - Merchant Redis Projector for Exportation'
+
+host: IMN.MER.PROJ.Redis
+basePath: /MerchantRedisProjectorForExport
+
+x-beezup-ops:
+  codeGenType: eventHandlerActor
+  repo: IMN
+  product: IMN-CORE
+  group: merchant
+  appRoot: IMN.MER.PROJ.Redis
+  apiName: MerchantRedisProjectorForExport
+  namespace: IMN.MER.PROJ.Redis
+  applicationShortName: MER.PROJ.Redis
+  comment: |
+    Actor.
+  using:
+  - IMN.MER.Events
+
+paths:
+
+
+
+  '/offerPublicationEnabled':
+    post:
+      summary: When the offer publication is enabled
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOfferPublicationEnabled'
+      responses:
+        204:
+          description: OK
+
+
+  '/offerPublicationDisabled':
+    post:
+      summary: When the offer publication is disabled
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOfferPublicationDisabled'
+      responses:
+        204:
+          description: OK
+
+
+  '/merchantMarketplacePricingSettingConfigured':
+    post:
+      summary: When the merchant configured the pricing of a marketplace
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplacePricingSettingConfigured'
+      responses:
+        204:
+          description: OK
+
+  '/merchantMarketplaceShippingPreparationSettingConfigured':
+    post:
+      summary: When the merchant configured the shipping preparation of a marketplace
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceShippingPreparationSettingConfigured'
+      responses:
+        204:
+          description: OK
+
+  '/merchantMarketplaceShippingDeliverySettingConfigured':
+    post:
+      summary: When the merchant configure the delivery setting of a marketplace
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceShippingDeliverySettingConfigured'
+      responses:
+        204:
+          description: OK
+  
+    
+  '/merchantMarketplaceShippingDeliverySettingDeleted':
+    post:
+      summary: When the merchant delete the delivery setting of a marketplace
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceShippingDeliverySettingDeleted'
+      responses:
+        204:
+          description: OK
+  
+  
+
+definitions: {}
