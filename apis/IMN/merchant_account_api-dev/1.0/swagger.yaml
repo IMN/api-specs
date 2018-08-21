@@ -196,7 +196,7 @@ paths:
        - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
      responses:
        '200':
-         description: Merchant api token reset
+         description: The merchant api token
          schema:
            $ref: '#/definitions/apiToken'
        '404':
