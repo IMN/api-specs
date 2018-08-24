@@ -4,17 +4,16 @@ info:
   title: 'Marketplace - Merchants API'
   description: 'Marketplace - Merchants API'
   x-logo:
-    url: https://imngo.blob.core.windows.net/imngo/images/imn-logo.png
+    url: "https://imngo.blob.core.windows.net/imngo/images/imn-logo.png"
     backgroundColor: "#FFFFFF"
-  
+
   contact:
     email: support@imn.io
-     
- 
+
   license:
     name: IMN
     url: https://go.imn.io
-    
+
 host: api.imn.io
 basePath: /marketplace/merchants/v1
 
@@ -43,7 +42,6 @@ x-IMN-api-ops:
 
 x-basePath: /marketplace/merchants/v1
 
-
 schemes:
   - https
 
@@ -51,7 +49,7 @@ consumes:
   - application/json
 produces:
   - application/json
-  
+
 tags:
 - name: Global
 - name: Merchants
@@ -59,16 +57,16 @@ tags:
 - name: Subscription
 - name: Marketplace Merchant Code
 
-paths: 
+paths:
 
   '/{marketplaceCode}':
     get:
-      tags: 
+      tags:
       - Global
       summary: Get marketplace index in the merchants API
       description: Indicates you all the actions you can do this api
       operationId: GetMarketplaceMerchantApiIndex
-      parameters: 
+      parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       responses:
         200:
@@ -79,14 +77,14 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/marketplaceNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
-            
+
   '/{marketplaceCode}/incoming':
     post:
-      tags: 
+      tags:
       - Merchants
       summary: Get the list of incoming merchants related to a marketplace
       operationId: GetIncomingMerchantList
-      parameters: 
+      parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageSizeQueryStringParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageNumberQueryStringParameter'
@@ -107,7 +105,7 @@ paths:
 
   '/{marketplaceCode}/incoming/{merchantCode}':
     get:
-      tags: 
+      tags:
       - Merchants
       summary: Get the incoming merchant
       operationId: GetIncomingMerchantIndex
@@ -124,15 +122,13 @@ paths:
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
-
-
   '/{marketplaceCode}/outgoing':
     post:
-      tags: 
+      tags:
       - Merchants
       summary: Get the list of outgoing merchants related to a marketplace
       operationId: GetOutgoingMerchantList
-      parameters: 
+      parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageSizeQueryStringParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageNumberQueryStringParameter'
@@ -150,13 +146,10 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/marketplaceNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
-            
-            
-
 
   '/{marketplaceCode}/outgoing/{merchantCode}':
     get:
-      tags: 
+      tags:
       - Merchants
       summary: Get the outgoing merchant
       operationId: GetOutgoingMerchantIndex
@@ -174,7 +167,7 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
   '/{marketplaceCode}/{merchantCode}/apiCredential':
     get:
-      tags: 
+      tags:
       - Api Credentials
       summary: Get the merchant API credential
       operationId: GetMerchantApiCredential
@@ -192,7 +185,7 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
     put:
-      tags: 
+      tags:
       - Api Credentials
       summary: Save the marketplace API credential
       operationId: SaveMerchantApiCredential
@@ -216,11 +209,9 @@ paths:
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
-
-
   '/{marketplaceCode}/{merchantCode}/subscription/accept':
     post:
-      tags: 
+      tags:
       - Subscription
       summary: Accept a merchant subscription to a marketplace
       operationId: AcceptMerchantSubscription
@@ -233,13 +224,13 @@ paths:
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'          
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
   '/{marketplaceCode}/{merchantCode}/subscription/decline':
     post:
-      tags: 
+      tags:
       - Subscription
       summary: Decline a merchant subscription to a marketplace
       operationId: DeclineMerchantSubscription
@@ -260,10 +251,10 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
-          
+
   '/{marketplaceCode}/{merchantCode}/subscription/block':
     post:
-      tags: 
+      tags:
       - Subscription
       summary: Block a merchant subscription to the marketplace
       operationId: BlockMerchantSubscription
@@ -285,13 +276,12 @@ paths:
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
-
   '/{marketplaceCode}/{merchantCode}/configureMarketplaceMerchantCode':
     post:
-      tags: 
+      tags:
       - Marketplace Merchant Code
       summary: Configure marketplace merchant code
-      description: By configuring the merchant identifier of the marketplace the marketplace will be able  to found the merchant easily using this identifier 
+      description: By configuring the merchant identifier of the marketplace the marketplace will be able  to found the merchant easily using this identifier
       operationId: ConfigureMarketplaceMerchantCode
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
@@ -311,13 +301,11 @@ paths:
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
-
-
 definitions:
 
   marketplaceMerchantApiIndexLinks:
     type: object
-    required: 
+    required:
     - incoming
     - outgoing
     properties:
@@ -328,16 +316,14 @@ definitions:
       outgoing:
         $ref: '#/definitions/links.GetOutgoingMerchantListLink'
 
-
   marketplaceMerchantApiIndex:
     type: object
-    required: 
+    required:
     - links
     properties:
       links:
         $ref: '#/definitions/marketplaceMerchantApiIndexLinks'
-    
-    
+
   merchantListOrderBy:
     type: object
     required:
@@ -347,7 +333,7 @@ definitions:
         $ref: '#/definitions/merchantListOrderByOn'
       sort:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/sort'
-      
+
   incomingMerchantListRequest:
     type: object
     properties:
@@ -380,18 +366,18 @@ definitions:
       filterSubscriptionRequestUtcDateFrom:
         type: string
         format: date-time
-        description: filter merchants From beginning subscription request date 
+        description: filter merchants From beginning subscription request date
       filterSubscriptionRequestUtcDateTo:
         type: string
         format: date-time
-        description: filter merchants by subscription request date 
+        description: filter merchants by subscription request date
       filterCountry:
         type: string
-        description: filter merchants by country code 
+        description: filter merchants by country code
         example: FRA
       filterSourceMarketplaceCode:
         type: string
-        description: filter merchants by Source MarketplaceCode 
+        description: filter merchants by Source MarketplaceCode
         example: C1
       filterCredentialStatus:
         $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceCredentialStatus'
@@ -432,25 +418,25 @@ definitions:
       filterCreationUtcDateFrom:
         type: string
         format: date-time
-        description: filter merchants by From beginning creation date 
+        description: filter merchants by From beginning creation date
       filterCreationUtcDateTo:
         type: string
         format: date-time
         description: filter merchants by to ending creation date
       filterCountry:
         type: string
-        description: filter merchants by country code 
+        description: filter merchants by country code
         example: FRA
-      
+
       filterSubscriptionStatus:
         $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceSubscriptionStatus'
 
       filterofferPublicationStatus:
         $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceOfferPublicationStatus'
-        
+
   incomingMerchantList:
     type: object
-    required: 
+    required:
     - links
     properties:
       links:
@@ -458,14 +444,13 @@ definitions:
       merchants:
         type: array
         items:
-          $ref: '#/definitions/incomingMerchantIndex' 
+          $ref: '#/definitions/incomingMerchantIndex'
       paginationResult:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/paginationResult'
-        
 
   outgoingMerchantList:
     type: object
-    required: 
+    required:
     - links
     properties:
       links:
@@ -473,11 +458,10 @@ definitions:
       merchants:
         type: array
         items:
-          $ref: '#/definitions/outgoingMerchantIndex' 
+          $ref: '#/definitions/outgoingMerchantIndex'
       paginationResult:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/paginationResult'
-        
-        
+
   links.GetMerchantApiCredentialLink:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
@@ -508,7 +492,7 @@ definitions:
   links.GetOutgoingMerchantListLink:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
-    
+
   incomingMerchantInfoLinks:
     type: object
     required:
@@ -525,7 +509,7 @@ definitions:
         $ref: '#/definitions/links.DeclineMerchantSubscriptionLink'
       blockSubscription:
         $ref: '#/definitions/links.BlockMerchantSubscriptionLink'
-        
+
   incomingMerchantListLinks:
     type: object
     required:
@@ -533,15 +517,15 @@ definitions:
     properties:
       self:
         $ref: '#/definitions/links.GetIncomingMerchantListLink'
-        
+
   outgoingMerchantListLinks:
     type: object
-    required: 
+    required:
     - self
     properties:
       self:
         $ref: '#/definitions/links.GetOutgoingMerchantListLink'
-  
+
   outgoingMerchantInfoLinks:
     type: object
     required:
@@ -553,7 +537,6 @@ definitions:
       apiCredential:
         $ref: '#/definitions/links.GetMerchantApiCredentialLink'
 
-  
   incomingMerchantIndex:
     type: object
     required:
@@ -564,7 +547,6 @@ definitions:
         $ref: '#/definitions/incomingMerchantInfo'
       links:
         $ref: '#/definitions/incomingMerchantInfoLinks'
-
 
   outgoingMerchantIndex:
     type: object
@@ -577,8 +559,6 @@ definitions:
       links:
         $ref: '#/definitions/outgoingMerchantInfoLinks'
 
-
-  
   merchantInfo:
     type: object
     required:
@@ -647,7 +627,6 @@ definitions:
       targetMarketplaceMerchantCode:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceMerchantCode'
 
-        
   incomingMerchantInfo:
     allOf:
     - $ref: '#/definitions/merchantInfo'
@@ -688,8 +667,6 @@ definitions:
           format: date-time
         salesforceSubscriptionUrl:
           type: string
-
-
 
   marketplaceSubcriptionReporting:
     type: object
@@ -732,7 +709,7 @@ definitions:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
         sourceMarketplaceMerchantCode:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceMerchantCode'
-          
+
         targetMarketplaces:
           type: object
           description: The key is the marketplace code
@@ -743,7 +720,6 @@ definitions:
         salesforceSubscriptionUrl:
           type: string
 
-        
   merchantListOrderByOn:
     type: string
     description: Indicates on which property you want to order by the list of merchant
@@ -753,4 +729,5 @@ definitions:
     - creationUtcDate
     - modificationUtcDate
     - subscriptionRequestUtcDate
+
 x-azure-api-id: 'MarketplaceMerchantsV1'
