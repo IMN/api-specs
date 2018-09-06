@@ -98,7 +98,173 @@ paths:
       responses:
         204:
           description: OK
+          
+  '/merchantCreated':
+    post:
+      summary: When the merchant is created
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantCreated'
+      responses:
+        204:
+          description: OK
+          
+  '/merchantAcountInfoUpdated':
+    post:
+      summary: When the merchant account info is updated
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantAcountInfoUpdated'
+      responses:
+        204:
+          description: OK
+          
+  '/merchantMarketplaceCredentialConfigured':
+    post:
+      summary: When the merchant credentials for a marketplace is configured
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceCredentialConfigured'
+      responses:
+        204:
+          description: OK
+          
+  '/merchantMarketplaceSubscriptionAccepted':
+    post:
+      summary: When the merchant subscription for a marketplace is accepted
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceSubscriptionAccepted'
+      responses:
+        204:
+          description: OK
   
+  '/merchantMarketplaceOfferImportationEnabled':
+    post:
+      summary: When the merchant offer importation for a marketplace is enabled
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOfferImportationEnabled'
+      responses:
+        204:
+          description: OK
+          
+  '/merchantMarketplaceOfferImportationDisabled':
+    post:
+      summary: When the merchant offer importation for a marketplace is disabled
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOfferImportationDisabled'
+      responses:
+        204:
+          description: OK
+          
+  '/merchantOffersSourceMarketplaceDeclared':
+    post:
+      summary: When the merchant offer source for a marketplace is declared
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantOffersSourceMarketplaceDeclared'
+      responses:
+        204:
+          description: OK
   
-
+  '/merchantOffersSourceMarketplaceUndeclared':
+    post:
+      summary: When the merchant offer source for a marketplace is undeclared
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantOffersSourceMarketplaceUndeclared'
+      responses:
+        204:
+          description: OK
+  
+  '/merchantMarketplaceSubscriptionRequested':
+    post:
+      summary: When the merchant subscription for a marketplace is requested
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceSubscriptionRequested'
+      responses:
+        204:
+          description: OK
+          
+  '/merchantMarketplaceSubscriptionRefused':
+    post:
+      summary: When the merchant subscription for a marketplace is refused
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceSubscriptionRefused'
+      responses:
+        204:
+          description: OK
+          
+  '/merchantMarketplaceSubscriptionBlocked':
+    post:
+      summary: When the merchant subscription for a marketplace is blocked
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceSubscriptionBlocked'
+      responses:
+        204:
+          description: OK
+          
+  '/merchantMarketplaceOrderImportationDisabled':
+    post:
+      summary: When the merchant order imporation for a marketplace is disabled
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOrderImportationDisabled'
+      responses:
+        204:
+          description: OK
+  
+  '/merchantMarketplaceOrderImportationEnabled':
+    post:
+      summary: When the merchant order imporation for a marketplace is enabled
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOrderImportationEnabled'
+      responses:
+        204:
+          description: OK
+          
+  '/marketplaceMerchantCodeConfigured':
+    post:
+      summary: When the MerchantMarketplaceCode is configured
+      parameters:
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/marketplaceMerchantCodeConfigured'
+      responses:
+        204:
+          description: OK
+  
 definitions: {}
