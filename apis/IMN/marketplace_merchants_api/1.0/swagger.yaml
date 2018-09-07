@@ -667,6 +667,8 @@ definitions:
           format: date-time
         salesforceSubscriptionUrl:
           type: string
+        ecommerceSoftwareName:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/ecommerceSoftwareName'
 
   marketplaceSubcriptionReporting:
     type: object
@@ -729,6 +731,8 @@ definitions:
           example: 10602.23
         currencyCode:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/currencyCode'
+        ecommerceSoftwareName:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/ecommerceSoftwareName'
 
   merchantListOrderByOn:
     type: string
