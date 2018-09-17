@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   version: "1.0"
-  title: Marketplaces - Orders
+  title: Merchant - Orders
   description: |
     The features exposed in this API are centered around managing Orders harvested from your configured marketplaces.\
     This includes:
@@ -21,14 +21,44 @@ info:
     name: IMN
     url: http://www.imn.io
 
-x-imn-api-ops:
+x-IMN-api-ops:
+  codeGenType: webapi
   repo: IMN
+  product: IMN-CORE
+  group: Order
+  applicationShortName: MER.Orders.WS
   appRoot: IMN.MER.Orders.WebService
   namespace: IMN.MER.Orders.WebService
   apiName: MerchantOrdersV1
+  useBeezUPFrameworkVersion2: true
   comment: |
     First document
     regen
+  using:
+  - IMN.MER.Schemas
+  - IMN.MER.Exceptions
+  - IMN.Order.Schemas
+  - IMN.Order.Events
+  - IMN.Schemas
+  - IMN.Exceptions
+  - IMN.Order.Exceptions
+  - BeezUP2.Framework.Messaging
+  - BeezUP2.Framework.Processing
+  references:
+  - BeezUP2.Framework.Temp
+  - IMN.MER.Schemas
+  - IMN.MER.Exceptions
+  - IMN.Order.Schemas
+  - IMN.Order.Events
+  - IMN.Schemas
+  - IMN.Exceptions
+  - IMN.Order.Exceptions
+  packages:
+  - EntityFramework
+  - CosmosDB
+  - EventHubs
+  - Redis
+
 
 x-host: api.imn.io
 x-basePath: /merchant/orders/v1
@@ -58,67 +88,56 @@ tags:
 - name: Batches
   description: All batch operations on Orders to reduce call rate
 
-- name: Subscriptions
-  description: All orders subscription operations
+- name: Subscriptions - DRAFT
+  description: All orders subscription operations - DRAFT
+
+- name: Statistics
+  description: The statistics of your orders
 
 consumes:
   - application/json
 produces:
   - application/json
 
-parameters:
+responses:
 
+  orderMerchantInfoBatchOperationResponse:
+    description: |
+      Succesfully or partially processed operations.
+      In the response, you will see the status per operation.
+    schema:
+      $ref: '#/definitions/batchOrderOperationResponse'
 
-  imnOrderIdParameter:
-    description: The IMN Order identifier
-    name: imnOrderId
-    in: path
-    required: true
-    type: string
-    format: uuid
-    x-example: '00000000000000000000000000000000000000000000000'
-
-  changeOrderTypeParameter:
-    description: The Order change type
-    name: changeOrderType
-    in: path
-    required: true
-    type: string
-    x-lov: OrderChangeBusinessOperationType
-
-  userNameInQueryParameter:
-    name: userName
-    description: Sometimes the user in the e-commerce application is not the same as user associated with the current subscription key. We recommend providing your application's user login.
-    in: query
-    required: true
-    type: string
-
-  testModeInQueryParameter:
-    name: testMode
-    description: If true, the operation will be not be sent to marketplace. But the validation will be taken in account.
-    in: query
-    required: false
-    type: boolean
-    default: false
-    x-example: false
-
+  orderChangeBatchOperationResponse:
+    description: |
+      Succesfully or partially processed operations.
+      In the response, you will see the status per operation.
+      
+      For each operation succeed:
+      - the operation will be fowarded to the marketplace
+      - that does not mean that marketplace will validate your operation.
+      
+    schema:
+      $ref: '#/definitions/batchOrderOperationResponse'
+      
+      
 paths:
 
   '/{merchantCode}':
     get:
       tags:
       - Global
-      x-tagGroups: Martketplaces Orders
-      operationId: GetOrderIndex
+      x-tagGroups: Marketplaces Orders
+      operationId: GetOrderApiIndex
       summary: Get all actions you can do on the order API
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/ifNoneMatchParameter'
       responses:
         200:
-          description: Order index
+          description: Order API index
           schema:
-            $ref: '#/definitions/orderIndex'
+            $ref: '#/definitions/orderApiIndex'
         304:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/304_NotModified'
         default:
@@ -126,7 +145,7 @@ paths:
       deprecated: false
 
 
-  '/{merchantCode}/list/full':
+  '/{merchantCode}/list':
     post:
       tags:
       - List
@@ -143,13 +162,7 @@ paths:
         description: Allows the client to indicate wether it accepts a compressed encoding to reduce traffic size
         in: header
         required: true
-        type: array
-        collectionFormat: csv
-        items:
-          type: string
-        #x-example:
-        #- gzip
-        #- deflate
+        type: string
       - name: request
         in: body
         required: true
@@ -168,32 +181,7 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
 
-  '/{merchantCode}/list/light':
-    post:
-      tags:
-      - List
-      operationId: GetOrderListLight
-      summary:  Get a paginated list of all Orders without details
-      parameters:
-      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
-      - name: request
-        in: body
-        required: true
-        schema:
-          $ref: '#/definitions/orderListRequest'
-      responses:
-        200:
-          description: Successfully fetched the list of Orders
-          schema:
-            $ref: '#/definitions/orderListLight'
-        400:
-          description: Could not process request for given parameters values. Please check error message for more details.
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
-        default:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
-      deprecated: false
-
+ 
 
 
   '/{merchantCode}/batches/setMerchantOrderInfos':
@@ -211,14 +199,11 @@ paths:
         schema:
           $ref: '#/definitions/setMerchantOrderInfoListRequest'
       responses:
-        202:
-          description: Succesfully received and processed batched operations. Please check response to see the status per operation.
-          schema:
-            $ref: '#/definitions/batchOrderOperationResponse'
+        200:
+          $ref: '#/responses/orderMerchantInfoBatchOperationResponse'
         400:
-          description: Requested too many batch operations
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderBatchBadRequest'
+
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
@@ -238,50 +223,175 @@ paths:
         schema:
           $ref: '#/definitions/clearMerchantOrderInfoListRequest'
       responses:
-        202:
-          description: Succesfully received and processed batched operations. Please check response to see the status per operation.
-          schema:
-            $ref: '#/definitions/batchOrderOperationResponse'
+        200:
+          $ref: '#/responses/orderMerchantInfoBatchOperationResponse'
         400:
-          description: Requested too many batch operations
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderBatchBadRequest'
+
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
 
 
-  '/{merchantCode}/batches/changeOrders/{changeOrderType}':
+  '/{merchantCode}/batches/ship':
     post:
       tags:
       - Batches
-      operationId: ChangeOrderList
-      summary: Send a batch of operations to change your marketplace Order information (accept, ship, etc.)
+      operationId: ShipOrderList
+      summary: Ship multiple marketplace orders in one operation (max 100 items per call)
       description: The purpose of this operation is to reduce the amount of request to the API.
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
-      - $ref: '#/parameters/changeOrderTypeParameter'
-      - $ref: '#/parameters/userNameInQueryParameter'
-      - $ref: '#/parameters/testModeInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/testModeInQueryParameter'
       - name: request
         in: body
         required: true
         schema:
-          $ref: '#/definitions/changeOrderListRequest'
+         $ref: '#/definitions/shipOrderListRequest'
       responses:
         202:
-          description: Succesfully received and processed batched operations. Please check response to see the status per operation.
-          schema:
-            $ref: '#/definitions/batchOrderOperationResponse'
+          $ref: '#/responses/orderChangeBatchOperationResponse'
         400:
-          description: Requested too many batch operations
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderBatchBadRequest'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
 
-  '/{merchantCode}/{marketplaceCode}/{imnOrderId}':
+  '/{merchantCode}/batches/shipWithTrackingUrl':
+    post:
+      tags:
+      - Batches
+      operationId: ShipOrderListWithTrackUrl
+      summary: Ship multiple marketplace orders with tracking url in one operation (max 100 items per call)
+      description: The purpose of this operation is to reduce the amount of request to the API.
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/testModeInQueryParameter'
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/shipOrderWithTrackingUrlListRequest'
+      responses:
+        202:
+          $ref: '#/responses/orderChangeBatchOperationResponse'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderBatchBadRequest'
+
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+      deprecated: false
+
+
+  '/{merchantCode}/batches/refund':
+    post:
+      tags:
+      - Batches
+      operationId: RefundOrderList
+      summary: Refund multiple marketplace orders in one operation (max 100 items per call)
+      description: The purpose of this operation is to reduce the amount of request to the API.
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/testModeInQueryParameter'
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/refundOrderListRequest'
+      responses:
+        202:
+          $ref: '#/responses/orderChangeBatchOperationResponse'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderBatchBadRequest'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+      deprecated: false
+
+
+  '/{merchantCode}/batches/accept':
+    post:
+      tags:
+      - Batches
+      operationId: AcceptOrderList
+      summary: Accept multiple marketplace orders in one operation (max 100 items per call)
+      description: The purpose of this operation is to reduce the amount of request to the API.
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/testModeInQueryParameter'
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/acceptOrderListRequest'
+      responses:
+        202:
+          $ref: '#/responses/orderChangeBatchOperationResponse'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderBatchBadRequest'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+      deprecated: false
+
+  '/{merchantCode}/batches/refuse':
+    post:
+      tags:
+      - Batches
+      operationId: RefuseOrderList
+      summary: Refuse multiple marketplace orders in one operation (max 100 items per call)
+      description: The purpose of this operation is to reduce the amount of request to the API.
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/testModeInQueryParameter'
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/refuseOrderListRequest'
+      responses:
+        202:
+          $ref: '#/responses/orderChangeBatchOperationResponse'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderBatchBadRequest'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+      deprecated: false
+
+
+  '/{merchantCode}/batches/cancel':
+    post:
+      tags:
+      - Batches
+      operationId: CancelOrderList
+      summary: Cancel multiple marketplace orders in one operation (max 100 items per call)
+      description: The purpose of this operation is to reduce the amount of request to the API.
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/testModeInQueryParameter'
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/cancelOrderListRequest'
+      responses:
+        202:
+          $ref: '#/responses/orderChangeBatchOperationResponse'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderBatchBadRequest'
+
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+      deprecated: false
+
+
+
+
+  '/{merchantCode}/{marketplaceCode}/{marketplaceOrderId}':
     head:
       tags:
       - Order
@@ -293,7 +403,7 @@ paths:
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
-      - $ref: '#/parameters/imnOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/marketplaceOrderIdParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/ifNoneMatchParameter'
       responses:
         200:
@@ -314,9 +424,8 @@ paths:
         304:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/304_NotModified'
         404:
-          description: Requested Order could not be found
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
+         
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
@@ -328,7 +437,7 @@ paths:
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
-      - $ref: '#/parameters/imnOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/marketplaceOrderIdParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/ifNoneMatchParameter'
       responses:
         200:
@@ -346,18 +455,16 @@ paths:
                 ETag value to identify the current version of requested Order\
                 For more details go to this link: http://tools.ietf.org/html/rfc7232#section-2.3
           schema:
-            $ref: '#/definitions/order'
+            $ref: '#/definitions/orderIndex'
         304:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/304_NotModified'
         404:
-          description: Requested Order could not be found
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
 
-  '/{merchantCode}/{marketplaceCode}/{imnOrderId}/history':
+  '/{merchantCode}/{marketplaceCode}/{marketplaceOrderId}/history':
     get:
       tags:
       - Order
@@ -366,7 +473,7 @@ paths:
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
-      - $ref: '#/parameters/imnOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/marketplaceOrderIdParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/ifNoneMatchParameter'
       responses:
         200:
@@ -376,14 +483,12 @@ paths:
         304:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/304_NotModified'
         404:
-          description: Requested Order could not be found
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
 
-  '/{merchantCode}/{marketplaceCode}/{imnOrderId}/setMerchantOrderInfo':
+  '/{merchantCode}/{marketplaceCode}/{marketplaceOrderId}/setMerchantOrderInfo':
     post:
       tags:
       - Order
@@ -392,7 +497,7 @@ paths:
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
-      - $ref: '#/parameters/imnOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/marketplaceOrderIdParameter'
       - name: request
         in: body
         required: true
@@ -406,14 +511,12 @@ paths:
           schema:
             $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
         404:
-          description: Requested Order could not be found
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
 
-  '/{merchantCode}/{marketplaceCode}/{imnOrderId}/clearMerchantOrderInfo':
+  '/{merchantCode}/{marketplaceCode}/{marketplaceOrderId}/clearMerchantOrderInfo':
     post:
       tags:
       - Order
@@ -422,7 +525,7 @@ paths:
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
-      - $ref: '#/parameters/imnOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/marketplaceOrderIdParameter'
       responses:
         204:
           description: Successfully cleared Order merchant order info set
@@ -431,55 +534,36 @@ paths:
           schema:
             $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
         404:
-          description: Requested Order could not be found
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
 
-  '/{merchantCode}/{marketplaceCode}/{imnOrderId}/{changeOrderType}':
+
+  '/{merchantCode}/{marketplaceCode}/{marketplaceOrderId}/accept':
     post:
       tags:
       - Order
-      operationId: ChangeOrder
-      summary: Change your marketplace Order Information (accept, ship, etc.)
+      operationId: AcceptOrder
+      summary: Accept your marketplace order
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
-      - $ref: '#/parameters/imnOrderIdParameter'
-      - $ref: '#/parameters/changeOrderTypeParameter'
-      - $ref: '#/parameters/userNameInQueryParameter'
-      - $ref: '#/parameters/testModeInQueryParameter'
-
-      - name: request
-        in: body
-        #required: true
-        required: false
-        schema:
-          $ref: '#/definitions/changeOrderRequest'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/marketplaceOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/testModeInQueryParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/ifMatchParameter'
       responses:
         202:
-          description: Order change request accepted
+          description: Order accept request accepted
         400:
-          description: Invalid order change request, could not be send to the marketplace. Please check the body of this request.
+          description: Invalid order accept request, could not be send to the marketplace. Please check your request.
           schema:
             $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
         404:
-          description: Requested Order could not be found
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
         409:
-          description: |
-            Already processing a change request for this Order.\
-            Please refresh your clients Order information and retry later.
-          headers:
-            Retry-After:
-              type: integer
-              description: Indicates the duration in seconds to wait to be able to make this request again
-          schema:
-            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeAlreadyInProgress'
         412:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/412_PreConditionFailed'
         default:
@@ -487,10 +571,192 @@ paths:
       deprecated: false
 
 
+  '/{merchantCode}/{marketplaceCode}/{marketplaceOrderId}/refuse':
+    post:
+      tags:
+      - Order
+      operationId: RefuseOrder
+      summary: Refuse your marketplace order
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/marketplaceOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/testModeInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/ifMatchParameter'
+      responses:
+        202:
+          description: Order refuse request accepted
+        400:
+          description: Invalid order refuse request, could not be send to the marketplace. Please check your request.
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+        404:
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
+        
+        409:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeAlreadyInProgress'        
+        412:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/412_PreConditionFailed'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+      deprecated: false
+
+
+  '/{merchantCode}/{marketplaceCode}/{marketplaceOrderId}/cancel':
+    post:
+      tags:
+      - Order
+      operationId: CancelOrder
+      summary: Cancel your marketplace order
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/marketplaceOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/testModeInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/ifMatchParameter'
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/cancelOrderRequest'
+      responses:
+        202:
+          description: Order cancel request accepted
+        400:
+          description: Invalid order cancel request, could not be send to the marketplace. Please check your request.
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+        404:
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
+        409:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeAlreadyInProgress'        
+        412:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/412_PreConditionFailed'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+      deprecated: false
+
+
+  '/{merchantCode}/{marketplaceCode}/{marketplaceOrderId}/ship':
+    post:
+      tags:
+      - Order
+      operationId: ShipOrder
+      summary: Ship your marketplace order
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/marketplaceOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/testModeInQueryParameter'
+
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/shipOrderRequest'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/ifMatchParameter'
+      responses:
+        202:
+          description: Order ship request accepted
+        400:
+          description: Invalid order ship request, could not be send to the marketplace. Please check the body of this request.
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+        404:
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
+        409:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeAlreadyInProgress'        
+        412:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/412_PreConditionFailed'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+      deprecated: false
+
+
+  '/{merchantCode}/{marketplaceCode}/{marketplaceOrderId}/shipWithTrackingUrl':
+    post:
+      tags:
+      - Order
+      operationId: ShipOrderWithTrackingUrl
+      summary: Ship your marketplace order with tracking url
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/marketplaceOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/testModeInQueryParameter'
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/shipOrderWithTrackingUrlRequest'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/ifMatchParameter'
+      responses:
+        202:
+          description: Order ship with tracking url request accepted
+        400:
+          description: Invalid order ship request, could not be send to the marketplace. Please check the body of this request.
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+        404:
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
+        409:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeAlreadyInProgress'        
+        412:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/412_PreConditionFailed'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+      deprecated: false
+
+
+  '/{merchantCode}/{marketplaceCode}/{marketplaceOrderId}/refund':
+    post:
+      tags:
+      - Order
+      operationId: RefundOrder
+      summary: Refund your marketplace order
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/marketplaceOrderIdParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/userNameInQueryParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/parameters/testModeInQueryParameter'
+
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/refundOrderRequest'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/ifMatchParameter'
+      responses:
+        202:
+          description: Order refund request accepted
+        400:
+          description: Invalid order refund request, could not be send to the marketplace. Please check the body of this request.
+          x-exceptions:
+          - ValidationException
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/errorResponseMessage'
+        404:
+         $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderNotFound'
+        409:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-exceptions/1.0#/responses/orderChangeAlreadyInProgress'        
+        412:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/412_PreConditionFailed'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+      deprecated: false
+
+
+
+
   '/{merchantCode}/subscriptions':
     post:
       tags:
-      - Subscriptions
+      - Subscriptions - DRAFT
       operationId: CreateSubscription
       summary: Creates a subscription to the orders
       parameters:
@@ -520,7 +786,7 @@ paths:
 
     get:
       tags:
-      - Subscriptions
+      - Subscriptions - DRAFT
       operationId: GetSubscriptionList
       summary: Get the subscription list
       parameters: 
@@ -551,7 +817,7 @@ paths:
   '/{merchantCode}/subscriptions/{id}':
     get:
       tags:
-      - Subscriptions
+      - Subscriptions - DRAFT
       operationId: GetSubscription
       summary: Get a subscription to the orders
       parameters:
@@ -578,7 +844,7 @@ paths:
 
     delete:
       tags:
-      - Subscriptions
+      - Subscriptions - DRAFT
       operationId: DeleteSubscription
       summary: Delete a subscription to the orders
       parameters:
@@ -608,7 +874,7 @@ paths:
   '/{merchantCode}/subscriptions/{id}/activate':
     post:
       tags:
-      - Subscriptions
+      - Subscriptions - DRAFT
       operationId: ActivateSubscription
       summary: Activate a subscription to the orders
       parameters:
@@ -636,7 +902,7 @@ paths:
   '/{merchantCode}/subscriptions/{id}/deactivate':
     post:
       tags:
-      - Subscriptions
+      - Subscriptions - DRAFT
       operationId: DeactivateSubscription
       summary: Deactivate a subscription to the orders
       parameters:
@@ -665,66 +931,168 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
       deprecated: false
 
+
+  '/{merchantCode}/reports/status':
+    post:
+      tags:
+        - Statistics
+      summary: Get the report status
+      description: Get the report status
+      operationId: GetMerchantReportStatus
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      responses:
+        200:
+          description: Your reporting status
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/reportStatusByMarketplace'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantNotFound'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+  '/{merchantCode}/reports/byday':
+    post:
+      tags:
+        - Statistics
+      summary: Get the report by day
+      description: Get the report by day
+      operationId: GetMerchantReportByDay
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: request
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/reportByDayRequest'
+      responses:
+        200:
+          description: Your reporting by day
+          schema:
+            $ref: '#/definitions/reportByDayResponse'
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantNotFound'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
 definitions:
 
-  imnOrderId:
-    description: The IMN Order identifier
-    type: string
-    format: uuid
-    example: '00000000000000000000000000000000000000000000000'
-
-
-
-  order_MerchantOrderId:
-    description: The order merchant identifier
-    type: string
-    example: MyOrderMerchantId
-
-  order_MerchantECommerceSoftwareName:
-    description: The e-commerce software name of the merchant
-    type: string
-    example: Prestashop
-
-  order_MerchantECommerceSoftwareVersion:
-    description: The e-commece software version of the merchant
-    type: string
-    example: 123.0.1
-
+  reportStatusByMarketplace:
+    type: object
+    required:
+    - toAccept
+    - toShip
+    - lateToShip
+    - marketplaceCode
+    properties:
+      toAccept:
+        type: integer
+        description: The order count to accept
+        example: 10
+      toShip:
+        type: integer
+        description: The order count to ship
+        example: 34
+      lateToShip:
+        type: integer
+        description: The order count late to ship
+        example: 56
+      marketplaceCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
 
 
  
  
- 
-  dateSearchType:
-    description: Indicates on which date you want to make the filter
-    type: string
-    enum:
-    - Modification
-    - Purchase
-    - MarketPlaceModification
-    default: Modification
+  reportByDayRequest:
+    required:
+    - beginPeriodUtcDate
+    - endPeriodUtcDate
+    type: object
+    properties:
+      marketplaceCodes:
+        description: Indicate the marketplace identifier list
+        type: array
+        minItems: 1
+        items:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
+        example:
+        - C1
+        - E1
+        - R1
+      beginPeriodUtcDate:
+        type: string
+        format: date
+        description: The begin date of the period for the report
+        example: '2006-11-20T00:00:00Z'
+      endPeriodUtcDate:
+        type: string
+        format: date
+        description: The end date of the period for the report
+        example: '2006-12-20T00:00:00Z'
 
-  pageSize:
-    description: Indicate the order count per page
-    type: integer
-    format: int32
-    default: 100
-    minimum: 25
-    maximum: 100
-    example: 100
 
-  pageNumber:
-    description: Indicates the page number
-    format: int32
-    type: integer
-    example: 1
-    minimum: 1
-    default: 1
 
-  order_Buyer_Name:
-    description: Buyer full name
-    type: string
-    example: Monroe
+
+
+  reportByDayResponse:
+    type: object
+    required:
+    - days
+    properties:
+      days:
+        type: array
+        items:
+          $ref: '#/definitions/reportByDay'
+
+
+
+  reportByDay:
+    type: object
+    required:
+    - day
+    - byMarketplaces
+    properties:
+      day:
+        type: string
+        format: date
+        example: '2017-04-23'
+# [Style Validator (8c3bfea8-ddcf-4f79-8c7c-52fb930044e7) : All model properties must have examples]: Field 'example' required in 'properties'
+# [Style Validator (d4181c6e-f5b7-47c8-b188-98eaaaf65988) : All model properties must have examples]: Field 'example' required in 'properties'
+      byMarketplaces:
+        type: array
+        items:
+          $ref: '#/definitions/reportByDayByMarketplace'
+
+  reportByDayByMarketplace:
+    type: object
+    required:
+    - marketplaceCode
+    - currencyCode
+    - orderCount
+    - turnover
+    properties:
+      marketplaceCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
+      currencyCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/currencyCode'
+      orderCount:
+        type: integer
+        description: The order count
+        example: 42
+      turnover:
+        type: number
+        description: The turnover
+        example: 234.42
+  
+
+
 
   orderListRequestWithoutPagination:
     type: object
@@ -739,14 +1107,18 @@ definitions:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
         example:
         - C1
+      late:
+        type: boolean
+        description: Looking for late orders
+        example: true
       imnOrderStatuses:
         type: array
         items:
-          $ref: '#/definitions/imnOrderStatus'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/imnOrderStatus'
         example:
         - InProgress
       dateSearchType:
-        $ref: '#/definitions/dateSearchType'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderDateSearchType'
       beginPeriodUtcDate:
         description: |
           The begin period you want to make the search. \
@@ -764,21 +1136,24 @@ definitions:
         format: date-time
         type: string
         example: '2017-04-01T13:10:01Z'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_Name' does not comply with the rule
-      order_Buyer_Name:
-        $ref: '#/definitions/order_Buyer_Name'
+
+      buyerFirstName:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/firstName'
+      buyerLastName:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/lastName'
+
       marketplaceOrderIds:
         type: array
         items:
-          $ref: '#/definitions/marketplaceOrderId'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/marketplaceOrderId'
         example:
-        - AmazonOrderId1234
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantOrderIds' does not comply with the rule
-      order_MerchantOrderIds:
+        - CdiscountOrderId1234
+# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'merchantOrderIds' does not comply with the rule
+      merchantOrderIds:
         description: Merchant order id list
         type: array
         items:
-          $ref: '#/definitions/order_MerchantOrderId'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantOrderId'
         example:
         - MyOrderId1234
 
@@ -794,364 +1169,62 @@ definitions:
       - pageNumber
       properties:
         pageSize:
-          $ref: '#/definitions/pageSize'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/pageSize'
+          
         pageNumber:
-          $ref: '#/definitions/pageNumber'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/pageNumber'
 
 
-  businessOperationType:
-    type: string
-    x-lov: OrderChangeBusinessOperationType
-    example: ShipOrder
+ 
 
 
-  orderIdentifier:
-    type: object
-    required:
-    - marketplaceCode
-    - merchantCode
-    - imnOrderId
-    properties:
-      marketplaceCode:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
-      merchantCode:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/merchantCode'
-      imnOrderId:
-        $ref: '#/definitions/imnOrderId'
-
-  clearMerchantOrderInfoListRequest:
-    type: object
-    required:
-    - orders
-    properties:
-      orders:
-        type: array
-        items:
-          $ref: '#/definitions/orderIdentifier'
-        maxItems: 100
-        uniqueItems: true
-        minItems: 1
-        example:
-        - marketplaceCode: Amazon
-          merchantCode: 1234
-          imnOrderId: '00000000000000000000000000000000000000000000000'
-        - marketplaceCode: Amazon
-          merchantCode: 5678
-          imnOrderId: '00000000000000000000000000000000000000000000000'
-        - marketplaceCode: Ebay
-          merchantCode: 9876
-          imnOrderId: '00000000000000000000000000000000000000000000000'
-
-  setMerchantOrderInfoListRequest:
-    type: object
-    required:
-    - order_MerchantECommerceSoftwareName
-    - order_MerchantECommerceSoftwareVersion
-    - orders
-    properties:
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantECommerceSoftwareName' does not comply with the rule
-      order_MerchantECommerceSoftwareName:
-        $ref: '#/definitions/order_MerchantECommerceSoftwareName'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantECommerceSoftwareVersion' does not comply with the rule
-      order_MerchantECommerceSoftwareVersion:
-        $ref: '#/definitions/order_MerchantECommerceSoftwareVersion'
-      orders:
-        type: array
-        items:
-          $ref: '#/definitions/setMerchantOrderInfoListRequestItem'
-        maxItems: 100
-        uniqueItems: true
-        minItems: 1
-        example:
-        - marketplaceCode: Amazon
-          merchantCode: 1234
-          imnOrderId: '8D47FF1427A26B064ca98e95f644361ada5a5be0bbb3b53'
-          order_MerchantOrderId: BX1234
-        - marketplaceCode: Amazon
-          merchantCode: 5678
-          imnOrderId: '8D47FF149F213D055f26e3c413e4c9ba5c5cfda460547a4'
-          order_MerchantOrderId: BX5678
-        - marketplaceCode: Ebay
-          merchantCode: 9876
-          imnOrderId: '8D47FF150217B60bdec05ab61c445d1a59e3da050b52823'
-          order_MerchantOrderId: BX9876
-
-  setMerchantOrderInfoListRequestItem:
-    allOf:
-    - $ref: '#/definitions/orderIdentifier'
-    - type: object
-      required:
-      - marketplaceCode
-      - merchantCode
-      - imnOrderId
-      - order_MerchantOrderId
-      properties:
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantOrderId' does not comply with the rule
-        order_MerchantOrderId:
-          $ref: '#/definitions/order_MerchantOrderId'
-
-  setMerchantOrderInfoRequest:
-    type: object
-    required:
-    - order_MerchantOrderId
-    - order_MerchantECommerceSoftwareName
-    - order_MerchantECommerceSoftwareVersion
-    properties:
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantOrderId' does not comply with the rule
-      order_MerchantOrderId:
-        $ref: '#/definitions/order_MerchantOrderId'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantECommerceSoftwareName' does not comply with the rule
-      order_MerchantECommerceSoftwareName:
-        $ref: '#/definitions/order_MerchantECommerceSoftwareName'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantECommerceSoftwareVersion' does not comply with the rule
-      order_MerchantECommerceSoftwareVersion:
-        $ref: '#/definitions/order_MerchantECommerceSoftwareVersion'
-
-  accountSynchronizationList:
-    type: object
-    additionalProperties:
-      $ref: '#/definitions/accountSynchronization'
-
-  accountSynchronization:
-    type: object
-    required:
-    - merchantCode
-    - marketplaceCode
-    - marketplaceBusinessCode
-    properties:
-      completedHarvestSynchroUtcDate:
-        format: date-time
-        type: string
-
-
-  processing:
-    description: If true, there is currently a harvest or an order change in progress. Otherwise false.
-    type: boolean
-    example: false
 
   links.GetOrderLink:
     allOf:
     - $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3
     - example:
-        href: /merchant/orders/v1/Amazon/1001/00000000000000000000000000000000000000000000000
+        href: /merchant/orders/v1/MLT01/C1/A0CD3FG
         method: GET
 
-  orderHeaderLinks:
+
+
+  orderLinks:
     type: object
+    description: |
+      The links related to an order.
+      The "go" property is the link to see the order on https://go.imn.io
+      Example: TBD
     required:
     - self
+    - go
+    - history
+    - setMerchantInfo
+    - clearMerchantInfo
     properties:
       self:
         $ref: '#/definitions/links.GetOrderLink'
-
-  orderHeader:
-    description: Describe the basic information related to an order. All properties with the prefix order_ are translated in the list of values /user/lov/OrderMetaInfoOrderDetails
-    type: object
-    required:
-    - marketplaceCode
-    - merchantCode
-    - imnOrderId
-    - order_MarketplaceOrderId
-    - order_Status_IMNOrderStatus
-    - order_PurchaseUtcDate
-    - order_LastModificationUtcDate
-    - order_MarketplaceLastModificationUtcDate
-    - processing
-    - etag
-    - links
-    properties:
-      marketplaceCode:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
-      merchantCode:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/merchantCode'
-      imnOrderId:
-        $ref: '#/definitions/imnOrderId'
-      imnOrderUrl:
+      go:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/httpUrl'
-      order_MarketplaceOrderId:
-        $ref: '#/definitions/marketplaceOrderId'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Status_IMNOrderStatus' does not comply with the rule
-      order_Status_IMNOrderStatus:
-        $ref: '#/definitions/imnOrderStatus'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Status_MarketplaceOrderStatus' does not comply with the rule
-      order_Status_MarketplaceOrderStatus:
-        $ref: '#/definitions/marketplaceOrderStatus'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantOrderId' does not comply with the rule
-      order_MerchantOrderId:
-        $ref: '#/definitions/order_MerchantOrderId'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantECommerceSoftwareName' does not comply with the rule
-      order_MerchantECommerceSoftwareName:
-        $ref: '#/definitions/order_MerchantECommerceSoftwareName'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MerchantECommerceSoftwareVersion' does not comply with the rule
-      order_MerchantECommerceSoftwareVersion:
-        $ref: '#/definitions/order_MerchantECommerceSoftwareVersion'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_PurchaseUtcDate' does not comply with the rule
-      order_PurchaseUtcDate:
-        description: The purchase date of this order
-        format: date-time
-        type: string
-        example: '2017-03-31T21:30:23Z'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_LastModificationUtcDate' does not comply with the rule
-      order_LastModificationUtcDate:
-        description: The last modification UTC date done by IMN of this order
-        format: date-time
-        type: string
-        example: '2017-04-16T10:30:23Z'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MarketplaceLastModificationUtcDate' does not comply with the rule
-      order_MarketplaceLastModificationUtcDate:
-        description: The last modification UTC date done by the marketplace on this order
-        format: date-time
-        type: string
-        example: '2017-04-16T10:25:23Z'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_Name' does not comply with the rule
-      order_Buyer_Name:
-        $ref: '#/definitions/order_Buyer_Name'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_TotalPrice' does not comply with the rule
-      order_TotalPrice:
-        description: The total price of this order (corresponding to the amount paid by the customer)
-        format: decimal
-        type: number
-        example: 101.42
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_CurrencyCode' does not comply with the rule
-      order_CurrencyCode:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/currencyCode'
-      processing:
-        $ref: '#/definitions/processing'
-      etag:
-       $ref: '#/definitions/etag'
-      links:
-       $ref: '#/definitions/orderHeaderLinks'
-
-  etag:
-    description: |
-      ETag value to identify the order.\
-      This information is required for the operation GetOrder and ChangeOrder.\
-      For more details go to this link: http://tools.ietf.org/html/rfc7232#section-2.3
-    type: string
-    example: '"ca071a4580129f932a03971968ffef69"'
-
-  orderItem:
-    description: Describe an order item. All properties with the prefix orderItem_ are translated in the list of values /user/lov/OrderMetaInfoOrderItems
-    type: object
-    required:
-    - imnOrderItemId
-    - orderItem_OrderItemType
-    properties:
-      imnOrderItemId:
-        description: The IMN identifier of the order Item
-        type: string
-        example: '1'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_OrderItemType' does not comply with the rule
-      orderItem_OrderItemType:
-        description: The order item type of the order item
-        type: string
-        example: Product
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_MerchantImportedProductId' does not comply with the rule
-      orderItem_MerchantImportedProductId:
-        description: The product id indicated in the catalog importation in IMN system for this order item. This property will help you to match the order to the inventory system.
-        type: string
-        example: '73267'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_MerchantImportedProductIdColumnName' does not comply with the rule
-      orderItem_MerchantImportedProductIdColumnName:
-        description: The column name for the product id indicated in the catalog importation in IMN system related to this order item. This property will help you to match the order to the inventory system.
-        example: reference
-        type: string
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_MerchantImportedProductUrl' does not comply with the rule
-      orderItem_MerchantImportedProductUrl:
-        description: The product url indicated in the catalog importation in IMN system related to this order item
-        example: 'http://blabla.com/my-folder/73267.html'
-        type: string
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_MerchantProductIdColumnName' does not comply with the rule
-      orderItem_MerchantProductIdColumnName:
-        description: The column name indicate in the mapping for the product id related to the order item
-        example: reference_produit
-        type: string
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_IMNStoreId' does not comply with the rule
-      orderItem_IMNStoreId:
-        description: The store id in the IMN system related to the order item. This property will help you to match the order to the inventory system.
-        example: '00000000-cceb-4c20-b2c9-000000000000'
-        type: string
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_ItemTax' does not comply with the rule
-      orderItem_ItemTax:
-        description: The tax of the order item
-        type: number
-        format: decimal
-        example: 0.0
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_Title' does not comply with the rule
-      orderItem_Title:
-        description: The title of the order item
-        example: 'bLA acide-plomb 6v-4.5ah 70x48x106mm'
-        type: string
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_ImageUrl' does not comply with the rule
-      orderItem_ImageUrl:
-        description: The URL of the image of the order item
-        example: 'http://blabla.com//das6-45.jpg'
-        type: string
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_MerchantProductId' does not comply with the rule
-      orderItem_MerchantProductId:
-        description: The merchant product id of the order item
-        example: 'BlaLdas6-4.5'
-        type: string
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_MarketPlaceProductId' does not comply with the rule
-      orderItem_MarketPlaceProductId:
-        description: The marketplace product identifier of the order item
-        example: ''
-        type: string
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_ItemPrice' does not comply with the rule
-      orderItem_ItemPrice:
-        description: The price of the order item
-        example: 6.86
-        type: number
-        format: decimal
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_Quantity' does not comply with the rule
-      orderItem_Quantity:
-        description: The quantity of the order item
-        example: 1
-        type: number
-        format: decimal
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_TotalPrice' does not comply with the rule
-      orderItem_TotalPrice:
-        description: The total price of the order item
-        example: 6.86
-        type: number
-        format: decimal
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'orderItem_Shipping_Price' does not comply with the rule
-      orderItem_Shipping_Price:
-        description: The shipping price of the order item
-        type: number
-        example: 0.00
-        format: decimal
-
-  orderLinks:
-    allOf:
-    - $ref: '#/definitions/orderHeaderLinks'
-    - type: object
-      required:
-      - self
-      - history
-      - harvest
-      - setMerchantInfo
-      - clearMerchantInfo
-      properties:
-        history:
-          $ref: '#/definitions/links.GetOrderHistoryLink'
-        setMerchantInfo:
-          $ref: '#/definitions/links.SetMerchantOrderInfoLink'
-        clearMerchantInfo:
-          $ref: '#/definitions/links.ClearMerchantOrderInfoLink'
+    
+      history:
+        $ref: '#/definitions/links.GetOrderHistoryLink'
+      setMerchantInfo:
+        $ref: '#/definitions/links.SetMerchantOrderInfoLink'
+      clearMerchantInfo:
+        $ref: '#/definitions/links.ClearMerchantOrderInfoLink'
 
   links.GetOrderHistoryLink:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
     - example:
-        href: /merchant/orders/v1/Amazon/1001/00000000000000000000000000000000000000000000000/history
+        href: /merchant/orders/v1/MLT01/C1/A0CD3FG/history
         method: GET
 
   links.SetMerchantOrderInfoLink:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
     - example:
-        href: /merchant/orders/v1/Amazon/1001/00000000000000000000000000000000000000000000000/setMerchantOrderInfo
+        href: /merchant/orders/v1/MLT01/C1/A0CD3FG/setMerchantOrderInfo
         method: POST
         parameters:
           request:
@@ -1163,461 +1236,116 @@ definitions:
     allOf:
     - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
     - example:
-        href: /merchant/orders/v1/Amazon/1001/00000000000000000000000000000000000000000000000/clearMerchantOrderInfo
+        href: /merchant/orders/v1/MLT01/C1/A0CD3FG/clearMerchantOrderInfo
         method: POST
 
-  links.HarvestOrderLink:
-    allOf:
-    - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3'
-    - example:
-        href: /merchant/orders/v1/Amazon/1001/00000000000000000000000000000000000000000000000/harvest
-        method: POST
 
-  order:
-    allOf:
-    - $ref: '#/definitions/orderHeader'
-    - type: object
-      description: Describe in details all informations related to an order. All properties with the prefix order_ are translated in the list of values /user/lov/OrderMetaInfoOrderDetails.
-      required:
-      - marketplaceCode
-      - merchantCode
-      - imnOrderId
-      - marketplaceBusinessCode
-      - order_MarketplaceOrderId
-      - order_Status_IMNOrderStatus
-      - order_PurchaseUtcDate
-      - order_LastModificationUtcDate
-      - order_MarketplaceLastModificationUtcDate
-      - processing
-      - etag
-      - links
-      - orderItems
-      - transitionLinks
-      properties:
-        links:
-          $ref: '#/definitions/orderLinks'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_MarketPlaceChannel' does not comply with the rule
-        order_MarketPlaceChannel:
-          description: Useful to identify the origin of the order. For example in Amazon.
-          type: string
-          example: Amazon France
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_TotalTax' does not comply with the rule
-        order_TotalTax:
-          description: The total tax of this order
-          type: number
-          format: decimal
-          example: 0.0
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_TotalCommission' does not comply with the rule
-        order_TotalCommission:
-          description: The total commission of this order
-          type: number
-          format: decimal
-          example: 0.0
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_PaymentMethod' does not comply with the rule
-        order_PaymentMethod:
-          description: The payment method of this order
-          type: string
-          example: '1 / 1X'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_PayingUtcDate' does not comply with the rule
-        order_PayingUtcDate:
-          description: The UTC date of the payment of this order
-          type: string
-          format: date-time
-          example: '2017-04-01T13:22:01Z'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Comment' does not comply with the rule
-        order_Comment:
-          description: The comment associated to this order
-          type: string
-          example: 'This is a comment'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_Civility' does not comply with the rule
-        order_Shipping_Civility:
-          description: The civility of the person in the shipping address for this order
-          type: string
-          example: MRS
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_CompanyName' does not comply with the rule
-        order_Shipping_CompanyName:
-          description: The company name of the shipping address for this order
-          type: string
-          example: My Company
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_AddressName' does not comply with the rule
-        order_Shipping_AddressName:
-          description: The name of the person in the shipping address for this order
-          type: string
-          example: Jacques BAUREGARD
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_Email' does not comply with the rule
-        order_Shipping_Email:
-          description: The email of the person in the shipping address for this order
-          type: string
-          example: client_000000@manomano.fr
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_AddressLine1' does not comply with the rule
-        order_Shipping_AddressLine1:
-          description: The shipping address line 1 of this order
-          type: string
-          example: '5 rue amélie'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_AddressLine2' does not comply with the rule
-        order_Shipping_AddressLine2:
-          description: The shipping address line 2 of this order
-          type: string
-          example: 'BDR'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_AddressLine3' does not comply with the rule
-        order_Shipping_AddressLine3:
-          description: The shipping address line 3 of this order
-          type: string
-          example: 'RDC'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_AddressPostalCode' does not comply with the rule
-        order_Shipping_AddressPostalCode:
-          description: The shipping address postal code of this order
-          type: string
-          example: '13014'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_AddressCity' does not comply with the rule
-        order_Shipping_AddressCity:
-          description: The shipping address city of this order
-          type: string
-          example: Marseille
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_AddressStateOrRegion' does not comply with the rule
-        order_Shipping_AddressStateOrRegion:
-          description: The shipping address state or region of this order
-          type: string
-          example: BDR
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_AddressCountryName' does not comply with the rule
-        order_Shipping_AddressCountryName:
-          description: The shipping address country name
-          type: string
-          example: France
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_AddressCountryIsoCodeAlpha2' does not comply with the rule
-        order_Shipping_AddressCountryIsoCodeAlpha2:
-          description: The shipping address country iso code alpha 2 (see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#/decoding_table for more details)
-          type: string
-          example: FR
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_Phone' does not comply with the rule
-        order_Shipping_Phone:
-          description: The phone number of the person in the shipping address for this order
-          type: string
-          example: '+33000000041'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_MobilePhone' does not comply with the rule
-        order_Shipping_MobilePhone:
-          description: The mobile phone number of the person in the shipping address for this order
-          type: string
-          example: '+33000000042'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_Price' does not comply with the rule
-        order_Shipping_Price:
-          description: The shipping price of this order
-          type: number
-          format: decimal
-          example: 6.9
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_Method' does not comply with the rule
-        order_Shipping_Method:
-          description: The shipping method of this order
-          type: string
-          example: DPD Domicile
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_ShippingTax' does not comply with the rule
-        order_Shipping_ShippingTax:
-          description: The shipping tax for this order
-          type: number
-          format: decimal
-          example: 0.0
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_EarliestShipUtcDate' does not comply with the rule
-        order_Shipping_EarliestShipUtcDate:
-          description: The UTC date of the earliest ship for this order
-          type: string
-          example: '2017-04-02T21:30:00Z'
-          format: date-time
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_LatestShipUtcDate' does not comply with the rule
-        order_Shipping_LatestShipUtcDate:
-          description: The UTC date of the latest ship for this order
-          type: string
-          format: date-time
-          example: '2017-04-30T21:30:00Z'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_Identifier' does not comply with the rule
-        order_Buyer_Identifier:
-          description: The buyer identifier for this order
-          type: string
-          example: '1234567890'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_Civility' does not comply with the rule
-        order_Buyer_Civility:
-          description: The buyer civility for this order
-          type: string
-          example: 'Marseille'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_CompanyName' does not comply with the rule
-        order_Buyer_CompanyName:
-          description: The buyer company name for this order
-          type: string
-          example: 'Marsillia'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_Email' does not comply with the rule
-        order_Buyer_Email:
-          description: The email of the buyer for this order
-          type: string
-          example: client_000000@manomano.fr
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_AddressLine1' does not comply with the rule
-        order_Buyer_AddressLine1:
-          description: The Buyer address line 1 of this order
-          type: string
-          example: '5 rue amélie'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_AddressLine2' does not comply with the rule
-        order_Buyer_AddressLine2:
-          description: The Buyer address line 2 of this order
-          type: string
-          example: 'BDR'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_AddressLine3' does not comply with the rule
-        order_Buyer_AddressLine3:
-          description: The Buyer address line 3 of this order
-          type: string
-          example:  'RDC'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_AddressPostalCode' does not comply with the rule
-        order_Buyer_AddressPostalCode:
-          description: The Buyer address postal code of this order
-          type: string
-          example: '13014'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_AddressCity' does not comply with the rule
-        order_Buyer_AddressCity:
-          description: The Buyer address city of this order
-          type: string
-          example: Marseille
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_AddressStateOrRegion' does not comply with the rule
-        order_Buyer_AddressStateOrRegion:
-          description: The Buyer address state or region of this order
-          type: string
-          example: BDR
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_AddressCountryName' does not comply with the rule
-        order_Buyer_AddressCountryName:
-          description: The Buyer address country name
-          type: string
-          example: France
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_AddressCountryIsoCodeAlpha2' does not comply with the rule
-        order_Buyer_AddressCountryIsoCodeAlpha2:
-          description: The Buyer address country iso code alpha 2 (see http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#/decoding_table for more details)
-          type: string
-          example: FR
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_Phone' does not comply with the rule
-        order_Buyer_Phone:
-          description: The phone number of the buyer for this order
-          type: string
-          example: '+33000000101'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Buyer_MobilePhone' does not comply with the rule
-        order_Buyer_MobilePhone:
-          description: The mobile phone number of the buyer for this order
-          type: string
-          example: '+33000000042'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
-        orderItems:
-          type: array
-          items:
-            $ref: '#/definitions/orderItem'
-        transitionLinks:
-          $ref: '#/definitions/orderTransitionLinks'
 
-  links.ChangeOrderLink:
+    
+
+  
+  
+    
+
+  orderIndex:
+    type: object
+    description: Describe in details all informations related to an order.
+    required:
+    - info
+    - links
+    - transitionLinks
+    properties:
+      info:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderInfo'
+
+      links:
+        $ref: '#/definitions/orderLinks'
+
+      transitionLinks:
+        $ref: '#/definitions/orderTransitionLinks'
+
+
+ 
+
+
+  links.ShipOrderLink:
     allOf:
     - $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3
-    - type: object
-      properties:
-        rel:
-          type: string
-          description: Indicate the relation name related to the link
-          example: self
-    - example:
-        rel: ShipOrder
-        href: /merchant/orders/v1/Amazon/1001/00000000000000000000000000000000000000000000000/ShipOrder
-        method: POST
-        templated: true
-        parameters:
-          'If-Match':
-            in: header
-            value: '"ca071a4580129f932a03971968ffef69"'
-            required: true
-            type: string
-          testMode:
-            in: query
-            type: boolean
-            required: false
-            value: false
-          userName:
-            in: query
-            type: string
-            required: true
-          request:
-            in: body
-            type: object
-            schema: changeOrderRequest
-            properties:
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_FulfillmentDate' does not comply with the rule
-              order_Shipping_FulfillmentDate:
-                required: true
-                type: date-time
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_ShipperTrackingNumber' does not comply with the rule
-              order_Shipping_ShipperTrackingNumber:
-                required: true
-                type: string
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_CarrierName' does not comply with the rule
-              order_Shipping_CarrierName:
-                required: true
-                type: string
-                lovRequired: true
-                lovLink:
-                  href: /v2/user/PriceMinisterCarrierName
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_Method' does not comply with the rule
-              order_Shipping_Method:
-                required: true
-                type: string
-                lovRequired: false
-                lovLink:
-                  href: /v2/user/ShippingMethod_PriceMinister
+
+  links.ShipOrderWithTrackingUrlLink:
+    allOf:
+    - $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3
+
+  links.RefundOrderLink:
+    allOf:
+    - $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3
+
+  links.AcceptOrderLink:
+    allOf:
+    - $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3
+
+  links.RefuseOrderLink:
+    allOf:
+    - $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3
+
+  links.CancelOrderLink:
+    allOf:
+    - $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3
 
   orderTransitionLinks:
     description: Contains the authorized change actions for an order
-    type: array
-    items:
-      $ref: '#/definitions/links.ChangeOrderLink'
-    example:
-      - rel: ShipOrder
-        href: /merchant/orders/v1/Amazon/1001/00000000000000000000000000000000000000000000000/ShipOrder
-        method: POST
-        templated: true
-        parameters:
-          'If-Match':
-            in: header
-            value: '"ca071a4580129f932a03971968ffef69"'
-            required: true
-            type: string
-          testMode:
-            in: query
-            type: boolean
-            required: false
-            value: false
-          userName:
-            in: query
-            type: string
-            required: true
-          request:
-            in: body
-            type: object
-            schema: changeOrderRequest
-            properties:
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_FulfillmentDate' does not comply with the rule
-              order_Shipping_FulfillmentDate:
-                required: true
-                type: date-time
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_ShipperTrackingNumber' does not comply with the rule
-              order_Shipping_ShipperTrackingNumber:
-                required: true
-                type: string
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_CarrierName' does not comply with the rule
-              order_Shipping_CarrierName:
-                required: true
-                type: string
-                lovRequired: true
-                lovLink:
-                  href: /v2/user/PriceMinisterCarrierName
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : camelCase]: 'order_Shipping_Method' does not comply with the rule
-              order_Shipping_Method:
-                required: true
-                type: string
-                lovRequired: false
-                lovLink:
-                  href: /v2/user/ShippingMethod_PriceMinister
+    type: object
+    properties:
+      accept:
+        $ref: '#/definitions/links.AcceptOrderLink'
+      refuse:
+        $ref: '#/definitions/links.RefuseOrderLink'
+      cancel:
+        $ref: '#/definitions/links.CancelOrderLink'
+      ship:
+        $ref: '#/definitions/links.ShipOrderLink'
+      shipWithTrackingUrl:
+        $ref: '#/definitions/links.ShipOrderWithTrackingUrlLink'
+      refund:
+        $ref: '#/definitions/links.RefundOrderLink'
+        
 
-      - rel: CancelOrder
-        href: /merchant/orders/v1/Amazon/1001/00000000000000000000000000000000000000000000000/CancelOrder
-        method: POST
-        templated: true
-        parameters:
-          'If-Match':
-            in: header
-            value: '"ca071a4580129f932a03971968ffef69"'
-            required: true
-            type: string
-          testMode:
-            in: query
-            type: boolean
-            required: false
-            value: false
-          userName:
-            in: query
-            type: string
-            required: true
-          request:
-            in: body
-            type: object
-            schema: changeOrderRequest
-            properties:
-              order_Cancel_Reason:
-                required: true
-                type: string
-                example: I have a good reason
 
-  orderIndex:
+  orderApiIndex:
     type: object
     required:
     - links
     - lovLinks
     properties:
       links:
-        $ref: '#/definitions/orderIndexLinks'
-      lovLinks:
-        $ref: '#/definitions/orderIndexLovLinks'
+        $ref: '#/definitions/orderApiIndexLinks'
 
-  links.GetOrderIndexLink:
+  links.GetOrderApiIndexLink:
     allOf:
     - $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3
     - example:
-        href: /merchant/orders/v1
+        href: /merchant/orders/v1/MLT01
         method: GET
 
-  orderIndexLinks:
+  orderApiIndexLinks:
     description: Gives you all entry point operations you can do on this API
     type: object
     required:
     - self
-    - status
-    - setMerchantInfos
-    - clearMerchantInfos
-    - export
-    - autoTransitions
     - orders
-    - lightOrders
     properties:
       self:
-        $ref: '#/definitions/links.GetOrderIndexLink'
-      setMerchantInfos:
-        $ref: '#/definitions/links.SetMerchantOrderInfoListLink'
-      clearMerchantInfos:
-        $ref: '#/definitions/links.ClearMerchantOrderInfoListLink'
+        $ref: '#/definitions/links.GetOrderApiIndexLink'
       orders:
         $ref: '#/definitions/links.GetOrderListFullLink'
-      lightOrders:
-        $ref: '#/definitions/links.GetOrderListLightLink'
 
-  orderIndexLovLinks:
-    description: Gives you all the LOV to get the translations realated to operation name, codes, property names and statuses.
-    type: object
-    required:
-    - orderChangeBusinessOperationType
-    - orderState
-    - orderProperty
-    - orderPropertyPosted
-    properties:
-      orderChangeBusinessOperationType:
-        $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/LOVLink3
-      orderState:
-        $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/LOVLink3
-      orderProperty:
-        $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/LOVLink3
-      orderPropertyPosted:
-        $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/LOVLink3
+
 
   links.GetOrderListFullLink:
     allOf:
     - $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3
     - example:
-        href: /merchant/orders/v1/list/full
+        href: /merchant/orders/v1/MLT01/list
         method: POST
         properties:
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
@@ -1625,7 +1353,7 @@ definitions:
           'Accept-Encoding':
             in: header
             required: true
-            "type": "​array"
+            "type": "​string"
             schema: string
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
           request:
@@ -1633,27 +1361,16 @@ definitions:
             required: false
             type: object
             schema: orderListRequest
-
-  links.GetOrderListLightLink:
-    allOf:
-    - $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/link3
-    - example:
-        href: /merchant/orders/v1/list/light
-        method: POST
-        properties:
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
-          request:
-            in: body
-            required: false
-            type: object
-            schema: orderListRequest
+  
 
 
+  
 
-  orderListLinks:
-    description: The list of actions you can do from the order list response
+  orderListFullLinks:
     type: object
+    description: The list of actions you can do from the order list response
     required:
+    - self
     - setMerchantInfos
     - clearMerchantInfos
     properties:
@@ -1661,37 +1378,8 @@ definitions:
         $ref: '#/definitions/links.SetMerchantOrderInfoListLink'
       clearMerchantInfos:
         $ref: '#/definitions/links.ClearMerchantOrderInfoListLink'
-
-
-  orderListLightLinks:
-    allOf:
-    - $ref: '#/definitions/orderListLinks'
-    - type: object
-      required:
-      - self
-      - harvest
-      - setMerchantInfos
-      - clearMerchantInfos
-      - export
-      - status
-      properties:
-        self:
-          $ref: '#/definitions/links.GetOrderListLightLink'
-
-  orderListFullLinks:
-    allOf:
-    - $ref: '#/definitions/orderListLinks'
-    - type: object
-      required:
-      - self
-      - harvest
-      - setMerchantInfos
-      - clearMerchantInfos
-      - export
-      - status
-      properties:
-        self:
-          $ref: '#/definitions/links.GetOrderListFullLink'
+      self:
+        $ref: '#/definitions/links.GetOrderListFullLink'
 
   links.SetMerchantOrderInfoListLink:
     allOf:
@@ -1715,63 +1403,35 @@ definitions:
 
 
 
-  orderListLight:
-    description: |
-      The order list with minimum information we have from the orders.\
-      The paginationResult properties can be null if the list is empty.
-    type: object
-    required:
-    - orders
-    - links
-    properties:
-      paginationResult:
-        $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/paginationResult
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
-      orders:
-        type: array
-        items:
-          $ref: '#/definitions/orderHeader'
-      links:
-        $ref: '#/definitions/orderListLightLinks'
-
+ 
+ 
   orderListFull:
     description: |
       The order list with all information we have from the orders and its items.\
       The paginationResult properties can be null if the list is empty.
     type: object
     required:
-    - orders
     - links
+    - orders
     properties:
       paginationResult:
         $ref: https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/paginationResult
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
       orders:
         type: array
+        description: The order index list, this list can be empty if there is no result
+        minimum: 0
         items:
-          $ref: '#/definitions/order'
+          $ref: '#/definitions/orderIndex'
       links:
         $ref: '#/definitions/orderListFullLinks'
 
-  imnOrderStatus:
-    type: string
-    description: IMN order status. Unified for all marketplaces.
-    example: Shipped
-    x-lov: IMNOrderState
-
-  marketplaceOrderStatus:
-    description: The marketplace order state
-    type: string
-    example: In_progress_3
-
-  marketplaceOrderId:
-    description: The order marketplace identifier
-    type: string
-    example: AMAZON12345
 
   orderHistory:
     description: Describe the history related to an order
     type: object
+    required:
+    - changeOrderReportings
     properties:
 # [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
       changeOrderReportings:
@@ -1784,30 +1444,29 @@ definitions:
         format: date-time
         type: string
 
-  sourceType:
-    description: Indicates the origin of the operation
-    type: string
-    enum:
-    - Api
-    - Go
-    example: Api
-
-  executionUUID:
-    description: The execution identifier
-    format: uuid
-    type: string
-    example: '8D4176FA78D5A7Fffa91e9edc694ec5858be9a1b109507c'
+      
 
   changeOrderReporting:
     description: The reporting related to a change order operation
     type: object
+    required:
+    - correlationId
+    - changeType
+    - sourceType
+    - sourceUserId
+    - sourceUserName
+    - creationUtcDate
+    - processingStatus
+    - lastUpdateUtcDate
+    - ipAddress
+    - testMode
     properties:
-      executionUUID:
-        $ref: '#/definitions/executionUUID'
-      changeOrderType:
-        $ref: '#/definitions/businessOperationType'
+      correlationId:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/correlationId'
+      changeType:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderChangeType'
       sourceType:
-        $ref: '#/definitions/sourceType'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/operationSourceType'
       sourceUserId:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/userId'
       sourceUserName:
@@ -1819,9 +1478,7 @@ definitions:
         type: string
         example: '2017-04-01T13:10:03Z'
       processingStatus:
-        description: The processing status of the execution
-        type: string
-        example: Done
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/processingStatus'
       lastUpdateUtcDate:
         description: The last update UTC date of the execution
         format: date-time
@@ -1847,57 +1504,70 @@ definitions:
 
 
 
-  changeOrderListRequest:
+
+
+
+  refundOrderRequest:
     type: object
-    description: Contains all change order operations you want to make
+    description: The refund order parameters
     required:
-    - changeOrders
+    - refundReason
     properties:
-# [Style Validator (57ac916a-8714-4f1c-8fd3-529d6f08a61d) : All model properties must have examples]: Field 'example' required in 'properties'
-      changeOrders:
-        type: array
-        description: The change order operations
-        minLength: 1
-        maxLength: 100
-        items:
-         $ref: '#/definitions/changeOrderListRequestItem'
+      refundReason:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/refundReason'
 
-  changeOrderListRequestItem:
+ 
+
+  cancelOrderRequest:
     type: object
-    description: Contains the order identifier and the change order request
+    description: The cancel order parameters
     required:
-    - order
-    #- changeOrderRequest
+    - cancellationReason
     properties:
-      order:
-        $ref: '#/definitions/orderIdentifierWithETag'
-      changeOrderRequest:
-        $ref: '#/definitions/changeOrderRequest'
+      cancellationReason:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/cancellationReason'
+  
 
-  orderIdentifierWithETag:
-    allOf:
-    - $ref: '#/definitions/orderIdentifier'
-    - type: object
-      required:
-      - marketplaceCode
-      - merchantCode
-      - imnOrderId
-      - etag
-      properties:
-        etag:
-         $ref: '#/definitions/etag'
-
-  changeOrderRequest:
+  shipOrderRequest:
     type: object
-    description: All properties with the prefix order_ are translated in the list of values /user/lov#OrderMetaInfoPosted
-    additionalProperties:
-      type: string
+    description: The ship order parameters
+    required:
+    - trackingNumber
+    - carrierCode
+    properties:
+      trackingNumber:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/trackingNumber'
+      carrierCode: 
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/carrierCode'
     example:
-      order_Shipping_ShipperTrackingNumber: '1H01845163783'
-      order_Shipping_ShippingUrl: 'https://trackingpackage.com?number=1H01845163783'
-      order_Shipping_CarrierName: 'La poste'
-      order_Shipping_FulfillmentDate: '2014-09-23T09:58:00.000Z'
-      order_Shipping_EstimatedDeliveryDate: '2014-09-24T09:58:00.000Z'
+      trackingNumber: '1H01845163783'
+      carrierCode: MondialRelay
+
+
+  shipOrderWithTrackingUrlRequest:
+    type: object
+    description: The ship order parameters for an unidentified carrier in the carrierCode enum
+    required:
+    - carrierName
+    - trackingNumber
+    - trackingUrl
+    properties:
+      carrierName:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/carrierName'
+      trackingNumber:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/trackingNumber'
+      trackingUrl: 
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/trackingUrl'
+    example:
+      carrierName: 'My special carrier name'
+      trackingNumber: '1H01845163783'
+      shippingUrl: 'https://trackingpackage.com?number=1H01845163783'
+
+
+
+
+
+  
 
   batchOrderOperationResponse:
     description: The response given by the batch operation
@@ -1920,7 +1590,7 @@ definitions:
     - status
     properties:
       order:
-        $ref: '#/definitions/orderIdentifier'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
       success:
         type: boolean
         description: Indicates if the operation succeed or not
@@ -1946,8 +1616,6 @@ definitions:
     properties:
       targetUrl:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/httpUrl'
-      eventTypes:
-        $ref: '#/definitions/subscriptionOrderEventTypeList'
       name:
         $ref: '#/definitions/subscriptionName'
       applicationName:
@@ -1956,16 +1624,6 @@ definitions:
         $ref: '#/definitions/subscriptionApplicationVersion'
 
 
-  subscriptionOrderEventTypeList:
-    type: array
-    items:
-      $ref: '#/definitions/orderEventType'
-    default:
-    - order.created
-    - order.updated
-    example:
-    - order.created
-    - order.updated
   subscriptionName:
     type: string
     description: The subscription name you want to use
@@ -1986,7 +1644,6 @@ definitions:
     required:
     - id
     - targetUrl
-    - eventTypes
     - status
     - name
     - applicationName
@@ -1998,8 +1655,6 @@ definitions:
         $ref: '#/definitions/subscriptionStatus'
       targetUrl:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/httpUrl'
-      eventTypes:
-        $ref: '#/definitions/subscriptionOrderEventTypeList'
       name:
         $ref: '#/definitions/subscriptionName'
       applicationName:
@@ -2014,16 +1669,258 @@ definitions:
     type: string
     description: The status of your subscription
     enum:
-    - active
-    - inactive
+    - Active
+    - Inactive
   
-  orderEventType:
-    type: string
-    description: The event type you can subscribe to
-    enum:
-    - order.created
-    - order.updated
+
+
+
+
+  shipOrderListRequest:
+    type: object
+    required:
+    - orders
+    properties:
+      orders:
+        type: array
+        maxItems: 100
+        minItems: 1
+        uniqueItems: true
+        items:
+         $ref: '#/definitions/shipOrderListRequestItem' 
+          
+  shipOrderListRequestItem:
+    type: object
+    required:
+    - order
+    - request
+    - etag
+    properties:
+      order:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
+      request:
+        $ref: '#/definitions/shipOrderRequest'
+      etag:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderEtag'
+
+
+
+  shipOrderWithTrackingUrlListRequest:
+    type: object
+    required:
+    - orders
+    properties:
+      orders:
+        type: array
+        maxItems: 100
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: '#/definitions/shipOrderWithTrackingUrlListRequestItem'
+    
   
+  shipOrderWithTrackingUrlListRequestItem:
+    type: object
+    required:
+    - order
+    - request
+    - etag
+    properties:
+      order:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
+      request:
+        $ref: '#/definitions/shipOrderWithTrackingUrlRequest'
+      etag:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderEtag'
+
+  refundOrderListRequest:
+    type: object
+    required:
+    - orders
+    properties:
+      orders:
+        type: array
+        maxItems: 100
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: '#/definitions/refundOrderListRequestItem'
+
+  refundOrderListRequestItem:
+    type: object
+    required:
+    - order
+    - request
+    - etag
+    properties:
+      order:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
+      request:
+        $ref: '#/definitions/refundOrderRequest'
+      etag:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderEtag'
+
+  cancelOrderListRequest:
+    type: object
+    required:
+    - orders
+    properties:
+      orders:
+        type: array
+        maxItems: 100
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: '#/definitions/cancelOrderListRequestItem'
+
+
+  cancelOrderListRequestItem:
+    type: object
+    required:
+    - order
+    - request
+    - etag
+    properties:
+      order:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
+      request:
+        $ref: '#/definitions/cancelOrderRequest'
+      etag:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderEtag'
+
+
+
+  acceptOrderListRequest:
+    type: object
+    required:
+    - orders
+    properties:
+      orders:
+        type: array
+        maxItems: 100
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: '#/definitions/acceptOrderListRequestItem'
+
+  acceptOrderListRequestItem:
+    type: object
+    required:
+    - order
+    - etag
+    properties:
+      order:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
+      etag:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderEtag'
+
+
+  refuseOrderListRequest:
+    type: object
+    required:
+    - orders
+    properties:
+      orders:
+        type: array
+        maxItems: 100
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: '#/definitions/refuseOrderListRequestItem'
+
+  refuseOrderListRequestItem:
+    type: object
+    required:
+    - order
+    - etag
+    properties:
+      order:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
+      etag:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderEtag'
+
+
+
+  clearMerchantOrderInfoListRequest:
+    type: object
+    required:
+    - orders
+    properties:
+      orders:
+        type: array
+        maxItems: 100
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: '#/definitions/clearMerchantOrderInfoListRequestItem'
+
+  clearMerchantOrderInfoListRequestItem:
+    type: object
+    required:
+    - order
+    properties:
+      order:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
+
+    
+    
+  setMerchantOrderInfoListRequest:
+    type: object
+    required:
+    - merchantECommerceSoftwareName
+    - merchantECommerceSoftwareVersion
+    - orders
+    properties:
+
+      merchantECommerceSoftwareName:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/ecommerceSoftwareName'
+
+      merchantECommerceSoftwareVersion:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantECommerceSoftwareVersion'
+      orders:
+        type: array
+        items:
+          $ref: '#/definitions/setMerchantOrderInfoListRequestItem'
+        maxItems: 100
+        uniqueItems: true
+        minItems: 1
+        example:
+        - order:
+            marketplaceCode: C1
+            merchantCode: 'MLT01'
+            marketplaceOrderId: 'X0CD8FG'
+          merchantOrderId: BX1234
+
+  setMerchantOrderInfoListRequestItem:
+    type: object
+    required:
+    - order
+    - merchantOrderId
+    properties:
+      order:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
+      merchantOrderId:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantOrderId'
+
+  setMerchantOrderInfoRequest:
+    type: object
+    required:
+    - merchantOrderId
+    - merchantECommerceSoftwareName
+    - merchantECommerceSoftwareVersion
+    properties:
+
+      merchantOrderId:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantOrderId'
+
+      merchantECommerceSoftwareName:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/ecommerceSoftwareName'
+
+      merchantECommerceSoftwareVersion:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/merchantECommerceSoftwareVersion'
+
+
+
 x-azure-api-id: 'merchant_orders_v1'
 host: api.imn.io
 basePath: /merchant/orders/v1
