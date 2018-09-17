@@ -49,7 +49,7 @@ x-servers:
 - url: https://api.imn.io/marketplace/orders/v1
   description: Production Server
 
-x-azure-api-id: 'marketplace_orders_v1'
+x-azure-api-id: 'MarketplaceOrdersV1'
 host: api.imn.io
 basePath: /marketplace/orders/v1
 
