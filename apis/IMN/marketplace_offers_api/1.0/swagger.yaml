@@ -1,0 +1,131 @@
+swagger: '2.0'
+info:
+  title: 'Marketplace API - Offers'
+  description: 'This API will allow you to manage your merchant offers .'
+
+  version: "1.0"
+  
+  x-logo:
+    url: 'https://imngo.blob.core.windows.net/imngo/images/imn-logo.png'
+    backgroundColor: '#FFFFFF'
+  
+  contact:
+    email: support@imn.io
+     
+ 
+  license:
+    name: IMN
+    url: https://go.imn.io
+
+
+host: api.imn.io
+basePath: /marketplace/offers/v1
+
+x-IMN-api-ops:
+  codeGenType: webapi
+  repo: IMN
+  apiName: MarketplaceOffersV1
+  appRoot: IMN.MKP.Offers.WebService
+  applicationShortName: MKP.Offers.WS
+  namespace: IMN.MKP.Offers.WebService
+  useBeezUPFrameworkVersion2: true
+  comment: |
+    No change. Just server side generation.
+  using:
+  - IMN.Schemas
+  - IMN.Offer.Messages
+  - BeezUP2.Framework.Messaging
+  - IMN.Exceptions
+  - IMN.Offer.Exceptions
+  references:
+  - IMN.Offer.Helpers
+  - IMN.Exceptions
+  - IMN.Offer.Exceptions
+
+
+x-basePath: /marketplace/offers/v1
+
+
+schemes:
+  - https
+
+consumes:
+  - application/json
+produces:
+  - application/json
+  
+tags:
+- name: Global
+
+x-azure-api-id: 'MarketplaceOffersV1'  
+
+
+
+paths:
+
+
+  '/{marketplaceCode}/{merchantCode}/purges/{correlationId}/done':
+    post:
+      tags:
+      - Global
+      summary: Inform IMN about the offer purge completed
+      operationId: PurgeCompleted
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/correlationIdParameter'
+      responses:
+        '204':
+          description: The purge completion has been saved
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+          
+
+
+  '/{marketplaceCode}/{merchantCode}/purges/{correlationId}/failed':
+    post:
+      tags:
+      - Global
+      summary: Inform IMN about the offer purge failure
+      operationId: PurgeFailed
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/correlationIdParameter'
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/userErrorMessage'
+        required: true
+      responses:
+        '204':
+          description: The purge failure has been saved
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+  
+  
+  '/{marketplaceCode}/{merchantCode}/events':
+    post:
+      tags:
+      - Global
+      summary: Save a batch of marketplace merchant offers
+      operationId: SaveMarketplaceMerchantOfferBatch
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-messages/1.0#/definitions/batchMerchantOfferChanges'
+        required: true
+      responses:
+        '204':
+          description: The marketplace merchant offers changes have been saved!
+
+        400:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-exceptions/1.0#/responses/offerBatchBadRequest'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+          
+          
+definitions: {}
