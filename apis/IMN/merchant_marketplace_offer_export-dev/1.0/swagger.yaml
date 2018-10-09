@@ -57,6 +57,21 @@ paths:
         204:
           description: OK
 
+
+
+  '/merchantMarketplacePartitionOfferPublicationDisabled':
+    post:
+      tags: 
+      - Offer Exportation Events
+      summary: When the initializer starts to retrieve merchant offers. Propagated from initializer to purge the transformed offers referential
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplacePartitionOfferPublicationDisabled'
+      responses:
+        204:
+          description: OK
           
   '/merchantOfferReceived':
     post:
