@@ -25,12 +25,90 @@ x-beezup-ops:
   - IMN.Offer.EXP.Events
   
 
+tags: 
+- name: Offer Exportation Events
+- name: Merchant Offer Events 
+
 paths:
 
+
+  '/offerExportPartitionInitializationCompleted':
+    post:
+      tags: 
+      - Offer Exportation Events
+      summary: When the offer publication is enabled
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_export-events/1.0#/definitions/offerExportPartitionInitializationCompleted'
+      responses:
+        204:
+          description: OK
+
+  '/offerExportPartitionInitializationStarted':
+    post:
+      tags: 
+      - Offer Exportation Events
+      summary: When the initializer starts to retrieve merchant offers. Propagated from initializer to purge the transformed offers referential
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_export-events/1.0#/definitions/offerExportPartitionInitializationStarted'
+      responses:
+        204:
+          description: OK
+
+  '/offerExportPartitionUnpublicationCompleted':
+    post:
+      tags: 
+      - Offer Exportation Events
+      summary: When the offer unpublication is completed
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_export-events/1.0#/definitions/offerExportPartitionUnpublicationCompleted'
+      responses:
+        204:
+          description: OK
+
+  '/offerExportPartitionUnpublicationStarted':
+    post:
+      tags: 
+      - Offer Exportation Events
+      summary: When the unpublication starts.
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_export-events/1.0#/definitions/offerExportPartitionUnpublicationStarted'
+      responses:
+        204:
+          description: OK
+
+
+  '/merchantOfferUnpublished':
+    post:
+      tags: 
+      - Merchant Offer Events
+      summary: When the offer is unpublished
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-events/1.0#/definitions/merchantOfferUnpublished'
+      responses:
+        204:
+          description: OK
+          
   '/merchantOfferReceived':
     post:
-      summary: merchant offers exported for a marketplace 
-      parameters:
+      tags: 
+      - Merchant Offer Events
+      summary: When the merchant offer is Received
+      parameters: 
       - name: request
         in: body
         schema:
@@ -42,8 +120,10 @@ paths:
 
   '/merchantOfferDeleted':
     post:
-      summary: merchant offers exported for a marketplace 
-      parameters:
+      tags: 
+      - Merchant Offer Events
+      summary: When the merchant offer is deleted
+      parameters: 
       - name: request
         in: body
         schema:
@@ -52,16 +132,6 @@ paths:
         204:
           description: OK
 
-  '/offerExportPartitionInitializationStarted':
-    post:
-      summary: When the initializer starts to retrieve merchant offers. Propagated from initializer to purge the transformed offers referential
-      parameters: 
-      - name: request
-        in: body
-        schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_export-events/1.0#/definitions/offerExportPartitionInitializationStarted'
-      responses:
-        204:
-          description: OK
 
+      
 definitions: {}
