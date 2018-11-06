@@ -75,17 +75,6 @@ paths:
         204:
           description: OK
 
-  '/credentialExpired':
-    post:
-      summary: When the merchant marketplace api credential is expired
-      parameters: 
-      - name: request
-        in: body
-        schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceCredentialExpired'
-      responses:
-        204:
-          description: OK
 
 
 definitions:
