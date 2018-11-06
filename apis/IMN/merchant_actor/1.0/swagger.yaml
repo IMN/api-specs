@@ -284,5 +284,17 @@ paths:
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'          
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/invalidMerchantCode'         
+  '/credentialExpired':
+    post:
+      summary: Scheduled message to check if the merchant marketplace api credential is expired
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceCredentialExpired'
+      responses:
+        204:
+          description: OK
+
 definitions: {}
