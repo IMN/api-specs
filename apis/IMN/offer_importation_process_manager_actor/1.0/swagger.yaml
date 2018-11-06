@@ -1,0 +1,110 @@
+swagger: '2.0'
+info:
+  version: "1.0"
+  title: 'IMN ADAPTER - Offer Importation Process Manager Actor'
+
+
+basePath: /OfferImportationProcessManager
+x-beezup-ops:
+  codeGenType: actor
+  repo: IMN
+  product: IMN-ADPT
+  group: adpt-offerimp
+  domain: IMN.ADPT.OfferIMP
+  appRoot: IMN.ADPT.OfferIMP.PM
+  apiName: OfferImportationProcessManager
+  namespace: IMN.ADPT.OfferIMP.PM
+  applicationShortName: OfferIMP.PM
+  comment: |
+    Actor
+  using:
+  - IMN.ADPT.OfferIMP.Events
+  - IMN.MER.Events
+
+
+
+
+paths:
+
+  '/enabled':
+    post:
+      summary: When the offer importation is enabled
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOfferImportationEnabled'
+      responses:
+        204:
+          description: OK
+
+  '/startRequested':
+    post:
+      summary: When the offer importation start is requested
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_importation-events/1.0#/definitions/offerImportationStartRequested'
+      responses:
+        204:
+          description: OK
+
+  '/completed':
+    post:
+      summary: When the offer importation is completed
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_importation-events/1.0#/definitions/offerImportationCompleted'
+      responses:
+        204:
+          description: OK
+
+
+  '/disabled':
+    post:
+      summary: When the offer importation is disabled
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceOfferImportationDisabled'
+      responses:
+        204:
+          description: OK
+
+  '/credentialExpired':
+    post:
+      summary: When the merchant marketplace api credential is expired
+      parameters: 
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-events/1.0#/definitions/merchantMarketplaceCredentialExpired'
+      responses:
+        204:
+          description: OK
+
+
+definitions:
+
+  x-applies:
+    type: object
+    properties:
+      offerImportationStarted:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/offer_importation-events/1.0#/definitions/offerImportationStarted'
+        
+  actorId:
+    x-format: ActorId
+    type: object
+    x-pattern: '{marketplaceCode}-{merchantCode}-{correlationId}'
+    properties:
+      marketplaceCode:
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/marketplaceCode'
+      merchantCode: 
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/merchantCode'
+      correlationId:
+        type: string
+        format: CorrelationId
