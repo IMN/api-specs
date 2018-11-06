@@ -122,7 +122,7 @@ paths:
     post:
       tags:
         - Global
-      summary: Purge existing offers
+      summary: DRAFT - Purge existing offers
       description: |
         This operation could will be called for the following reason:
         - the merchant wants to disable the offer publication to your marketplace and ask to purge his offers on your marketplace
