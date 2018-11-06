@@ -124,7 +124,7 @@ paths:
         - Global
       summary: DRAFT - Purge existing offers
       description: |
-        This operation could will be called for the following reason:
+        DRAFT - This operation could be called for the following reason:
         - the merchant wants to disable the offer publication to your marketplace and ask to purge his offers on your marketplace
         - the merchant wants to purge his existing offers before publishing his offers coming from IMN
         
