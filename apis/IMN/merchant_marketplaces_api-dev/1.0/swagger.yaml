@@ -198,8 +198,12 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplaceShippingSettings'
         required: true
       responses:
-        204:
+        202:
           description: Shipping settings configured for this marketplace
+          headers:
+            Location:
+              type: string
+              description: The location to monitor the progression of the operation in the IMN system
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         default:
@@ -238,8 +242,12 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/merchant-schemas/1.0#/definitions/marketplacePricingSetting'
         required: true
       responses:
-        204:
+        202:
           description: Pricing setting configured for this marketplace
+          headers:
+            Location:
+              type: string
+              description: The location to monitor the progression of the operation in the IMN system
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantNotFound'
         400:
@@ -257,8 +265,12 @@ paths:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       responses:
-        204:
+        202:
           description: The source marketplace has been declared
+          headers:
+            Location:
+              type: string
+              description: The location to monitor the progression of the operation in the IMN system
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
@@ -276,8 +288,12 @@ paths:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       responses:
-        204:
+        202:
           description: The source marketplace has been declared
+          headers:
+            Location:
+              type: string
+              description: The location to monitor the progression of the operation in the IMN system
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
@@ -297,8 +313,12 @@ paths:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       responses:
-        204:
+        202:
           description: The marketplace has been enabled
+          headers:
+            Location:
+              type: string
+              description: The location to monitor the progression of the operation in the IMN system
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
@@ -320,8 +340,12 @@ paths:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       responses:
-        204:
+        202:
           description: The marketplace has been disabled
+          headers:
+            Location:
+              type: string
+              description: The location to monitor the progression of the operation in the IMN system
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
@@ -339,8 +363,12 @@ paths:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       responses:
-        204:
+        202:
           description: The marketplace order importation has been disabled
+          headers:
+            Location:
+              type: string
+              description: The location to monitor the progression of the operation in the IMN system
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
@@ -358,8 +386,12 @@ paths:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       responses:
-        204:
+        202:
           description: The marketplace order importation has been reenabled
+          headers:
+            Location:
+              type: string
+              description: The location to monitor the progression of the operation in the IMN system
         404:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/merchantOrMarketplaceNotFound'
         400:
