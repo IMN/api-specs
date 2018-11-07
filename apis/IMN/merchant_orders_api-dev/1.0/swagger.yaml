@@ -1638,7 +1638,7 @@ definitions:
         $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderIdentifier'
       operationId:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/correlationId'
-      operationMonitoringUrl:
+      operationMonitoringHref:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/href'
       success:
         type: boolean
