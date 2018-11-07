@@ -130,8 +130,13 @@ paths:
        schema:
         $ref: '#/definitions/createMerchantAccountRequest'
      responses:
-       '204':
+       '202':
          description: The merchant code has been created
+         headers:
+           Location:
+            type: string
+            description: The location to monitor the progression of the operation in the IMN system
+            
        '400':
          description: The merchant code or some values are invalid. Please check the error message.
          schema:
