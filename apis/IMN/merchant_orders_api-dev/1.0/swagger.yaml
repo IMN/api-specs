@@ -1639,7 +1639,7 @@ definitions:
       operationId:
         $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/correlationId'
       operationMonitoringUrl:
-        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/httpUrl'
+        $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/definitions/href'
       success:
         type: boolean
         description: Indicates if the operation succeed or not
