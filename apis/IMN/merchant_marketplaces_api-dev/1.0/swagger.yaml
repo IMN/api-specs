@@ -23,6 +23,7 @@ x-IMN-api-ops:
   codeGenType: webapi
   repo: IMN
   product: IMN-CORE
+  group: merchant
   appRoot: IMN.MER.MKP.WebService
   apiName: MerchantMarketplacesV1
   namespace: IMN.MER.MKP.WebService
