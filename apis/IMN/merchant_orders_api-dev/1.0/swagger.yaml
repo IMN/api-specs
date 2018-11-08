@@ -1724,6 +1724,15 @@ definitions:
 
 
 
+  orderChangeRequestBase:
+    type: object
+    properties:
+      userName:
+        type: string
+        description: Optional. Sometimes the user in the e-commerce application is not the same as user associated with the current subscription key. We recommend providing your application's user login. Default value is the connected user's email address.
+      useTest:
+        type: boolean
+        description: Optional. If true, the operation will be not be sent to marketplace. But the validation will be taken in account. Default value is false.
 
   shipOrderListRequest:
     type: object
