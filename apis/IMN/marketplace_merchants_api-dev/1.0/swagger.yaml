@@ -689,6 +689,9 @@ definitions:
         type: string
       salesforceSubscriptionId:
         type: string
+      ipAddress:
+        type: string
+        example: 127.0.0.1
 
   outgoingMerchantInfo:
     allOf:
