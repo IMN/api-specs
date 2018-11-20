@@ -32,7 +32,7 @@ tags:
 paths:
 
 
-  '/offerExportPartitionInitializationCompleted':
+  '/offerExportPartitionOperationCompleted':
     post:
       tags: 
       - Offer Exportation Events
@@ -41,12 +41,12 @@ paths:
       - name: request
         in: body
         schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_export-events/1.0#/definitions/offerExportPartitionInitializationCompleted'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_export-events/1.0#/definitions/offerExportPartitionOperationCompleted'
       responses:
         204:
           description: OK
 
-  '/offerExportPartitionInitializationStarted':
+  '/offerExportPartitionOperationStarted':
     post:
       tags: 
       - Offer Exportation Events
@@ -55,7 +55,7 @@ paths:
       - name: request
         in: body
         schema:
-          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_export-events/1.0#/definitions/offerExportPartitionInitializationStarted'
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer_export-events/1.0#/definitions/offerExportPartitionOperationStarted'
       responses:
         204:
           description: OK
