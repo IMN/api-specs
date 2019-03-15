@@ -133,4 +133,24 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
 
+
+  '/{marketplaceCode}/{merchantCode}/{marketplaceOrderId}':
+    get:
+      tags:
+        - Global
+      summary: Get order
+      operationId: GetOrder
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref:  'https://api.swaggerhub.com/domains/IMN/order-schemas/v1#/parameters/marketplaceOrderIdParameter'
+      responses:
+        '200':
+          description: The order
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderMarketplaceInfo'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
 x-azure-api-id: 'GatewayOrdersV1'
