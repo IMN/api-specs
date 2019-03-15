@@ -124,7 +124,6 @@ paths:
         in: query
         type: string
         format: DateTime
-        
       responses:
         '200':
           description: The paginated order list
