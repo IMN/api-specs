@@ -120,7 +120,7 @@ paths:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageNumberQueryStringParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageSizeQueryStringParameter'
-      - name: lastMarketplaceModificationUtcDate
+      - name: marketplaceLastModificationUtcDate
         in: query
         type: string
         format: DateTime
