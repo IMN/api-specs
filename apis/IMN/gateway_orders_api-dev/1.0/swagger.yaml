@@ -88,8 +88,8 @@ paths:
     post:
       tags:
         - Global
-      summary: Push a batch of merchant marketplace orders events
-      operationId: PushMerchantOrderEvents
+      summary: Push a batch of merchant marketplace order change events
+      operationId: PushMerchantOrderChangeEvents
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
@@ -107,5 +107,31 @@ paths:
           description: The merchant orders changes have been saved!
         default:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+  '/{marketplaceCode}/{merchantCode}/list':
+    get:
+      tags:
+        - Global
+      summary: Get order list
+      operationId: GetOrderList
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageNumberQueryStringParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageSizeQueryStringParameter'
+      - name: lastMarketplaceModificationUtcDate
+        in: query
+        type: string
+        format: DateTime
+        
+      responses:
+        '200':
+          description: The paginated order list
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/order-schemas/1.0#/definitions/orderMarektplaceInfoPaginatedList'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
 
 x-azure-api-id: 'GatewayOrdersV1'
