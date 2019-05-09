@@ -124,7 +124,7 @@ paths:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/correlationIdParameter'
       - name: request
         in: body
-        required: true
+        required: false
         schema:
           type: string ## todo send processing status + error msg + rollbarId + etc
 
