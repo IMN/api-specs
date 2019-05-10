@@ -1,0 +1,238 @@
+swagger: '2.0'
+info:
+  title: 'Marketplace API - Offers'
+  description: 'This API will allow you to manage your merchant offers .'
+
+  version: "1.0"
+  
+  x-logo:
+    url: 'https://imngo.blob.core.windows.net/imngo/images/imn-logo.png'
+    backgroundColor: '#FFFFFF'
+  
+  contact:
+    email: support@imn.io
+     
+ 
+  license:
+    name: IMN
+    url: https://go.imn.io
+
+
+host: api.imn.io
+basePath: /marketplace/offers/v1
+
+x-IMN-api-ops:
+  codeGenType: webapi
+  repo: IMN
+  apiName: MarketplaceOffersV1
+  appRoot: IMN.MKP.Offers.WebService
+  applicationShortName: MKP.Offers.WS
+  namespace: IMN.MKP.Offers.WebService
+  useBeezUPFrameworkVersion2: true
+  comment: |
+    No change. Just server side generation.
+  using:
+  - IMN.Schemas
+  - IMN.Offer.Messages
+  - BeezUP2.Framework.Messaging
+  - IMN.Exceptions
+  - IMN.Offer.Exceptions
+  references:
+  - IMN.Offer.Helpers
+  - IMN.Exceptions
+  - IMN.Offer.Exceptions
+
+
+x-basePath: /marketplace/offers/v1
+
+
+schemes:
+  - https
+
+consumes:
+  - application/json
+produces:
+  - application/json
+  
+tags:
+- name: Global
+
+x-azure-api-id: 'MarketplaceOffersV1'  
+
+
+
+paths:
+
+
+  '/{marketplaceCode}/{merchantCode}/publications/{correlationId}/started':
+    post:
+      tags:
+        - Global
+      summary: Start the publication of merchant offers
+      operationId: StartMerchantOffersPublication
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/correlationIdParameter'
+      responses:
+        '204':
+          description: The merchant offers publication started has been received!
+        '400':
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-exceptions/1.0#/responses/offerBatchBadRequest'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+  '/{marketplaceCode}/{merchantCode}/publications/{correlationId}/events':
+    post:
+      tags:
+        - Global
+      summary: Publish merchant offers
+      operationId: PublishMerchantOfferEvents
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/correlationIdParameter'
+      - name: request
+        in: body
+        schema:
+          type: array
+          minItems: 1
+          maxItems: 1000
+          items:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/offer-events/1.0#/definitions/merchantOfferEventBase'
+      responses:
+        '202':
+          description: The merchant offers have been received!
+        '400':
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-exceptions/1.0#/responses/offerBatchBadRequest'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+  '/{marketplaceCode}/{merchantCode}/publications/{correlationId}/purgeUnreceived':
+    post:
+      tags:
+        - Global
+      summary: Purge unreceived merchant offers
+      operationId: PurgeUnreceivedMerchantOffers
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/correlationIdParameter'
+      responses:
+        '202':
+          description: The purge unreceived merchant offers request have been received!
+        '400':
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-exceptions/1.0#/responses/offerBatchBadRequest'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+  
+  '/{marketplaceCode}/{merchantCode}/publications/{correlationId}/completed':
+    post:
+      tags:
+        - Global
+      summary: Complete the publication of the merchant offers
+      operationId: CompleteMerchantOffersPublication
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/correlationIdParameter'
+      responses:
+        '204':
+          description: The merchant offers publication have been completed!
+        '400':
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-exceptions/1.0#/responses/offerBatchBadRequest'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+  '/{marketplaceCode}/{merchantCode}/publications/{correlationId}/status':
+    get:
+      tags:
+        - Global
+      summary: Get merchant offers publication status
+      operationId: GetMerchantOffersPublicationStatus
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/correlationIdParameter'
+      responses:
+        '200':
+          description: The publication status
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/offer-schemas/1.0#/definitions/feedPublicationStatusResponse'
+        '400':
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-exceptions/1.0#/responses/offerBatchBadRequest'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+  '/{marketplaceCode}/{merchantCode}/events':
+    post:
+      tags:
+        - Global
+      summary: Push a batch of merchant marketplace offers events
+      operationId: PushMerchantOfferEvents
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - name: request
+        in: body
+        schema:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-messages/1.0#/definitions/batchMerchantOfferChanges'
+      responses:
+        '202':
+          description: The merchant offers changes have been received
+        '400':
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-exceptions/1.0#/responses/offerBatchBadRequest'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+  
+
+  '/{marketplaceCode}/{merchantCode}/list':
+    get:
+      tags:
+        - Global
+      summary: Get merchant offer list
+      operationId: GetMerchantOfferList
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageNumberQueryStringParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageSizeQueryStringParameter'
+      responses:
+        '200':
+          description: The merchant offer list
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/offer-schemas/1.0#/definitions/merchantOfferPaginatedList'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+
+  '/{marketplaceCode}/{merchantCode}/{sku}':
+    get:
+      tags:
+        - Global
+      summary: Get merchant offer
+      operationId: GetMerchantOffer
+      parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/skuPathParameter'
+      responses:
+        '200':
+          description: The merchant offer
+          schema:
+            $ref: 'https://api.swaggerhub.com/domains/IMN/offer-schemas/1.0#/definitions/merchantOffer'
+        404:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/offer-exceptions/1.0#/responses/offerNotFound'
+        default:
+          $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
+
+          
+definitions: {}
