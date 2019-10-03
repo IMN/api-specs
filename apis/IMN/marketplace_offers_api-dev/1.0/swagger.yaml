@@ -102,7 +102,7 @@ paths:
       parameters:
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
-      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageNumberQueryStringParameter'
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/paginationContinuationTokenQueryStringParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/pageSizeQueryStringParameter'
       responses:
         '200':
