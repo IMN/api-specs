@@ -21,7 +21,7 @@ info:
 host: api.imn.io
 basePath: /marketplace/offers/v1
 
-x-IMN-api-ops:
+x-beezup-ops:
   codeGenType: webapi
   repo: IMN
   apiName: MarketplaceOffersV1
