@@ -33,12 +33,12 @@ x-beezup-ops:
     No change. Just server side generation.
   using:
   - IMN.Schemas
-  - IMN.Offer.Messages
+  - IMN.Offer.Events
   - BeezUP2.Framework.Messaging
   - IMN.Exceptions
   - IMN.Offer.Exceptions
   references:
-  - IMN.Offer.Messages
+  - IMN.Offer.Events
   - IMN.Exceptions
   - IMN.Offer.Exceptions
 
