@@ -38,7 +38,7 @@ x-beezup-ops:
   - IMN.Exceptions
   - IMN.Offer.Exceptions
   references:
-  - IMN.Offer.Helpers
+  - IMN.Offer.Messages
   - IMN.Exceptions
   - IMN.Offer.Exceptions
 
