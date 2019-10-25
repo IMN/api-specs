@@ -34,6 +34,7 @@ x-beezup-ops:
   using:
   - IMN.Schemas
   - IMN.Offer.Events
+  - IMN.Offer.Schemas
   - BeezUP2.Framework.Messaging
   - IMN.Exceptions
   - IMN.Offer.Exceptions
