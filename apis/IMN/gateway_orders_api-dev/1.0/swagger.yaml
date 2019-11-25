@@ -61,7 +61,7 @@ tags:
 paths:
 
   '/{marketplaceCode}/ping':
-    post:
+    get:
       tags:
         - Global
       summary: Ping the status of your order system
