@@ -139,13 +139,14 @@ paths:
 
 
 
-  '/{merchantCode}/publications/{correlationId}/start':
+  '/{marketplaceCode}/{merchantCode}/publications/{correlationId}/start':
     post:
       tags:
         - Global
       summary: Start the publication of merchant offers
       operationId: StartMerchantOffersPublication
       parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/correlationIdParameter'
       responses:
@@ -157,13 +158,14 @@ paths:
           $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/responses/GeneralError'
 
 
-  '/{merchantCode}/publications/{correlationId}/events':
+  '/{marketplaceCode}/{merchantCode}/publications/{correlationId}/events':
     post:
       tags:
         - Global
       summary: Publish merchant offers
       operationId: PublishMerchantOffers
       parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/correlationIdParameter'
       - name: request
@@ -186,13 +188,14 @@ paths:
 
 
   
-  '/{merchantCode}/publications/{correlationId}/complete':
+  '/{marketplaceCode}/{merchantCode}/publications/{correlationId}/complete':
     post:
       tags:
         - Global
       summary: Complete the publication of the merchant offers
       operationId: CompleteMerchantOffersPublication
       parameters:
+      - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/marketplaceCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/merchantCodeParameter'
       - $ref: 'https://api.swaggerhub.com/domains/IMN/imn.io/v1#/parameters/correlationIdParameter'
       responses:
