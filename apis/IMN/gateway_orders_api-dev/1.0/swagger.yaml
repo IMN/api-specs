@@ -19,7 +19,7 @@ info:
 host: api.imn.io
 basePath: /gateway/orders/v1
 
-x-IMN-api-ops:
+x-beezup-ops:
   codeGenType: webapi
   repo: IMN
   product: IMN-ADPT
