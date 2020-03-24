@@ -36,6 +36,7 @@ x-beezup-ops:
   - IMN.Exceptions
   - IMN.Order.Schemas
   - IMN.Order.Events
+  - IMN.Order.Exceptions
   references:
   - IMN.Schemas
   - IMN.Exceptions
